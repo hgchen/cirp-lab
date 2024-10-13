@@ -12,7 +12,7 @@ sections:
       image:
         filename: welcome.jpg
       text: 
-        *Computational Imaging and Robotic Perception* Lab @ University of Hawii at Manoa
+        Computational Imaging and Robotic Perception Lab @ University of Hawii at Manoa
   
   - block: collection
     content:
