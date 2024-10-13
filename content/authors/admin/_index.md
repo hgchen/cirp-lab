@@ -1,41 +1,38 @@
 ---
 # Display name
-title: Nelson Bighetti
+title: Huaijin Chen
 
 # Full Name (for SEO)
-first_name: Nelson
-last_name: Bighetti
+first_name: Huaijin
+last_name: Chen
 
 # Is this the primary user of the site?
 superuser: true
 
 # Role/position
-role: Professor of Artificial Intelligence
+role: Assistant Professor of Computer Science
 
 # Organizations/Affiliations
 organizations:
-  - name: Stanford University
-    url: ''
+  - name: University of Hawaii at Manoa
+    url: 'https://hgchen.com'
 
 # Short bio (displayed in user profile at end of posts)
-bio: My research interests include distributed robotics, mobile computing and programmable matter.
+bio: Huaijin Chen is an Assistant Professor of Computer Science at the University of Hawaiʻi at Mānoa, where he directs the Computational Imaging and Robotic Perception (CIRP) Lab. 
 
 interests:
-  - Artificial Intelligence
-  - Computational Linguistics
-  - Information Retrieval
+  - Computational Imaging
+  - Computer Vision
+  - Robotic Perception
 
 education:
   courses:
-    - course: PhD in Artificial Intelligence
-      institution: Stanford University
-      year: 2012
-    - course: MEng in Artificial Intelligence
-      institution: Massachusetts Institute of Technology
-      year: 2009
-    - course: BSc in Artificial Intelligence
-      institution: Massachusetts Institute of Technology
-      year: 2008
+    - course: PhD in Electrical and Computer Engineering
+      institution: Rice University
+      year: 2019
+    - course: BS in Imaging Science
+      institution: Rochester Institute of Technology
+      year: 2013
 
 # Social/Academic Networking
 # For available icons, see: https://docs.hugoblox.com/getting-started/page-builder/#icons
@@ -44,16 +41,16 @@ education:
 social:
   - icon: envelope
     icon_pack: fas
-    link: 'mailto:test@example.org'
-  - icon: twitter
-    icon_pack: fab
-    link: https://twitter.com/GeorgeCushen
+    link: 'mailto:huaijin@hawaii.edu'
   - icon: google-scholar
     icon_pack: ai
-    link: https://scholar.google.co.uk/citations?user=sIwtMXoAAAAJ
+    link: https://scholar.google.com/citations?user=6E9elWUAAAAJ
   - icon: github
     icon_pack: fab
-    link: https://github.com/gcushen
+    link: https://github.com/hgchen
+  - icon: cv
+    icon_pack: ai
+    link: https://hgchen.com/assets/pdf/hgc_cv.pdf
 # Link to a PDF of your resume/CV from the About widget.
 # To enable, copy your resume/CV to `static/files/cv.pdf` and uncomment the lines below.
 # - icon: cv
@@ -72,6 +69,4 @@ user_groups:
   - Researchers
 ---
 
-Nelson Bighetti is a professor of artificial intelligence at the Stanford AI Lab. His research interests include distributed robotics, mobile computing and programmable matter. He leads the Robotic Neurobiology group, which develops self-reconfiguring robots, systems of self-organizing robots, and mobile sensor networks.
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.
+Huaijin Chen is an Assistant Professor of Computer Science at the University of Hawaiʻi at Mānoa, where he directs the Computational Imaging and Robotic Perception (CIRP) Lab. He earned his Ph.D. in Electrical and Computer Engineering from Rice University in 2019 and a B.S. in Imaging Science from the Rochester Institute of Technology. Before academia, he worked at companies like Vayu Robotics, NVIDIA, and IBM. He has authored over 15 peer-reviewed papers in top-tier venues such as CVPR, ICCP, and Optics Express, and holds four U.S. patents. Dr. Chen has served on program committees for ICCP and IJCAI, and is an active reviewer for major journals and conferences such as IEEE TPAMI, IEEE TIP, Optics Express, Optics Letters, CVPR, ICCV, ECCV, and ICLR. His awards include the Outstanding Reviewer Award at ICCV 2021, the Best Poster Award at ICCP 2019, and the Texas Instruments Distinguished Graduate Student Fellowship.
