@@ -7,15 +7,12 @@ type: landing
 sections:
   - block: hero
     content:
-      title: |
-        Wowchemy
-        Research Group
+      title: 
+        CIRP
       image:
         filename: welcome.jpg
-      text: |
-        <br>
-        
-        The **Wowchemy Research Group** has been a center of excellence for Artificial Intelligence research, teaching, and practice since its founding in 2016.
+      text: 
+        *Computational Imaging and Robotic Perception* Lab @ University of Hawii at Manoa
   
   - block: collection
     content:
