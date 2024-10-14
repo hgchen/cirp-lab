@@ -18,7 +18,7 @@ organizations:
     url: 'https://www.ics.hawaii.edu'
 
 # Short bio (displayed in user profile at end of posts)
-bio: Huaijin Chen is an Assistant Professor of Computer Science at the University of Hawaiʻi at Mānoa, where he directs the Computational Imaging and Robotic Perception (CIRP) Lab. 
+bio: Feimei Chen is a MS stduent of computer science at University of Hawaii at Manoa
 
 interests:
   - Computer Vision
