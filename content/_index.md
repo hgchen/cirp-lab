@@ -32,7 +32,7 @@ sections:
           icon: graduation-cap
           icon_pack: fas
           text: Join Us
-          url: cirp-lab/contact/
+          url: contact/
     design:
       # Slide height is automatic unless you force a specific height (e.g. '400px')
       slide_height: ''
