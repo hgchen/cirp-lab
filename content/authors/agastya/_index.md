@@ -30,6 +30,9 @@ education:
     - course: BS in Computer Science
       institution: University of Waterloo
       year: 
+    - course: PhD in Computer Science
+      institution: University of Hawaii at Manoa
+      year: 2029
 
 # Social/Academic Networking
 # For available icons, see: https://docs.hugoblox.com/getting-started/page-builder/#icons
