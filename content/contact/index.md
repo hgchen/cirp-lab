@@ -17,8 +17,8 @@ sections:
         country: United States
         country_code: US
       coordinates:
-        latitude: '37.4275'
-        longitude: '-122.1697'
+        latitude: '21.29737647842418'
+        longitude: '-157.81619370953624'
       directions: Pacific Ocean Science and Technology (POST) Building Room 312
       appointment_url: 'https://calendly.com/huaijin-hawaii/30min'
       #contact_links:
