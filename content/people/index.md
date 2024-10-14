@@ -13,8 +13,8 @@ sections:
       user_groups:
           - Principal Investigators
           - MS Students
-          - PhD Studensts
-          - Undgrad Students
+          - PhD Students
+          - Undergrad Students
           - Alumni
       sort_by: Params.last_name
       sort_ascending: true
