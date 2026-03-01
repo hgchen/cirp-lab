@@ -1,13 +1,13 @@
 ---
 title: Contact
-date: 2022-10-24
+date: 2026-02-28
 
 type: landing
 
 sections:
   - block: contact
     content:
-      title: Contact
+      title: Contact the Lab
       email: huaijin@hawaii.edu
       address:
         street: 1680 East-west Rd
@@ -40,4 +40,5 @@ sections:
           captcha: false
     design:
       columns: '1'
+      css_class: contact-lab
 ---
