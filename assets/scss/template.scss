@@ -269,6 +269,76 @@ select:focus-visible {
   color: var(--cirp-ink);
 }
 
+.lab-news-link {
+  color: var(--cirp-ink);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color 0.18s ease, border-color 0.18s ease;
+}
+
+.lab-news-link:hover,
+.lab-news-link:focus-visible {
+  color: var(--cirp-accent);
+  border-bottom-color: color-mix(in srgb, var(--cirp-accent), transparent 52%);
+}
+
+/* Clean, minimal typography for each news detail page. */
+.news-article .article-container {
+  max-width: 860px;
+}
+
+.news-article .article-container.pt-3 {
+  padding-top: 1rem !important;
+}
+
+.news-article h1 {
+  font-size: clamp(1.9rem, 3.8vw, 2.7rem);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.8rem;
+}
+
+.news-article .article-metadata {
+  margin-bottom: 1rem;
+  font-family: 'IBM Plex Mono', 'SFMono-Regular', ui-monospace, monospace;
+  font-size: 0.84rem;
+  color: var(--cirp-muted);
+}
+
+.news-article .article-style {
+  font-size: 1.07rem;
+  line-height: 1.9;
+  color: var(--cirp-ink);
+}
+
+.news-article .article-style p {
+  margin: 0 0 1rem;
+}
+
+.news-article .article-style a {
+  color: var(--cirp-accent);
+  text-decoration: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--cirp-accent), transparent 55%);
+}
+
+.news-article .article-style a:hover,
+.news-article .article-style a:focus-visible {
+  border-bottom-color: color-mix(in srgb, var(--cirp-accent), transparent 30%);
+}
+
+.news-article .article-style ul,
+.news-article .article-style ol {
+  margin-top: 0.6rem;
+  margin-bottom: 1rem;
+  padding-left: 1.15rem;
+}
+
+.news-article .share-box,
+.news-article .author-card,
+.news-article .network-icon {
+  display: none !important;
+}
+
 .lab-news-meta {
   display: flex;
   justify-content: space-between;
@@ -425,5 +495,10 @@ select:focus-visible {
   .contact-lab .section-heading {
     max-width: 100%;
     flex-basis: 100%;
+  }
+
+  .news-article .article-style {
+    font-size: 1rem;
+    line-height: 1.8;
   }
 }
