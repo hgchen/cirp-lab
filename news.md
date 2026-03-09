@@ -1,5 +1,43 @@
 # News
 
+## 2026-03-06 | One Paper Accepted at CVPR 2026
+Congratulations to lab member and PhD student **Agastya Kalra** for his first-author paper on **6-DoF object pose estimation** accepted to **CVPR 2026**.
+
+The paper introduces a unified framework for object detection, segmentation, and 6DoF pose estimation for robotic perception.
+
+This work demonstrates strong performance on **BOP benchmarks** and targets real-world robotics applications such as bin picking and precise insertion.
+
+Great work from Agastya and collaborators.
+---
+
+## 2026-03-06 | PhD Student Christian Moore to Join GM Cruise for Summer Internship
+Congratulations to lab member and PhD student **Christian Moore** for securing a **Summer 2026 internship** with the **GM Cruise** autonomous driving team.
+
+Christian has been working on perception and robotics systems in the CIRP Lab, and we are excited to see him bring these skills to real-world autonomous driving systems.
+
+We look forward to seeing what he builds this summer and welcoming him back with new insights from industry.
+---
+
+## 2026-03-06 | New Paper on Imaging Through Turbulence on arXiv
+A new paper on **computational imaging through turbulence** is now available on **arXiv**.
+
+MS student **Ethan Chung** and PhD student **Norman Luo** contributed as second and third authors on the work:
+
+[arxiv.org/abs/2603.02048](https://arxiv.org/abs/2603.02048)
+
+The paper studies imaging and reconstruction methods for scenes degraded by atmospheric turbulence, an important challenge for long-range vision and sensing systems.
+---
+
+## 2026-01-14 | NVIDIA Academic Grant Awarded! Thanks, NVIDIA!
+CIRP Lab has received an **NVIDIA Academic Grant** to support our agricultural robotics research project.
+
+The award provides high-performance computing hardware to support the development of AI-enabled farm robots, including **two RTX PRO 6000 Blackwell GPUs** for training large AI models and **four Jetson AGX Orin** edge computers that will serve as onboard computing systems for field robots.
+
+The project focuses on combining robotics, computer vision, and edge AI to build practical tools that can operate directly in farm environments, helping address labor challenges and improve agricultural productivity in Hawai'i and beyond.
+
+Full story: [hawaii.edu/news/2026/01/14/nvidia-awards-next-gen-tech](https://www.hawaii.edu/news/2026/01/14/nvidia-awards-next-gen-tech/)
+---
+
 ## 2025-10-15 | CIRP Lab @ ICCV 2025 — Two Workshop Papers, Invited Talk, and Local Chair Role
 **CIRP Lab** will have several presences at **ICCV 2025** with **two accepted workshop papers**, **one invited talk**, and a **local chair role**.
 
