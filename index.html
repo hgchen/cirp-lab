@@ -19,7 +19,7 @@
       --accent-soft: #dff4f3;
       --warm: #cc7b42;
       --warm-soft: #fff0de;
-      --shadow: 0 24px 60px rgba(44, 28, 14, 0.12);
+      --shadow: 0 16px 38px rgba(44, 28, 14, 0.08);
       --radius: 26px;
       --content-width: min(1180px, calc(100vw - 32px));
     }
@@ -33,6 +33,7 @@
     }
 
     body {
+      position: relative;
       margin: 0;
       font-family: "Avenir Next", "Segoe UI", sans-serif;
       color: var(--text);
@@ -45,15 +46,14 @@
 
     body::before {
       content: "";
-      position: fixed;
+      position: absolute;
       inset: 0;
       pointer-events: none;
       background-image:
-        linear-gradient(rgba(31, 20, 13, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(31, 20, 13, 0.03) 1px, transparent 1px);
-      background-size: 28px 28px;
-      mask-image: radial-gradient(circle at center, black 54%, transparent 88%);
-      opacity: 0.35;
+        linear-gradient(rgba(31, 20, 13, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(31, 20, 13, 0.02) 1px, transparent 1px);
+      background-size: 34px 34px;
+      opacity: 0.18;
     }
 
     a {
@@ -71,8 +71,7 @@
       top: 0;
       z-index: 30;
       border-bottom: 1px solid var(--line);
-      backdrop-filter: blur(18px);
-      background: rgba(244, 239, 230, 0.82);
+      background: rgba(244, 239, 230, 0.94);
     }
 
     .topbar-inner {
@@ -215,6 +214,47 @@
       text-transform: uppercase;
     }
 
+    .hero-brand-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
+      margin-bottom: 22px;
+    }
+
+    .hero-brand-tile {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 92px;
+      padding: 16px 20px;
+      border-radius: 24px;
+      overflow: hidden;
+      background: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.52);
+      box-shadow:
+        0 16px 30px rgba(5, 20, 30, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.84);
+    }
+
+    .hero-brand-tile img {
+      width: auto;
+      height: 56px;
+      object-fit: contain;
+      mix-blend-mode: multiply;
+    }
+
+    .hero-brand-tile-seal {
+      min-width: 108px;
+      padding-inline: 18px;
+      border-radius: 32px;
+    }
+
+    .hero-brand-tile-dept {
+      min-width: 220px;
+      padding: 18px 24px;
+    }
+
     .hero-grid {
       position: relative;
       z-index: 1;
@@ -281,7 +321,6 @@
       border-radius: 26px;
       background: rgba(255, 255, 255, 0.1);
       border: 1px solid rgba(255, 255, 255, 0.18);
-      backdrop-filter: blur(18px);
     }
 
     .hero-spotlight h2,
@@ -305,14 +344,16 @@
     }
 
     .focus-pills .chip {
-      background: rgba(255, 250, 243, 0.18);
+      background: rgba(223, 244, 243, 0.18);
       color: #fff9f2;
-      border: 1px solid rgba(255, 250, 243, 0.34);
+      border: 1px solid rgba(223, 244, 243, 0.34);
       box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16);
     }
 
     .stack-section {
       margin-top: 32px;
+      content-visibility: auto;
+      contain-intrinsic-size: 1px 520px;
     }
 
     .section-title {
@@ -572,7 +613,6 @@
       border-radius: 50%;
       background: rgba(17, 20, 24, 0.54);
       color: #fff8f0;
-      backdrop-filter: blur(10px);
       cursor: pointer;
       font-size: 1.34rem;
       font-weight: 800;
@@ -662,6 +702,8 @@
 
     .member-section {
       margin-top: 28px;
+      content-visibility: auto;
+      contain-intrinsic-size: 1px 680px;
     }
 
     .member-section h2,
@@ -669,6 +711,13 @@
       margin: 0 0 16px;
       font-size: 1.42rem;
       letter-spacing: -0.04em;
+    }
+
+    .member-section-note {
+      margin: -4px 0 18px;
+      color: var(--muted);
+      line-height: 1.68;
+      max-width: 72ch;
     }
 
     .member-grid {
@@ -702,6 +751,22 @@
 
     .member-meta {
       margin: 10px 0 14px;
+    }
+
+    .member-now-at {
+      margin: -2px 0 14px;
+      color: var(--text);
+      font-size: 0.95rem;
+    }
+
+    .member-now-at strong {
+      color: var(--accent-deep);
+    }
+
+    .chip.tag-chip {
+      background: rgba(15, 106, 104, 0.08);
+      border-color: rgba(15, 106, 104, 0.18);
+      color: var(--accent-deep);
     }
 
     .chip,
@@ -770,30 +835,27 @@
     .timeline::before {
       content: "";
       position: absolute;
-      left: 50%;
+      left: 18px;
       top: 0;
       bottom: 0;
       width: 2px;
-      transform: translateX(-50%);
       background: linear-gradient(to bottom, transparent, rgba(15, 106, 104, 0.2), rgba(15, 106, 104, 0.28), transparent);
     }
 
     .timeline-row {
       position: relative;
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-      gap: 36px;
-      align-items: start;
+      padding-left: 54px;
+      content-visibility: auto;
+      contain-intrinsic-size: 1px 260px;
     }
 
     .timeline-row::before {
       content: "";
       position: absolute;
-      left: 50%;
+      left: 12px;
       top: 26px;
       width: 14px;
       height: 14px;
-      transform: translateX(-50%);
       border-radius: 50%;
       background: var(--warm);
       border: 4px solid rgba(255, 248, 240, 0.94);
@@ -858,7 +920,7 @@
     }
 
     .logo-grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(4, minmax(0, 1fr));
     }
 
     .logo-tile {
@@ -916,6 +978,90 @@
       margin: 0;
       color: var(--muted);
       line-height: 1.72;
+    }
+
+    .contact-note-box {
+      margin-top: 24px;
+      padding: 20px 22px;
+      border-radius: 22px;
+      background: linear-gradient(145deg, rgba(15, 106, 104, 0.1), rgba(255, 255, 255, 0.76));
+      border: 1px solid rgba(15, 106, 104, 0.14);
+    }
+
+    .contact-note-box strong {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 0.9rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent-deep);
+    }
+
+    .contact-visual-stack {
+      display: grid;
+      gap: 18px;
+    }
+
+    .contact-map-frame,
+    .contact-photo-frame {
+      padding: 18px;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(71, 48, 28, 0.12);
+    }
+
+    .contact-map-frame strong,
+    .contact-photo-frame strong {
+      display: block;
+      margin-bottom: 12px;
+      font-size: 0.96rem;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+
+    .contact-embed {
+      width: 100%;
+      border: 0;
+      border-radius: 18px;
+      background: #e7ecec;
+    }
+
+    .contact-map-frame .contact-embed {
+      height: 300px;
+    }
+
+    .contact-photo-frame .contact-embed {
+      height: 230px;
+    }
+
+    .prospective-card {
+      margin-top: 22px;
+      padding: 28px;
+    }
+
+    .prospective-card h3 {
+      margin-bottom: 12px;
+    }
+
+    .prospective-card p + p,
+    .prospective-card ul + p,
+    .prospective-card p + ul {
+      margin-top: 14px;
+    }
+
+    .prospective-card ul {
+      margin: 14px 0 0;
+      padding-left: 20px;
+      color: var(--muted);
+    }
+
+    .prospective-card li + li {
+      margin-top: 10px;
+    }
+
+    .prospective-card a {
+      color: var(--accent-deep);
+      font-weight: 700;
     }
 
     .contact-form {
@@ -1081,23 +1227,14 @@
 
       .timeline::before {
         left: 18px;
-        transform: none;
       }
 
       .timeline-row {
-        grid-template-columns: 1fr;
-        gap: 12px;
         padding-left: 42px;
       }
 
       .timeline-row::before {
         left: 12px;
-        transform: none;
-      }
-
-      .timeline-row.right .timeline-spacer,
-      .timeline-row.left .timeline-spacer {
-        display: none;
       }
 
       .member-card {
@@ -1187,7 +1324,14 @@
       <section class="hero">
         <div class="hero-grid">
           <div class="hero-copy">
-            <span class="eyebrow">University of Hawaii at Manoa</span>
+            <div class="hero-brand-strip" aria-label="University and department logos">
+              <div class="hero-brand-tile hero-brand-tile-seal">
+                <img src="images/uhm_logo.png" alt="University of Hawaii at Manoa logo">
+              </div>
+              <div class="hero-brand-tile hero-brand-tile-dept">
+                <img src="images/ics_logo.png" alt="Information and Computer Sciences logo">
+              </div>
+            </div>
             <h1>Computational Imaging for Real-World Robotics.</h1>
             <p>
               We build cameras that capture light properties beyond human vision, including transient transport, phase, polarization, and spectral cues. We combine these novel imagers with physics-informed AI to interpret non-conventional data and deploy multimodal perception and vision-language-action models for real-world robotics, especially in agriculture and healthcare where intelligent sensing improves automation, safety, and accessibility.
@@ -1199,13 +1343,11 @@
           </div>
           <aside class="hero-spotlight">
             <h2>Focus Areas</h2>
-            <p>Physics-informed AI, novel imaging systems, robotic perception, and multimodal sensing for agriculture and healthcare.</p>
+            <p>Imaging-based tactile sensing, computational imaging, and multi-modal VLA for real-world robotics in agriculture and healthcare.</p>
             <div class="focus-pills">
-              <span class="chip">Transient Light Transport</span>
-              <span class="chip">Phase</span>
-              <span class="chip">Polarization</span>
-              <span class="chip">Spectral Imaging</span>
-              <span class="chip">VLA</span>
+              <span class="chip">Imaging-Based Tactile Sensing</span>
+              <span class="chip">Computational Imaging</span>
+              <span class="chip">Multi-Modal VLA</span>
             </div>
           </aside>
         </div>
@@ -1272,8 +1414,11 @@
           <a class="logo-tile" href="https://www.nsf.gov/" target="_blank" rel="noreferrer" aria-label="National Science Foundation">
             <img src="images/nsf_logo.png" alt="NSF logo">
           </a>
-          <a class="logo-tile" href="https://www.nvidia.com/en-us/startups/?ncid=pa-srch-goog-877459&_bt=797109179974&_bk=nvidia%20startup%20funding&_bm=e&_bn=g&_bg=196906458127&gad_source=1&gad_campaignid=23551120779&gbraid=0AAAAAD4XAoF8FIZkQ-rTxK1TeK_J2ahzr&gclid=Cj0KCQiA2bTNBhDjARIsAK89wlHX7auOF0JuCDjEap9ec9nMiGmeHIxLcrg2nryYGWh0AKBE7epSI9UaAp1JEALw_wcB" target="_blank" rel="noreferrer" aria-label="NVIDIA Inception for Startups">
+          <a class="logo-tile" href="https://www.nvidia.com/" target="_blank" rel="noreferrer" aria-label="NVIDIA">
             <img src="images/nvidia_logo.png" alt="NVIDIA logo">
+          </a>
+          <a class="logo-tile" href="https://www.google.com/" target="_blank" rel="noreferrer" aria-label="Google">
+            <img src="images/google.png" alt="Google logo">
           </a>
           <a class="logo-tile" href="https://www.hawaiicommunityfoundation.org/" target="_blank" rel="noreferrer" aria-label="Hawaii Community Foundation">
             <img src="images/hcf_log.jpg" alt="HCF logo">
@@ -1315,8 +1460,8 @@
       </div>
       <div class="contact-grid">
         <section class="contact-card">
-          <h3>Reach Out</h3>
-          <p>We welcome inquiries about research collaboration, student opportunities, and lab visits.</p>
+          <h3>Visit CIRP Lab</h3>
+          <p>Find the lab in the Pacific Ocean Science and Technology Building on the University of Hawai'i at Manoa campus.</p>
           <div class="contact-list">
             <div class="contact-item">
               <strong>Email</strong>
@@ -1333,38 +1478,32 @@
               Pacific Ocean Science and Technology (POST) Building, Room 312
             </div>
           </div>
-          <div class="contact-actions">
-            <a class="button button-secondary" href="https://calendly.com/huaijin-hawaii/30min" target="_blank" rel="noreferrer">Book 30 Minutes</a>
-          </div>
         </section>
         <aside class="contact-card contact-map">
-          <div class="contact-map-panel">
-            <div>
-              <strong>Visit CIRP Lab</strong>
-              <p>Located in the POST Building at the University of Hawaii at Manoa, the lab supports work spanning computational imaging, robotics, and multimodal perception.</p>
+          <div class="contact-visual-stack">
+            <div class="contact-map-frame">
+              <strong>Google Map</strong>
+              <iframe class="contact-embed" src="https://www.google.com/maps?q=Pacific+Ocean+Science+and+Technology+Building,+Honolulu,+HI+96822&z=17&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Map centered on the POST Building"></iframe>
             </div>
-            <form class="contact-form" id="contact-form">
-              <label class="field-label" for="contact-email">
-                <span>Your Email</span>
-                <input class="field-input" id="contact-email" name="email" type="email" placeholder="name@domain.com">
-              </label>
-              <label class="field-label" for="contact-subject">
-                <span>Subject</span>
-                <input class="field-input" id="contact-subject" name="subject" type="text" placeholder="Collaboration, visit, or student interest">
-              </label>
-              <label class="field-label" for="contact-message">
-                <span>Content</span>
-                <textarea class="field-input field-textarea" id="contact-message" name="message" placeholder="Tell the lab what you would like to discuss."></textarea>
-              </label>
-              <p class="contact-note">Fill in your email and message, then use the button below to draft an email to the lab.</p>
-              <div class="contact-actions">
-                <button class="button button-primary" type="submit">Email the Lab</button>
-                <a class="button button-secondary" href="https://www.google.com/maps/search/?api=1&query=Pacific+Ocean+Science+and+Technology+Building+Room+312+Honolulu+HI+96822" target="_blank" rel="noreferrer">Directions</a>
-              </div>
-            </form>
+            <div class="contact-photo-frame">
+              <strong>POST Building View</strong>
+              <iframe class="contact-embed" src="https://www.google.com/maps?layer=c&cbll=21.29737647842418,-157.81619370953624&cbp=12,0,0,0,0&output=svembed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Street view near the POST Building"></iframe>
+            </div>
           </div>
         </aside>
       </div>
+      <section class="contact-card prospective-card">
+        <h3>Prospective Students</h3>
+        <p>Due to the high volume of inquiries, we regret that we cannot respond to individual emails asking about available positions.</p>
+        <p>Please do not email to inquire about openings unless at least one of the following applies:</p>
+        <ul>
+          <li>You have previously worked with one of the PI's collaborators.</li>
+          <li>You have published relevant work in major venues related to the lab's research areas, such as ICCP, CVPR, ECCV, ICCV, IROS, ICRA, RSS, or SIGGRAPH.</li>
+        </ul>
+        <p>Students interested in joining the CIRP Lab are encouraged to apply through the University of Hawai'i ICS graduate programs: <a href="https://www.ics.hawaii.edu/academics/graduate-programs/" target="_blank" rel="noreferrer">ics.hawaii.edu/academics/graduate-programs</a>. Research assistantships are typically offered only to students who have already worked in the CIRP Lab.</p>
+        <p>Current UH undergraduate and M.S. students should contact the PI about potential research opportunities. Undergraduate students are especially encouraged to apply to UROP: <a href="https://manoa.hawaii.edu/undergrad/urop/" target="_blank" rel="noreferrer">manoa.hawaii.edu/undergrad/urop</a>.</p>
+        <p>For international applicants, please note that teaching assistantships require meeting the university's English proficiency requirements. Details are available here: <a href="https://manoa.hawaii.edu/graduate/english-proficiency-exemption-eligibility/" target="_blank" rel="noreferrer">manoa.hawaii.edu/graduate/english-proficiency-exemption-eligibility</a>.</p>
+      </section>
     </section>
   </main>
 
@@ -1395,6 +1534,8 @@
       publications: [],
       gallery: []
     };
+    const renderedRoutes = new Set();
+    let dataReady = false;
 
     function escapeHtml(value) {
       return String(value ?? "")
@@ -1777,6 +1918,17 @@
       return ROUTES.includes(route) ? route : "home";
     }
 
+    function splitPipedValues(value) {
+      return String(value || "")
+        .split("|")
+        .map((item) => item.trim())
+        .filter(Boolean);
+    }
+
+    function renderMemberBio(member) {
+      return renderInlineMarkdown(member.bio || "");
+    }
+
     function setRoute(route) {
       document.querySelectorAll("[data-route]").forEach((section) => {
         section.classList.toggle("active", section.dataset.route === route);
@@ -1784,10 +1936,13 @@
       document.querySelectorAll("[data-route-link]").forEach((link) => {
         link.classList.toggle("active", link.getAttribute("href") === "#" + route);
       });
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      if (dataReady) {
+        ensureRouteRendered(route);
+      }
+      window.scrollTo({ top: 0, behavior: "auto" });
     }
 
-    function createMemberCard(member) {
+    function createMemberCard(member, categoryName = "") {
       const imageSource = member.image || DEFAULT_MEMBER_AVATAR;
       const links = [
         member.website ? `<a class="link-chip" href="${escapeHtml(member.website)}" target="_blank" rel="noreferrer">Website</a>` : "",
@@ -1798,19 +1953,25 @@
         member.email ? `<a class="link-chip" href="mailto:${escapeHtml(member.email)}">Email</a>` : ""
       ].filter(Boolean).join("");
 
+      const tags = splitPipedValues(member.tags)
+        .map((tag) => `<span class="chip tag-chip">${escapeHtml(tag)}</span>`)
+        .join("");
       const meta = [
         member.role ? `<span class="chip">${escapeHtml(member.role)}</span>` : "",
         member.affiliation ? `<span class="chip">${escapeHtml(member.affiliation)}</span>` : "",
-        member.placement ? `<span class="chip">${escapeHtml(member.placement)}</span>` : ""
+        tags
       ].filter(Boolean).join("");
-
+      const nowAt = categoryName === "Alumni" && member.placement
+        ? `<p class="member-now-at"><strong>Now at</strong> ${escapeHtml(member.placement)}</p>`
+        : "";
       return `
         <article class="member-card">
           <img class="member-photo" src="${escapeHtml(imageSource)}" alt="${escapeHtml(member.name)}" loading="lazy" onerror="this.onerror=null;this.src='images/user-avatar.svg';">
           <div>
             <h3>${escapeHtml(member.name)}</h3>
             <div class="member-meta">${meta}</div>
-            <p>${escapeHtml(member.bio || "")}</p>
+            ${nowAt}
+            <p>${renderMemberBio(member)}</p>
             <div class="link-cluster">${links}</div>
           </div>
         </article>
@@ -1828,11 +1989,12 @@
 
       container.innerHTML = sorted.map((category) => {
         const content = category.members.length
-          ? `<div class="member-grid">${category.members.map(createMemberCard).join("")}</div>`
+          ? `<div class="member-grid">${category.members.map((member) => createMemberCard(member, category.name)).join("")}</div>`
           : `<div class="empty-state">${escapeHtml(category.note || "No members listed in this category yet.")}</div>`;
         return `
           <section class="member-section">
             <h2>${escapeHtml(category.name)}</h2>
+            ${category.members.length && category.note ? `<p class="member-section-note">${escapeHtml(category.note)}</p>` : ""}
             ${content}
           </section>
         `;
@@ -1907,19 +2069,24 @@
       `;
     }
 
-    function renderPublications(entries) {
+    function splitPublications(entries) {
+      const sorted = [...entries].sort((left, right) => {
+        return publicationSortValue(right) - publicationSortValue(left) || (right.fields.title || "").localeCompare(left.fields.title || "");
+      });
+      return {
+        current: sorted.filter((entry) => Number(entry.fields.year || 0) >= 2025),
+        previous: sorted.filter((entry) => Number(entry.fields.year || 0) < 2025)
+      };
+    }
+
+    function renderPublicationsPage(entries) {
       const container = document.getElementById("publications-root");
       if (!entries.length) {
         container.innerHTML = '<div class="error-state">Unable to load publications.</div>';
         return;
       }
 
-      const sorted = [...entries].sort((left, right) => {
-        return publicationSortValue(right) - publicationSortValue(left) || (right.fields.title || "").localeCompare(left.fields.title || "");
-      });
-      const current = sorted.filter((entry) => Number(entry.fields.year || 0) >= 2025);
-      const previous = sorted.filter((entry) => Number(entry.fields.year || 0) < 2025);
-
+      const { current, previous } = splitPublications(entries);
       container.innerHTML = `
         <section class="publication-section">
           <h2>CIRP Lab Publications</h2>
@@ -1930,8 +2097,14 @@
           <div class="publication-list">${previous.map((entry, index) => renderPublicationCard(entry, `previous-${index}`)).join("") || '<div class="empty-state">No previous publications listed.</div>'}</div>
         </section>
       `;
+      attachCitationToggles(container);
+    }
 
-      document.getElementById("home-publications-root").innerHTML = current.slice(0, 4).map((entry, index) => renderPublicationCard(entry, `home-${index}`)).join("") || '<div class="empty-state">No recent publications listed.</div>';
+    function renderHomePublications(entries) {
+      const container = document.getElementById("home-publications-root");
+      const { current } = splitPublications(entries);
+      container.innerHTML = current.slice(0, 4).map((entry, index) => renderPublicationCard(entry, `home-${index}`)).join("") || '<div class="empty-state">No recent publications listed.</div>';
+      attachCitationToggles(container);
     }
 
     function renderTimeline(items, limit) {
@@ -1941,18 +2114,14 @@
       }
       return `
         <div class="timeline">
-          ${sliced.map((item, index) => {
-            const isLeft = index % 2 === 0;
-            const card = `
+          ${sliced.map((item) => {
+            return `
+              <div class="timeline-row">
               <article class="timeline-card">
                 <div class="timeline-date"><span>${escapeHtml(item.date)}</span></div>
                 <h3>${escapeHtml(item.title)}</h3>
                 <div class="news-body">${renderMarkdown(item.body)}</div>
               </article>
-            `;
-            return `
-              <div class="timeline-row ${isLeft ? "left" : "right"}">
-                ${isLeft ? `${card}<div class="timeline-spacer"></div>` : `<div class="timeline-spacer"></div>${card}`}
               </div>
             `;
           }).join("")}
@@ -1960,14 +2129,40 @@
       `;
     }
 
-    function renderNews(items) {
+    function renderNewsPage(items) {
       const container = document.getElementById("news-root");
       if (!items.length) {
         container.innerHTML = '<div class="error-state">Unable to load news.</div>';
         return;
       }
       container.innerHTML = renderTimeline(items);
-      document.getElementById("home-news-root").innerHTML = renderTimeline(items, 6);
+      container.querySelectorAll(".news-body").forEach((node) => highlightMoneyValues(node));
+    }
+
+    function renderHomeNews(items) {
+      const container = document.getElementById("home-news-root");
+      container.innerHTML = items.length ? renderTimeline(items, 6) : '<div class="empty-state">No news items listed.</div>';
+      container.querySelectorAll(".news-body").forEach((node) => highlightMoneyValues(node));
+    }
+
+    function ensureRouteRendered(route) {
+      if (renderedRoutes.has(route)) {
+        return;
+      }
+
+      if (route === "home") {
+        renderGallery(state.gallery);
+        renderHomeNews(state.news);
+        renderHomePublications(state.publications);
+      } else if (route === "members") {
+        renderMembers(state.members);
+      } else if (route === "publications") {
+        renderPublicationsPage(state.publications);
+      } else if (route === "news") {
+        renderNewsPage(state.news);
+      }
+
+      renderedRoutes.add(route);
     }
 
     function renderGallery(images) {
@@ -2199,36 +2394,17 @@
       sync();
     }
 
-    function attachCitationToggles() {
-      document.querySelectorAll("[data-citation-toggle]").forEach((button) => {
+    function attachCitationToggles(root = document) {
+      root.querySelectorAll("[data-citation-toggle]").forEach((button) => {
+        if (button.dataset.citationBound === "true") {
+          return;
+        }
+        button.dataset.citationBound = "true";
         button.addEventListener("click", () => {
           const target = document.getElementById(button.dataset.citationToggle);
           const visible = target.classList.toggle("visible");
           button.textContent = visible ? "Hide BibTeX" : "Show BibTeX";
         });
-      });
-    }
-
-    function setupContactForm() {
-      const form = document.getElementById("contact-form");
-      if (!form) {
-        return;
-      }
-
-      form.addEventListener("submit", (event) => {
-        event.preventDefault();
-        const email = document.getElementById("contact-email").value.trim();
-        const subject = document.getElementById("contact-subject").value.trim() || "CIRP Lab inquiry";
-        const message = document.getElementById("contact-message").value.trim();
-        const lines = [
-          message,
-          email ? `Sender email: ${email}` : ""
-        ].filter(Boolean);
-        const params = new URLSearchParams({
-          subject,
-          body: lines.join("\n\n")
-        });
-        window.location.href = `mailto:huaijin@hawaii.edu?${params.toString()}`;
       });
     }
 
@@ -2274,14 +2450,8 @@
         state.news = parseNews(newsText);
         state.publications = parseBibTeX(publicationsText);
         state.gallery = galleryImages;
-
-        renderMembers(state.members);
-        renderNews(state.news);
-        renderPublications(state.publications);
-        renderGallery(state.gallery);
-        attachCitationToggles();
-        setupContactForm();
-        document.querySelectorAll(".news-body").forEach((node) => highlightMoneyValues(node));
+        dataReady = true;
+        ensureRouteRendered(routeFromHash());
       } catch (error) {
         console.error(error);
         document.querySelectorAll("#members-root, #news-root, #publications-root, #gallery-root, #home-news-root, #home-publications-root").forEach((node) => {
