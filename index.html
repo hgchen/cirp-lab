@@ -1,0 +1,2258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CIRP Lab</title>
+  <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+  <style>
+    :root {
+      --bg: #f4efe6;
+      --surface: rgba(255, 250, 243, 0.86);
+      --surface-strong: rgba(255, 250, 243, 0.96);
+      --line: rgba(71, 48, 28, 0.14);
+      --line-strong: rgba(71, 48, 28, 0.22);
+      --text: #1f140d;
+      --muted: #685344;
+      --accent: #0f6a68;
+      --accent-deep: #0a4745;
+      --accent-soft: #dff4f3;
+      --warm: #cc7b42;
+      --warm-soft: #fff0de;
+      --shadow: 0 24px 60px rgba(44, 28, 14, 0.12);
+      --radius: 26px;
+      --content-width: min(1180px, calc(100vw - 32px));
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Avenir Next", "Segoe UI", sans-serif;
+      color: var(--text);
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top left, rgba(15, 106, 104, 0.16), transparent 24%),
+        radial-gradient(circle at bottom right, rgba(204, 123, 66, 0.16), transparent 28%),
+        var(--bg);
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(31, 20, 13, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(31, 20, 13, 0.03) 1px, transparent 1px);
+      background-size: 28px 28px;
+      mask-image: radial-gradient(circle at center, black 54%, transparent 88%);
+      opacity: 0.35;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(18px);
+      background: rgba(244, 239, 230, 0.82);
+    }
+
+    .topbar-inner {
+      width: var(--content-width);
+      margin: 0 auto;
+      padding: 14px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .brand-badge {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      color: #fff8f1;
+      font-weight: 800;
+      line-height: 1;
+      background: linear-gradient(135deg, var(--accent), var(--warm));
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .brand-badge span {
+      display: inline-block;
+      font-size: 0.52rem;
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+    }
+
+    .brand-copy strong,
+    .brand-copy span {
+      display: block;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .brand-copy strong {
+      font-size: 0.98rem;
+      letter-spacing: 0.03em;
+    }
+
+    .brand-copy span {
+      color: var(--muted);
+      font-size: 0.78rem;
+    }
+
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: flex-end;
+    }
+
+    .nav-link {
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      color: var(--muted);
+      transition: all 180ms ease;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: var(--text);
+      border-color: rgba(15, 106, 104, 0.18);
+      background: rgba(255, 255, 255, 0.72);
+    }
+
+    main {
+      width: var(--content-width);
+      margin: 0 auto;
+      padding: 30px 0 76px;
+    }
+
+    .page {
+      display: none;
+      animation: fade-up 220ms ease;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    @keyframes fade-up {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      min-height: 520px;
+      padding: 66px 64px;
+      border-radius: 36px;
+      color: #fff8f0;
+      background:
+        linear-gradient(118deg, rgba(7, 18, 27, 0.86), rgba(9, 58, 57, 0.6)),
+        url("images/bg_1.png") center/cover no-repeat;
+      box-shadow: var(--shadow);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -110px -140px auto;
+      width: 380px;
+      height: 380px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.26), transparent 68%);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .hero-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(310px, 0.85fr);
+      align-items: end;
+      gap: 34px;
+      height: 100%;
+    }
+
+    .hero-copy h1 {
+      margin: 20px 0 18px;
+      max-width: 12ch;
+      font-size: clamp(2.9rem, 7vw, 4.85rem);
+      line-height: 1.15;
+      letter-spacing: -0.05em;
+    }
+
+    .hero-copy p {
+      margin: 0;
+      max-width: 66ch;
+      font-size: 1rem;
+      line-height: 1.72;
+      color: rgba(255, 248, 240, 0.9);
+    }
+
+    .hero-actions {
+      margin-top: 30px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 13px 18px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-weight: 700;
+      transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+      cursor: pointer;
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.14);
+    }
+
+    .button-primary {
+      color: #2d1407;
+      background: linear-gradient(135deg, #f8dcc0, #f2b981);
+    }
+
+    .button-secondary {
+      color: #fff8f0;
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.22);
+    }
+
+    .hero-spotlight {
+      padding: 26px;
+      border-radius: 26px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(18px);
+    }
+
+    .hero-spotlight h2,
+    .section-title h2 {
+      margin: 0;
+      font-size: 1.26rem;
+      letter-spacing: -0.03em;
+    }
+
+    .hero-spotlight p {
+      margin: 12px 0 0;
+      color: rgba(255, 248, 240, 0.9);
+      line-height: 1.68;
+    }
+
+    .focus-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .focus-pills .chip {
+      background: rgba(255, 250, 243, 0.18);
+      color: #fff9f2;
+      border: 1px solid rgba(255, 250, 243, 0.34);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16);
+    }
+
+    .stack-section {
+      margin-top: 32px;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .panel,
+    .theme-card,
+    .member-card,
+    .publication-card,
+    .timeline-card,
+    .logo-tile {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .panel {
+      padding: 28px;
+    }
+
+    .theme-grid,
+    .member-grid,
+    .logo-grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .theme-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .theme-card {
+      position: relative;
+      overflow: hidden;
+      min-height: 220px;
+      padding: 28px 26px 26px;
+      background:
+        radial-gradient(circle at top right, rgba(255, 255, 255, 0.76), transparent 34%),
+        linear-gradient(165deg, rgba(255, 250, 243, 0.98), rgba(250, 241, 230, 0.9));
+    }
+
+    .theme-card span {
+      display: inline-block;
+      margin-bottom: 18px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .theme-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 5px;
+      background: linear-gradient(to bottom, var(--accent), var(--warm));
+      opacity: 0.95;
+    }
+
+    .theme-card::after {
+      content: "";
+      position: absolute;
+      inset: auto -36px -44px auto;
+      width: 148px;
+      height: 148px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(15, 106, 104, 0.12), transparent 70%);
+      pointer-events: none;
+    }
+
+    .theme-card:nth-child(2)::after {
+      background: radial-gradient(circle, rgba(204, 123, 66, 0.14), transparent 70%);
+    }
+
+    .theme-card:nth-child(3)::after {
+      background: radial-gradient(circle, rgba(15, 106, 104, 0.1), transparent 70%);
+    }
+
+    .theme-card h3 {
+      max-width: 16ch;
+      font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif;
+      font-size: 1.34rem;
+      line-height: 1.2;
+      letter-spacing: -0.04em;
+    }
+
+    .theme-card p {
+      max-width: 34ch;
+      font-size: 0.98rem;
+    }
+
+    .member-card h3,
+    .publication-card h3,
+    .timeline-card h3 {
+      margin: 0 0 10px;
+      font-size: 1.14rem;
+      line-height: 1.32;
+      letter-spacing: -0.03em;
+    }
+
+    .theme-card p,
+    .member-card p,
+    .publication-card p,
+    .timeline-card p,
+    .timeline-card li {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.72;
+    }
+
+    .gallery-shell {
+      position: relative;
+      overflow: hidden;
+      padding: 20px 78px 12px;
+    }
+
+    .gallery-stage {
+      position: relative;
+      min-height: 420px;
+    }
+
+    .gallery-stage:focus-visible {
+      outline: 2px solid rgba(15, 106, 104, 0.4);
+      outline-offset: 10px;
+      border-radius: 36px;
+    }
+
+    .gallery-card {
+      --offset: 0%;
+      --scale: 1;
+      --opacity: 1;
+      --tone: 1;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: min(72%, 820px);
+      margin: 0;
+      overflow: hidden;
+      border-radius: 28px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: rgba(255, 255, 255, 0.18);
+      box-shadow: var(--shadow);
+      transform: translate3d(calc(-50% + var(--offset)), -50%, 0) scale(var(--scale));
+      opacity: var(--opacity);
+      filter: saturate(var(--tone)) brightness(var(--tone));
+      transition:
+        transform 620ms cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 620ms ease,
+        filter 620ms ease;
+      will-change: transform, opacity, filter;
+      backface-visibility: hidden;
+      transform-style: preserve-3d;
+      contain: layout paint style;
+    }
+
+    .gallery-shell.is-resetting .gallery-card {
+      transition: none;
+    }
+
+    .gallery-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to top, rgba(19, 16, 13, 0.22), transparent 26%),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.08), transparent 24%);
+      pointer-events: none;
+    }
+
+    .gallery-card img {
+      width: 100%;
+      height: 100%;
+      min-height: 400px;
+      object-fit: cover;
+      user-select: none;
+      pointer-events: none;
+      aspect-ratio: 16 / 10;
+      backface-visibility: hidden;
+      transform: translateZ(0);
+    }
+
+    .gallery-card[data-pos="-3"],
+    .gallery-card[data-pos="3"] {
+      --scale: 0.72;
+      --opacity: 0;
+      --tone: 0.92;
+      pointer-events: none;
+    }
+
+    .gallery-card[data-pos="-3"] {
+      --offset: -216%;
+      z-index: 0;
+    }
+
+    .gallery-card[data-pos="-2"] {
+      --offset: -142%;
+      --scale: 0.82;
+      --opacity: 0;
+      --tone: 0.95;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .gallery-card[data-pos="-1"] {
+      --offset: -74%;
+      --scale: 0.86;
+      --opacity: 0.62;
+      --tone: 0.97;
+      z-index: 2;
+    }
+
+    .gallery-card[data-pos="0"] {
+      --offset: 0%;
+      --scale: 1;
+      --opacity: 1;
+      --tone: 1;
+      z-index: 3;
+    }
+
+    .gallery-card[data-pos="1"] {
+      --offset: 74%;
+      --scale: 0.86;
+      --opacity: 0.62;
+      --tone: 0.97;
+      z-index: 2;
+    }
+
+    .gallery-card[data-pos="2"] {
+      --offset: 142%;
+      --scale: 0.82;
+      --opacity: 0;
+      --tone: 0.95;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .gallery-card[data-pos="3"] {
+      --offset: 216%;
+      z-index: 0;
+    }
+
+    .gallery-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 4;
+      width: 52px;
+      height: 52px;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 50%;
+      background: rgba(17, 20, 24, 0.54);
+      color: #fff8f0;
+      backdrop-filter: blur(10px);
+      cursor: pointer;
+      font-size: 1.34rem;
+      font-weight: 800;
+      font-family: "SFMono-Regular", Menlo, monospace;
+      line-height: 1;
+    }
+
+    .gallery-arrow:hover {
+      background: rgba(17, 20, 24, 0.72);
+    }
+
+    .gallery-arrow:disabled {
+      cursor: default;
+      opacity: 0.48;
+    }
+
+    .gallery-arrow.prev {
+      left: 10px;
+    }
+
+    .gallery-arrow.next {
+      right: 10px;
+    }
+
+    .gallery-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    .gallery-dot {
+      appearance: none;
+      display: block;
+      width: 12px;
+      height: 12px;
+      min-width: 12px;
+      flex: 0 0 12px;
+      padding: 0;
+      line-height: 0;
+      border-radius: 50%;
+      border: 0;
+      background: rgba(15, 106, 104, 0.18);
+      cursor: pointer;
+      transition: transform 240ms ease, background-color 240ms ease;
+    }
+
+    .gallery-dot.active {
+      background: var(--accent);
+      transform: scale(1.12);
+    }
+
+    .section-footer {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 20px;
+    }
+
+    .publication-list {
+      display: grid;
+      gap: 16px;
+    }
+
+    .publication-section + .publication-section {
+      margin-top: 56px;
+    }
+
+    .publication-card {
+      padding: 22px;
+    }
+
+    .publication-meta,
+    .timeline-date {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 12px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .member-section {
+      margin-top: 28px;
+    }
+
+    .member-section h2,
+    .publication-section h2 {
+      margin: 0 0 16px;
+      font-size: 1.42rem;
+      letter-spacing: -0.04em;
+    }
+
+    .member-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .member-card {
+      padding: 22px;
+      display: grid;
+      grid-template-columns: 96px minmax(0, 1fr);
+      gap: 18px;
+      align-items: start;
+    }
+
+    .member-photo {
+      width: 96px;
+      height: 96px;
+      border-radius: 24px;
+      object-fit: cover;
+      border: 1px solid rgba(15, 106, 104, 0.12);
+      background: rgba(15, 106, 104, 0.08);
+    }
+
+    .member-meta,
+    .link-cluster,
+    .publication-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .member-meta {
+      margin: 10px 0 14px;
+    }
+
+    .chip,
+    .link-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      border: 1px solid rgba(15, 106, 104, 0.12);
+    }
+
+    .chip {
+      background: rgba(15, 106, 104, 0.08);
+      color: var(--accent-deep);
+    }
+
+    .link-chip {
+      background: rgba(255, 255, 255, 0.84);
+      border-color: rgba(71, 48, 28, 0.14);
+      color: var(--text);
+      margin-top: 16px;
+    }
+
+    .link-chip:hover {
+      background: #ffffff;
+    }
+
+    .citation-toggle {
+      margin-top: 16px;
+      padding: 0;
+      border: 0;
+      background: none;
+      color: var(--accent-deep);
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .citation {
+      display: none;
+      margin-top: 14px;
+      padding: 16px;
+      border-radius: 18px;
+      background: #1f1510;
+      color: #f8ede3;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      font-family: "SFMono-Regular", Menlo, monospace;
+      font-size: 0.84rem;
+      line-height: 1.58;
+    }
+
+    .citation.visible {
+      display: block;
+    }
+
+    .timeline {
+      position: relative;
+      display: grid;
+      gap: 22px;
+      padding: 6px 0;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      transform: translateX(-50%);
+      background: linear-gradient(to bottom, transparent, rgba(15, 106, 104, 0.2), rgba(15, 106, 104, 0.28), transparent);
+    }
+
+    .timeline-row {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 36px;
+      align-items: start;
+    }
+
+    .timeline-row::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 26px;
+      width: 14px;
+      height: 14px;
+      transform: translateX(-50%);
+      border-radius: 50%;
+      background: var(--warm);
+      border: 4px solid rgba(255, 248, 240, 0.94);
+      box-shadow: 0 0 0 6px rgba(204, 123, 66, 0.12);
+    }
+
+    .timeline-card {
+      overflow: hidden;
+      padding: 24px 24px 22px;
+      position: relative;
+      border-color: rgba(15, 106, 104, 0.16);
+      background:
+        radial-gradient(circle at top right, rgba(255, 255, 255, 0.7), transparent 36%),
+        linear-gradient(180deg, rgba(255, 252, 247, 0.98), rgba(252, 246, 239, 0.92));
+      box-shadow:
+        0 18px 42px rgba(44, 28, 14, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.72);
+    }
+
+    .timeline-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent), rgba(204, 123, 66, 0.78));
+    }
+
+    .timeline-card::after {
+      content: "";
+      position: absolute;
+      right: -34px;
+      bottom: -42px;
+      width: 132px;
+      height: 132px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(15, 106, 104, 0.08), transparent 72%);
+      pointer-events: none;
+    }
+
+    .timeline-card ul {
+      margin: 12px 0 0;
+      padding-left: 18px;
+    }
+
+    .news-body strong {
+      font-weight: 700;
+      color: inherit;
+    }
+
+    .news-signoff {
+      margin-top: 14px;
+    }
+
+    .news-signoff strong {
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .timeline-date span {
+      font-weight: 700;
+      color: var(--accent-deep);
+    }
+
+    .logo-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .logo-tile {
+      min-height: 128px;
+      display: grid;
+      place-items: center;
+      padding: 22px;
+      background: var(--surface-strong);
+      transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+    }
+
+    .logo-tile img {
+      max-height: 56px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .logo-tile:hover {
+      transform: translateY(-2px);
+      border-color: rgba(15, 106, 104, 0.24);
+      background: rgba(255, 255, 255, 0.96);
+    }
+
+    .status,
+    .empty-state,
+    .error-state {
+      padding: 22px;
+      border-radius: 20px;
+      border: 1px dashed var(--line-strong);
+      background: rgba(255, 255, 255, 0.48);
+      color: var(--muted);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+      gap: 20px;
+    }
+
+    .contact-card {
+      padding: 26px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .contact-card h3 {
+      margin: 0 0 12px;
+      font-size: 1.18rem;
+      letter-spacing: -0.03em;
+    }
+
+    .contact-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.72;
+    }
+
+    .contact-form {
+      display: grid;
+      gap: 14px;
+      margin-top: 22px;
+    }
+
+    .field-label {
+      display: grid;
+      gap: 8px;
+    }
+
+    .field-label span {
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent-deep);
+    }
+
+    .field-input {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1px solid rgba(71, 48, 28, 0.16);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.84);
+      color: var(--text);
+      font: inherit;
+      transition: border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
+    }
+
+    .field-input:focus {
+      outline: none;
+      border-color: rgba(15, 106, 104, 0.46);
+      box-shadow: 0 0 0 4px rgba(15, 106, 104, 0.1);
+      background: #ffffff;
+    }
+
+    .field-textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    .contact-note {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .contact-item {
+      padding: 16px 18px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(71, 48, 28, 0.12);
+    }
+
+    .contact-item strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent-deep);
+    }
+
+    .contact-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .contact-card .button-secondary {
+      color: var(--accent-deep);
+      background: rgba(15, 106, 104, 0.08);
+      border-color: rgba(15, 106, 104, 0.14);
+    }
+
+    .contact-map {
+      min-height: 100%;
+      background:
+        linear-gradient(145deg, rgba(15, 106, 104, 0.12), rgba(204, 123, 66, 0.1)),
+        rgba(255, 255, 255, 0.76);
+    }
+
+    .contact-map-panel {
+      min-height: 240px;
+      border-radius: 24px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background:
+        radial-gradient(circle at top right, rgba(15, 106, 104, 0.14), transparent 34%),
+        radial-gradient(circle at bottom left, rgba(204, 123, 66, 0.14), transparent 38%),
+        rgba(255, 255, 255, 0.68);
+      border: 1px solid rgba(71, 48, 28, 0.12);
+    }
+
+    .contact-map-panel strong {
+      display: block;
+      font-size: 1.4rem;
+      letter-spacing: -0.04em;
+      margin-bottom: 12px;
+    }
+
+    .money-value {
+      font-weight: 700;
+      color: inherit;
+    }
+
+    footer {
+      width: var(--content-width);
+      margin: 0 auto 32px;
+      color: var(--muted);
+      font-size: 0.92rem;
+      text-align: center;
+    }
+
+    @media (max-width: 1040px) {
+      .hero {
+        padding: 42px 26px;
+      }
+
+      .hero-grid,
+      .theme-grid,
+      .member-grid,
+      .logo-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery-card img {
+        min-height: 320px;
+      }
+
+      .gallery-shell {
+        padding-inline: 52px;
+      }
+
+      .gallery-stage {
+        min-height: 340px;
+      }
+
+      .gallery-card {
+        width: min(82%, 720px);
+      }
+
+      .gallery-card[data-pos="-1"] {
+        --offset: -62%;
+      }
+
+      .gallery-card[data-pos="1"] {
+        --offset: 62%;
+      }
+
+      .timeline::before {
+        left: 18px;
+        transform: none;
+      }
+
+      .timeline-row {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        padding-left: 42px;
+      }
+
+      .timeline-row::before {
+        left: 12px;
+        transform: none;
+      }
+
+      .timeline-row.right .timeline-spacer,
+      .timeline-row.left .timeline-spacer {
+        display: none;
+      }
+
+      .member-card {
+        grid-template-columns: 84px minmax(0, 1fr);
+      }
+
+      .member-photo {
+        width: 84px;
+        height: 84px;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .topbar-inner {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .nav {
+        justify-content: flex-start;
+        overflow-x: auto;
+      }
+
+      main {
+        padding-top: 20px;
+      }
+
+      .hero-copy h1 {
+        max-width: none;
+      }
+
+      .gallery-arrow {
+        width: 46px;
+        height: 46px;
+      }
+
+      .gallery-shell {
+        padding-inline: 12px;
+      }
+
+      .gallery-stage {
+        min-height: 290px;
+      }
+
+      .gallery-card {
+        width: 100%;
+      }
+
+      .gallery-card[data-pos="-1"],
+      .gallery-card[data-pos="1"] {
+        --offset: 0%;
+        --scale: 0.92;
+        --opacity: 0.16;
+      }
+
+      .gallery-card[data-pos="-2"],
+      .gallery-card[data-pos="2"],
+      .gallery-card[data-pos="-3"],
+      .gallery-card[data-pos="3"] {
+        --opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="#home">
+        <div class="brand-badge"><span>CIRP</span></div>
+        <div class="brand-copy">
+          <strong>CIRP Lab</strong>
+          <span>Computational Imaging and Robotic Perception</span>
+        </div>
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <a class="nav-link" data-route-link href="#home">Home</a>
+        <a class="nav-link" data-route-link href="#members">Members</a>
+        <a class="nav-link" data-route-link href="#publications">Publications</a>
+        <a class="nav-link" data-route-link href="#news">News</a>
+        <a class="nav-link" data-route-link href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page active" data-route="home" id="home">
+      <section class="hero">
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <span class="eyebrow">University of Hawaii at Manoa</span>
+            <h1>Computational Imaging for Real-World Robotics.</h1>
+            <p>
+              We build cameras that capture light properties beyond human vision, including transient transport, phase, polarization, and spectral cues. We combine these novel imagers with physics-informed AI to interpret non-conventional data and deploy multimodal perception and vision-language-action models for real-world robotics, especially in agriculture and healthcare where intelligent sensing improves automation, safety, and accessibility.
+            </p>
+            <div class="hero-actions">
+              <a class="button button-primary" href="#members">Meet the Team</a>
+              <a class="button button-secondary" href="#publications">View Publications</a>
+            </div>
+          </div>
+          <aside class="hero-spotlight">
+            <h2>Focus Areas</h2>
+            <p>Physics-informed AI, novel imaging systems, robotic perception, and multimodal sensing for agriculture and healthcare.</p>
+            <div class="focus-pills">
+              <span class="chip">Transient Light Transport</span>
+              <span class="chip">Phase</span>
+              <span class="chip">Polarization</span>
+              <span class="chip">Spectral Imaging</span>
+              <span class="chip">VLA</span>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="stack-section">
+        <div class="section-title">
+          <h2>Research Themes</h2>
+        </div>
+        <div class="theme-grid">
+          <article class="theme-card">
+            <span>Theme 01</span>
+            <h3>Computational Imaging Beyond RGB</h3>
+            <p>We design cameras that capture information beyond conventional color imaging, including phase, polarization, transient transport, and spectral cues.</p>
+          </article>
+          <article class="theme-card">
+            <span>Theme 02</span>
+            <h3>Physics-Informed AI</h3>
+            <p>We build machine learning models that respect imaging physics so non-conventional sensor data can be reconstructed, interpreted, and deployed robustly.</p>
+          </article>
+          <article class="theme-card">
+            <span>Theme 03</span>
+            <h3>Robotic Perception in the Wild</h3>
+            <p>We integrate advanced visual sensing into robots and VLA systems for practical automation in agriculture, healthcare, and other safety-critical settings.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="stack-section panel">
+        <div class="section-title">
+          <h2>Group Photos</h2>
+        </div>
+        <div id="gallery-root" class="gallery-shell">
+          <div class="status">Loading group photos...</div>
+        </div>
+      </section>
+
+      <section class="stack-section panel">
+        <div class="section-title">
+          <h2>Latest News</h2>
+        </div>
+        <div id="home-news-root">
+          <div class="status">Loading news...</div>
+        </div>
+        <div class="section-footer">
+          <a class="button button-primary" href="#news">View Full</a>
+        </div>
+      </section>
+
+      <section class="stack-section">
+        <div class="section-title">
+          <h2>Selected Publications</h2>
+        </div>
+        <div id="home-publications-root" class="publication-list">
+          <div class="status">Loading publications...</div>
+        </div>
+      </section>
+
+      <section class="stack-section panel">
+        <div class="section-title">
+          <h2>Sponsors and Collaborators</h2>
+        </div>
+        <div class="logo-grid">
+          <a class="logo-tile" href="https://www.nsf.gov/" target="_blank" rel="noreferrer" aria-label="National Science Foundation">
+            <img src="images/nsf_logo.png" alt="NSF logo">
+          </a>
+          <a class="logo-tile" href="https://www.nvidia.com/en-us/startups/?ncid=pa-srch-goog-877459&_bt=797109179974&_bk=nvidia%20startup%20funding&_bm=e&_bn=g&_bg=196906458127&gad_source=1&gad_campaignid=23551120779&gbraid=0AAAAAD4XAoF8FIZkQ-rTxK1TeK_J2ahzr&gclid=Cj0KCQiA2bTNBhDjARIsAK89wlHX7auOF0JuCDjEap9ec9nMiGmeHIxLcrg2nryYGWh0AKBE7epSI9UaAp1JEALw_wcB" target="_blank" rel="noreferrer" aria-label="NVIDIA Inception for Startups">
+            <img src="images/nvidia_logo.png" alt="NVIDIA logo">
+          </a>
+          <a class="logo-tile" href="https://www.hawaiicommunityfoundation.org/" target="_blank" rel="noreferrer" aria-label="Hawaii Community Foundation">
+            <img src="images/hcf_log.jpg" alt="HCF logo">
+          </a>
+        </div>
+      </section>
+    </section>
+
+    <section class="page" data-route="members" id="members">
+      <div class="section-title">
+        <h2>Members</h2>
+      </div>
+      <div id="members-root">
+        <div class="status">Loading members...</div>
+      </div>
+    </section>
+
+    <section class="page" data-route="publications" id="publications">
+      <div class="section-title">
+        <h2>Publications</h2>
+      </div>
+      <div id="publications-root">
+        <div class="status">Loading publications...</div>
+      </div>
+    </section>
+
+    <section class="page" data-route="news" id="news">
+      <div class="section-title">
+        <h2>News</h2>
+      </div>
+      <div id="news-root">
+        <div class="status">Loading news...</div>
+      </div>
+    </section>
+
+    <section class="page" data-route="contact" id="contact">
+      <div class="section-title">
+        <h2>Contact the Lab</h2>
+      </div>
+      <div class="contact-grid">
+        <section class="contact-card">
+          <h3>Reach Out</h3>
+          <p>We welcome inquiries about research collaboration, student opportunities, and lab visits.</p>
+          <div class="contact-list">
+            <div class="contact-item">
+              <strong>Email</strong>
+              <a href="mailto:huaijin@hawaii.edu">huaijin@hawaii.edu</a>
+            </div>
+            <div class="contact-item">
+              <strong>Address</strong>
+              1680 East-West Rd<br>
+              Honolulu, HI 96822<br>
+              United States
+            </div>
+            <div class="contact-item">
+              <strong>Directions</strong>
+              Pacific Ocean Science and Technology (POST) Building, Room 312
+            </div>
+          </div>
+          <div class="contact-actions">
+            <a class="button button-secondary" href="https://calendly.com/huaijin-hawaii/30min" target="_blank" rel="noreferrer">Book 30 Minutes</a>
+          </div>
+        </section>
+        <aside class="contact-card contact-map">
+          <div class="contact-map-panel">
+            <div>
+              <strong>Visit CIRP Lab</strong>
+              <p>Located in the POST Building at the University of Hawaii at Manoa, the lab supports work spanning computational imaging, robotics, and multimodal perception.</p>
+            </div>
+            <form class="contact-form" id="contact-form">
+              <label class="field-label" for="contact-email">
+                <span>Your Email</span>
+                <input class="field-input" id="contact-email" name="email" type="email" placeholder="name@domain.com">
+              </label>
+              <label class="field-label" for="contact-subject">
+                <span>Subject</span>
+                <input class="field-input" id="contact-subject" name="subject" type="text" placeholder="Collaboration, visit, or student interest">
+              </label>
+              <label class="field-label" for="contact-message">
+                <span>Content</span>
+                <textarea class="field-input field-textarea" id="contact-message" name="message" placeholder="Tell the lab what you would like to discuss."></textarea>
+              </label>
+              <p class="contact-note">Fill in your email and message, then use the button below to draft an email to the lab.</p>
+              <div class="contact-actions">
+                <button class="button button-primary" type="submit">Email the Lab</button>
+                <a class="button button-secondary" href="https://www.google.com/maps/search/?api=1&query=Pacific+Ocean+Science+and+Technology+Building+Room+312+Honolulu+HI+96822" target="_blank" rel="noreferrer">Directions</a>
+              </div>
+            </form>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Computational Imaging and Robotic Perception Lab, Department of Information and Computer Sciences, University of Hawaii at Manoa.
+  </footer>
+
+  <script>
+    const ROUTES = ["home", "members", "publications", "news", "contact"];
+    const PUBLICATION_LINKS = [
+      ["pdf", "PDF"],
+      ["website", "Website"],
+      ["code", "Code"],
+      ["poster", "Poster"],
+      ["slides", "Slides"],
+      ["video", "Video"],
+      ["arxiv", "arXiv"],
+      ["doi", "DOI"]
+    ];
+    const CATEGORY_ORDER = ["Faculty", "PhD", "Masters", "Undergrads", "Alumni"];
+    const DEFAULT_MEMBER_AVATAR = "images/user-avatar.svg";
+    const MONEY_PATTERN = /\$\d[\d,]*(?:\.\d+)?(?:\s?(?:[KMB]|million|billion|thousand))?/gi;
+
+    const state = {
+      members: [],
+      news: [],
+      publications: [],
+      gallery: []
+    };
+
+    function escapeHtml(value) {
+      return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    function cleanValue(value) {
+      return String(value ?? "")
+        .replace(/\r/g, "")
+        .replace(/[{}]/g, "")
+        .replace(/\s+/g, " ")
+        .trim();
+    }
+
+    function renderInlineMarkdown(text) {
+      let html = escapeHtml(text);
+      html = html.replace(/`([^`]+)`/g, "<code>$1</code>");
+      html = html.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+      html = html.replace(/\*([^*]+)\*/g, "<em>$1</em>");
+      html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noreferrer">$1</a>');
+      return html;
+    }
+
+    function highlightMoneyValues(root) {
+      if (!root) {
+        return;
+      }
+
+      const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+        acceptNode(node) {
+          if (!node.nodeValue || !/\$\d/.test(node.nodeValue)) {
+            return NodeFilter.FILTER_REJECT;
+          }
+          const parent = node.parentElement;
+          if (!parent || parent.closest("strong, b, code, pre, script, style, .money-value")) {
+            return NodeFilter.FILTER_REJECT;
+          }
+          return NodeFilter.FILTER_ACCEPT;
+        }
+      });
+
+      const nodes = [];
+      while (walker.nextNode()) {
+        nodes.push(walker.currentNode);
+      }
+
+      for (const node of nodes) {
+        const text = node.nodeValue || "";
+        let lastIndex = 0;
+        let matched = false;
+        const fragment = document.createDocumentFragment();
+        MONEY_PATTERN.lastIndex = 0;
+        text.replace(MONEY_PATTERN, (match, offset) => {
+          matched = true;
+          if (offset > lastIndex) {
+            fragment.append(text.slice(lastIndex, offset));
+          }
+          const amount = document.createElement("span");
+          amount.className = "money-value";
+          amount.textContent = match;
+          fragment.append(amount);
+          lastIndex = offset + match.length;
+          return match;
+        });
+
+        if (!matched) {
+          continue;
+        }
+        if (lastIndex < text.length) {
+          fragment.append(text.slice(lastIndex));
+        }
+        node.parentNode.replaceChild(fragment, node);
+      }
+    }
+
+    function renderMarkdown(text) {
+      const lines = String(text ?? "").trim().split("\n");
+      const blocks = [];
+      let paragraph = [];
+      let list = [];
+
+      function flushParagraph() {
+        if (paragraph.length) {
+          const html = renderInlineMarkdown(paragraph.join(" ").trim());
+          const paragraphClass = /^<strong>[^<]+<\/strong>$/.test(html) ? ' class="news-signoff"' : "";
+          blocks.push(`<p${paragraphClass}>${html}</p>`);
+          paragraph = [];
+        }
+      }
+
+      function flushList() {
+        if (list.length) {
+          blocks.push("<ul>" + list.map((item) => "<li>" + renderInlineMarkdown(item) + "</li>").join("") + "</ul>");
+          list = [];
+        }
+      }
+
+      for (const rawLine of lines) {
+        const line = rawLine.trim();
+        if (!line) {
+          flushParagraph();
+          flushList();
+          continue;
+        }
+        if (/^[-*]\s+/.test(line)) {
+          flushParagraph();
+          list.push(line.replace(/^[-*]\s+/, ""));
+          continue;
+        }
+        if (/^###\s+/.test(line)) {
+          flushParagraph();
+          flushList();
+          blocks.push("<h3>" + renderInlineMarkdown(line.replace(/^###\s+/, "")) + "</h3>");
+          continue;
+        }
+        paragraph.push(line);
+      }
+
+      flushParagraph();
+      flushList();
+      return blocks.join("");
+    }
+
+    function parseMembers(text) {
+      const categories = [];
+      let currentCategory = null;
+      let currentMember = null;
+
+      function flushMember() {
+        if (currentCategory && currentMember) {
+          currentCategory.members.push(currentMember);
+          currentMember = null;
+        }
+      }
+
+      function flushCategory() {
+        flushMember();
+        if (currentCategory) {
+          categories.push(currentCategory);
+          currentCategory = null;
+        }
+      }
+
+      for (const rawLine of text.split("\n")) {
+        const line = rawLine.trim();
+        if (!line || line === "# Members") {
+          continue;
+        }
+        if (line.startsWith("## ")) {
+          flushCategory();
+          currentCategory = {
+            name: line.slice(3).trim(),
+            note: "",
+            members: []
+          };
+          continue;
+        }
+        if (line.startsWith("### ")) {
+          flushMember();
+          currentMember = { name: line.slice(4).trim() };
+          continue;
+        }
+        if (line === "---") {
+          flushMember();
+          continue;
+        }
+        const match = line.match(/^([A-Za-z_]+):\s*(.*)$/);
+        if (match) {
+          const key = match[1].toLowerCase();
+          const value = match[2].trim();
+          if (currentMember) {
+            currentMember[key] = value;
+          } else if (currentCategory) {
+            currentCategory[key] = value;
+          }
+          continue;
+        }
+        if (currentMember) {
+          currentMember.bio = currentMember.bio ? currentMember.bio + " " + line : line;
+        } else if (currentCategory) {
+          currentCategory.note = currentCategory.note ? currentCategory.note + " " + line : line;
+        }
+      }
+
+      flushCategory();
+      return categories;
+    }
+
+    function parseNews(text) {
+      const items = [];
+      let current = null;
+      let body = [];
+
+      function flush() {
+        if (!current) {
+          return;
+        }
+        current.body = body.join("\n").trim();
+        items.push(current);
+        current = null;
+        body = [];
+      }
+
+      for (const rawLine of text.split("\n")) {
+        const line = rawLine.replace(/\r/g, "");
+        const trimmed = line.trim();
+        if (trimmed === "# News" || (!trimmed && !current)) {
+          continue;
+        }
+        if (trimmed.startsWith("## ")) {
+          flush();
+          const payload = trimmed.slice(3);
+          const separatorIndex = payload.indexOf("|");
+          const date = separatorIndex >= 0 ? payload.slice(0, separatorIndex).trim() : payload.trim();
+          const title = separatorIndex >= 0 ? payload.slice(separatorIndex + 1).trim() : payload.trim();
+          current = { date, title };
+          continue;
+        }
+        if (trimmed === "---") {
+          flush();
+          continue;
+        }
+        if (current) {
+          body.push(line);
+        }
+      }
+
+      flush();
+      return items.sort((left, right) => new Date(right.date) - new Date(left.date));
+    }
+
+    function parseBibTeX(source) {
+      const entries = [];
+      let index = 0;
+
+      function skipWhitespace() {
+        while (index < source.length && /\s/.test(source[index])) {
+          index += 1;
+        }
+      }
+
+      function readUntil(stopChars) {
+        let value = "";
+        while (index < source.length && !stopChars.includes(source[index])) {
+          value += source[index];
+          index += 1;
+        }
+        return value;
+      }
+
+      function readBalanced(openChar, closeChar) {
+        let depth = 0;
+        let value = "";
+        if (source[index] === openChar) {
+          depth = 1;
+          index += 1;
+        }
+        while (index < source.length && depth > 0) {
+          const char = source[index];
+          if (char === openChar) {
+            depth += 1;
+          } else if (char === closeChar) {
+            depth -= 1;
+          }
+          if (depth > 0) {
+            value += char;
+          }
+          index += 1;
+        }
+        return value;
+      }
+
+      function readValue() {
+        skipWhitespace();
+        const char = source[index];
+        if (char === "{") {
+          return readBalanced("{", "}");
+        }
+        if (char === '"') {
+          index += 1;
+          let value = "";
+          while (index < source.length) {
+            const current = source[index];
+            if (current === '"' && source[index - 1] !== "\\") {
+              index += 1;
+              break;
+            }
+            value += current;
+            index += 1;
+          }
+          return value;
+        }
+        let value = "";
+        while (index < source.length && source[index] !== "," && source[index] !== "\n" && source[index] !== "}") {
+          value += source[index];
+          index += 1;
+        }
+        return value.trim();
+      }
+
+      while (index < source.length) {
+        const at = source.indexOf("@", index);
+        if (at === -1) {
+          break;
+        }
+        const entryStart = at;
+        index = at + 1;
+        skipWhitespace();
+        const type = readUntil(["{", "("]).trim().toLowerCase();
+        if (!source[index]) {
+          break;
+        }
+        const opening = source[index];
+        const closing = opening === "{" ? "}" : ")";
+        index += 1;
+        skipWhitespace();
+        const key = readUntil([","]).trim();
+        if (source[index] === ",") {
+          index += 1;
+        }
+        const fields = {};
+        while (index < source.length) {
+          skipWhitespace();
+          if (source[index] === closing) {
+            index += 1;
+            break;
+          }
+          const fieldName = readUntil(["="]).trim().toLowerCase();
+          if (source[index] === "=") {
+            index += 1;
+          }
+          const value = readValue();
+          fields[fieldName] = cleanValue(value);
+          skipWhitespace();
+          if (source[index] === ",") {
+            index += 1;
+          }
+        }
+        entries.push({
+          type,
+          key,
+          id: `${key || "entry"}-${entries.length + 1}`,
+          fields,
+          raw: source.slice(entryStart, index).trim()
+        });
+      }
+      return entries;
+    }
+
+    function formatAuthorName(name) {
+      const clean = cleanValue(name);
+      if (!clean) {
+        return "";
+      }
+      if (clean.toLowerCase() === "others") {
+        return "others";
+      }
+      if (!clean.includes(",")) {
+        return clean;
+      }
+      const [last, ...rest] = clean.split(",");
+      return (rest.join(" ").trim() + " " + last.trim()).trim();
+    }
+
+    function formatAuthors(authorValue) {
+      return String(authorValue || "")
+        .split(/\s+and\s+/i)
+        .map(formatAuthorName)
+        .filter(Boolean)
+        .map((name) => name === "Huaijin Chen" ? "<strong>Huaijin Chen</strong>" : escapeHtml(name))
+        .join(", ");
+    }
+
+    function routeFromHash() {
+      const route = window.location.hash.replace(/^#/, "").trim().toLowerCase();
+      return ROUTES.includes(route) ? route : "home";
+    }
+
+    function setRoute(route) {
+      document.querySelectorAll("[data-route]").forEach((section) => {
+        section.classList.toggle("active", section.dataset.route === route);
+      });
+      document.querySelectorAll("[data-route-link]").forEach((link) => {
+        link.classList.toggle("active", link.getAttribute("href") === "#" + route);
+      });
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function createMemberCard(member) {
+      const imageSource = member.image || DEFAULT_MEMBER_AVATAR;
+      const links = [
+        member.website ? `<a class="link-chip" href="${escapeHtml(member.website)}" target="_blank" rel="noreferrer">Website</a>` : "",
+        member.scholar ? `<a class="link-chip" href="${escapeHtml(member.scholar)}" target="_blank" rel="noreferrer">Scholar</a>` : "",
+        member.github ? `<a class="link-chip" href="${escapeHtml(member.github)}" target="_blank" rel="noreferrer">GitHub</a>` : "",
+        member.linkedin ? `<a class="link-chip" href="${escapeHtml(member.linkedin)}" target="_blank" rel="noreferrer">LinkedIn</a>` : "",
+        member.cv ? `<a class="link-chip" href="${escapeHtml(member.cv)}" target="_blank" rel="noreferrer">CV</a>` : "",
+        member.email ? `<a class="link-chip" href="mailto:${escapeHtml(member.email)}">Email</a>` : ""
+      ].filter(Boolean).join("");
+
+      const meta = [
+        member.role ? `<span class="chip">${escapeHtml(member.role)}</span>` : "",
+        member.affiliation ? `<span class="chip">${escapeHtml(member.affiliation)}</span>` : "",
+        member.placement ? `<span class="chip">${escapeHtml(member.placement)}</span>` : ""
+      ].filter(Boolean).join("");
+
+      return `
+        <article class="member-card">
+          <img class="member-photo" src="${escapeHtml(imageSource)}" alt="${escapeHtml(member.name)}" loading="lazy" onerror="this.onerror=null;this.src='images/user-avatar.svg';">
+          <div>
+            <h3>${escapeHtml(member.name)}</h3>
+            <div class="member-meta">${meta}</div>
+            <p>${escapeHtml(member.bio || "")}</p>
+            <div class="link-cluster">${links}</div>
+          </div>
+        </article>
+      `;
+    }
+
+    function renderMembers(categories) {
+      const container = document.getElementById("members-root");
+      if (!categories.length) {
+        container.innerHTML = '<div class="error-state">Unable to load members.</div>';
+        return;
+      }
+
+      const sorted = [...categories].sort((left, right) => CATEGORY_ORDER.indexOf(left.name) - CATEGORY_ORDER.indexOf(right.name));
+
+      container.innerHTML = sorted.map((category) => {
+        const content = category.members.length
+          ? `<div class="member-grid">${category.members.map(createMemberCard).join("")}</div>`
+          : `<div class="empty-state">${escapeHtml(category.note || "No members listed in this category yet.")}</div>`;
+        return `
+          <section class="member-section">
+            <h2>${escapeHtml(category.name)}</h2>
+            ${content}
+          </section>
+        `;
+      }).join("");
+    }
+
+    function publicationVenue(fields) {
+      return fields.booktitle || fields.journal || fields.publisher || "";
+    }
+
+    function publicationSortValue(entry) {
+      const year = Number(entry.fields.year || 0);
+      const month = String(entry.fields.month || "").toLowerCase();
+      const monthMap = {
+        jan: 1,
+        january: 1,
+        feb: 2,
+        february: 2,
+        mar: 3,
+        march: 3,
+        apr: 4,
+        april: 4,
+        may: 5,
+        jun: 6,
+        june: 6,
+        jul: 7,
+        july: 7,
+        aug: 8,
+        august: 8,
+        sep: 9,
+        sept: 9,
+        september: 9,
+        oct: 10,
+        october: 10,
+        nov: 11,
+        november: 11,
+        dec: 12,
+        december: 12
+      };
+      const monthScore = Object.keys(monthMap).find((key) => month.includes(key));
+      return year * 100 + (monthScore ? monthMap[monthScore] : 0);
+    }
+
+    function renderPublicationCard(entry, contextId) {
+      const fields = entry.fields;
+      const showBibTeX = String(fields.bibtex_show || "true").toLowerCase() !== "false";
+      const links = PUBLICATION_LINKS
+        .filter(([key]) => fields[key])
+        .map(([key, label]) => `<a class="link-chip" href="${escapeHtml(fields[key])}" target="_blank" rel="noreferrer">${label}</a>`)
+        .join("");
+      const extras = [
+        fields.abbr ? `<span class="chip">${escapeHtml(fields.abbr)}</span>` : "",
+        fields.note ? `<span class="chip">${escapeHtml(fields.note)}</span>` : ""
+      ].filter(Boolean).join("");
+      const venue = publicationVenue(fields);
+      const identifier = "citation-" + contextId + "-" + entry.id.replace(/[^A-Za-z0-9_-]/g, "-");
+
+      return `
+        <article class="publication-card">
+          <h3>${escapeHtml(fields.title || entry.key)}</h3>
+          <div class="publication-meta">
+            ${extras}
+            ${venue ? `<span>${escapeHtml(venue)}</span>` : ""}
+            ${fields.year ? `<span>${escapeHtml(fields.year)}</span>` : ""}
+          </div>
+          <p>${formatAuthors(fields.author || "")}</p>
+          ${fields.pages ? `<p style="margin-top: 8px;">Pages: ${escapeHtml(fields.pages)}</p>` : ""}
+          <div class="publication-links">${links}</div>
+          ${showBibTeX ? `<button class="citation-toggle" type="button" data-citation-toggle="${identifier}">Show BibTeX</button>` : ""}
+          ${showBibTeX ? `<pre class="citation" id="${identifier}">${escapeHtml(entry.raw)}</pre>` : ""}
+        </article>
+      `;
+    }
+
+    function renderPublications(entries) {
+      const container = document.getElementById("publications-root");
+      if (!entries.length) {
+        container.innerHTML = '<div class="error-state">Unable to load publications.</div>';
+        return;
+      }
+
+      const sorted = [...entries].sort((left, right) => {
+        return publicationSortValue(right) - publicationSortValue(left) || (right.fields.title || "").localeCompare(left.fields.title || "");
+      });
+      const current = sorted.filter((entry) => Number(entry.fields.year || 0) >= 2025);
+      const previous = sorted.filter((entry) => Number(entry.fields.year || 0) < 2025);
+
+      container.innerHTML = `
+        <section class="publication-section">
+          <h2>CIRP Lab Publications</h2>
+          <div class="publication-list">${current.map((entry, index) => renderPublicationCard(entry, `current-${index}`)).join("") || '<div class="empty-state">No current lab publications listed.</div>'}</div>
+        </section>
+        <section class="publication-section">
+          <h2>Previous Publications</h2>
+          <div class="publication-list">${previous.map((entry, index) => renderPublicationCard(entry, `previous-${index}`)).join("") || '<div class="empty-state">No previous publications listed.</div>'}</div>
+        </section>
+      `;
+
+      document.getElementById("home-publications-root").innerHTML = current.slice(0, 4).map((entry, index) => renderPublicationCard(entry, `home-${index}`)).join("") || '<div class="empty-state">No recent publications listed.</div>';
+    }
+
+    function renderTimeline(items, limit) {
+      const sliced = typeof limit === "number" ? items.slice(0, limit) : items;
+      if (!sliced.length) {
+        return '<div class="empty-state">No news items listed.</div>';
+      }
+      return `
+        <div class="timeline">
+          ${sliced.map((item, index) => {
+            const isLeft = index % 2 === 0;
+            const card = `
+              <article class="timeline-card">
+                <div class="timeline-date"><span>${escapeHtml(item.date)}</span></div>
+                <h3>${escapeHtml(item.title)}</h3>
+                <div class="news-body">${renderMarkdown(item.body)}</div>
+              </article>
+            `;
+            return `
+              <div class="timeline-row ${isLeft ? "left" : "right"}">
+                ${isLeft ? `${card}<div class="timeline-spacer"></div>` : `<div class="timeline-spacer"></div>${card}`}
+              </div>
+            `;
+          }).join("")}
+        </div>
+      `;
+    }
+
+    function renderNews(items) {
+      const container = document.getElementById("news-root");
+      if (!items.length) {
+        container.innerHTML = '<div class="error-state">Unable to load news.</div>';
+        return;
+      }
+      container.innerHTML = renderTimeline(items);
+      document.getElementById("home-news-root").innerHTML = renderTimeline(items, 6);
+    }
+
+    function renderGallery(images) {
+      const container = document.getElementById("gallery-root");
+      if (!images.length) {
+        container.innerHTML = '<div class="empty-state">No group photos found in <code>images/gallery/</code>.</div>';
+        return;
+      }
+
+      const transitionMs = 620;
+      const slotPositions = [-2, -1, 0, 1, 2];
+      let index = 0;
+      let animating = false;
+      container.innerHTML = `
+        <button class="gallery-arrow prev" id="gallery-prev" type="button" aria-label="Previous photo">&lt;</button>
+        <div class="gallery-stage" id="gallery-stage" tabindex="0" aria-label="Group photo carousel"></div>
+        <button class="gallery-arrow next" id="gallery-next" type="button" aria-label="Next photo">&gt;</button>
+        <div class="gallery-dots" id="gallery-dots"></div>
+      `;
+
+      const stage = document.getElementById("gallery-stage");
+      const prevButton = document.getElementById("gallery-prev");
+      const nextButton = document.getElementById("gallery-next");
+      const dots = document.getElementById("gallery-dots");
+      const cards = slotPositions.map((position, shellIndex) => {
+        const card = document.createElement("figure");
+        card.className = "gallery-card";
+        card.dataset.pos = String(position);
+        card.dataset.shell = String(shellIndex);
+        card.innerHTML = '<img alt="">';
+        stage.appendChild(card);
+        return card;
+      });
+
+      const imageCache = new Map();
+
+      function ensureImageReady(source, priority) {
+        if (!imageCache.has(source)) {
+          const preload = new Image();
+          if ("fetchPriority" in preload) {
+            preload.fetchPriority = priority;
+          }
+          preload.decoding = "async";
+          preload.src = source;
+          const ready = (typeof preload.decode === "function"
+            ? preload.decode().catch(() => undefined)
+            : new Promise((resolve) => {
+                if (preload.complete) {
+                  resolve(undefined);
+                  return;
+                }
+                preload.addEventListener("load", () => resolve(undefined), { once: true });
+                preload.addEventListener("error", () => resolve(undefined), { once: true });
+              })
+          ).then(() => preload);
+          imageCache.set(source, ready);
+        }
+        return imageCache.get(source);
+      }
+
+      Promise.all(images.map((source, imageIndex) => ensureImageReady(source, imageIndex < 3 ? "high" : "low"))).catch(() => undefined);
+
+      function syncCards() {
+        cards.forEach((card) => {
+          const relative = Number(card.dataset.pos);
+          const image = card.querySelector("img");
+          const imageIndex = (index + relative + images.length * 10) % images.length;
+          const source = images[imageIndex];
+          image.alt = `Group photo ${imageIndex + 1}`;
+          image.dataset.source = source;
+          if (image.src !== new URL(source, window.location.href).href) {
+            image.src = source;
+          }
+          ensureImageReady(source, relative === 0 ? "high" : "auto").then((preloaded) => {
+            if (image.dataset.source !== source) {
+              return;
+            }
+            if (image.src !== preloaded.src) {
+              image.src = preloaded.src;
+            }
+          });
+        });
+      }
+
+      function sync() {
+        syncCards();
+        dots.innerHTML = images.map((_, dotIndex) => `
+          <button class="gallery-dot ${dotIndex === index ? "active" : ""}" data-gallery-index="${dotIndex}" type="button" aria-label="Go to photo ${dotIndex + 1}"></button>
+        `).join("");
+        dots.querySelectorAll("[data-gallery-index]").forEach((button) => {
+          button.addEventListener("click", () => {
+            update(Number(button.dataset.galleryIndex));
+          });
+        });
+      }
+
+      function finishTransition(direction, callback) {
+        index = (index + direction + images.length) % images.length;
+        container.classList.add("is-resetting");
+        cards.forEach((card) => {
+          let position = Number(card.dataset.pos);
+          if (position < -2) {
+            position = 2;
+          } else if (position > 2) {
+            position = -2;
+          }
+          card.dataset.pos = String(position);
+        });
+        syncCards();
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            container.classList.remove("is-resetting");
+            container.classList.remove("is-animating");
+            animating = false;
+            if (typeof callback === "function") {
+              callback();
+            }
+          });
+        });
+      }
+
+      function animate(direction, callback) {
+        if (animating || images.length < 2) {
+          return;
+        }
+        animating = true;
+        container.classList.add("is-animating");
+        const currentCard = cards.find((card) => Number(card.dataset.pos) === 0) || cards[2];
+        let settled = false;
+        let fallbackTimer = 0;
+
+        function settle() {
+          if (settled) {
+            return;
+          }
+          settled = true;
+          currentCard.removeEventListener("transitionend", handleTransitionEnd);
+          window.clearTimeout(fallbackTimer);
+          finishTransition(direction, callback);
+        }
+
+        function handleTransitionEnd(event) {
+          if (event.propertyName === "transform") {
+            settle();
+          }
+        }
+
+        currentCard.addEventListener("transitionend", handleTransitionEnd);
+        fallbackTimer = window.setTimeout(settle, transitionMs + 80);
+        requestAnimationFrame(() => {
+          cards.forEach((card) => {
+            card.dataset.pos = String(Number(card.dataset.pos) - direction);
+          });
+        });
+      }
+
+      function update(nextIndex) {
+        if (animating || nextIndex === index) {
+          return;
+        }
+        const forwardSteps = (nextIndex - index + images.length) % images.length;
+        const backwardSteps = (index - nextIndex + images.length) % images.length;
+        const direction = forwardSteps <= backwardSteps ? 1 : -1;
+
+        const step = () => {
+          if (index === nextIndex) {
+            return;
+          }
+          animate(direction, step);
+        };
+
+        step();
+      }
+
+      prevButton.addEventListener("click", () => {
+        update((index - 1 + images.length) % images.length);
+      });
+      nextButton.addEventListener("click", () => {
+        update((index + 1) % images.length);
+      });
+      stage.addEventListener("keydown", (event) => {
+        if (event.key === "ArrowLeft") {
+          event.preventDefault();
+          prevButton.click();
+        }
+        if (event.key === "ArrowRight") {
+          event.preventDefault();
+          nextButton.click();
+        }
+      });
+
+      prevButton.disabled = images.length < 2;
+      nextButton.disabled = images.length < 2;
+
+      sync();
+    }
+
+    function attachCitationToggles() {
+      document.querySelectorAll("[data-citation-toggle]").forEach((button) => {
+        button.addEventListener("click", () => {
+          const target = document.getElementById(button.dataset.citationToggle);
+          const visible = target.classList.toggle("visible");
+          button.textContent = visible ? "Hide BibTeX" : "Show BibTeX";
+        });
+      });
+    }
+
+    function setupContactForm() {
+      const form = document.getElementById("contact-form");
+      if (!form) {
+        return;
+      }
+
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const email = document.getElementById("contact-email").value.trim();
+        const subject = document.getElementById("contact-subject").value.trim() || "CIRP Lab inquiry";
+        const message = document.getElementById("contact-message").value.trim();
+        const lines = [
+          message,
+          email ? `Sender email: ${email}` : ""
+        ].filter(Boolean);
+        const params = new URLSearchParams({
+          subject,
+          body: lines.join("\n\n")
+        });
+        window.location.href = `mailto:huaijin@hawaii.edu?${params.toString()}`;
+      });
+    }
+
+    async function fetchText(path) {
+      const response = await fetch(path, { cache: "no-cache" });
+      if (!response.ok) {
+        throw new Error(`Failed to load ${path}`);
+      }
+      return response.text();
+    }
+
+    async function loadGallery() {
+      try {
+        const response = await fetch("gallery.json", { cache: "no-cache" });
+        if (response.ok) {
+          const payload = await response.json();
+          return Array.isArray(payload.images) ? payload.images : [];
+        }
+      } catch (error) {
+        console.warn("gallery manifest missing, falling back to default list", error);
+      }
+      return [
+        "images/gallery/group_1.jpg",
+        "images/gallery/group_2.jpg",
+        "images/gallery/group_3.jpg",
+        "images/gallery/group_4.jpeg",
+        "images/gallery/group_5.jpeg",
+        "images/gallery/group_6.jpg",
+        "images/gallery/group_7.jpeg"
+      ];
+    }
+
+    async function loadData() {
+      try {
+        const [membersText, newsText, publicationsText, galleryImages] = await Promise.all([
+          fetchText("members.md"),
+          fetchText("news.md"),
+          fetchText("publications.bib"),
+          loadGallery()
+        ]);
+
+        state.members = parseMembers(membersText);
+        state.news = parseNews(newsText);
+        state.publications = parseBibTeX(publicationsText);
+        state.gallery = galleryImages;
+
+        renderMembers(state.members);
+        renderNews(state.news);
+        renderPublications(state.publications);
+        renderGallery(state.gallery);
+        attachCitationToggles();
+        setupContactForm();
+        document.querySelectorAll(".news-body").forEach((node) => highlightMoneyValues(node));
+      } catch (error) {
+        console.error(error);
+        document.querySelectorAll("#members-root, #news-root, #publications-root, #gallery-root, #home-news-root, #home-publications-root").forEach((node) => {
+          node.innerHTML = `<div class="error-state">${escapeHtml(error.message)}</div>`;
+        });
+      }
+    }
+
+    window.addEventListener("hashchange", () => setRoute(routeFromHash()));
+    setRoute(routeFromHash());
+    loadData();
+  </script>
+</body>
+</html>

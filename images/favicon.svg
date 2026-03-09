@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="CIRP Lab favicon">
+  <defs>
+    <linearGradient id="badge" x1="12" y1="10" x2="116" y2="118" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0f6a68"/>
+      <stop offset="1" stop-color="#cc7b42"/>
+    </linearGradient>
+  </defs>
+  <rect x="10" y="10" width="108" height="108" rx="30" fill="url(#badge)"/>
+  <text x="64" y="74" text-anchor="middle" font-family="'Avenir Next', 'Segoe UI', sans-serif" font-size="18" font-weight="800" letter-spacing="2.2" fill="#fff8f1">CIRP</text>
+</svg>
