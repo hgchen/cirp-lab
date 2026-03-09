@@ -1,62 +1,43 @@
-# [Hugo Research Group Theme](https://github.com/wowchemy/starter-hugo-research-group)
+# CIRP Lab Static Site
 
-[![Screenshot](preview.png)](https://hugoblox.com/hugo-themes/)
+This repository publishes a pure static lab website without Hugo or Wowchemy.
 
-The **Research Group Template** empowers your research group to easily create a beautiful website with a stunning homepage, news, academic publications, events, team profiles, and a contact form.
+## Primary files
 
-️**Trusted by 250,000+ researchers, educators, and students.** Highly customizable via the integrated **no-code, widget-based Wowchemy page builder**, making every site truly personalized ⭐⭐⭐⭐⭐
+- `index.html`: single-page frontend with inline JavaScript and CSS
+- `members.md`: faculty, student, and alumni data
+- `news.md`: lab updates
+- `publications.bib`: publication data
+- `images/gallery/`: slideshow images
+- `scripts/build_static_site.sh`: static build script for GitHub Pages and Netlify
 
-## CIRP Lab Workflow
-
-### Import publications from BibTeX
-
-Use the local script below to convert a `.bib` file into Hugo publication pages:
+## Local preview
 
 ```bash
-python3 scripts/import_publications_from_bib.py \
-  --bib content/publication/pub.bib \
-  --out content/publication
+bash scripts/build_static_site.sh
+cd dist
+python3 -m http.server 8000
 ```
 
-By default, existing publication folders are kept unchanged. Add `--overwrite` if you want to regenerate existing entries.
+Open `http://localhost:8000`.
 
-[![Get Started](https://img.shields.io/badge/-Get%20started-ff4655?style=for-the-badge)](https://hugoblox.com/hugo-themes/)
-[![Discord](https://img.shields.io/discord/722225264733716590?style=for-the-badge)](https://discord.com/channels/722225264733716590/742892432458252370/742895548159492138)  
-[![Twitter Follow](https://img.shields.io/twitter/follow/GetResearchDev?label=Follow%20on%20Twitter)](https://twitter.com/wowchemy)
+## Live preview
 
-Easily write technical content with plain text Markdown, LaTeX math, diagrams, RMarkdown, or Jupyter, and import publications from BibTeX.
+For a single-command local dev server with auto rebuild:
 
-[Check out the latest demo](https://research-group.netlify.app/) of what you'll get in less than 60 seconds, or [view the showcase](https://hugoblox.com/creators/).
+```bash
+bash scripts/dev_static_site.sh
+```
 
-The integrated [**Wowchemy**](https://hugoblox.com) website builder and CMS makes it easy to create a beautiful website for free. Edit your site in the CMS (or your favorite editor), generate it with [Hugo](https://github.com/gohugoio/hugo), and deploy with GitHub or Netlify. Customize anything on your site with widgets, light/dark themes, and language packs.
+Then open `http://127.0.0.1:8000`.
 
-- 👉 [**Get Started**](https://hugoblox.com/hugo-themes/)
-- 📚 [View the **documentation**](https://docs.hugoblox.com/)
-- 💬 [Chat with the **Wowchemy research community**](https://discord.gg/z8wNYzb) or [**Hugo community**](https://discourse.gohugo.io)
-- ⬇️ **Automatically import citations from BibTeX** with the [Hugo Academic CLI](https://github.com/GetRD/academic-file-converter)
-- 🐦 Share your new site with the community: [@wowchemy](https://twitter.com/wowchemy) [@GeorgeCushen](https://twitter.com/GeorgeCushen) [#MadeWithWowchemy](https://twitter.com/search?q=%23MadeWithWowchemy&src=typed_query)
-- 🗳 [Take the survey and help us improve #OpenSource](https://forms.gle/NioD9VhUg7PNmdCAA)
-- 🚀 [Contribute improvements](https://github.com/HugoBlox/hugo-blox-builder/blob/main/CONTRIBUTING.md) or [suggest improvements](https://github.com/HugoBlox/hugo-blox-builder/issues)
-- ⬆️ **Updating?** View the [Update Guide](https://docs.hugoblox.com/hugo-tutorials/update/) and [Release Notes](https://github.com/HugoBlox/hugo-blox-builder/releases)
+When you save `index.html`, `members.md`, `news.md`, `publications.bib`, or files under `images/`, the script rebuilds automatically. Refresh the browser to see the latest result.
 
-## We ask you, humbly, to support this open source movement
+## Deployment
 
-Today we ask you to defend the open source independence of the Wowchemy website builder and themes 🐧
+- GitHub Pages publishes `dist/` via `.github/workflows/publish.yaml`
+- Netlify runs `bash scripts/build_static_site.sh` and publishes `dist/`
 
-We're an open source movement that depends on your support to stay online and thriving, but 99.9% of our creators don't give; they simply look the other way.
+## Updating group photos
 
-### [❤️ Click here to become a GitHub Sponsor, unlocking awesome perks such as _exclusive academic templates and widgets_](https://github.com/sponsors/gcushen)
-
-## Demo credits
-
-Please replace the demo images with your own.
-
-- [Female scientist](https://unsplash.com/photos/uVnRa6mOLOM)
-- [2 Coders](https://unsplash.com/photos/kwzWjTnDPLk)
-- [Cafe](https://unsplash.com/photos/RnDGGnMEOao)
-- Blog posts
-  - https://unsplash.com/photos/AndE50aaHn4
-  - https://unsplash.com/photos/OYzbqk2y26c
-- Avatars
-  - https://unsplash.com/photos/5yENNRbbat4
-  - https://unsplash.com/photos/WNoLnJo7tS8
+Add new images to `images/gallery/` and rebuild. The build script regenerates `gallery.json` automatically.

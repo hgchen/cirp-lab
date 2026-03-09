@@ -1,7 +1,7 @@
 # IDEs
 .idea/
+.DS_Store
+__pycache__/
 
-# Hugo
-/resources/
-public/
-assets/jsconfig.json
+# Static site output
+dist/
