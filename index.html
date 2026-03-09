@@ -625,6 +625,11 @@
       transform: scale(1.12);
     }
 
+    .gallery-dot.is-edge {
+      transform: scale(0.78);
+      opacity: 0.58;
+    }
+
     .section-footer {
       display: flex;
       justify-content: flex-end;
@@ -1382,6 +1387,7 @@
     const CATEGORY_ORDER = ["Faculty", "PhD", "Masters", "Undergrads", "Alumni"];
     const DEFAULT_MEMBER_AVATAR = "images/user-avatar.svg";
     const MONEY_PATTERN = /\$\d[\d,]*(?:\.\d+)?(?:\s?(?:[KMB]|million|billion|thousand))?/gi;
+    const MAX_VISIBLE_GALLERY_DOTS = 7;
 
     const state = {
       members: [],
@@ -2046,16 +2052,49 @@
         });
       }
 
-      function sync() {
-        syncCards();
-        dots.innerHTML = images.map((_, dotIndex) => `
-          <button class="gallery-dot ${dotIndex === index ? "active" : ""}" data-gallery-index="${dotIndex}" type="button" aria-label="Go to photo ${dotIndex + 1}"></button>
-        `).join("");
+      function visibleDotIndices() {
+        if (images.length <= MAX_VISIBLE_GALLERY_DOTS) {
+          return Array.from({ length: images.length }, (_, dotIndex) => dotIndex);
+        }
+
+        const halfWindow = Math.floor(MAX_VISIBLE_GALLERY_DOTS / 2);
+        let start = index - halfWindow;
+        let end = index + halfWindow;
+
+        if (start < 0) {
+          end += -start;
+          start = 0;
+        }
+        if (end > images.length - 1) {
+          start -= end - (images.length - 1);
+          end = images.length - 1;
+        }
+
+        start = Math.max(0, start);
+        return Array.from({ length: MAX_VISIBLE_GALLERY_DOTS }, (_, offset) => start + offset).filter((dotIndex) => dotIndex <= end);
+      }
+
+      function syncDots() {
+        const visibleIndices = visibleDotIndices();
+        dots.innerHTML = visibleIndices.map((dotIndex, visibleIndex) => {
+          const edgeClass = images.length > MAX_VISIBLE_GALLERY_DOTS
+            && ((visibleIndex === 0 && dotIndex > 0) || (visibleIndex === visibleIndices.length - 1 && dotIndex < images.length - 1))
+            ? " is-edge"
+            : "";
+          return `
+            <button class="gallery-dot ${dotIndex === index ? "active" : ""}${edgeClass}" data-gallery-index="${dotIndex}" type="button" aria-label="Go to photo ${dotIndex + 1}"></button>
+          `;
+        }).join("");
         dots.querySelectorAll("[data-gallery-index]").forEach((button) => {
           button.addEventListener("click", () => {
             update(Number(button.dataset.galleryIndex));
           });
         });
+      }
+
+      function sync() {
+        syncCards();
+        syncDots();
       }
 
       function finishTransition(direction, callback) {
@@ -2071,6 +2110,7 @@
           card.dataset.pos = String(position);
         });
         syncCards();
+        syncDots();
         requestAnimationFrame(() => {
           requestAnimationFrame(() => {
             container.classList.remove("is-resetting");
