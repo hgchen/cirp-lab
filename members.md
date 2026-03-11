@@ -124,6 +124,16 @@ linkedin: https://www.linkedin.com/in/riki-macmillan/
 bio: Riki Macmillan is an MS student in Computer Science at the University of Hawaii at Manoa.
 ---
 
+### Sean Hiroki Flynn
+role: MS Student
+affiliation: University of Hawaii at Manoa
+image: images/members/sean.jpeg
+email: sflynn7@hawaii.edu
+website: https://seanhflynn.github.io/
+linkedin: https://www.linkedin.com/in/sean-hiroki-flynn/
+bio: I am a MS student in Computer Science at the University of Hawaii at Manoa. My research interests are in Generative AI, computer vision, and computational imaging. Currently working on a thorough comparison of 3D reconstruction methods.
+---
+
 ### Chayanika Devi
 role: MS Student
 affiliation: UH Medical School

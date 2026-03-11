@@ -10,6 +10,7 @@ This repository publishes a pure static lab website without Hugo or Wowchemy.
 - `publications.bib`: publication data
 - `images/gallery/`: slideshow images
 - `scripts/build_static_site.sh`: static build script for GitHub Pages and Netlify
+- `scripts/optimize_images.py`: build-time image resizing/compression for oversized assets
 
 ## Local preview
 
@@ -41,3 +42,7 @@ When you save `index.html`, `members.md`, `news.md`, `publications.bib`, or file
 ## Updating group photos
 
 Add new images to `images/gallery/` and rebuild. The build script regenerates `gallery.json` automatically.
+
+## Image optimization
+
+The build copies `images/` into `dist/` and then runs `scripts/optimize_images.py` to resize oversized gallery, member, logo, and hero images before deployment. The optimizer uses `ffmpeg` when available and falls back to `sips` on macOS.

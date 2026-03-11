@@ -14,6 +14,7 @@ cp "$ROOT_DIR/members.md" "$DIST_DIR/members.md"
 cp "$ROOT_DIR/news.md" "$DIST_DIR/news.md"
 cp "$ROOT_DIR/publications.bib" "$DIST_DIR/publications.bib"
 rsync -a --exclude '.DS_Store' "$ROOT_DIR/images/" "$DIST_DIR/images/"
+python3 "$ROOT_DIR/scripts/optimize_images.py" "$DIST_DIR"
 touch "$DIST_DIR/.nojekyll"
 
 ROOT_DIR="$ROOT_DIR" DIST_DIR="$DIST_DIR" python3 - <<'PY'
