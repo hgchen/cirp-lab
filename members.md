@@ -115,13 +115,13 @@ email: echung32@hawaii.edu
 bio: Ethan Chung is an MS student in Computer Science at the University of Hawaii at Manoa. His current work focuses on computational imaging VLM benchmarks and phase mask-based imaging.
 ---
 
-### Riki Macmillan
+### Riki MacMillan
 role: MS Student
 affiliation: University of Hawaii at Manoa
-image: images/members/riki.jpeg
+image: images/members/riki.jpg
 email: rikimacm@hawaii.edu
 linkedin: https://www.linkedin.com/in/riki-macmillan/
-bio: Riki Macmillan is an MS student in Computer Science at the University of Hawaii at Manoa.
+bio: Riki MacMillan is a Master's student in Computer Science at the University of Hawaii at Manoa. His research focuses on computer vision and robotics, with an emphasis on multi-drone systems for automated 3D reconstruction and environmental mapping. His work involves designing drone coordination systems, ground-station software, and computer vision pipelines for processing aerial imagery.
 ---
 
 ### Sean Hiroki Flynn

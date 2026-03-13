@@ -26,11 +26,16 @@ root = Path(os.environ["ROOT_DIR"])
 dist = Path(os.environ["DIST_DIR"])
 gallery_dir = root / "images" / "gallery"
 allowed = {".jpg", ".jpeg", ".png", ".webp", ".gif"}
+priority = {
+    "images/gallery/palm_capture.jpg": 0,
+    "images/gallery/drone_pic.png": 1,
+}
 images = sorted(
     f"images/gallery/{path.name}"
     for path in gallery_dir.iterdir()
     if path.is_file() and path.suffix.lower() in allowed
 )
+images.sort(key=lambda image: (priority.get(image, len(priority)), image))
 (dist / "gallery.json").write_text(json.dumps({"images": images}, indent=2) + "\n", encoding="utf-8")
 PY
 

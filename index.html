@@ -654,6 +654,14 @@
       margin-top: 18px;
     }
 
+    .gallery-progress {
+      margin-top: 10px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-variant-numeric: tabular-nums;
+    }
+
     .gallery-dot {
       appearance: none;
       display: block;
@@ -1536,7 +1544,7 @@
     const CATEGORY_ORDER = ["Faculty", "PhD", "Masters", "Undergrads", "Alumni"];
     const DEFAULT_MEMBER_AVATAR = "images/user-avatar.svg";
     const MONEY_PATTERN = /\$\d[\d,]*(?:\.\d+)?(?:\s?(?:[KMB]|million|billion|thousand))?/gi;
-    const MAX_VISIBLE_GALLERY_DOTS = 7;
+    const MAX_VISIBLE_GALLERY_DOTS = 6;
 
     const state = {
       members: [],
@@ -1935,6 +1943,37 @@
         .filter(Boolean);
     }
 
+    function getVisibleDots(total, currentIndex, maxVisibleDots = 6) {
+      if (total <= 0) {
+        return {
+          visibleStartIndex: 0,
+          visibleEndIndex: -1,
+          activeDotIndex: -1
+        };
+      }
+
+      const visibleCount = Math.max(1, Math.min(total, maxVisibleDots));
+      const safeCurrentIndex = Math.min(Math.max(currentIndex, 0), total - 1);
+      if (total <= visibleCount) {
+        return {
+          visibleStartIndex: 0,
+          visibleEndIndex: total - 1,
+          activeDotIndex: safeCurrentIndex
+        };
+      }
+
+      const stickyDotIndex = Math.floor(visibleCount / 2);
+      const maxStartIndex = total - visibleCount;
+      const visibleStartIndex = Math.min(Math.max(safeCurrentIndex - stickyDotIndex, 0), maxStartIndex);
+      const visibleEndIndex = visibleStartIndex + visibleCount - 1;
+
+      return {
+        visibleStartIndex,
+        visibleEndIndex,
+        activeDotIndex: safeCurrentIndex - visibleStartIndex
+      };
+    }
+
     function renderMemberBio(member) {
       return renderInlineMarkdown(member.bio || "");
     }
@@ -2191,12 +2230,14 @@
         <div class="gallery-stage" id="gallery-stage" tabindex="0" aria-label="Group photo carousel"></div>
         <button class="gallery-arrow next" id="gallery-next" type="button" aria-label="Next photo">&gt;</button>
         <div class="gallery-dots" id="gallery-dots"></div>
+        <div class="gallery-progress" id="gallery-progress" aria-live="polite"></div>
       `;
 
       const stage = document.getElementById("gallery-stage");
       const prevButton = document.getElementById("gallery-prev");
       const nextButton = document.getElementById("gallery-next");
       const dots = document.getElementById("gallery-dots");
+      const progress = document.getElementById("gallery-progress");
       const cards = slotPositions.map((position, shellIndex) => {
         const card = document.createElement("figure");
         card.className = "gallery-card";
@@ -2263,37 +2304,18 @@
         warmGalleryImages(index);
       }
 
-      function visibleDotIndices() {
-        if (images.length <= MAX_VISIBLE_GALLERY_DOTS) {
-          return Array.from({ length: images.length }, (_, dotIndex) => dotIndex);
-        }
-
-        const halfWindow = Math.floor(MAX_VISIBLE_GALLERY_DOTS / 2);
-        let start = index - halfWindow;
-        let end = index + halfWindow;
-
-        if (start < 0) {
-          end += -start;
-          start = 0;
-        }
-        if (end > images.length - 1) {
-          start -= end - (images.length - 1);
-          end = images.length - 1;
-        }
-
-        start = Math.max(0, start);
-        return Array.from({ length: MAX_VISIBLE_GALLERY_DOTS }, (_, offset) => start + offset).filter((dotIndex) => dotIndex <= end);
-      }
-
       function syncDots() {
-        const visibleIndices = visibleDotIndices();
+        const { visibleStartIndex, visibleEndIndex, activeDotIndex } = getVisibleDots(images.length, index, MAX_VISIBLE_GALLERY_DOTS);
+        const visibleIndices = visibleEndIndex >= visibleStartIndex
+          ? Array.from({ length: visibleEndIndex - visibleStartIndex + 1 }, (_, offset) => visibleStartIndex + offset)
+          : [];
         dots.innerHTML = visibleIndices.map((dotIndex, visibleIndex) => {
           const edgeClass = images.length > MAX_VISIBLE_GALLERY_DOTS
-            && ((visibleIndex === 0 && dotIndex > 0) || (visibleIndex === visibleIndices.length - 1 && dotIndex < images.length - 1))
+            && ((visibleIndex === 0 && visibleStartIndex > 0) || (visibleIndex === visibleIndices.length - 1 && visibleEndIndex < images.length - 1))
             ? " is-edge"
             : "";
           return `
-            <button class="gallery-dot ${dotIndex === index ? "active" : ""}${edgeClass}" data-gallery-index="${dotIndex}" type="button" aria-label="Go to photo ${dotIndex + 1}"></button>
+            <button class="gallery-dot ${visibleIndex === activeDotIndex ? "active" : ""}${edgeClass}" data-gallery-index="${dotIndex}" type="button" aria-label="Go to photo ${dotIndex + 1}"></button>
           `;
         }).join("");
         dots.querySelectorAll("[data-gallery-index]").forEach((button) => {
@@ -2301,6 +2323,7 @@
             update(Number(button.dataset.galleryIndex));
           });
         });
+        progress.textContent = `${index + 1} / ${images.length}`;
       }
 
       function sync() {
