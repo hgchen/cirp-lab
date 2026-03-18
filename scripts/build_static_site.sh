@@ -5,6 +5,8 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 DIST_DIR="$ROOT_DIR/dist"
 
+python3 "$ROOT_DIR/scripts/validate_content.py"
+
 rm -rf "$DIST_DIR"
 mkdir -p "$DIST_DIR"
 mkdir -p "$DIST_DIR/content"

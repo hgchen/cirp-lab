@@ -26,6 +26,7 @@ WATCH_FILES = [
     ROOT_DIR / "publications.bib",
     ROOT_DIR / "README.md",
     BUILD_SCRIPT,
+    ROOT_DIR / "scripts" / "validate_content.py",
 ]
 IGNORE_DIRS = {".git", "dist", "__pycache__"}
 IGNORE_SUFFIXES = {".DS_Store", ".swp", ".tmp"}

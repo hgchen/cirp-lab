@@ -225,7 +225,6 @@ bio: Hok Wai Chan completed the MS in Computer Science at the University of Hawa
 role: Alumni
 placement: Amazon Web Services
 affiliation: University of Hawaii at Manoa
-image: images/members/vincent.jpeg
 linkedin: https://www.linkedin.com/in/vincentchan26/
 bio: Vincent Chan is a CIRP Lab alumnus from the University of Hawaii at Manoa.
 ---

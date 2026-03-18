@@ -1,5 +1,12 @@
 # News
 
+## 2026-03-18 | CIRP Lab Receiving a $50K Gift from Google for Research in 3D Vision for Robotics
+CIRP Lab has received a **2026 research gift from Google** to support our work on **3D vision for robotics**.
+This support will help advance our research on visual perception for robots, including methods for **novel sensors**, **3D scene understanding**, **robotic manipulation**, and **real-world autonomy**.
+
+We are grateful to Google for supporting academic research and collaboration with the CIRP Lab.
+---
+
 ## 2026-03-06 | One Paper Accepted at CVPR 2026
 Congratulations to lab member and PhD student **Agastya Kalra** for his first-author paper on **6-DoF object pose estimation** accepted to **CVPR 2026**.
 The paper introduces a unified framework for object detection, segmentation, and 6DoF pose estimation for robotic perception.

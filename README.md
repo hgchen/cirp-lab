@@ -1,6 +1,7 @@
 # CIRP Lab Static Site
 
 This repository publishes a pure static lab website without Hugo or Wowchemy.
+News and member updates are edited directly in Markdown files, then validated during the build.
 
 ## Primary files
 
@@ -10,6 +11,7 @@ This repository publishes a pure static lab website without Hugo or Wowchemy.
 - `publications.bib`: publication data
 - `images/gallery/`: slideshow images
 - `scripts/build_static_site.sh`: static build script for GitHub Pages and Netlify
+- `scripts/validate_content.py`: validates `news.md` and `members.md` before each build
 - `scripts/optimize_images.py`: build-time image resizing/compression for oversized assets
 
 ## Local preview
@@ -21,6 +23,55 @@ python3 -m http.server 8000
 ```
 
 Open `http://localhost:8000`.
+
+## Editing content
+
+This site does not use Hugo-style post files anymore. To add content safely:
+
+- Add news items directly to `news.md`
+- Add or update members directly in `members.md`
+- Run `bash scripts/build_static_site.sh` to validate and rebuild the site
+
+If the Markdown structure is invalid, the build stops with a clear error message.
+
+### News template
+
+Use this format for each item:
+
+```md
+## 2026-03-18 | News Title
+One or more paragraphs describing the update.
+
+- Optional bullet
+- Optional bullet
+
+---
+```
+
+### Member template
+
+Use this format for each member:
+
+```md
+## Category
+
+### Member Name
+role: Role
+affiliation: Organization
+image: images/members/example.jpg
+email: name@example.edu
+website: https://example.com
+bio: Short bio goes here.
+---
+```
+
+Notes:
+
+- The first non-empty line of `news.md` must be `# News`
+- The first non-empty line of `members.md` must be `# Members`
+- News headings must use `## YYYY-MM-DD | Title`
+- Member entries must live under a `## Category`
+- If a member includes an `image:` path, that file must exist
 
 ## Live preview
 
