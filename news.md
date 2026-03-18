@@ -2,9 +2,7 @@
 
 ## 2026-03-06 | One Paper Accepted at CVPR 2026
 Congratulations to lab member and PhD student **Agastya Kalra** for his first-author paper on **6-DoF object pose estimation** accepted to **CVPR 2026**.
-
 The paper introduces a unified framework for object detection, segmentation, and 6DoF pose estimation for robotic perception.
-
 This work demonstrates strong performance on **BOP benchmarks** and targets real-world robotics applications such as bin picking and precise insertion.
 
 Great work from Agastya and collaborators.
@@ -12,27 +10,21 @@ Great work from Agastya and collaborators.
 
 ## 2026-03-06 | PhD Student Christian Moore to Join GM Cruise for Summer Internship
 Congratulations to lab member and PhD student **Christian Moore** for securing a **Summer 2026 internship** with the **GM Cruise** autonomous driving team.
-
 Christian has been working on perception and robotics systems in the CIRP Lab, and we are excited to see him bring these skills to real-world autonomous driving systems.
 
-We look forward to seeing what he builds this summer and welcoming him back with new insights from industry.
+We look forward to seeing what he builds this summer and welcoming him back with new insights from the industry.
 ---
 
 ## 2026-03-06 | New Paper on Imaging Through Turbulence on arXiv
 A new paper on **computational imaging through turbulence** is now available on **arXiv**.
-
 MS student **Ethan Chung** and PhD student **Norman Luo** contributed as second and third authors on the work:
-
 [arxiv.org/abs/2603.02048](https://arxiv.org/abs/2603.02048)
-
 The paper studies imaging and reconstruction methods for scenes degraded by atmospheric turbulence, an important challenge for long-range vision and sensing systems.
 ---
 
 ## 2026-01-14 | NVIDIA Academic Grant Awarded! Thanks, NVIDIA!
 CIRP Lab has received an **NVIDIA Academic Grant** to support our agricultural robotics research project.
-
 The award provides high-performance computing hardware to support the development of AI-enabled farm robots, including **two RTX PRO 6000 Blackwell GPUs** for training large AI models and **four Jetson AGX Orin** edge computers that will serve as onboard computing systems for field robots.
-
 The project focuses on combining robotics, computer vision, and edge AI to build practical tools that can operate directly in farm environments, helping address labor challenges and improve agricultural productivity in Hawai'i and beyond.
 
 Full story: [hawaii.edu/news/2026/01/14/nvidia-awards-next-gen-tech](https://www.hawaii.edu/news/2026/01/14/nvidia-awards-next-gen-tech/)
@@ -85,42 +77,6 @@ Congratulations to the lab's undergraduate team for winning the **$10,000 Grand 
 Their AI-powered robot and drone system, developed with **Dole Plantation**, automatically counts and sizes pineapples in the field.
 ---
 
-## 2024-09-01 | Joining UHM
-Huaijin Chen will serve as the local chair at ICCV 2025 and continues building the lab at the University of Hawaii at Manoa.
----
-
 ## 2024-08-01 | Joining UHM
-Huaijin Chen joined the **University of Hawaii at Manoa** as an Assistant Professor in the Department of Information and Computer Sciences.
----
-
-## 2024-01-05 | Serving as a guest editor for the ACM Journal on Autonomous Transportation Systems
-Alongside journal service, the lab also demonstrated the **Vayu Sense 3D sensing kit** at [CES 2024](https://www.linkedin.com/posts/mkrishnamurthi_ces2024-activity-7141521626080165888-EIIi?utm_source=share&utm_medium=member_desktop).
----
-
-## 2023-12-01 | Serving as a guest editor for the ACM Journal on Autonomous Transportation Systems
-Serving as a guest editor for the ACM Journal on Autonomous Transportation Systems; please consider [submitting or reviewing](https://dl.acm.org/pb-assets/static_journal_pages/jats/pdf/JATS_SI_UAVS-CFP-1698955031337.pdf) for the special issue on UAVs.
----
-
-## 2023-11-01 | Job Opening for Camera Embedded System Engineer at Vayu
-Vayu Robotics sought an experienced camera embedded system engineer to work on neural network-based imaging algorithm optimization and deployment across platforms.
----
-
-## 2023-08-06 | SIGGRAPH 2023 Course
-Co-hosted the [SIGGRAPH 2023 Course on Polarization-based Visual Computing](https://s2023.siggraph.org/presentation/?id=gensub_332&sess=sess154).
----
-
-## 2023-04-02 | CVPR 2023 Tutorial
-Co-hosted the [CVPR 2023 Tutorial on Polarization-based Computer Vision](https://hgchen.com/pol_vis_tutorial/cvpr2023/).
----
-
-## 2023-02-28 | CVPR 2023 Papers
-Two papers, *TransFlow: Transformer as Flow Learner* and *Generating Aligned Pseudo-Supervision from Non-Aligned Data for Image Restoration in Under-Display Camera*, were accepted at CVPR 2023.
----
-
-## 2023-02-28 | Vayu Sense Depth Sensing
-Check out recent 3D sensing results from computational imaging at Vayu [here](https://www.youtube.com/watch?v=xOypONSzOus).
----
-
-## 2022-10-10 | Internship at Vayu Robotics
-The lab advertised a research internship on polarization imaging at Vayu Robotics. Interested students were invited to [apply here](https://docs.google.com/document/d/1-ULcVMSSiAIRXV8wCA95zbK0BADE7SGxocmA-tntw3U/edit?usp=sharing).
+Huaijin Chen joined the **University of Hawaii at Manoa** as an Assistant Professor in the Department of Information and Computer Sciences and founded the CIRP Lab.
 ---
