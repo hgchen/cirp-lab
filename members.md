@@ -188,9 +188,8 @@ bio: Lucas Horsman is an undergraduate at UH Manoa interested in programming, ro
 role: Undergraduate Researcher
 affiliation: University of Hawai'i at Manoa
 tags: Information and Computer Sciences | FRC 2025 | FRC 2026
-image: images/members/wilson-huynh.jpeg
 website: https://www.wilsonhuynh.com/
-linkedin: https://www.linkedin.com/in/whuynh1/
+linkedin: https://www.linkedin.com/in/wilsonh22/
 bio: Wilson Huynh is an undergraduate at UH Manoa contributing design and prototyping work to the lab's robotics projects. He has worked across product design, web experiences, and field robotics.
 ---
 

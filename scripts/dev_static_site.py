@@ -21,7 +21,9 @@ WATCH_DIRS = [
 ]
 WATCH_FILES = [
     ROOT_DIR / "index.html",
+    ROOT_DIR / "styles.css",
     ROOT_DIR / "members.md",
+    ROOT_DIR / "projects.md",
     ROOT_DIR / "news.md",
     ROOT_DIR / "publications.bib",
     ROOT_DIR / "README.md",
@@ -116,7 +118,7 @@ def watch_loop(interval: float) -> None:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Serve the CIRP Lab static site with auto rebuild.")
-    parser.add_argument("--port", type=int, default=8000, help="Port to serve the site on")
+    parser.add_argument("--port", type=int, default=7000, help="Port to serve the site on")
     parser.add_argument("--interval", type=float, default=0.8, help="Polling interval in seconds")
     args = parser.parse_args()
 
