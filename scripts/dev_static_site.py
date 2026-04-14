@@ -21,6 +21,7 @@ WATCH_DIRS = [
 ]
 WATCH_FILES = [
     ROOT_DIR / "index.html",
+    ROOT_DIR / "styles.css",
     ROOT_DIR / "members.md",
     ROOT_DIR / "news.md",
     ROOT_DIR / "publications.bib",

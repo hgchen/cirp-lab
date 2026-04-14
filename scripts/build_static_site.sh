@@ -12,6 +12,7 @@ mkdir -p "$DIST_DIR"
 mkdir -p "$DIST_DIR/content"
 
 cp "$ROOT_DIR/index.html" "$DIST_DIR/index.html"
+cp "$ROOT_DIR/styles.css" "$DIST_DIR/styles.css"
 cp "$ROOT_DIR/members.md" "$DIST_DIR/members.md"
 cp "$ROOT_DIR/news.md" "$DIST_DIR/news.md"
 cp "$ROOT_DIR/publications.bib" "$DIST_DIR/publications.bib"

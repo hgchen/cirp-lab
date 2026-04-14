@@ -21,6 +21,8 @@ class Rule:
 SPECIFIC_RULES = {
     "images/bg_1.jpg": Rule(max_edge=1920),
     "images/bg_1.png": Rule(max_edge=1920, output_suffix=".jpg"),
+    "images/bg_2.jpg": Rule(max_edge=1600),
+    "images/bg_2.png": Rule(max_edge=960),
     "images/uhm_logo.png": Rule(max_edge=512),
     "images/nsf_logo.png": Rule(max_edge=512),
 }

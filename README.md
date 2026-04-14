@@ -83,7 +83,7 @@ bash scripts/dev_static_site.sh
 
 Then open `http://127.0.0.1:8000`.
 
-When you save `index.html`, `members.md`, `news.md`, `publications.bib`, or files under `images/`, the script rebuilds automatically. Refresh the browser to see the latest result.
+When you save `index.html`, `styles.css`, `members.md`, `news.md`, `publications.bib`, or files under `images/`, the script rebuilds automatically. Refresh the browser to see the latest result.
 
 ## Deployment
 
