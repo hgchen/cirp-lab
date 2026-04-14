@@ -20,6 +20,7 @@
       <nav class="nav" aria-label="Primary">
         <a class="nav-link" data-route-link href="#home">Home</a>
         <a class="nav-link" data-route-link href="#members">Members</a>
+        <a class="nav-link" data-route-link href="#projects">Projects</a>
         <a class="nav-link" data-route-link href="#publications">Publications</a>
         <a class="nav-link" data-route-link href="#news">News</a>
         <a class="nav-link" data-route-link href="#contact">Contact</a>
@@ -71,28 +72,19 @@
             <span>Theme 01</span>
             <h3>Computational Imaging Beyond RGB</h3>
             <p>We design cameras that capture information beyond conventional color imaging, including phase, polarization, transient transport, and spectral cues.</p>
-            <div class="theme-card-action">
-              <span>Explore Theme</span>
-              <span class="theme-card-action-mark" aria-hidden="true">→</span>
-            </div>
+            <div class="button button-secondary button-soft theme-card-action theme-card-action--button">Explore Theme</div>
           </article>
           <article class="theme-card" data-theme-id="theme-02" role="button" tabindex="0" aria-haspopup="dialog">
             <span>Theme 02</span>
             <h3>Physics-Informed AI</h3>
             <p>We build machine learning models that respect imaging physics so non-conventional sensor data can be reconstructed, interpreted, and deployed robustly.</p>
-            <div class="theme-card-action">
-              <span>Explore Theme</span>
-              <span class="theme-card-action-mark" aria-hidden="true">→</span>
-            </div>
+            <div class="button button-secondary button-soft theme-card-action theme-card-action--button">Explore Theme</div>
           </article>
           <article class="theme-card" data-theme-id="theme-03" role="button" tabindex="0" aria-haspopup="dialog">
             <span>Theme 03</span>
             <h3>Robotic Perception in the Wild</h3>
             <p>We integrate advanced visual sensing into robots and VLA systems for practical automation in agriculture, healthcare, and other safety-critical settings.</p>
-            <div class="theme-card-action">
-              <span>Explore Theme</span>
-              <span class="theme-card-action-mark" aria-hidden="true">→</span>
-            </div>
+            <div class="button button-secondary button-soft theme-card-action theme-card-action--button">Explore Theme</div>
           </article>
         </div>
       </section>
@@ -157,6 +149,15 @@
       </div>
       <div id="members-root">
         <div class="status">Loading members...</div>
+      </div>
+    </section>
+
+    <section class="page" data-route="projects" id="projects">
+      <div class="section-title">
+        <h2>Projects</h2>
+      </div>
+      <div id="projects-root">
+        <div class="status">Loading projects...</div>
       </div>
     </section>
 
@@ -244,7 +245,7 @@
   </div>
 
   <script>
-    const ROUTES = ["home", "members", "publications", "news", "contact"];
+    const ROUTES = ["home", "members", "projects", "publications", "news", "contact"];
     const PUBLICATION_LINKS = [
       ["pdf", "PDF"],
       ["website", "Website"],
@@ -256,6 +257,7 @@
       ["doi", "DOI"]
     ];
     const CATEGORY_ORDER = ["Faculty", "PhD", "Masters", "Undergrads", "Alumni"];
+    const PROJECT_CATEGORY_ORDER = ["CV Health", "Perception", "VLA"];
     const DEFAULT_MEMBER_AVATAR = "images/user-avatar.svg";
     const MONEY_PATTERN = /\$\d[\d,]*(?:\.\d+)?(?:\s?(?:[KMB]|million|billion|thousand))?/gi;
     const MAX_VISIBLE_GALLERY_DOTS = 6;
@@ -353,11 +355,15 @@
 
     const state = {
       members: [],
+      projects: [],
       news: [],
       publications: [],
-      gallery: []
+      gallery: [],
+      projectMedia: {}
     };
     const memberLookup = new Map();
+    const memberDirectory = new Map();
+    const projectLookup = new Map();
     const renderedRoutes = new Set();
     let revealObserver = null;
     let motionReady = false;
@@ -365,6 +371,7 @@
     let modalBound = false;
     let modalHideTimer = 0;
     let dataReady = false;
+    const modalStack = [];
 
     function initializeMotion() {
       if (motionReady || prefersReducedMotion.matches) {
@@ -671,6 +678,83 @@
       return categories;
     }
 
+    function parseProjects(text) {
+      const categories = [];
+      let currentCategory = null;
+      let currentProject = null;
+
+      function flushProject() {
+        if (currentCategory && currentProject) {
+          currentCategory.projects.push(currentProject);
+          currentProject = null;
+        }
+      }
+
+      function flushCategory() {
+        flushProject();
+        if (currentCategory) {
+          categories.push(currentCategory);
+          currentCategory = null;
+        }
+      }
+
+      for (const rawLine of text.split("\n")) {
+        const line = rawLine.trim();
+        if (!line || line === "# Projects") {
+          continue;
+        }
+        if (line.startsWith("## ")) {
+          flushCategory();
+          currentCategory = {
+            name: line.slice(3).trim(),
+            note: "",
+            projects: []
+          };
+          continue;
+        }
+        if (line.startsWith("### ")) {
+          flushProject();
+          currentProject = { title: line.slice(4).trim() };
+          continue;
+        }
+        if (line === "---") {
+          flushProject();
+          continue;
+        }
+        const match = line.match(/^([A-Za-z_]+):\s*(.*)$/);
+        if (match) {
+          const key = match[1].toLowerCase();
+          const value = match[2].trim();
+          if (currentProject) {
+            currentProject[key] = value;
+          } else if (currentCategory) {
+            currentCategory[key] = value;
+          }
+          continue;
+        }
+        if (currentProject) {
+          currentProject.description = currentProject.description ? currentProject.description + " " + line : line;
+        } else if (currentCategory) {
+          currentCategory.note = currentCategory.note ? currentCategory.note + " " + line : line;
+        }
+      }
+
+      flushCategory();
+      return categories;
+    }
+
+    function registerMembers(categories) {
+      memberDirectory.clear();
+      categories.forEach((category) => {
+        category.members.forEach((member) => {
+          memberDirectory.set(member.name.trim().toLowerCase(), {
+            ...member,
+            categoryName: category.name
+          });
+        });
+      });
+    }
+
     function parseNews(text) {
       const items = [];
       let current = null;
@@ -927,7 +1011,55 @@
       modal.addEventListener("click", (event) => {
         if (event.target.closest("[data-modal-close]")) {
           closeDetailModal();
+          return;
         }
+
+        const galleryThumb = event.target.closest("[data-project-gallery-index]");
+        if (galleryThumb) {
+          const gallery = galleryThumb.closest("[data-project-gallery]");
+          setProjectGalleryMedia(gallery, Number(galleryThumb.dataset.projectGalleryIndex));
+          return;
+        }
+
+        const galleryNav = event.target.closest("[data-project-gallery-nav]");
+        if (galleryNav) {
+          const gallery = galleryNav.closest("[data-project-gallery]");
+          const stage = gallery?.querySelector("[data-project-gallery-stage]");
+          const thumbs = gallery ? Array.from(gallery.querySelectorAll("[data-project-gallery-index]")) : [];
+          if (!gallery || !stage || !thumbs.length) {
+            return;
+          }
+          const currentIndex = Number(stage.dataset.projectMediaIndex || 0);
+          const direction = Number(galleryNav.dataset.projectGalleryNav || 0);
+          const nextIndex = (currentIndex + direction + thumbs.length) % thumbs.length;
+          setProjectGalleryMedia(gallery, nextIndex);
+          return;
+        }
+
+        const projectMediaTrigger = event.target.closest("[data-project-media-open]");
+        if (projectMediaTrigger) {
+          openDetailModal(
+            "project-media",
+            renderProjectMediaViewer(
+              projectMediaTrigger.dataset.projectMediaSrc || "",
+              projectMediaTrigger.dataset.projectMediaAlt || "Project media"
+            ),
+            { preserveCurrent: true }
+          );
+          return;
+        }
+
+        const memberButton = event.target.closest("[data-project-member-name]");
+        if (!memberButton) {
+          return;
+        }
+
+        const member = memberDirectory.get(String(memberButton.dataset.projectMemberName || "").trim().toLowerCase());
+        if (!member) {
+          return;
+        }
+
+        openDetailModal("member", renderMemberModal(member), { preserveCurrent: true });
       });
 
       document.addEventListener("keydown", (event) => {
@@ -937,13 +1069,26 @@
       });
     }
 
-    function openDetailModal(kind, html) {
+    function openDetailModal(kind, html, options = {}) {
       bindModal();
       const modal = document.getElementById("detail-modal");
       const body = document.getElementById("detail-modal-body");
       const dialog = modal?.querySelector(".detail-modal-dialog");
       if (!modal || !body || !dialog) {
         return;
+      }
+
+      const preserveCurrent = options.preserveCurrent === true;
+      const restoring = options.restoring === true;
+      if (!restoring) {
+        if (preserveCurrent && !modal.hidden && body.innerHTML.trim()) {
+          modalStack.push({
+            kind: modal.dataset.kind || "",
+            html: body.innerHTML
+          });
+        } else if (!preserveCurrent) {
+          modalStack.length = 0;
+        }
       }
 
       window.clearTimeout(modalHideTimer);
@@ -955,6 +1100,11 @@
       document.body.classList.add("modal-open");
       window.requestAnimationFrame(() => {
         modal.classList.add("is-open");
+        if (kind === "project") {
+          body.querySelectorAll("[data-project-gallery]").forEach((gallery) => {
+            setProjectGalleryMedia(gallery, 0);
+          });
+        }
         const closeButton = modal.querySelector(".detail-modal-close");
         if (closeButton instanceof HTMLElement) {
           closeButton.focus({ preventScroll: true });
@@ -962,11 +1112,28 @@
       });
     }
 
-    function closeDetailModal(immediate = false) {
+    function restorePreviousModal() {
+      const previous = modalStack.pop();
+      if (!previous) {
+        return false;
+      }
+      openDetailModal(previous.kind, previous.html, { restoring: true });
+      return true;
+    }
+
+    function closeDetailModal(immediate = false, forceCloseAll = false) {
       const modal = document.getElementById("detail-modal");
       const body = document.getElementById("detail-modal-body");
       if (!modal || modal.hidden) {
         return;
+      }
+
+      if (!forceCloseAll && restorePreviousModal()) {
+        return;
+      }
+
+      if (forceCloseAll) {
+        modalStack.length = 0;
       }
 
       const finish = () => {
@@ -1057,6 +1224,349 @@
       `;
     }
 
+    function getProjectMedia(folder) {
+      return Array.isArray(state.projectMedia[folder]) ? state.projectMedia[folder] : [];
+    }
+
+    function createProjectPerson(name) {
+      const cleanName = String(name || "").trim();
+      if (!cleanName) {
+        return "";
+      }
+
+      const member = memberDirectory.get(cleanName.toLowerCase());
+      const initials = cleanName
+        .split(/\s+/)
+        .filter(Boolean)
+        .slice(0, 2)
+        .map((part) => part[0]?.toUpperCase() || "")
+        .join("") || "?";
+      const visual = member?.image
+        ? `<img class="project-person-photo" src="${escapeHtml(member.image)}" alt="${escapeHtml(cleanName)}" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='images/user-avatar.svg';">`
+        : `<span class="project-person-fallback" aria-hidden="true">${escapeHtml(initials)}</span>`;
+
+      if (!member) {
+        return `
+          <div class="project-person project-person--static">
+            ${visual}
+            <span>${escapeHtml(cleanName)}</span>
+          </div>
+        `;
+      }
+
+      return `
+        <button class="project-person" type="button" data-project-member-name="${escapeHtml(cleanName)}" aria-label="Open ${escapeHtml(cleanName)} profile">
+          ${visual}
+          <span>${escapeHtml(cleanName)}</span>
+        </button>
+      `;
+    }
+
+    function renderProjectPeopleGroup(label, names) {
+      const people = splitPipedValues(names)
+        .map((name) => createProjectPerson(name))
+        .join("");
+      if (!people) {
+        return "";
+      }
+
+      return `
+        <section class="project-people-group project-people-group--${escapeHtml(slugify(label))}">
+          <p class="project-people-label">${escapeHtml(label)}</p>
+          <div class="project-people-list">
+            ${people}
+          </div>
+        </section>
+      `;
+    }
+
+    function renderProjectMediaGrid(project) {
+      const media = getProjectMedia(project.folder);
+      if (!media.length) {
+        return `
+          <div class="project-media-empty">
+            Add media to <code>images/projects/${escapeHtml(project.folder || "")}/</code> to show them here.
+          </div>
+        `;
+      }
+
+      const firstSource = media[0];
+      const firstIsGif = /\.gif$/i.test(firstSource);
+      return `
+        <div class="project-gallery" data-project-gallery>
+          <div class="project-gallery-stage-shell">
+            ${media.length > 1 ? '<button class="gallery-arrow prev project-gallery-arrow" type="button" data-project-gallery-nav="-1" aria-label="Previous media">&lt;</button>' : ""}
+            <button class="project-gallery-stage" type="button" data-project-gallery-stage data-project-media-open data-project-media-index="0" data-project-media-src="${escapeHtml(firstSource)}" data-project-media-alt="${escapeHtml(project.title)} media 1">
+              <img src="${escapeHtml(firstSource)}" alt="${escapeHtml(project.title)} media 1" loading="eager" decoding="async">
+              ${firstIsGif ? '<span class="project-gallery-badge">GIF</span>' : ""}
+            </button>
+            ${media.length > 1 ? '<button class="gallery-arrow next project-gallery-arrow" type="button" data-project-gallery-nav="1" aria-label="Next media">&gt;</button>' : ""}
+          </div>
+          ${media.length > 1 ? `
+            <div class="gallery-dots project-gallery-dots">
+              ${media.map((source, index) => {
+                const isGif = /\.gif$/i.test(source);
+                return `
+                  <button class="gallery-dot project-gallery-dot${index === 0 ? " active" : ""}" type="button" data-project-gallery-index="${index}" data-project-media-src="${escapeHtml(source)}" data-project-media-alt="${escapeHtml(project.title)} media ${index + 1}" data-project-media-type="${isGif ? "gif" : "image"}" aria-label="Show media ${index + 1}"></button>
+                `;
+              }).join("")}
+            </div>
+          ` : `
+            <button type="button" hidden data-project-gallery-index="0" data-project-media-src="${escapeHtml(firstSource)}" data-project-media-alt="${escapeHtml(project.title)} media 1" data-project-media-type="${firstIsGif ? "gif" : "image"}"></button>
+          `}
+          <div class="project-gallery-meta">
+            <p class="project-gallery-label" data-project-gallery-label>${media.length > 1 ? `1 / ${media.length}` : "Preview"}</p>
+            <p class="project-gallery-hint" data-project-gallery-hint>${firstIsGif ? "GIF loops in preview. Click to expand." : "Click preview to expand."}</p>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderProjectModal(project) {
+      const shortDescription = project.short || project.description || "";
+      const longDescription = project.description && project.description !== project.short
+        ? `<div class="detail-sheet-copy project-detail-description"><p>${renderInlineMarkdown(project.description)}</p></div>`
+        : "";
+
+      return `
+        <div class="detail-sheet detail-sheet--project">
+          <div class="project-detail-shell">
+            <div class="project-detail-intro">
+              <p class="detail-sheet-eyebrow">${escapeHtml(project.categoryName || "Project")}</p>
+              <h3 id="detail-modal-title">${escapeHtml(project.title)}</h3>
+            </div>
+            <section class="project-media-panel">
+              <p class="project-people-label">Project Gallery</p>
+              ${renderProjectMediaGrid(project)}
+            </section>
+            <div class="project-detail-body">
+              <div class="project-detail-copy">
+                ${shortDescription ? `<p class="detail-sheet-summary">${renderInlineMarkdown(shortDescription)}</p>` : ""}
+                ${longDescription}
+              </div>
+              <section class="project-people-panel">
+                ${renderProjectPeopleGroup("Project Lead", project.lead)}
+                ${renderProjectPeopleGroup("Members", project.members)}
+                ${renderProjectPeopleGroup("PI", project.pi)}
+              </section>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function createProjectCard(project, categoryName = "") {
+      const projectId = `${slugify(categoryName)}-${slugify(project.title)}`;
+      const media = getProjectMedia(project.folder);
+      const cover = media[0] || "";
+      const summary = project.short || project.description || "Project description coming soon.";
+      projectLookup.set(projectId, { ...project, categoryName });
+
+      return `
+        <article class="project-card" data-project-card data-project-card-id="${escapeHtml(projectId)}" data-project-category="${escapeHtml(slugify(categoryName))}" role="button" tabindex="0" aria-haspopup="dialog">
+          <div class="project-card-media">
+            ${cover
+              ? `<img src="${escapeHtml(cover)}" alt="${escapeHtml(project.title)}" loading="lazy" decoding="async">`
+              : '<div class="project-card-placeholder">Project media</div>'}
+          </div>
+          <div class="project-card-body">
+            <div class="project-card-meta">
+              <span class="chip tag-chip">${escapeHtml(categoryName)}</span>
+            </div>
+            <h3>${escapeHtml(project.title)}</h3>
+            <p>${renderInlineMarkdown(summary)}</p>
+            <button class="button button-secondary button-soft project-card-action" type="button" data-project-detail="${escapeHtml(projectId)}">View Detail</button>
+          </div>
+        </article>
+      `;
+    }
+
+    function updateProjectFilter(container, filter) {
+      container.dataset.projectFilter = filter;
+      container.querySelectorAll("[data-project-filter]").forEach((button) => {
+        button.classList.toggle("active", button.dataset.projectFilter === filter);
+      });
+
+      container.querySelectorAll("[data-project-card]").forEach((card) => {
+        const matches = filter === "all" || card.dataset.projectCategory === filter;
+        card.hidden = !matches;
+      });
+
+      syncProjectFilterIndicator(container);
+    }
+
+    function syncProjectFilterIndicator(container) {
+      const indicator = container.querySelector("[data-project-filter-indicator]");
+      const activeButton = container.querySelector("[data-project-filter].active");
+      const filterBar = container.querySelector(".project-filter-bar");
+      if (!indicator || !activeButton || !filterBar) {
+        return;
+      }
+
+      const barRect = filterBar.getBoundingClientRect();
+      const buttonRect = activeButton.getBoundingClientRect();
+      indicator.style.width = `${buttonRect.width}px`;
+      indicator.style.height = `${buttonRect.height}px`;
+      indicator.style.transform = `translate3d(${buttonRect.left - barRect.left}px, ${buttonRect.top - barRect.top}px, 0)`;
+    }
+
+    function openProjectDetail(projectId) {
+      const project = projectLookup.get(projectId);
+      if (!project) {
+        return;
+      }
+
+      openDetailModal("project", renderProjectModal(project));
+    }
+
+    function bindProjectPage(container) {
+      if (!container || container.dataset.projectsBound === "true") {
+        return;
+      }
+
+      container.dataset.projectsBound = "true";
+      container.querySelectorAll("[data-project-filter]").forEach((button) => {
+        button.addEventListener("click", () => {
+          updateProjectFilter(container, button.dataset.projectFilter);
+        });
+      });
+
+      container.querySelectorAll("[data-project-detail]").forEach((button) => {
+        button.addEventListener("click", (event) => {
+          event.stopPropagation();
+          openProjectDetail(button.dataset.projectDetail);
+        });
+      });
+
+      container.querySelectorAll("[data-project-card-id]").forEach((card) => {
+        card.addEventListener("click", (event) => {
+          if (event.target.closest("button, a")) {
+            return;
+          }
+          openProjectDetail(card.dataset.projectCardId);
+        });
+
+        card.addEventListener("keydown", (event) => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            openProjectDetail(card.dataset.projectCardId);
+          }
+        });
+      });
+
+      if (container.dataset.projectResizeBound !== "true") {
+        container.dataset.projectResizeBound = "true";
+        window.addEventListener("resize", () => {
+          if (!container.isConnected) {
+            return;
+          }
+          syncProjectFilterIndicator(container);
+        });
+      }
+    }
+
+    function renderProjectsPage(categories) {
+      const container = document.getElementById("projects-root");
+      if (!categories.length) {
+        container.innerHTML = '<div class="error-state">Unable to load projects.</div>';
+        return;
+      }
+
+      projectLookup.clear();
+      const categoriesByName = new Map(categories.map((category) => [category.name, category]));
+      const orderedCategories = PROJECT_CATEGORY_ORDER.map((name) => categoriesByName.get(name) || { name, note: "", projects: [] });
+      const allProjects = orderedCategories.flatMap((category) => {
+        return category.projects.map((project) => ({ ...project, categoryName: category.name }));
+      });
+
+      container.innerHTML = `
+        <div class="project-filter-bar" role="tablist" aria-label="Project categories">
+          <div class="project-filter-indicator" data-project-filter-indicator aria-hidden="true"></div>
+          <button class="project-filter active" type="button" data-project-filter="all">All</button>
+          ${orderedCategories.map((category) => (
+            `<button class="project-filter" type="button" data-project-filter="${escapeHtml(slugify(category.name))}">${escapeHtml(category.name)}</button>`
+          )).join("")}
+        </div>
+        <div class="project-grid">
+          ${allProjects.map((project) => createProjectCard(project, project.categoryName)).join("")}
+        </div>
+      `;
+
+      bindProjectPage(container);
+      updateProjectFilter(container, container.dataset.projectFilter || "all");
+      prepareMotion(container);
+    }
+
+    function setProjectGalleryMedia(gallery, index) {
+      if (!gallery) {
+        return;
+      }
+
+      const thumbs = Array.from(gallery.querySelectorAll("[data-project-gallery-index]"));
+      const thumb = thumbs[index];
+      const stage = gallery.querySelector("[data-project-gallery-stage]");
+      const stageImage = stage?.querySelector("img");
+      const label = gallery.querySelector("[data-project-gallery-label]");
+      const hint = gallery.querySelector("[data-project-gallery-hint]");
+      if (!thumb || !stage || !stageImage || !label) {
+        return;
+      }
+
+      const source = thumb.dataset.projectMediaSrc || "";
+      const alt = thumb.dataset.projectMediaAlt || "Project media";
+      const type = thumb.dataset.projectMediaType || "image";
+
+      stage.dataset.projectMediaIndex = String(index);
+      stage.dataset.projectMediaSrc = source;
+      stage.dataset.projectMediaAlt = alt;
+      stageImage.src = source;
+      stageImage.alt = alt;
+      stageImage.loading = "eager";
+      gallery.querySelectorAll("[data-project-media-open]").forEach((trigger) => {
+        trigger.dataset.projectMediaIndex = String(index);
+        trigger.dataset.projectMediaSrc = source;
+        trigger.dataset.projectMediaAlt = alt;
+      });
+      label.textContent = thumbs.length > 1
+        ? `${index + 1} / ${thumbs.length}${type === "gif" ? " Animated demo" : ""}`
+        : (type === "gif" ? "Animated preview" : "Preview");
+      if (hint) {
+        hint.textContent = type === "gif"
+          ? "GIF loops in preview. Click to expand."
+          : "Click preview to expand.";
+      }
+
+      let badge = stage.querySelector(".project-gallery-badge");
+      if (type === "gif") {
+        if (!badge) {
+          badge = document.createElement("span");
+          badge.className = "project-gallery-badge";
+          badge.textContent = "GIF";
+          stage.appendChild(badge);
+        }
+      } else if (badge) {
+        badge.remove();
+      }
+
+      thumbs.forEach((button, buttonIndex) => {
+        button.classList.toggle("active", buttonIndex === index);
+      });
+    }
+
+    function renderProjectMediaViewer(source, alt) {
+      return `
+        <div class="detail-sheet detail-sheet--project-media-viewer">
+          <div class="project-media-viewer">
+            <p class="detail-sheet-eyebrow">Project Media</p>
+            <h3 id="detail-modal-title">${escapeHtml(alt)}</h3>
+            <div class="project-media-viewer-frame">
+              <img src="${escapeHtml(source)}" alt="${escapeHtml(alt)}" loading="eager" decoding="async">
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
     function bindThemeCards() {
       document.querySelectorAll(".theme-card[data-theme-id]").forEach((card) => {
         if (card.dataset.themeBound === "true") {
@@ -1096,7 +1606,7 @@
     }
 
     function setRoute(route) {
-      closeDetailModal(true);
+      closeDetailModal(true, true);
       document.querySelectorAll("[data-route]").forEach((section) => {
         section.classList.toggle("active", section.dataset.route === route);
       });
@@ -1333,6 +1843,8 @@
         renderHomePublications(state.publications);
       } else if (route === "members") {
         renderMembers(state.members);
+      } else if (route === "projects") {
+        renderProjectsPage(state.projects);
       } else if (route === "publications") {
         renderPublicationsPage(state.publications);
       } else if (route === "news") {
@@ -1605,24 +2117,42 @@
       ];
     }
 
+    async function loadProjectMedia() {
+      try {
+        const response = await fetch("projects-manifest.json", { cache: "no-cache" });
+        if (response.ok) {
+          const payload = await response.json();
+          return payload && typeof payload.projects === "object" ? payload.projects : {};
+        }
+      } catch (error) {
+        console.warn("projects manifest missing, falling back to empty project media", error);
+      }
+      return {};
+    }
+
     async function loadData() {
       try {
-        const [membersText, newsText, publicationsText, galleryImages] = await Promise.all([
+        const [membersText, projectsText, newsText, publicationsText, galleryImages, projectMedia] = await Promise.all([
           fetchText("members.md"),
+          fetchText("projects.md"),
           fetchText("news.md"),
           fetchText("publications.bib"),
-          loadGallery()
+          loadGallery(),
+          loadProjectMedia()
         ]);
 
         state.members = parseMembers(membersText);
+        registerMembers(state.members);
+        state.projects = parseProjects(projectsText);
         state.news = parseNews(newsText);
         state.publications = parseBibTeX(publicationsText);
         state.gallery = galleryImages;
+        state.projectMedia = projectMedia;
         dataReady = true;
         ensureRouteRendered(routeFromHash());
       } catch (error) {
         console.error(error);
-        document.querySelectorAll("#members-root, #news-root, #publications-root, #gallery-root, #home-news-root, #home-publications-root").forEach((node) => {
+        document.querySelectorAll("#members-root, #projects-root, #news-root, #publications-root, #gallery-root, #home-news-root, #home-publications-root").forEach((node) => {
           node.innerHTML = `<div class="error-state">${escapeHtml(error.message)}</div>`;
         });
       }

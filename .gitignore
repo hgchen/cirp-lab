@@ -5,3 +5,7 @@ __pycache__/
 
 # Static site output
 dist/
+
+# Playwright artifacts
+.playwright-cli/
+output/playwright/
