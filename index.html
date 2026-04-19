@@ -1080,11 +1080,13 @@
 
       const preserveCurrent = options.preserveCurrent === true;
       const restoring = options.restoring === true;
+      const restoreScrollTop = Number.isFinite(options.scrollTop) ? Number(options.scrollTop) : 0;
       if (!restoring) {
         if (preserveCurrent && !modal.hidden && body.innerHTML.trim()) {
           modalStack.push({
             kind: modal.dataset.kind || "",
-            html: body.innerHTML
+            html: body.innerHTML,
+            scrollTop: dialog.scrollTop
           });
         } else if (!preserveCurrent) {
           modalStack.length = 0;
@@ -1096,15 +1098,16 @@
       modal.dataset.kind = kind;
       modal.hidden = false;
       modal.setAttribute("aria-hidden", "false");
-      dialog.scrollTop = 0;
+      dialog.scrollTop = restoreScrollTop;
       document.body.classList.add("modal-open");
       window.requestAnimationFrame(() => {
         modal.classList.add("is-open");
-        if (kind === "project") {
+        if (kind === "project" && !restoring) {
           body.querySelectorAll("[data-project-gallery]").forEach((gallery) => {
             setProjectGalleryMedia(gallery, 0);
           });
         }
+        dialog.scrollTop = restoreScrollTop;
         const closeButton = modal.querySelector(".detail-modal-close");
         if (closeButton instanceof HTMLElement) {
           closeButton.focus({ preventScroll: true });
@@ -1117,7 +1120,10 @@
       if (!previous) {
         return false;
       }
-      openDetailModal(previous.kind, previous.html, { restoring: true });
+      openDetailModal(previous.kind, previous.html, {
+        restoring: true,
+        scrollTop: previous.scrollTop
+      });
       return true;
     }
 
