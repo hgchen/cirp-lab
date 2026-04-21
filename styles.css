@@ -1108,6 +1108,7 @@ main {
 .project-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 380px));
+  align-items: stretch;
   justify-content: start;
   gap: 22px;
 }
@@ -1129,6 +1130,7 @@ main {
   overflow: hidden;
   display: grid;
   grid-template-rows: auto 1fr;
+  height: 100%;
   transition:
     transform var(--transition-medium),
     box-shadow var(--transition-medium);
@@ -1167,8 +1169,11 @@ main {
 
 .project-card-body {
   display: grid;
+  grid-template-rows: auto auto minmax(0, 1fr) auto;
   gap: 14px;
-  align-content: start;
+  min-height: 240px;
+  height: 100%;
+  align-content: stretch;
   padding: 24px;
 }
 
@@ -1194,7 +1199,9 @@ main {
 
 .project-card-action {
   width: fit-content;
-  margin-top: 4px;
+  margin-top: 0;
+  justify-self: start;
+  align-self: end;
 }
 
 .project-detail-shell {
@@ -1275,23 +1282,26 @@ main {
 }
 
 .project-people-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(68px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 14px 8px;
 }
 
 .project-people-group--members .project-people-list {
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  max-width: 382px;
+  margin: 0 auto;
 }
 
 .project-people-group--project-lead .project-people-list,
 .project-people-group--pi .project-people-list {
-  grid-template-columns: repeat(auto-fit, minmax(84px, 1fr));
+  justify-content: center;
 }
 
 .project-person,
 .project-person--static {
-  width: 100%;
+  width: 70px;
+  flex: 0 0 70px;
   min-height: auto;
   display: flex;
   flex-direction: column;
@@ -1301,6 +1311,14 @@ main {
   padding: 2px;
   border-radius: 16px;
   min-width: 0;
+}
+
+.project-people-group--project-lead .project-person,
+.project-people-group--project-lead .project-person--static,
+.project-people-group--pi .project-person,
+.project-people-group--pi .project-person--static {
+  width: 84px;
+  flex-basis: 84px;
 }
 
 .project-person {
@@ -2346,14 +2364,6 @@ body.js-motion .theme-card[data-reveal="theme"].is-visible {
     width: min(220px, 100%);
   }
 
-  .project-people-list {
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-  }
-
-  .project-people-group--members .project-people-list {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-
   .gallery-card img {
     min-height: 340px;
   }
@@ -2512,14 +2522,6 @@ body.js-motion .theme-card[data-reveal="theme"].is-visible {
   .project-people-panel,
   .project-media-panel {
     padding: 20px;
-  }
-
-  .project-people-list {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .project-people-group--members .project-people-list {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .project-person-photo,
