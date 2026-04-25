@@ -125,52 +125,14 @@ iframe:focus-visible {
   min-width: 0;
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 0;
 }
 
-.brand-badge {
-  width: 46px;
-  height: 46px;
-  border-radius: 15px;
-  display: grid;
-  place-items: center;
-  color: #ffffff;
-  background:
-    linear-gradient(180deg, #1f2228, #0b0d12);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.14),
-    0 16px 30px rgba(15, 23, 42, 0.14);
-  text-align: center;
-}
-
-.brand-badge span {
-  display: inline-block;
-  font-size: 0.52rem;
-  letter-spacing: 0.14em;
-  font-weight: 600;
-  white-space: nowrap;
-}
-
-.brand-copy strong,
-.brand-copy span {
-  display: block;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.brand-copy strong {
-  font-size: 0.98rem;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-}
-
-.brand-copy span {
-  margin-top: 2px;
-  color: var(--muted);
-  font-size: 0.78rem;
-  letter-spacing: -0.01em;
+.brand-logo {
+  width: auto;
+  height: 58px;
+  object-fit: contain;
+  filter: drop-shadow(0 12px 22px rgba(15, 23, 42, 0.08));
 }
 
 .nav {
@@ -271,15 +233,22 @@ main {
   z-index: 1;
   min-height: inherit;
   display: grid;
-  width: min(1080px, 100%);
+  width: 100%;
   margin: 0 auto;
-  grid-template-columns: minmax(0, 0.96fr) minmax(230px, 0.5fr);
-  gap: clamp(16px, 2.5vw, 28px);
-  align-items: center;
+  padding-left: 32px;
+  grid-template-columns: minmax(0, 640px) minmax(230px, 360px);
+  grid-template-rows: auto auto;
+  column-gap: clamp(16px, 2.5vw, 28px);
+  row-gap: 14px;
+  align-content: center;
+  align-items: start;
+  justify-content: space-between;
 }
 
 .hero-copy {
-  align-self: center;
+  grid-column: 1;
+  grid-row: 1 / 3;
+  align-self: start;
   max-width: 640px;
 }
 
@@ -472,10 +441,49 @@ main {
   backdrop-filter: blur(18px);
 }
 
-.hero-spotlight {
-  align-self: center;
+.hero-logo-showcase {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: start;
   justify-self: end;
-  max-width: 360px;
+  width: min(225px, 100%);
+  margin-top: 0;
+  padding: 8px;
+  overflow: hidden;
+  border-radius: 24px;
+  background: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.94);
+  box-shadow:
+    0 16px 34px rgba(2, 8, 18, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.96);
+  transition:
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.hero-logo-showcase:hover,
+.hero-logo-showcase:focus-visible {
+  transform: translateY(-2px);
+  box-shadow:
+    0 20px 40px rgba(2, 8, 18, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.96);
+}
+
+.hero-logo-showcase img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  transform: scale(1.12);
+  transform-origin: center;
+}
+
+.hero-spotlight {
+  grid-column: 2;
+  grid-row: 2;
+  align-self: end;
+  justify-self: end;
+  width: 100%;
+  margin-top: 0;
   padding: 22px;
   border-radius: 28px;
   background:
@@ -524,6 +532,7 @@ main {
 .hero-copy h1,
 .hero-copy p,
 .hero-actions,
+.hero-logo-showcase,
 .hero-spotlight {
   opacity: 0;
   transform: translateY(24px);
@@ -550,8 +559,12 @@ main {
   animation-delay: 380ms;
 }
 
+.hero-logo-showcase {
+  animation-delay: 180ms;
+}
+
 .hero-spotlight {
-  animation-delay: 320ms;
+  animation-delay: 420ms;
 }
 
 @keyframes hero-rise {
@@ -2333,13 +2346,31 @@ body.js-motion .theme-card[data-reveal="theme"].is-visible {
     grid-template-columns: 1fr;
   }
 
+  .hero-grid {
+    padding-left: 0;
+  }
+
   .hero-copy {
+    grid-column: 1;
+    grid-row: 1;
     max-width: 100%;
   }
 
+  .hero-logo-showcase {
+    grid-column: 1;
+    grid-row: 2;
+    justify-self: start;
+    width: min(288px, 100%);
+    margin-top: 0;
+  }
+
   .hero-spotlight {
+    grid-column: 1;
+    grid-row: 3;
+    align-self: start;
     justify-self: start;
     max-width: 560px;
+    margin-top: 0;
   }
 
   .theme-grid {
@@ -2413,6 +2444,10 @@ body.js-motion .theme-card[data-reveal="theme"].is-visible {
     align-items: stretch;
   }
 
+  .brand-logo {
+    height: 52px;
+  }
+
   .nav {
     justify-content: flex-start;
     overflow-x: auto;
@@ -2476,6 +2511,12 @@ body.js-motion .theme-card[data-reveal="theme"].is-visible {
   .hero-brand-tile-dept {
     min-width: 0;
     width: 100%;
+  }
+
+  .hero-logo-showcase {
+    width: min(216px, 100%);
+    padding: 14px;
+    border-radius: 24px;
   }
 
   .hero-spotlight {
@@ -2602,6 +2643,7 @@ body.js-motion .theme-card[data-reveal="theme"].is-visible {
   .hero-copy h1,
   .hero-copy p,
   .hero-actions,
+  .hero-logo-showcase,
   .hero-spotlight,
   [data-reveal],
   .gallery-card,
