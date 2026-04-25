@@ -122,17 +122,24 @@ iframe:focus-visible {
 }
 
 .brand {
-  min-width: 0;
-  display: flex;
-  align-items: center;
-  gap: 0;
+  width: 58px;
+  height: 58px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #ffffff;
+  box-shadow:
+    0 14px 28px rgba(15, 23, 42, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
 }
 
 .brand-logo {
-  width: auto;
+  width: 58px;
   height: 58px;
   object-fit: contain;
-  filter: drop-shadow(0 12px 22px rgba(15, 23, 42, 0.08));
+  border-radius: inherit;
 }
 
 .nav {
@@ -2445,7 +2452,14 @@ body.js-motion .theme-card[data-reveal="theme"].is-visible {
   }
 
   .brand-logo {
+    width: 52px;
     height: 52px;
+  }
+
+  .brand {
+    width: 52px;
+    height: 52px;
+    border-radius: 16px;
   }
 
   .nav {
