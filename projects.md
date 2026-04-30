@@ -23,3 +23,12 @@ description: We develop diffractive optical elements (DOEs) for snapshot hypersp
 ---
 
 ## VLA
+
+### Autonomous Coconut Rhinoceros Beetle Infestation Management
+folder: FRC2026
+lead: Christian Moore
+pi: Huaijin Chen
+members: Wilson Huynh | Rona Lei Duldulao | Riki MacMillan
+short: We are developing an autonomous Farm Robotics Challenge 2026 system for mitigating Coconut Rhinoceros Beetle infestations in palm trees through climbing, end-effector intervention, and VLA-guided physical interaction.
+description: This project develops an autonomous robotic system for Coconut Rhinoceros Beetle infestation management in palm trees. The architecture integrates a climbing mechanism for ascending infested palms, an end-effector for pesticide deployment and palm flower trimming, and a Vision-Language-Action subsystem that manages complex physical interactions. The VLA work uses a sim-to-real pipeline that combines high-fidelity palm-tree and hardware simulation, custom 3D-printed robotic arms and control systems, synthetic and teleoperated expert datasets, pass/fail episode evaluation, model training, simulation testing, and final real-world deployment.
+---
