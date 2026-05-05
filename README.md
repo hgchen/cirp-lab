@@ -95,6 +95,8 @@ images/projects/ProjectFolder/
 
 Supported project images are picked up automatically during build and written to `dist/projects-manifest.json`.
 
+The build copies images as static assets without converting them, so local preview and GitHub Pages deploys stay fast and predictable. Keep the image that looks right for the site in `images/`; larger files are okay when the visual quality is worth it.
+
 ## Validation
 
 Every build validates:
