@@ -223,7 +223,8 @@ main {
     url("images/bg_2.jpg") var(--hero-position) / cover no-repeat;
   transform: translate3d(0, var(--hero-shift), 0) scale(1.06);
   transform-origin: center;
-  transition: transform 140ms linear;
+  backface-visibility: hidden;
+  will-change: transform;
   z-index: -2;
 }
 
@@ -2298,16 +2299,17 @@ footer {
 
 body.js-motion [data-reveal="section"] {
   opacity: 0;
-  transform: translateY(18px);
+  transform: translate3d(0, 18px, 0);
   transition:
     opacity 560ms cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0ms),
     transform 560ms cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0ms);
   will-change: opacity, transform;
+  backface-visibility: hidden;
 }
 
 body.js-motion [data-reveal="section"].is-visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: translate3d(0, 0, 0);
 }
 
 body.js-motion [data-reveal="section"].has-revealed {
@@ -2316,23 +2318,26 @@ body.js-motion [data-reveal="section"].has-revealed {
 
 body.js-motion [data-reveal="section"].has-revealed:not(.is-visible) {
   opacity: 0;
-  transform: translateY(8px);
+  transform: translate3d(0, 8px, 0);
 }
 
 body.js-motion .theme-card[data-reveal="theme"] {
   opacity: 0;
-  filter: blur(14px);
-  transform: translateY(36px) scale(0.96);
+  transform: translate3d(0, 34px, 0) scale(0.97);
   transition:
     opacity 760ms cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0ms),
-    transform 760ms cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0ms),
-    filter 760ms cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0ms);
+    transform 760ms cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+  backface-visibility: hidden;
 }
 
 body.js-motion .theme-card[data-reveal="theme"].is-visible {
   opacity: 1;
-  filter: blur(0);
-  transform: translateY(0) scale(1);
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
+body.js-motion [data-reveal].is-settled {
+  will-change: auto;
 }
 
 @media (max-width: 1040px) {
