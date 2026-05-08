@@ -33,9 +33,9 @@ description: Satellite-Derived Shorelines develops and evaluates shoreline segme
 
 ### CIBench: Does AI Understand Imaging? A Systematic Benchmark of Agentic AI for Computational Imaging Tasks
 folder: CIBench
-lead: Chuanjun Zheng
+lead: Ethan Chung
 pi: Huaijin Chen
-members: Ethan Chung
+members: Chuanjun Zheng
 short: We introduce CIBench, a benchmark for testing whether vision-language and agentic AI systems understand computational imaging physics, reconstruction, calibration, and image formation tasks.
 description: CIBench evaluates whether vision-language models and agentic AI systems can capture the physics and algorithms behind computational imaging. The benchmark covers inverse reconstruction, camera parameter estimation, image formation reasoning, and related tasks where semantic reasoning alone is not enough. By evaluating proprietary and open-source pipelines under varied prompting strategies, the project measures image quality, physical consistency, and robustness. The results reveal a gap between current general AI models and specialized methods, while providing a unified testbed for tracking progress in physically grounded imaging intelligence.
 ---
