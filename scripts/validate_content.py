@@ -24,7 +24,7 @@ def is_valid_url(value: str) -> bool:
 
 def validate_date(value: str) -> bool:
     try:
-        date.fromisoformat(value)
+        date.fromisoformat(value + "-01" if re.fullmatch(r"\d{4}-\d{2}", value) else value)
     except ValueError:
         return False
     return True
@@ -74,7 +74,7 @@ def validate_news(path: Path) -> list[str]:
             date_text, title = [part.strip() for part in payload.split("|", 1)]
             if not validate_date(date_text):
                 errors.append(
-                    f"{path.name}:{lineno}: '{date_text}' is not a valid date. Use YYYY-MM-DD in the heading."
+                    f"{path.name}:{lineno}: '{date_text}' is not a valid date. Use YYYY-MM or YYYY-MM-DD in the heading."
                 )
             if not title:
                 errors.append(f"{path.name}:{lineno}: news title cannot be empty.")

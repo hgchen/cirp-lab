@@ -18,6 +18,7 @@ DIST_DIR = ROOT_DIR / "dist"
 BUILD_SCRIPT = ROOT_DIR / "scripts" / "build_static_site.sh"
 WATCH_DIRS = [
     ROOT_DIR / "images",
+    ROOT_DIR / "fonts",
 ]
 WATCH_FILES = [
     ROOT_DIR / "index.html",
@@ -26,7 +27,9 @@ WATCH_FILES = [
     ROOT_DIR / "projects.md",
     ROOT_DIR / "news.md",
     ROOT_DIR / "publications.bib",
-    ROOT_DIR / "README.md",
+    ROOT_DIR / "gallery.json",
+    ROOT_DIR / "contact.html",
+    ROOT_DIR / "scripts" / "render_site.py",
     BUILD_SCRIPT,
     ROOT_DIR / "scripts" / "validate_content.py",
 ]

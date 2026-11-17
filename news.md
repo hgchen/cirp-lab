@@ -1,5 +1,19 @@
 # News
 
+## 2026-11-12 | CIRP and UH Mānoa at CoRL in Austin
+CoRL selected CIRP PhD student Agastya Kalra and colleagues’ paper [3PTv2](https://openreview.net/forum?id=WNZ4Dr57JS), on zero-shot 6D object pose estimation for robotic manipulation, for a main-conference poster. Huaijin Chen co-authored the work.
+
+Two other UH Mānoa contributions appeared at the conference. Justin Fletcher’s [Telescopes are Optomechanical Robots](https://openreview.net/forum?id=RS2INStAhX) was also accepted as a main-conference poster. At the [UMI Arena workshop](https://umi-arena.airoa.io/accepted), Yosub Shin, Yuan Liu and Igor Molybog had a paper poster on head-camera glove tracking (P09) and a hands-on [YAM-UMI](https://github.com/YosubShin/yam-umi) device exhibit (D10).
+---
+
+## 2026-07 | USDA APHIS supports plant pathogen risk assessment
+Huaijin Chen is co-PI on a $154,517 USDA APHIS project to develop a machine learning decision-support tool for phytopathogen risk assessments.
+---
+
+## 2026-06 | Minderoo Foundation supports AI-based fish measurement
+The Minderoo Foundation awarded $153,311 for an app that measures fish and reconstructs them in 3D for fisheries and ecosystem monitoring. Huaijin Chen leads the project.
+---
+
 ## 2026-03-18 | CIRP Lab Receiving a $50K Gift from Google for Research in 3D Vision for Robotics
 CIRP Lab has received a **2026 research gift from Google** to support our work on **3D vision for robotics**.
 This support will help advance our research on visual perception for robots, including methods for **novel sensors**, **3D scene understanding**, **robotic manipulation**, and **real-world autonomy**.
