@@ -81,10 +81,12 @@ def news_records():
     return sorted(items, key=lambda row: row[0], reverse=True)
 
 
-def display_date(stamp):
+def news_time(stamp):
     full = len(stamp) == 10
     parsed = date.fromisoformat(stamp if full else stamp + "-01")
-    return parsed.strftime("%b %d, %Y" if full else "%b %Y").replace(" 0", " ")
+    label = parsed.strftime("%b %d, %Y" if full else "%b %Y").replace(" 0", " ")
+    quarter = (parsed.month - 1) // 3 + 1
+    return f'<time datetime="{stamp}" data-quarter="{quarter}">{label}</time>'
 
 
 def bibliography():
@@ -259,7 +261,7 @@ def home(projects, items, pubs):
         content += f'<div><h3>{link("research/#" + slug(theme), theme)}</h3><p>{description}</p></div>'
     content += '</div></section><section class="section">' + heading("News", "news/", "All news →")
     for stamp, title, _ in items[:3]:
-        content += f'<div class="news-row"><time datetime="{stamp}">{display_date(stamp)}</time>{link("news/#" + news_anchor(stamp, title), title)}</div>'
+        content += f'<div class="news-row">{news_time(stamp)}{link("news/#" + news_anchor(stamp, title), title)}</div>'
     content += '</section><section class="section">' + heading("Recent publications", "publications/", "All publications →")
     content += "".join(publication(p) for p in pubs[:2]) + "</section>"
     partners = [
@@ -286,7 +288,7 @@ def main():
     people_page(people)
     content = page_head("News")
     for stamp, title, body in news:
-        content += (f'<article class="news-item" id="{news_anchor(stamp, title)}"><time datetime="{stamp}">{display_date(stamp)}</time>'
+        content += (f'<article class="news-item" id="{news_anchor(stamp, title)}">{news_time(stamp)}'
                     f'<h2>{escape(title)}</h2><div class="prose">{paragraphs(body)}</div></article>')
     page("news", "News", "News from CIRP Lab.", content)
     content = page_head("Publications") + '<p class="jump">' + link("../publications.bib", "Download BibTeX") + '</p>'

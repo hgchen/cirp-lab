@@ -62,7 +62,12 @@ figcaption {margin:8px 0 0}
 .two-col,.paper-extra {grid-template-columns:1fr 1fr;gap:clamp(24px,5vw,70px)}
 .two-col p,.prose p,.person p {margin-top:8px;color:var(--body)}
 .news-row {align-items:baseline;gap:22px;padding:13px 0;border-top:1px solid var(--line)}
-.news-row time,.news-item time {font-variant-numeric:tabular-nums;min-width:100px}
+time[data-quarter] {font-variant-numeric:tabular-nums;font-weight:550;white-space:nowrap}
+time[data-quarter="1"] {color:#605d78}
+time[data-quarter="2"] {color:#496958}
+time[data-quarter="3"] {color:#47677b}
+time[data-quarter="4"] {color:#845d43}
+.news-row time {min-width:100px}
 .news-row a {color:var(--ink);text-decoration:none}
 .foot {min-height:86px;border-top:1px solid var(--green);justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:.83rem}
 .foot-brand {font-size:21px}
