@@ -106,14 +106,11 @@ linkedin: https://www.linkedin.com/in/joelnicolow/
 bio: I am currently a graduate student researcher at the University of Hawai'i Manoa where I study computer science. My specific interests include data science, machine learning, and deep learning. I enjoy finding interdisciplinary applications for these interests. **Co-advised by [Charles Fletcher](https://www.linkedin.com/in/chip-fletcher-phd-29046825/).**
 ---
 
-## Masters
-
-### Ethan Chung
-role: MS Student
-affiliation: University of Hawaii at Manoa
-email: echung32@hawaii.edu
-bio: Ethan Chung is an MS student in Computer Science at the University of Hawaii at Manoa. His current work focuses on computational imaging VLM benchmarks and phase mask-based imaging.
+### Nykolas Rekasius
+role: PhD Student
 ---
+
+## Masters
 
 ### Riki MacMillan
 role: MS Student
@@ -122,26 +119,6 @@ image: images/members/riki.jpg
 email: rikimacm@hawaii.edu
 linkedin: https://www.linkedin.com/in/riki-macmillan/
 bio: Riki MacMillan is a Master's student in Computer Science at the University of Hawaii at Manoa. His research focuses on computer vision and robotics, with an emphasis on multi-drone systems for automated 3D reconstruction and environmental mapping. His work involves designing drone coordination systems, ground-station software, and computer vision pipelines for processing aerial imagery.
----
-
-### Sean Hiroki Flynn
-role: MS Student
-affiliation: University of Hawaii at Manoa
-image: images/members/sean.jpeg
-email: sflynn7@hawaii.edu
-website: https://seanhflynn.github.io/
-linkedin: https://www.linkedin.com/in/sean-hiroki-flynn/
-bio: I am a MS student in Computer Science at the University of Hawaii at Manoa. My research interests are in Generative AI, computer vision, and computational imaging. Currently working on a thorough comparison of 3D reconstruction methods.
----
-
-### Chayanika Devi
-role: MS Student
-affiliation: UH Medical School
-image: images/members/devi.jpeg
-email: cdevi@hawaii.edu
-scholar: https://scholar.google.co.in/citations?user=vDE7u0oAAAAJ&hl=en
-linkedin: https://www.linkedin.com/in/chayanikadevi7983/
-bio: I am a data science professional with a strong focus on advancing surgical precision through cutting-edge neuronavigation technology. My work bridges neuroscience, medical technology, and data science to enhance outcomes in neurosurgical procedures through real-time neuroimaging and machine learning. **Co-advised by [Thomas Noh](https://www.linkedin.com/in/thomas-noh-a090b798/).**
 ---
 
 ## Undergrads
@@ -184,15 +161,6 @@ linkedin: https://www.linkedin.com/in/lucas-horsman-b9b09523a/
 bio: Lucas Horsman is an undergraduate at UH Manoa interested in programming, robotics, and interactive systems. He contributes software and robotics work to the lab's Farm Robotics Challenge teams.
 ---
 
-### Wilson Huynh
-role: Undergraduate Researcher
-affiliation: University of Hawai'i at Manoa
-tags: Information and Computer Sciences | FRC 2025 | FRC 2026
-website: https://www.wilsonhuynh.com/
-linkedin: https://www.linkedin.com/in/wilsonh22/
-bio: Wilson Huynh is an undergraduate at UH Manoa contributing design and prototyping work to the lab's robotics projects. He has worked across product design, web experiences, and field robotics.
----
-
 ### Zadon Padello
 role: Undergraduate Researcher
 affiliation: University of Hawai'i at Manoa
@@ -208,7 +176,42 @@ linkedin: https://www.linkedin.com/in/hi-tylermak/
 bio: Tyler Mak is an undergraduate at UH Manoa contributing to the lab's robotics and perception projects, including the Farm Robotics Challenge teams.
 ---
 
+## Visiting Students
+
+### Jingyi Fang
+role: Visiting Undergraduate Student
+---
+
 ## Alumni
+
+### Ethan Chung
+role: MS alumnus
+placement: Instructor, University of Hawaiʻi at Mānoa
+affiliation: University of Hawaii at Manoa
+email: echung32@hawaii.edu
+bio: Ethan worked on computational imaging benchmarks and phase-mask imaging.
+---
+
+### Sean Hiroki Flynn
+role: MS alumnus
+placement: Image Processing Engineer, Okawa Screw Manufacturing, Tokyo
+affiliation: University of Hawaii at Manoa
+image: images/members/sean.jpeg
+email: sflynn7@hawaii.edu
+website: https://seanhflynn.github.io/
+linkedin: https://www.linkedin.com/in/sean-hiroki-flynn/
+bio: Sean studied 3D reconstruction methods and computational imaging.
+---
+
+### Wilson Huynh
+role: Undergraduate alumnus
+placement: Raytheon Technologies (RTX)
+affiliation: University of Hawai'i at Manoa
+tags: Information and Computer Sciences | FRC 2025 | FRC 2026
+website: https://www.wilsonhuynh.com/
+linkedin: https://www.linkedin.com/in/wilsonh22/
+bio: Wilson contributed design and prototyping work to field robotics projects.
+---
 
 ### Hok Wai Chan
 role: MS Student, 2025
