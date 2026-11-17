@@ -18,6 +18,7 @@ DIST_DIR = ROOT_DIR / "dist"
 BUILD_SCRIPT = ROOT_DIR / "scripts" / "build_static_site.sh"
 WATCH_DIRS = [
     ROOT_DIR / "images",
+    ROOT_DIR / "fonts",
 ]
 WATCH_FILES = [
     ROOT_DIR / "index.html",

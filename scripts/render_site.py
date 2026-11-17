@@ -188,12 +188,19 @@ def member(person):
     avatar = (f'<img class="person-face" src="../{escape(img)}" alt="" loading="lazy">' if img
               else '<span class="initials" aria-hidden="true">' + escape("".join(word[0] for word in name.split()[:2])) + "</span>")
     sub = escape(person.get("placement", person.get("role", "")))
-    fields = [("website", "Website"), ("scholar", "Scholar"), ("github", "GitHub"), ("linkedin", "LinkedIn"), ("cv", "CV"), ("email", "Email")]
-    links = [link(("mailto:" if k == "email" else "") + person[k], label) for k, label in fields if person.get(k)]
+    fields = [("website", "Website"), ("scholar", "Google Scholar"), ("github", "GitHub"), ("linkedin", "LinkedIn"), ("cv", "CV"), ("email", "Email")]
+    links = []
+    for key, label in fields:
+        if not person.get(key):
+            continue
+        href = ("mailto:" if key == "email" else "") + person[key]
+        links.append(f'<a href="{escape(href)}" aria-label="{escape(label)} · {escape(name)}">'
+                     f'<svg aria-hidden="true" width="21" height="21"><use href="../images/profile-links.svg#{key}"/></svg>'
+                     f'<span aria-hidden="true">{escape(label)}</span></a>')
     profile = [v for v in [person.get("bio"), person.get("affiliation"), person.get("tags", "").replace(" | ", " · ")] if v]
     more = '<details><summary>Profile</summary>' + "".join(f"<p>{inline(v)}</p>" for v in profile) + "</details>" if profile else ""
     return (f'<article class="person" id="{slug(name)}"><div class="person-top">{avatar}<div><h3>{escape(name)}</h3>'
-            f'<div class="metadata">{sub}</div></div></div><div class="links">{"".join(links)}</div>{more}</article>')
+            f'<div class="metadata">{sub}</div></div></div><div class="profile-links">{"".join(links)}</div>{more}</article>')
 
 
 def people_page(groups):
@@ -240,7 +247,7 @@ def news_anchor(stamp, title):
 
 def home(projects, items, pubs):
     hero = f'''<section class="hero"><div class="hero-copy"><h1>{LAB}</h1>
-    <p>We build cameras and tactile sensors for robots, and study how AI can recover shape, light and contact from their measurements.</p>
+    <p class="mission">We combine <em>computational imaging</em> and <em>physics-informed AI</em> to study how robots sense the physical world. Our work ranges from estimating an object’s 3D pose to measuring contact forces with polarized light.</p>
     <p class="byline">Led by {link("people/#huaijin-chen", "Huaijin Chen")} at the University of Hawaiʻi at Mānoa.</p></div>
     <figure class="hero-photo"><img src="images/gallery/palm_capture.jpg" alt="Two field team members observing palms in Hawaiʻi" width="640" height="360">
     <figcaption>Fieldwork in Hawaiʻi · <a href="research/frc2026/">Palm robotics project</a></figcaption></figure></section>'''
@@ -255,12 +262,21 @@ def home(projects, items, pubs):
         content += f'<div class="news-row"><time datetime="{stamp}">{display_date(stamp)}</time>{link("news/#" + news_anchor(stamp, title), title)}</div>'
     content += '</section><section class="section">' + heading("Recent publications", "publications/", "All publications →")
     content += "".join(publication(p) for p in pubs[:2]) + "</section>"
-    partners = [("National Science Foundation", "https://www.nsf.gov/"), ("NVIDIA", "https://www.nvidia.com/"),
-                ("Google", "https://www.google.com/"), ("Hawaiʻi Community Foundation", "https://www.hawaiicommunityfoundation.org/"),
-                ("Minderoo Foundation", "https://www.minderoo.org/"), ("USDA APHIS", "https://www.aphis.usda.gov/")]
-    content += '<section class="section">' + heading("Sponsors and collaborators") + '<div class="partners">'
+    partners = [
+        ("National Science Foundation", "https://www.nsf.gov/", "nsf_logo.png"),
+        ("NVIDIA", "https://www.nvidia.com/", "nvidia_logo.png"),
+        ("Google", "https://www.google.com/", "google.png"),
+        ("Hawaiʻi Community Foundation", "https://www.hawaiicommunityfoundation.org/", "hcf_log.jpg"),
+        ("Minderoo Foundation", "https://www.minderoo.org/", "minderoo.svg"),
+        ("USDA APHIS", "https://www.aphis.usda.gov/", "usda.jpg"),
+    ]
+    content += '<section class="section" id="sponsors">' + heading("Sponsors and collaborators") + '<ul class="partners">'
+    for name, url, image in partners:
+        agency = '<span aria-hidden="true">APHIS</span>' if name == "USDA APHIS" else ""
+        content += (f'<li><a href="{url}" aria-label="{escape(name)}">'
+                    f'<img src="images/{image}" alt="{escape(name)}" loading="lazy">{agency}</a></li>')
     page("", LAB, "Computational imaging, tactile sensing and physics-informed AI at the University of Hawaiʻi at Mānoa.",
-         content + "".join(link(url, label) for label, url in partners) + "</div></section>")
+         content + "</ul></section>")
 
 
 def main():

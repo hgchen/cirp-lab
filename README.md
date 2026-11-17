@@ -13,6 +13,8 @@ Run `bash scripts/dev_static_site.sh --port 7017` and open [localhost:7017](http
 - Edit `news.md` for dated items. Use YYYY-MM when the source gives only the month, or YYYY-MM-DD for a specific day.
 - Add public bibliographic records to `publications.bib`. Keep private manuscripts outside the repository. Only place figures and other assets intended for the site in `images/`.
 
+The homepage uses the original lab sponsor artwork plus the header marks from the [Minderoo Foundation](https://www.minderoo.org/) and [USDA APHIS](https://www.aphis.usda.gov/). Member resource icons are in `images/profile-links.svg`. The research statement uses locally hosted Spectral Semibold Italic, licensed in `fonts/OFL-Spectral.txt`.
+
 ## Layout and deployment
 
 The shared shell is `index.html`. The page renderer is `scripts/render_site.py`, the contact page body is `contact.html`, and presentation is in `styles.css`. GitHub Actions builds and publishes `dist/` when `main` changes. Netlify uses the same build command.

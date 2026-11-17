@@ -1,3 +1,10 @@
+@font-face {
+  font-family: Spectral;
+  src: url("fonts/spectral-latin-600-italic.woff2") format("woff2");
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+}
 :root {
   color-scheme: light;
   --paper: #faf9f5;
@@ -36,6 +43,8 @@ h3 {font-size:clamp(23px,2.2vw,32px);letter-spacing:-.03em}
 .hero-copy p,.intro {font-size:clamp(17px,1.45vw,21px);line-height:1.5;color:var(--body);max-width:66ch}
 .hero-copy p {margin-top:20px;max-width:46ch}
 .byline,figcaption,.metadata,.label,time,.crumb,.links,.resources {font-size:.86rem;line-height:1.46;color:var(--body)}
+.hero-copy .mission {max-width:49ch;text-wrap:pretty}
+.mission em {font:italic 600 1.13em/1 Spectral,Georgia,serif;color:var(--green)}
 .hero .byline {margin-top:16px;font-size:.9rem;max-width:none}
 .hero-photo img {width:100%;height:clamp(220px,24vw,348px);object-fit:cover;object-position:50% 55%}
 figcaption {margin:8px 0 0}
@@ -76,7 +85,13 @@ figcaption {margin:8px 0 0}
 .person-face,.initials {width:62px;height:71px;object-fit:cover;background:var(--pale);flex:none}
 .initials {display:grid;place-items:center;color:var(--green);font:23px var(--serif)}
 .person h3 {font-size:24px}
-.person .links {margin:8px 0}
+.profile-links {display:flex;align-items:center;flex-wrap:wrap;gap:2px;margin:6px 0}
+.profile-links:empty {display:none}
+.profile-links a {position:relative;display:grid;place-items:center;width:42px;height:44px;color:var(--green);border-radius:5px}
+.profile-links a:hover,.profile-links a:focus-visible {background:var(--pale)}
+.profile-links span {display:none;position:absolute;bottom:100%;left:50%;transform:translateX(-50%);z-index:1;white-space:nowrap;padding:3px 7px;border-radius:3px;background:var(--ink);color:white;font-size:.77rem}
+.profile-links a:focus-visible span {display:block}
+@media (hover:hover) {.profile-links a:hover span {display:block}}
 .person details {font-size:.9rem}
 .person summary {color:var(--green);cursor:pointer;width:fit-content}
 .people {grid-template-columns:repeat(3,minmax(0,1fr));gap:25px}
@@ -91,8 +106,19 @@ figcaption {margin:8px 0 0}
 .citation summary {width:fit-content;color:var(--green);cursor:pointer}
 .citation pre {white-space:pre-wrap;overflow-wrap:anywhere;background:var(--pale);padding:12px}
 .prose {max-width:80ch}
-.partners {display:flex;flex-wrap:wrap;gap:12px 28px;align-items:center}
-.partners a {color:var(--body)}
+.partners {list-style:none;margin:0;padding:12px clamp(10px,2vw,30px);display:grid;grid-template-columns:repeat(6,minmax(0,1fr));align-items:center;gap:12px;background:#fff}
+.partners li {min-width:0}
+.partners a {display:flex;align-items:center;justify-content:center;gap:7px;min-height:82px;text-decoration:none}
+.partners img {max-width:94%;width:136px;height:56px;object-fit:contain}
+.partners img[src$="nsf_logo.png"] {width:60px;height:60px}
+.partners img[src$="usda.jpg"] {width:50px;height:auto}
+.partners span {font-weight:650;color:#183850;letter-spacing:.025em}
+.visit {display:grid;grid-template-columns:minmax(240px,.75fr) minmax(0,1.65fr);gap:clamp(24px,5vw,70px);align-items:start}
+.visit-info address,.visit-info p {font-style:normal;color:var(--body);margin-top:10px}
+.visit-info h3 {margin-top:22px}
+.visit-map iframe {display:block;width:100%;height:clamp(270px,25vw,350px);border:1px solid var(--line);background:var(--pale)}
+.visit-map figcaption {display:flex;gap:20px}
+@media (max-width:900px) {.partners {grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media (max-width:800px) {
   .people {grid-template-columns:repeat(2,minmax(0,1fr))}
   .mast {min-height:72px}
@@ -104,7 +130,9 @@ figcaption {margin:8px 0 0}
   .brand img {width:34px;height:34px}
   nav {margin-top:8px;gap:4px 16px}
   nav a {font-size:.85rem;padding:4px 0}
-  .hero,.two-col,.paper-extra,.feature-grid,.catalog {grid-template-columns:1fr}
+  .hero,.two-col,.paper-extra,.feature-grid,.catalog,.visit {grid-template-columns:1fr}
+  .partners {grid-template-columns:repeat(2,minmax(0,1fr));gap:2px 18px}
+  .partners a {min-height:72px}
   .hero {padding:24px 0;gap:20px}
   .hero h1 {font-size:clamp(40px,10vw,58px);max-width:18ch}
   .hero-copy p {margin-top:12px}.hero .byline {margin-top:11px}

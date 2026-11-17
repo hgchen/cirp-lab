@@ -23,6 +23,7 @@ with tempfile.TemporaryDirectory(prefix="cirp-build-") as temporary:
     stage = Path(temporary)
     for name in ("styles.css", "members.md", "projects.md", "news.md", "publications.bib"):
         shutil.copy2(root / name, stage / name)
+    shutil.copytree(root / "fonts", stage / "fonts")
     shutil.copytree(root / "images", stage / "images", ignore=shutil.ignore_patterns(".DS_Store"))
     (stage / ".nojekyll").touch()
     # Preserve the published manifest URLs for consumers of the previous site.
