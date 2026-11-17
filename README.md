@@ -117,3 +117,7 @@ If the format is invalid, the build stops with an error.
 
 - Default local port is `7000`
 - Saving `index.html`, `styles.css`, Markdown content, or files under `images/` triggers rebuild in dev mode
+
+## Maintained design reference
+
+Use `styles.css` as the implemented design source: soft gray/white surfaces, dark text, blue interaction accents, translucent navigation/cards and responsive content width. Keep visible focus, contrast and reduced-motion behavior intact when editing. The earlier generic Apple design essay described a different visual system (including no gradients), so it is no longer a specification for this site. Content Markdown and LICENSE are website inputs/legal material, not redundant project notes.
