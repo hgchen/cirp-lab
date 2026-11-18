@@ -52,11 +52,32 @@ description: The team is developing a palm-climbing mechanism and an end effecto
 ### FishEye: Robust 3D Fish Measurement from Single Image or Video
 folder: FishEye
 name: FishEye
+related: FishPod
 lead: Ethan Chung
 pi: Huaijin Chen
 members: Vincent Chan
 short: We develop a low-cost computer vision pipeline for estimating fish length and volume from single images or videos using detection, segmentation, depth estimation, and 3D reconstruction.
 description: FishEye is a scalable pipeline for automatic 3D fish morphometry using consumer-grade devices such as smartphone cameras. The system combines deep learning based detection and segmentation, transformer-based camera calibration, depth estimation, and 3D reconstruction from single or multiple images. It then derives geometric length measurements from reconstructed models and can use ping pong ball detection as an optional fiducial marker for scale calibration. The goal is to provide practical, field-deployable fish measurement tools for sustainable fisheries, ecological research, and aquaculture monitoring.
+---
+
+### FishPod: Underwater Stereo Vision for Fish Measurement
+folder: FishPod
+name: FishPod
+related: FishEye
+pi: Huaijin Chen
+members: Feimei Chen | Riki MacMillan | Munir
+short: FishPod mounts a stereo camera on an underwater remotely operated vehicle to estimate fish length from paired video frames.
+description: The system detects and tracks fish, segments their outlines, and matches points along their body axes between the two camera views. Stereo triangulation recovers the endpoints in 3D and yields an estimate of body length.
+cover: stereo-pipeline.webp
+preview: images/projects/FishPod/03-field-deployment.webp
+caption: The FishPod workflow, from stereo video capture on an underwater vehicle to a 3D estimate of fish length.
+gallery_title: Hardware, deployment and measurements
+gallery_caption_01_method_comparison: Fish measurement approaches and the computing setups they use.
+gallery_caption_02_hardware_design: The stereo camera and Raspberry Pi in a sealed housing, shown mounted on the vehicle.
+gallery_caption_03_field_deployment: Preparing the vehicle and lowering it into the water during field deployment.
+gallery_caption_04_recording_environments: Example frames from four recording environments.
+gallery_caption_05_field_captures: The recording setups alongside example left and right stereo views.
+gallery_caption_06_length_estimates: Four examples with estimated fish depth and body length.
 ---
 
 ### Robot-Tablet Multimodal Behavioral Phenotyping for Cognitive Concern in Older Adults

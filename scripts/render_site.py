@@ -183,6 +183,7 @@ def video_player(src, poster, label):
 def research(projects, people):
     cards = []
     directory = {person["title"] for members in people.values() for person in members}
+    projects_by_folder = {project["folder"]: project for group in projects.values() for project in group}
     for theme, group in projects.items():
         cards.append(f'<section class="section" id="{slug(theme)}">{heading(theme)}<div class="catalog">')
         for project in group:
@@ -201,6 +202,9 @@ def research(projects, people):
             desc = f'<section class="section"><div class="paper-extra"><div><h2>Project overview</h2><p>{escape(project["description"])}</p>'
             if project.get("approach"):
                 desc += f'<h3>Method</h3><p>{escape(project["approach"])}</p>'
+            if related := projects_by_folder.get(project.get("related")):
+                name = related.get("name", related["title"])
+                desc += f'<p>{link("../../" + project_path(related), "Related project · " + name)}</p>'
             credits = []
             for label, field in [("Project lead", "lead"), ("Principal investigator", "pi"), ("Contributors", "members")]:
                 names = [n.strip() for n in project.get(field, "").split("|") if n.strip()]
@@ -213,9 +217,18 @@ def research(projects, people):
             if project.get("detail"):
                 body += figure("../../" + folder + project["detail"], project["detail_caption"])
             elif len(images) > 1:
-                body += '<div class="gallery">' + "".join(
-                    figure("../../" + folder + image, Path(image).stem.replace("_", " ").replace("-", " "))
-                    for image in images if image != cover) + "</div>"
+                gallery = []
+                for image in images:
+                    if image == cover:
+                        continue
+                    stem = Path(image).stem
+                    caption_key = "gallery_caption_" + slug(stem).replace("-", "_")
+                    caption = project.get(caption_key, stem.replace("_", " ").replace("-", " "))
+                    gallery.append(figure("../../" + folder + image, caption))
+                grid = '<div class="gallery">' + "".join(gallery) + "</div>"
+                if gallery_title := project.get("gallery_title"):
+                    grid = '<section class="section">' + heading(gallery_title) + grid + "</section>"
+                body += grid
             if project.get("field_photo"):
                 body += figure("../../" + project["field_photo"], project["field_caption"])
             page(project_path(project), title, project["short"], body)
