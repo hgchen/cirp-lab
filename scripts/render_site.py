@@ -15,6 +15,11 @@ NAV = {"": "Home", "research": "Research", "publications": "Publications",
        "people": "People", "news": "News", "contact": "Contact"}
 GROUP_LABELS = {"PhD": "PhD students", "Masters": "Master’s students",
                 "Undergrads": "Undergraduates", "Visiting Students": "Visiting students"}
+WORK_CAPTIONS = {
+    "kalra2026_3ptv2": "3PTv2 pose estimates on a YCB-Video test frame.",
+    "kalra2026_3pt": "3PT detects, segments and estimates the pose of metal parts.",
+    "motsoehli2025simulating": "A simulated lens flare in a dashcam recording.",
+}
 LAB = "Computational Imaging and Robotic Perception Lab"
 LEGACY = """<script>
 const routes = {members:"people",projects:"research",publications:"publications",news:"news",contact:"contact"};
@@ -190,11 +195,17 @@ def research(projects, people):
          page_head("Research") + jump + "".join(cards))
 
 
+def portrait(person, root, compact=False):
+    image = person.get("thumbnail") if compact else None
+    image = image or person.get("image")
+    if image:
+        return f'<img class="person-face" src="{root}{escape(image)}" alt="" loading="lazy" decoding="async">'
+    initials = "".join(word[0] for word in person["title"].split()[:2])
+    return f'<span class="initials" aria-hidden="true">{escape(initials)}</span>'
+
+
 def member(person):
     name = person["title"]
-    img = person.get("image")
-    avatar = (f'<img class="person-face" src="../{escape(img)}" alt="" loading="lazy">' if img
-              else '<span class="initials" aria-hidden="true">' + escape("".join(word[0] for word in name.split()[:2])) + "</span>")
     sub = escape(person.get("placement", person.get("role", "")))
     fields = [("website", "Website"), ("scholar", "Google Scholar"), ("github", "GitHub"), ("linkedin", "LinkedIn"), ("cv", "CV"), ("email", "Email")]
     links = []
@@ -207,7 +218,7 @@ def member(person):
                      f'<span aria-hidden="true">{escape(label)}</span></a>')
     profile = [v for v in [person.get("bio"), person.get("affiliation"), person.get("tags", "").replace(" | ", " · ")] if v]
     more = '<details><summary>Profile</summary>' + "".join(f"<p>{inline(v)}</p>" for v in profile) + "</details>" if profile else ""
-    return (f'<article class="person" id="{slug(name)}"><div class="person-top">{avatar}<div><h3>{escape(name)}</h3>'
+    return (f'<article class="person" id="{slug(name)}"><div class="person-top">{portrait(person, "../")}<div><h3>{escape(name)}</h3>'
             f'<div class="metadata">{sub}</div></div></div><div class="profile-links">{"".join(links)}</div>{more}</article>')
 
 
@@ -232,7 +243,7 @@ def publication(item):
     title = link(item["website"], item["title"]) if item.get("website") else escape(item["title"])
     venue = item.get("booktitle") or item.get("journal") or item.get("publisher") or item.get("abbr", "")
     links = []
-    for k, label in [("pdf", "PDF"), ("doi", "DOI"), ("arxiv", "arXiv"), ("code", "Code"), ("slides", "Slides")]:
+    for k, label in [("pdf", "PDF"), ("doi", "DOI"), ("arxiv", "arXiv"), ("code", "Code"), ("slides", "Slides"), ("results", "Benchmark results")]:
         if k in item:
             url = item[k]
             if k == "arxiv" and not url.startswith("http"):
@@ -266,17 +277,23 @@ def home(projects, people, items, pubs):
     <div class="hero-links">{link("#research-directions", "Explore our research")}{link("contact/#prospective-students", "Join the lab")}</div></section>'''
     content += '<section class="section" id="research-directions">' + home_heading("Research", "Questions we study", "research/", "All projects")
     content += '<div class="catalog">' + "".join(card(group[0], "./", theme) for theme, group in projects.items()) + '</div></section>'
-    content += '<section class="section">' + home_heading("People", "The group", "people/", "People & alumni") + '<dl class="roster">'
+    content += '<section class="section" id="the-group">' + home_heading("People", "The group", "people/", "People & alumni") + '<dl class="roster">'
     for group, members in people.items():
         if group != "Alumni":
-            names = [link("people/#" + slug(m["title"]), m["title"]) for m in members]
-            content += f'<div><dt>{escape(GROUP_LABELS.get(group, group))}</dt><dd>{", ".join(names)}</dd></div>'
-    content += '</dl></section><section class="section">' + home_heading("Publications", "Recent papers", "publications/", "All publications")
-    for item in pubs[:3]:
+            names = [f'<li><a href="people/#{slug(m["title"])}">{portrait(m, "", compact=True)}<span>{escape(m["title"])}</span></a></li>'
+                     for m in members]
+            content += f'<div><dt>{escape(GROUP_LABELS.get(group, group))}</dt><dd><ul>{"".join(names)}</ul></dd></div>'
+    content += '</dl></section><section class="section" id="selected-work">' + home_heading("Publications", "Selected work", "publications/", "All publications") + '<div class="work-grid">'
+    for item in pubs:
+        key = item["key"]
+        if key not in WORK_CAPTIONS:
+            continue
         venue = item.get("abbr") or item.get("booktitle") or item.get("journal", "")
-        content += (f'<div class="paper-row"><span class="metadata">{escape(venue)} · {escape(item["year"])}</span>'
-                    + link("publications/#" + item["key"], item["title"]) + '</div>')
-    content += '</section><section class="section">' + home_heading("News", "From the lab", "news/", "All news")
+        content += (f'<article><a class="work-link" href="publications/#{escape(key)}">'
+                    f'<img src="images/previews/{escape(key)}.webp" alt="{escape(WORK_CAPTIONS[key])}" loading="lazy" decoding="async">'
+                    f'<span class="metadata">{escape(venue)} · {escape(item["year"])}</span>'
+                    f'<h3>{escape(item["title"])}</h3></a></article>')
+    content += '</div></section><section class="section">' + home_heading("News", "From the lab", "news/", "All news")
     for stamp, title, _ in items[:3]:
         content += f'<div class="news-row">{news_time(stamp)}{link("news/#" + news_anchor(stamp, title), title)}</div>'
     partners = [

@@ -6,6 +6,7 @@
 role: Assistant Professor of Computer Science
 affiliation: University of Hawaii at Manoa
 image: images/members/huaijin-chen.jpg
+thumbnail: images/previews/huaijin-chen.webp
 email: huaijin@hawaii.edu
 website: https://hgchen.com
 scholar: https://scholar.google.com/citations?user=6E9elWUAAAAJ
@@ -59,6 +60,7 @@ role: PhD Student
 affiliation: University of Hawaii at Manoa
 tags: Google
 image: images/members/agastya-kalra.png
+thumbnail: images/previews/agastya-kalra.webp
 email: agastya@hawaii.edu
 website: https://kalraa.github.io/
 scholar: https://scholar.google.ca/citations?user=JjAcoqoAAAAJ&hl=en
