@@ -195,6 +195,14 @@ def research(projects, people):
     jump = '<div class="jump">' + "".join(link("#" + slug(theme), theme) for theme in projects) + "</div>"
     page("research", "Research", "Research projects in computational imaging, robotic perception and physics-informed AI.",
          page_head("Research") + jump + "".join(cards))
+    # Keep the retired project URL useful for visitors following old links.
+    retired = DIST / "research/sfm-comparison"
+    retired.mkdir(exist_ok=True)
+    (retired / "index.html").write_text('''<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex">
+<meta http-equiv="refresh" content="0;url=../"><link rel="canonical" href="../">
+<title>Research · CIRP Lab</title></head><body><a href="../">Explore current research projects</a></body></html>
+''')
 
 
 def portrait(person, root, compact=False):
