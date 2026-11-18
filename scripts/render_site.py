@@ -120,9 +120,9 @@ def page(route, title, description, body):
     (folder / "index.html").write_text(output)
 
 
-def page_head(title, intro="", crumb=""):
+def page_head(title, intro="", crumb="", action=""):
     return (f'<header class="page-head">{crumb}<h1>{escape(title)}</h1>' +
-            (f'<p class="intro">{escape(intro)}</p>' if intro else "") + "</header>")
+            (f'<p class="intro">{escape(intro)}</p>' if intro else "") + action + "</header>")
 
 
 def heading(title, href="", action=""):
@@ -131,6 +131,15 @@ def heading(title, href="", action=""):
 
 def project_path(project):
     return "research/" + project.get("slug", slug(project["folder"])) + "/"
+
+
+def project_website(project):
+    if not project.get("website"):
+        return ""
+    name = escape(project.get("name", project["title"]))
+    return (f'<a class="project-site" href="{escape(project["website"])}" '
+            f'aria-label="Learn more about {name} on its project website">'
+            'Learn more <span aria-hidden="true">↗</span></a>')
 
 
 def project_media(project):
@@ -168,7 +177,7 @@ def research(projects, people):
             folder, cover, images = project_media(project)
             title = project["title"]
             crumb = '<p class="crumb">' + link("../", "Research") + " / " + escape(theme) + "</p>"
-            body = page_head(title, project["short"], crumb)
+            body = page_head(title, project["short"], crumb, project_website(project))
             if project.get("preview_caption"):
                 body += figure("../../" + project["preview"], project["preview_caption"])
             body += figure("../../" + folder + cover, project.get("caption", project.get("name", title)))

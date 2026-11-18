@@ -68,6 +68,7 @@ description: Robot-Tablet Multimodal Behavioral Phenotyping for Cognitive Concer
 folder: CIBench
 name: ImagingBench
 slug: imagingbench
+website: https://cirplab-fourier.taildc92d1.ts.net/
 lead: Ethan Chung
 pi: Huaijin Chen
 members: Chuanjun Zheng | Jasper Tan | Jingxi Li
