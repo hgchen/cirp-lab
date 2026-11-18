@@ -6,11 +6,11 @@ CoRL selected CIRP PhD student Agastya Kalra and colleagues’ paper [3PTv2](htt
 Two other UH Mānoa contributions appeared at the conference. Justin Fletcher’s [Telescopes are Optomechanical Robots](https://openreview.net/forum?id=RS2INStAhX) was also accepted as a main-conference poster. At the [UMI Arena workshop](https://umi-arena.airoa.io/accepted), Yosub Shin, Yuan Liu and Igor Molybog had a paper poster on head-camera glove tracking (P09) and a hands-on [YAM-UMI](https://github.com/YosubShin/yam-umi) device exhibit (D10).
 ---
 
-## 2026-07 | USDA APHIS supports plant pathogen risk assessment
+## 2026-07 | USDA APHIS supports plant pathogen risk assessment ($154,517)
 Huaijin Chen is co-PI on a $154,517 USDA APHIS project to develop a machine learning decision-support tool for phytopathogen risk assessments.
 ---
 
-## 2026-06 | Minderoo Foundation supports AI-based fish measurement
+## 2026-06 | Minderoo Foundation supports AI-based fish measurement ($153,311)
 The Minderoo Foundation awarded $153,311 for an app that measures fish and reconstructs them in 3D for fisheries and ecosystem monitoring. Huaijin Chen leads the project.
 ---
 

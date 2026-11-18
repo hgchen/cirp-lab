@@ -283,7 +283,8 @@ def publication(item):
 
 
 def news_anchor(stamp, title):
-    return stamp + "-" + slug(title)
+    # Keep existing news links stable when a funding amount is added to a headline.
+    return stamp + "-" + slug(re.sub(r" \(\$[\d,]+\)$", "", title))
 
 
 def home_heading(label, title, url="", action=""):
@@ -298,7 +299,7 @@ def home(projects, people, items, pubs):
     <p class="byline">Led by {link("people/#huaijin-chen", "Huaijin Chen")} at the University of Hawaiʻi at Mānoa.</p>
     <div class="hero-links">{link("#research-directions", "Explore our research")}{link("contact/#prospective-students", "Join the lab")}</div></section>'''
     content += '<section class="section" id="lab-news"><header class="home-heading"><span><img class="news-mark" src="images/cirp-mark.png" width="36" height="36" alt=""></span><h2>Lab news</h2>' + link("news/", "All news →") + '</header>'
-    for stamp, title, _ in items[:3]:
+    for stamp, title, _ in items[:5]:
         content += f'<div class="news-row">{news_time(stamp)}{link("news/#" + news_anchor(stamp, title), title)}</div>'
     content += '</section>'
     content += '<section class="section" id="selected-work">' + home_heading("Research", "Selected work", "research/", "All projects")
