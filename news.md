@@ -1,13 +1,17 @@
 # News
 
 ## 2026-11-12 | CIRP and UH Mānoa at CoRL in Austin
-CoRL selected CIRP PhD student Agastya Kalra and colleagues’ paper [3PTv2](https://openreview.net/forum?id=WNZ4Dr57JS), on zero-shot 6D object pose estimation for robotic manipulation, for a main-conference poster. Huaijin Chen co-authored the work.
+The Conference on Robot Learning (CoRL) selected CIRP PhD student Agastya Kalra and colleagues’ paper [3PTv2](https://openreview.net/forum?id=WNZ4Dr57JS), on zero-shot 6D object pose estimation for robotic manipulation, for a main-conference poster. Huaijin Chen co-authored the work.
 
 Two other UH Mānoa contributions appeared at the conference. Justin Fletcher’s [Telescopes are Optomechanical Robots](https://openreview.net/forum?id=RS2INStAhX) was also accepted as a main-conference poster. At the [UMI Arena workshop](https://umi-arena.airoa.io/accepted), Yosub Shin, Yuan Liu and Igor Molybog had a paper poster on head-camera glove tracking (P09) and a hands-on [YAM-UMI](https://github.com/YosubShin/yam-umi) device exhibit (D10).
 ---
 
 ## 2026-07 | USDA APHIS supports plant pathogen risk assessment ($154,517)
 Huaijin Chen is co-PI on a $154,517 USDA APHIS project to develop a machine learning decision-support tool for phytopathogen risk assessments.
+---
+
+## 2026-06-04 | Huaijin Chen gives a keynote at the CVPR 2026 UG2+ Workshop
+Huaijin Chen presented “Do AI Agents Understand Computational Imaging?” at the [8th UG2+ Workshop and Challenge](https://cvpr2026ug2challenge.github.io/program24.html) in Denver.
 ---
 
 ## 2026-06 | Minderoo Foundation supports AI-based fish measurement ($153,311)

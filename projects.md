@@ -76,7 +76,7 @@ short: ImagingBench tests what multimodal AI models have learned about image for
 description: Can an image model recover a scene when the sensor measurement looks nothing like a photograph? ImagingBench evaluates six models on tasks spanning optics, image processing, inverse reconstruction, computational sensing and calibration. Twenty of the 22 tasks produce images. Lens design and camera calibration produce text and are scored separately.
 approach: Inverse tasks ask a model to reconstruct an image using either an expert’s instructions or an image-specific plan written by a vision–language model. Five tasks also run in the forward direction, asking the model to simulate a sensor measurement from a clean image. Specialized methods outperform general-purpose models on lensless imaging and holography, where a plausible picture can still be an inaccurate reconstruction.
 question: What have multimodal AI models learned about image formation?
-preview: images/previews/imagingbench-expert.webp
+preview: images/previews/imagingbench-expert.png
 preview_caption: ImagingBench Expert protocol. Overall scores on the 0–100 scale are Gemini-3.1-Flash-Image 61.4, GPT-Image-2 57.3, FLUX.2-Pro 56.6, GPT-Image-1.5 50.2, Qwen-Image-Edit-2511 42.7 and HunyuanImage-3.0 26.5.
 summary: ImagingBench tests six models on 22 computational imaging tasks. Can they recover a scene from a lensless measurement, or simulate what a sensor records when given the scene?
 cover: benchmark.webp

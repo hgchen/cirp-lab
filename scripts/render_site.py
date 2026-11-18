@@ -300,7 +300,7 @@ def home(projects, people, items, pubs):
     Our work spans robotic perception and scientific discovery, from mapping contact forces with polarized light to tracking changes in materials with X-ray diffraction.</p>
     <p class="byline">Led by {link("people/#huaijin-chen", "Huaijin Chen")} at the University of Hawaiʻi at Mānoa.</p>
     <div class="hero-links">{link("#research-directions", "Explore our research")}{link("contact/#prospective-students", "Join the lab")}</div>
-    <img class="hero-logo" src="images/cirp-hero.webp" width="144" height="144" alt=""></section>'''
+    <img class="hero-logo" src="images/cirp-hero.webp" width="176" height="176" alt=""></section>'''
     content += '<section class="section" id="lab-news"><header class="home-heading"><span><img class="news-mark" src="images/cirp-mark.png" width="36" height="36" alt=""></span><h2>Lab news</h2>' + link("news/", "All news →") + '</header>'
     for stamp, title, _ in items[:5]:
         content += f'<div class="news-row">{news_time(stamp)}{link("news/#" + news_anchor(stamp, title), title)}</div>'
