@@ -26,6 +26,10 @@ detail_caption: Two cameras view the photoelastic cube through crossed polarizer
 ### Snapshot Hyperspectral Imaging with Diffractive Optical Elements
 folder: DOE-HSI
 name: Snapshot hyperspectral imaging
+cover: doe-otf-map.png
+caption: A diffractive optical element encodes the scene on a monochrome sensor. The diagram shows how the optical measurement and its simulation are used for spectral reconstruction.
+detail: doe-psf-grid.png
+detail_caption: Reconstructed spectral bands (left) and the corresponding ground-truth bands (right) for the same scene.
 lead: Chuanjun Zheng
 pi: Huaijin Chen
 members: Feimei Chen
