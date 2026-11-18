@@ -14,7 +14,7 @@ DIST = Path(sys.argv[1]) if __name__ == "__main__" and len(sys.argv) > 1 else RO
 SHELL = Template((ROOT / "index.html").read_text())
 STYLES_VERSION = sha256((ROOT / "styles.css").read_bytes()).hexdigest()[:12]
 NAV = {"": "Home", "research": "Research", "publications": "Publications",
-       "people": "People", "news": "News", "contact": "Contact"}
+       "people": "People", "news": "News", "outreach": "Outreach", "contact": "Contact"}
 GROUP_LABELS = {"PhD": "PhD students", "Masters": "Master’s students",
                 "Undergrads": "Undergraduates", "Visiting Students": "Visiting students"}
 WORK_CAPTIONS = {
@@ -394,6 +394,8 @@ def main():
         content += f'<section class="section pub-year" data-year="{escape(year)}">' + heading(year) + "".join(publication(p) for p in pubs if p["year"] == year) + "</section>"
     content += '<script src="search.js" defer></script>'
     page("publications", "Publications", "Publications by members of CIRP Lab.", content)
+    outreach = (ROOT / "outreach.html").read_text()
+    page("outreach", "Outreach", "Student robotics and community projects from CIRP Lab.", page_head("Outreach") + outreach)
     contact = (ROOT / "contact.html").read_text()
     page("contact", "Contact & join", "Visit CIRP Lab or learn how to join the group.", page_head("Contact & join") + contact)
     home(projects, people, news, pubs)

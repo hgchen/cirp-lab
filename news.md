@@ -96,8 +96,8 @@ Learn more at [bpc.opencv.org](https://bpc.opencv.org/) and [github.com/opencv/b
 Huaijin Chen gave an invited talk at the **Colorado School of Mines** on how visual sensing can drive productivity in farms and factory floors, highlighting work on multimodal imaging, the **CVPR 2025 Bin-Picking Workshop**, the **Farm Robotics Challenge**, and **PolarTact3D**.
 ---
 
-## 2025-05-13 | Congrats to my students for winning the $10,000 Grand Prize at the 2025 Farm Robotics Challenge!
-Congratulations to the lab's undergraduate team for winning the **$10,000 Grand Prize** at the [2025 Farm Robotics Challenge](https://www.hawaii.edu/news/2025/05/13/farm-robotics-challenge-2025-winner/).
+## 2025-05-13 | Team ʻĀina wins a $10,000 award at the 2025 Farm Robotics Challenge {#2025-05-13-congrats-to-my-students-for-winning-the-10-000-grand-prize-at-the-2025-farm-robotics-challenge}
+Congratulations to the undergraduate team for winning the **Excellence in Productivity (Air)** award at the [2025 Farm Robotics Challenge](https://www.hawaii.edu/news/2025/05/13/farm-robotics-challenge-2025-winner/).
 
 Their AI-powered robot and drone system, developed with **Dole Plantation**, automatically counts and sizes pineapples in the field.
 ---

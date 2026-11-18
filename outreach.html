@@ -1,0 +1,34 @@
+<article class="section outreach-feature" id="farm-robotics-challenge">
+  <div>
+    <h2>2025 Farm Robotics Challenge</h2>
+    <p>How do you count pineapples across a field and measure the size of each fruit? At Dole Plantation, Team ʻĀina used a drone to count pineapples from the air and a ground robot to build 3D views of individual fruit.</p>
+    <p>The UH Mānoa undergraduate team, advised by faculty led by Huaijin Chen, earned the $10,000 Excellence in Productivity (Air) award.</p>
+    <div class="hero-links">
+      <a href="https://www.hawaii.edu/news/2025/05/13/farm-robotics-challenge-2025-winner/">Read the UH News story</a>
+      <a href="https://www.youtube.com/watch?v=Dpz_9Qo64MM">Watch on YouTube</a>
+    </div>
+  </div>
+  <figure>
+    <a class="outreach-player" href="https://www.youtube.com/watch?v=Dpz_9Qo64MM" aria-label="Play the Farm Robotics Challenge video">
+      <img src="https://i.ytimg.com/vi/Dpz_9Qo64MM/maxresdefault.jpg" width="1280" height="720" alt="">
+      <span aria-hidden="true">▶ Play video</span>
+    </a>
+    <figcaption>Team ʻĀina in the pineapple fields. Video by UH Mānoa’s College of Tropical Agriculture and Human Resilience.</figcaption>
+  </figure>
+</article>
+<script>
+  const preview = document.querySelector(".outreach-player");
+  preview.addEventListener("click", event => {
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    event.preventDefault();
+    const player = document.createElement("iframe");
+    player.className = "outreach-player";
+    player.title = "Team ʻĀina at the 2025 Farm Robotics Challenge";
+    player.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
+    player.allowFullscreen = true;
+    player.referrerPolicy = "strict-origin-when-cross-origin";
+    player.src = "https://www.youtube-nocookie.com/embed/Dpz_9Qo64MM?autoplay=1";
+    preview.replaceWith(player);
+    player.focus();
+  });
+</script>
