@@ -80,7 +80,13 @@ def news_records():
     for block in re.split(r"^## ", (ROOT / "news.md").read_text(), flags=re.M)[1:]:
         header, body = block.split("\n", 1)
         stamp, title = header.split(" | ", 1)
-        items.append((stamp, title, body.rsplit("---", 1)[0].strip()))
+        explicit_id = re.search(r" \{#([a-z0-9-]+)\}$", title)
+        if explicit_id:
+            anchor = explicit_id[1]
+            title = title[:explicit_id.start()]
+        else:
+            anchor = news_anchor(stamp, title)
+        items.append((stamp, title, body.rsplit("---", 1)[0].strip(), anchor))
     return sorted(items, key=lambda row: row[0], reverse=True)
 
 
@@ -234,9 +240,15 @@ def portrait(person, root, compact=False):
     return f'<span class="initials" aria-hidden="true">{escape(initials)}</span>'
 
 
-def member(person):
+def member(person, category):
     name = person["title"]
     sub = escape(person.get("placement", person.get("role", "")))
+    affiliation = person.get("affiliation", "")
+    if category == "Visiting Students" and affiliation:
+        sub += "<br>" + escape(affiliation)
+        affiliation = ""
+    elif slug(affiliation) in {"university-of-hawaii-at-manoa", "university-of-hawai-i-at-manoa"}:
+        affiliation = ""
     fields = [("website", "Website"), ("scholar", "Google Scholar"), ("github", "GitHub"), ("linkedin", "LinkedIn"), ("cv", "CV"), ("email", "Email")]
     links = []
     for key, label in fields:
@@ -246,7 +258,7 @@ def member(person):
         links.append(f'<a href="{escape(href)}" aria-label="{escape(label)} · {escape(name)}">'
                      f'<svg aria-hidden="true" width="21" height="21"><use href="../images/profile-links.svg#{key}"/></svg>'
                      f'<span aria-hidden="true">{escape(label)}</span></a>')
-    profile = [v for v in [person.get("bio"), person.get("affiliation"), person.get("tags", "").replace(" | ", " · ")] if v]
+    profile = [v for v in [person.get("bio"), affiliation, person.get("tags", "").replace(" | ", " · ")] if v]
     more = '<details><summary>Profile</summary>' + "".join(f"<p>{inline(v)}</p>" for v in profile) + "</details>" if profile else ""
     return (f'<article class="person" id="{slug(name)}"><div class="person-top">{portrait(person, "../")}<div><h3>{escape(name)}</h3>'
             f'<div class="metadata">{sub}</div></div></div><div class="profile-links">{"".join(links)}</div>{more}</article>')
@@ -257,7 +269,7 @@ def people_page(groups):
     parts = [page_head("People"), jump]
     for category, members in groups.items():
         parts.append(f'<section class="section" id="{slug(category)}">{heading(GROUP_LABELS.get(category, category))}<div class="people">')
-        parts.extend(member(m) for m in members)
+        parts.extend(member(m, category) for m in members)
         parts.append("</div></section>")
     photos = json.loads((ROOT / "gallery.json").read_text())["images"]
     parts.append('<section class="section" id="photos">' + heading("Group photos") + '<div class="gallery">')
@@ -283,6 +295,8 @@ def publication(item):
                 url = "https://arxiv.org/abs/" + url
             if k == "doi" and not url.startswith("http"):
                 url = "https://doi.org/" + url
+            if url.startswith("https://web.archive.org/"):
+                label += " (archived)"
             links.append(f'<a class="res-{k}" href="{escape(url)}">{label}</a>')
     citation = ""
     if item.get("bibtex_show", "true").lower() != "false":
@@ -311,8 +325,8 @@ def home(projects, people, items, pubs):
     <div class="hero-links">{link("#research-directions", "Explore our research")}{link("contact/#prospective-students", "Join the lab")}</div>
     <img class="hero-logo" src="images/cirp-hero.webp" width="176" height="176" alt=""></section>'''
     content += '<section class="section" id="lab-news"><header class="home-heading"><span><img class="news-mark" src="images/cirp-mark.png" width="36" height="36" alt=""></span><h2>Lab news</h2>' + link("news/", "All news →") + '</header>'
-    for stamp, title, _ in items[:5]:
-        content += f'<div class="news-row">{news_time(stamp)}{link("news/#" + news_anchor(stamp, title), title)}</div>'
+    for stamp, title, _, anchor in items[:5]:
+        content += f'<div class="news-row">{news_time(stamp)}{link("news/#" + anchor, title)}</div>'
     content += '</section>'
     content += '<section class="section" id="selected-work">' + home_heading("Research", "Selected work", "research/", "All projects")
     content += '<div class="work-grid" id="research-directions">' + "".join(card(group[0], "./", theme) for theme, group in projects.items())
@@ -361,8 +375,8 @@ def main():
     research(projects, people)
     people_page(people)
     content = page_head("News")
-    for stamp, title, body in news:
-        content += (f'<article class="news-item" id="{news_anchor(stamp, title)}">{news_time(stamp)}'
+    for stamp, title, body, anchor in news:
+        content += (f'<article class="news-item" id="{anchor}">{news_time(stamp)}'
                     f'<h2>{escape(title)}</h2><div class="prose">{paragraphs(body)}</div></article>')
     page("news", "News", "News from CIRP Lab.", content)
     years = list(dict.fromkeys(item["year"] for item in pubs))
