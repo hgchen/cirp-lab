@@ -240,23 +240,27 @@ def publication(item):
     author_names = []
     for author in item["author"].split(" and "):
         author_names.append(" ".join(reversed(author.split(", ", 1))))
-    title = link(item["website"], item["title"]) if item.get("website") else escape(item["title"])
+    landing = item.get("website") or item.get("project")
+    title = link(landing, item["title"]) if landing else escape(item["title"])
     venue = item.get("booktitle") or item.get("journal") or item.get("publisher") or item.get("abbr", "")
     links = []
-    for k, label in [("pdf", "PDF"), ("doi", "DOI"), ("arxiv", "arXiv"), ("code", "Code"), ("slides", "Slides"), ("results", "Benchmark results")]:
+    for k, label in [("pdf", "PDF"), ("doi", "DOI"), ("project", "Project"), ("code", "Code"), ("model", "Model"),
+                     ("data", "Data"), ("website", "Link"), ("arxiv", "arXiv"), ("slides", "Slides"), ("video", "Video"),
+                     ("workshop", "Workshop"), ("results", "Benchmark results")]:
         if k in item:
             url = item[k]
             if k == "arxiv" and not url.startswith("http"):
                 url = "https://arxiv.org/abs/" + url
             if k == "doi" and not url.startswith("http"):
                 url = "https://doi.org/" + url
-            links.append(link(url, label))
+            links.append(f'<a class="res-{k}" href="{escape(url)}">{label}</a>')
     citation = ""
     if item.get("bibtex_show", "true").lower() != "false":
         citation = f'<details class="citation"><summary>BibTeX</summary><pre><code>{escape(item["bibtex"])}</code></pre></details>'
     note = f'<p class="metadata">{escape(item["note"])}</p>' if item.get("note") else ""
-    return (f'<article class="pub" id="{escape(item["key"])}"><h3>{title}</h3><p>{escape(", ".join(author_names))}</p>'
-            f'<p class="metadata">{escape(venue)} · {escape(item["year"])}</p>{note}<div class="links">{"".join(links)}</div>{citation}</article>')
+    return (f'<article class="pub" id="{escape(item["key"])}" data-abbr="{escape(item.get("abbr", ""))}"><h3>{title}</h3>'
+            f'<p class="pub-meta">{escape(", ".join(author_names))} · <span>{escape(venue)} · {escape(item["year"])}</span></p>'
+            f'{note}<div class="pub-actions">{"".join(links)}{citation}</div></article>')
 
 
 def news_anchor(stamp, title):
@@ -269,14 +273,17 @@ def home_heading(label, title, url="", action=""):
 
 
 def home(projects, people, items, pubs):
-    content = f'''<section class="hero"><h1>Imaging for robotic perception.</h1>
-    <p class="mission">How can a robot see an object’s shape or sense the direction of a push?
-    We study these questions through <em>computational imaging</em> and <em>physics-informed AI</em>,
-    designing sensors alongside the algorithms that interpret their measurements.</p>
-    <p class="byline">{link("people/#huaijin-chen", "Huaijin Chen")} leads the {LAB} at the University of Hawaiʻi at Mānoa.</p>
+    content = f'''<section class="hero"><h1>{LAB}</h1>
+    <p class="mission">We combine <em>computational imaging</em> and <em>physics-informed AI</em> to design sensors and interpret their measurements.
+    Our work spans robotic perception and scientific discovery, from mapping contact forces with polarized light to tracking changes in materials with X-ray diffraction.</p>
+    <p class="byline">Led by {link("people/#huaijin-chen", "Huaijin Chen")} at the University of Hawaiʻi at Mānoa.</p>
     <div class="hero-links">{link("#research-directions", "Explore our research")}{link("contact/#prospective-students", "Join the lab")}</div></section>'''
     content += '<section class="section" id="research-directions">' + home_heading("Research", "Questions we study", "research/", "All projects")
     content += '<div class="catalog">' + "".join(card(group[0], "./", theme) for theme, group in projects.items()) + '</div></section>'
+    content += '<section class="section" id="lab-news"><header class="home-heading"><span><img class="news-mark" src="images/cirp-mark.png" width="36" height="36" alt=""></span><h2>Lab news</h2>' + link("news/", "All news →") + '</header>'
+    for stamp, title, _ in items[:3]:
+        content += f'<div class="news-row">{news_time(stamp)}{link("news/#" + news_anchor(stamp, title), title)}</div>'
+    content += '</section>'
     content += '<section class="section" id="the-group">' + home_heading("People", "The group", "people/", "People & alumni") + '<dl class="roster">'
     for group, members in people.items():
         if group != "Alumni":
@@ -293,9 +300,7 @@ def home(projects, people, items, pubs):
                     f'<img src="images/previews/{escape(key)}.webp" alt="{escape(WORK_CAPTIONS[key])}" loading="lazy" decoding="async">'
                     f'<span class="metadata">{escape(venue)} · {escape(item["year"])}</span>'
                     f'<h3>{escape(item["title"])}</h3></a></article>')
-    content += '</div></section><section class="section">' + home_heading("News", "From the lab", "news/", "All news")
-    for stamp, title, _ in items[:3]:
-        content += f'<div class="news-row">{news_time(stamp)}{link("news/#" + news_anchor(stamp, title), title)}</div>'
+    content += '</div></section>'
     partners = [
         ("National Science Foundation", "https://www.nsf.gov/", "nsf_logo.png"),
         ("NVIDIA", "https://www.nvidia.com/", "nvidia_logo.png"),
@@ -304,7 +309,7 @@ def home(projects, people, items, pubs):
         ("Minderoo Foundation", "https://www.minderoo.org/", "minderoo.svg"),
         ("USDA APHIS", "https://www.aphis.usda.gov/", "usda.jpg"),
     ]
-    content += '</section><section class="section" id="sponsors">' + home_heading("Support", "Sponsors and collaborators") + '<ul class="partners">'
+    content += '<section class="section" id="sponsors">' + home_heading("Support", "Sponsors and collaborators") + '<ul class="partners">'
     for name, url, image in partners:
         agency = '<span aria-hidden="true">APHIS</span>' if name == "USDA APHIS" else ""
         content += (f'<li><a href="{url}" aria-label="{escape(name)}">'
@@ -323,9 +328,18 @@ def main():
         content += (f'<article class="news-item" id="{news_anchor(stamp, title)}">{news_time(stamp)}'
                     f'<h2>{escape(title)}</h2><div class="prose">{paragraphs(body)}</div></article>')
     page("news", "News", "News from CIRP Lab.", content)
-    content = page_head("Publications") + '<p class="jump">' + link("../publications.bib", "Download BibTeX") + '</p>'
-    for year in dict.fromkeys(item["year"] for item in pubs):
-        content += '<section class="section">' + heading(year) + "".join(publication(p) for p in pubs if p["year"] == year) + "</section>"
+    years = list(dict.fromkeys(item["year"] for item in pubs))
+    options = "".join(f'<option>{escape(year)}</option>' for year in years)
+    content = page_head("Publications") + f'''<div class="pub-tools">
+      <form role="search" aria-label="Publications" id="publication-search" hidden>
+        <label>Search publications<input type="search" name="q" placeholder="Title, author, venue or year"></label>
+        <label><span id="year-label">Year</span><select name="year" aria-labelledby="year-label"><option value="">All years</option>{options}</select></label>
+        <button type="reset" disabled>Clear</button>
+      </form><a href="../publications.bib" download>Download .bib</a></div>
+      <p id="pub-status" role="status" hidden></p>'''
+    for year in years:
+        content += f'<section class="section pub-year" data-year="{escape(year)}">' + heading(year) + "".join(publication(p) for p in pubs if p["year"] == year) + "</section>"
+    content += '<script src="search.js" defer></script>'
     page("publications", "Publications", "Publications by members of CIRP Lab.", content)
     contact = (ROOT / "contact.html").read_text()
     page("contact", "Contact & join", "Visit CIRP Lab or learn how to join the group.", page_head("Contact & join") + contact)

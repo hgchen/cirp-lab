@@ -62,16 +62,6 @@ short: We develop a robot-tablet platform for brief, standardized interaction wi
 description: Robot-Tablet Multimodal Behavioral Phenotyping for Cognitive Concern in Older Adults develops an embodied assessment platform for brief, standardized interaction with older adults. A humanoid robot delivers contingent speech, orienting cues, and task prompts, while a tablet captures response timing, task performance, and interaction events with high precision. Rather than diagnosing MCI directly, the project focuses on measuring clinically relevant multimodal behavioral biomarkers, including speech, response timing, drawing, tapping, motion, and conversational adaptation, that are difficult to capture with paper-only, tablet-only, or static voice-based screening.
 ---
 
-### Comparison of State-of-the-Art SfM 3D Reconstruction Methods
-folder: SfM-Comparison
-name: Comparing 3D reconstruction methods
-lead: Sean Hiroki Flynn
-pi: Huaijin Chen
-members:
-short: We benchmark modern AI-based 3D reconstruction methods against classical Structure-from-Motion pipelines using custom indoor scenes and stereo depth ground truth.
-description: This project compares state-of-the-art AI-based 3D reconstruction methods with classical Structure-from-Motion pipelines. The benchmark evaluates VGGT, Pi3, Depth Anything 3, and COLMAP on a custom indoor dataset captured with an iPhone 15 Pro and a Gemini 335Lg stereo vision camera. Stereo depth point clouds provide ground truth for quantitative evaluation after scale alignment and ICP registration. Reconstructions are assessed with Chamfer Distance, Hausdorff Distance, accuracy, completeness, F-score, and reconstruction speed. The findings highlight trade-offs across classical and modern methods, with performance depending strongly on scene texture, geometry, completeness, and reconstruction accuracy.
----
-
 ## Physics-Informed AI
 
 ### ImagingBench: Can AI Solve Imaging Problems?
@@ -81,12 +71,12 @@ slug: imagingbench
 lead: Ethan Chung
 pi: Huaijin Chen
 members: Chuanjun Zheng | Jasper Tan | Jingxi Li
-short: Can an image model reconstruct what produced a measurement, or predict what a camera would measure?
-description: ImagingBench tests 22 tasks in five areas: ray and wave optics, image signal processing, inverse reconstruction, computational sensing, and calibration. Models return pixels directly, without external code execution or task-specific optimization.
-approach: In the Expert setting, a model reconstructs an image with fixed expert guidance. In Planner, it uses a model-generated plan. Forward reverses the question, asking the model to simulate the measurement from the scene. Across the tasks tested, general-purpose models lag specialized methods on problems such as lensless imaging and holography.
-question: Can AI predict what a camera sees and recover the scene?
+short: ImagingBench tests what multimodal AI models have learned about image formation and reconstruction.
+description: Can an image model recover a scene when the sensor measurement looks nothing like a photograph? ImagingBench evaluates six models on tasks spanning optics, image processing, inverse reconstruction, computational sensing and calibration. Twenty of the 22 tasks produce images. Lens design and camera calibration produce text and are scored separately.
+approach: Inverse tasks ask a model to reconstruct an image using either an expert’s instructions or an image-specific plan written by a vision–language model. Five tasks also run in the forward direction, asking the model to simulate a sensor measurement from a clean image. Specialized methods outperform general-purpose models on lensless imaging and holography, where a plausible picture can still be an inaccurate reconstruction.
+question: What have multimodal AI models learned about image formation?
 preview: images/previews/imagingbench.webp
-summary: ImagingBench tests both directions across 22 imaging tasks, from simulating a diffraction pattern to reconstructing an image from a lensless camera.
+summary: ImagingBench tests six models on 22 computational imaging tasks. Can they recover a scene from a lensless measurement, or simulate what a sensor records when given the scene?
 cover: benchmark.webp
 caption: The five task families and three evaluation settings, alongside the aggregate performance reported for each model.
 detail: reconstructions.webp
