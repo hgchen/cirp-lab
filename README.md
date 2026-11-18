@@ -8,12 +8,12 @@ Run `bash scripts/dev_static_site.sh --port 7017` and open [localhost:7017](http
 
 ## Update content
 
-- Edit `projects.md`. Each project has a title, image folder, short description, longer overview and team fields. Optional fields include a stable URL slug, short display name, cover and caption, method, and a detail figure with its caption. Image filenames are relative to `images/projects/<folder>/`. Within each of the two research directions, the first project is featured on the homepage.
+- Edit `projects.md`. Each project has a title, image folder, short description, longer overview and team fields. Optional fields include a stable URL slug, short display name, cover and caption, method, and a detail figure with its caption. Image filenames are relative to `images/projects/<folder>/`. Within each of the two research directions, the first project is featured on the homepage. Its optional `question`, `summary` and `preview` fields set the homepage heading, description and thumbnail. The two thumbnails in `images/previews/` are excerpts of the full project figures.
 - Edit `members.md` for people, roles, profiles and alumni placements. Names link to stable anchors on the People page. Choose group photos and their order in `gallery.json`.
 - Edit `news.md` for dated items. Use YYYY-MM when the source gives only the month, or YYYY-MM-DD for a specific day.
 - Add public bibliographic records to `publications.bib`. Keep private manuscripts outside the repository. Only place figures and other assets intended for the site in `images/`.
 
-The homepage uses the original lab sponsor artwork plus the header marks from the [Minderoo Foundation](https://www.minderoo.org/) and [USDA APHIS](https://www.aphis.usda.gov/). Member resource icons are in `images/profile-links.svg`. The research statement uses locally hosted Spectral Semibold Italic, licensed in `fonts/OFL-Spectral.txt`.
+The homepage uses the original lab sponsor artwork plus the header marks from the [Minderoo Foundation](https://www.minderoo.org/) and [USDA APHIS](https://www.aphis.usda.gov/). Member resource icons are in `images/profile-links.svg`. The site uses locally hosted Archivo and Spectral Semibold Italic. Both licenses are in `fonts/`.
 
 ## Layout and deployment
 

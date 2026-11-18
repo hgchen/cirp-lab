@@ -3,20 +3,47 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#faf9f5">
+  <meta name="color-scheme" content="light dark">
   <meta name="description" content="$description">
   <title>$title</title>
   <link rel="icon" href="${root}images/favicon.svg">
+  <script>
+    try {
+      const saved = localStorage.getItem("cirp-theme");
+      if (saved === "dark" || saved === "light") document.documentElement.dataset.theme = saved;
+    } catch {}
+  </script>
   <link rel="stylesheet" href="${root}styles.css">
   $legacy
 </head>
 <body>
   <a class="skip" href="#content">Skip to content</a>
-  <header class="mast wrap">
-    <a class="brand" href="${root}" aria-label="CIRP Lab home"><img src="${root}images/lab_logo_pure.png" alt="" width="43" height="43">CIRP Lab</a>
-    <nav aria-label="Main navigation">$nav</nav>
+  <header class="mast">
+    <div class="mast-inner">
+      <a class="brand" href="${root}" aria-label="CIRP Lab home"><img src="${root}images/lab_logo_pure.png" alt="" width="25" height="25"><strong>CIRP</strong><span>/</span> UH Mānoa</a>
+      <nav aria-label="Main navigation">$nav</nav>
+      <button class="theme" type="button" hidden></button>
+    </div>
   </header>
   <main id="content" class="wrap">$content</main>
   <footer class="wrap foot"><a class="foot-brand" href="${root}">CIRP Lab</a><span><a href="https://www.ics.hawaii.edu/">Information and Computer Sciences</a> · <a href="https://manoa.hawaii.edu/">University of Hawaiʻi at Mānoa</a></span><a href="${root}contact/">Contact</a></footer>
+  <script>
+    const button = document.querySelector(".theme");
+    const choices = ["system", "light", "dark"];
+    const site = document.documentElement;
+    function showChoice() {
+      const choice = site.dataset.theme || "system";
+      button.textContent = "Theme: " + choice;
+      button.setAttribute("aria-label", "Color theme: " + choice + ". Switch to " + choices[(choices.indexOf(choice) + 1) % choices.length]);
+    }
+    showChoice();
+    button.hidden = false;
+    button.addEventListener("click", () => {
+      const next = choices[(choices.indexOf(site.dataset.theme || "system") + 1) % choices.length];
+      site.dataset.theme = next;
+      try { localStorage.setItem("cirp-theme", next); } catch {}
+      showChoice();
+    });
+  </script>
 </body>
 </html>

@@ -11,14 +11,10 @@ from string import Template
 ROOT = Path(__file__).resolve().parents[1]
 DIST = Path(sys.argv[1]) if __name__ == "__main__" and len(sys.argv) > 1 else ROOT / "dist"
 SHELL = Template((ROOT / "index.html").read_text())
-NAV = {"research": "Research", "people": "People", "publications": "Publications",
-       "news": "News", "contact": "Contact"}
-THEMES = {
-    "Computational Imaging for Robotic Perception":
-        "We design cameras and tactile sensors that turn light into measurements of shape, motion and contact.",
-    "Physics-Informed AI":
-        "We use models of how measurements are formed to reconstruct images and test what learning systems can recover.",
-}
+NAV = {"": "Home", "research": "Research", "publications": "Publications",
+       "people": "People", "news": "News", "contact": "Contact"}
+GROUP_LABELS = {"PhD": "PhD students", "Masters": "Master’s students",
+                "Undergrads": "Undergraduates", "Visiting Students": "Visiting students"}
 LAB = "Computational Imaging and Robotic Perception Lab"
 LEGACY = """<script>
 const routes = {members:"people",projects:"research",publications:"publications",news:"news",contact:"contact"};
@@ -95,6 +91,7 @@ def bibliography():
         # The maintained BibTeX uses braced values; a new field or entry closes each value.
         fields = dict(re.findall(r"^\s*(\w+)\s*=\s*\{(.*?)\}\s*,?\s*(?=^\s*\w+\s*=|^\}|\Z)", block, re.M | re.S))
         entry = {k: " ".join(v.replace("{", "").replace("}", "").split()) for k, v in fields.items()}
+        entry["key"] = block.split("{", 1)[1].split(",", 1)[0].strip()
         entry["bibtex"] = "@" + block.strip()
         entries.append(entry)
     return sorted(entries, key=lambda row: row["year"], reverse=True)
@@ -105,8 +102,11 @@ def page(route, title, description, body):
     active = route.split("/")[0]
     nav = []
     for path, label in NAV.items():
-        current = ' aria-current="page"' if active == path else ''
-        nav.append(f'<a href="{root}{path}/"{current}>{label}</a>')
+        current = ""
+        if active == path:
+            current = ' aria-current="page"' if route.strip("/") == path else ' aria-current="location"'
+        href = root + (path + "/" if path else "")
+        nav.append(f'<a href="{href}"{current}>{escape(label)}</a>')
     folder = DIST / route
     folder.mkdir(parents=True, exist_ok=True)
     output = SHELL.substitute(root=root, title=escape(title + " · CIRP Lab" if route else "CIRP Lab · University of Hawaiʻi at Mānoa"),
@@ -135,13 +135,17 @@ def project_media(project):
     return directory.relative_to(ROOT).as_posix() + "/", cover, images
 
 
-def card(project, root):
+def card(project, root, theme=None):
     folder, cover, _ = project_media(project)
     title = project.get("name", project["title"])
     url = root + project_path(project)
-    return f'''<article class="card"><a href="{url}" aria-label="View {escape(title)}">
-    <img class="plate" loading="lazy" src="{escape(root + folder + cover)}" alt=""></a>
-    <h3>{link(url, title)}</h3><p>{escape(project["short"])}</p></article>'''
+    src = root + project.get("preview", folder + cover)
+    category = f'<p class="category">{link(root + "research/#" + slug(theme), theme)}</p>' if theme else ""
+    headline = project.get("question", title) if theme else title
+    summary = project.get("summary", project["short"]) if theme else project["short"]
+    return f'''<article class="card"><a class="plate" href="{url}" aria-label="View {escape(title)}">
+    <img loading="lazy" src="{escape(src)}" alt=""></a><div class="card-copy">{category}
+    <h3>{link(url, headline)}</h3><p>{escape(summary)}</p></div></article>'''
 
 
 def figure(path, caption):
@@ -177,6 +181,8 @@ def research(projects, people):
                 body += '<div class="gallery">' + "".join(
                     figure("../../" + folder + image, Path(image).stem.replace("_", " ").replace("-", " "))
                     for image in images if image != cover) + "</div>"
+            if project.get("field_photo"):
+                body += figure("../../" + project["field_photo"], project["field_caption"])
             page(project_path(project), title, project["short"], body)
         cards.append("</div></section>")
     jump = '<div class="jump">' + "".join(link("#" + slug(theme), theme) for theme in projects) + "</div>"
@@ -206,11 +212,10 @@ def member(person):
 
 
 def people_page(groups):
-    labels = {"PhD": "PhD students", "Masters": "Master’s students", "Undergrads": "Undergraduates"}
-    jump = '<div class="jump">' + "".join(link("#" + slug(g), labels.get(g, g)) for g in groups) + link("#photos", "Group photos") + "</div>"
+    jump = '<div class="jump">' + "".join(link("#" + slug(g), GROUP_LABELS.get(g, g)) for g in groups) + link("#photos", "Group photos") + "</div>"
     parts = [page_head("People"), jump]
     for category, members in groups.items():
-        parts.append(f'<section class="section" id="{slug(category)}">{heading(labels.get(category, category))}<div class="people">')
+        parts.append(f'<section class="section" id="{slug(category)}">{heading(GROUP_LABELS.get(category, category))}<div class="people">')
         parts.extend(member(m) for m in members)
         parts.append("</div></section>")
     photos = json.loads((ROOT / "gallery.json").read_text())["images"]
@@ -239,7 +244,7 @@ def publication(item):
     if item.get("bibtex_show", "true").lower() != "false":
         citation = f'<details class="citation"><summary>BibTeX</summary><pre><code>{escape(item["bibtex"])}</code></pre></details>'
     note = f'<p class="metadata">{escape(item["note"])}</p>' if item.get("note") else ""
-    return (f'<article class="pub"><h3>{title}</h3><p>{escape(", ".join(author_names))}</p>'
+    return (f'<article class="pub" id="{escape(item["key"])}"><h3>{title}</h3><p>{escape(", ".join(author_names))}</p>'
             f'<p class="metadata">{escape(venue)} · {escape(item["year"])}</p>{note}<div class="links">{"".join(links)}</div>{citation}</article>')
 
 
@@ -247,23 +252,33 @@ def news_anchor(stamp, title):
     return stamp + "-" + slug(title)
 
 
-def home(projects, items, pubs):
-    hero = f'''<section class="hero"><div class="hero-copy"><h1>{LAB}</h1>
-    <p class="mission">We combine <em>computational imaging</em> and <em>physics-informed AI</em> to study how robots sense the physical world. Our work ranges from estimating an object’s 3D pose to measuring contact forces with polarized light.</p>
-    <p class="byline">Led by {link("people/#huaijin-chen", "Huaijin Chen")} at the University of Hawaiʻi at Mānoa.</p></div>
-    <figure class="hero-photo"><img src="images/gallery/palm_capture.jpg" alt="Two field team members observing palms in Hawaiʻi" width="640" height="360">
-    <figcaption>Fieldwork in Hawaiʻi · <a href="research/frc2026/">Palm robotics project</a></figcaption></figure></section>'''
-    selected = [projects[theme][0] for theme in THEMES]
-    content = hero + '<section class="section">' + heading("Selected projects", "research/", "All projects →")
-    content += '<div class="feature-grid">' + "".join(card(p, "./") for p in selected) + "</div></section>"
-    content += '<section class="section">' + heading("Research directions") + '<div class="two-col">'
-    for theme, description in THEMES.items():
-        content += f'<div><h3>{link("research/#" + slug(theme), theme)}</h3><p>{description}</p></div>'
-    content += '</div></section><section class="section">' + heading("News", "news/", "All news →")
+def home_heading(label, title, url="", action=""):
+    more = link(url, action + " →") if url else ""
+    return f'<header class="home-heading"><span>{escape(label)}</span><h2>{escape(title)}</h2>{more}</header>'
+
+
+def home(projects, people, items, pubs):
+    content = f'''<section class="hero"><h1>Imaging for robotic perception.</h1>
+    <p class="mission">How can a robot see an object’s shape or sense the direction of a push?
+    We study these questions through <em>computational imaging</em> and <em>physics-informed AI</em>,
+    designing sensors alongside the algorithms that interpret their measurements.</p>
+    <p class="byline">{link("people/#huaijin-chen", "Huaijin Chen")} leads the {LAB} at the University of Hawaiʻi at Mānoa.</p>
+    <div class="hero-links">{link("#research-directions", "Explore our research")}{link("contact/#prospective-students", "Join the lab")}</div></section>'''
+    content += '<section class="section" id="research-directions">' + home_heading("Research", "Questions we study", "research/", "All projects")
+    content += '<div class="catalog">' + "".join(card(group[0], "./", theme) for theme, group in projects.items()) + '</div></section>'
+    content += '<section class="section">' + home_heading("People", "The group", "people/", "People & alumni") + '<dl class="roster">'
+    for group, members in people.items():
+        if group != "Alumni":
+            names = [link("people/#" + slug(m["title"]), m["title"]) for m in members]
+            content += f'<div><dt>{escape(GROUP_LABELS.get(group, group))}</dt><dd>{", ".join(names)}</dd></div>'
+    content += '</dl></section><section class="section">' + home_heading("Publications", "Recent papers", "publications/", "All publications")
+    for item in pubs[:3]:
+        venue = item.get("abbr") or item.get("booktitle") or item.get("journal", "")
+        content += (f'<div class="paper-row"><span class="metadata">{escape(venue)} · {escape(item["year"])}</span>'
+                    + link("publications/#" + item["key"], item["title"]) + '</div>')
+    content += '</section><section class="section">' + home_heading("News", "From the lab", "news/", "All news")
     for stamp, title, _ in items[:3]:
         content += f'<div class="news-row">{news_time(stamp)}{link("news/#" + news_anchor(stamp, title), title)}</div>'
-    content += '</section><section class="section">' + heading("Recent publications", "publications/", "All publications →")
-    content += "".join(publication(p) for p in pubs[:2]) + "</section>"
     partners = [
         ("National Science Foundation", "https://www.nsf.gov/", "nsf_logo.png"),
         ("NVIDIA", "https://www.nvidia.com/", "nvidia_logo.png"),
@@ -272,7 +287,7 @@ def home(projects, items, pubs):
         ("Minderoo Foundation", "https://www.minderoo.org/", "minderoo.svg"),
         ("USDA APHIS", "https://www.aphis.usda.gov/", "usda.jpg"),
     ]
-    content += '<section class="section" id="sponsors">' + heading("Sponsors and collaborators") + '<ul class="partners">'
+    content += '</section><section class="section" id="sponsors">' + home_heading("Support", "Sponsors and collaborators") + '<ul class="partners">'
     for name, url, image in partners:
         agency = '<span aria-hidden="true">APHIS</span>' if name == "USDA APHIS" else ""
         content += (f'<li><a href="{url}" aria-label="{escape(name)}">'
@@ -296,8 +311,8 @@ def main():
         content += '<section class="section">' + heading(year) + "".join(publication(p) for p in pubs if p["year"] == year) + "</section>"
     page("publications", "Publications", "Publications by members of CIRP Lab.", content)
     contact = (ROOT / "contact.html").read_text()
-    page("contact", "Contact", "Visit CIRP Lab or learn how to join the group.", page_head("Contact") + contact)
-    home(projects, news, pubs)
+    page("contact", "Contact & join", "Visit CIRP Lab or learn how to join the group.", page_head("Contact & join") + contact)
+    home(projects, people, news, pubs)
 
 
 if __name__ == "__main__":

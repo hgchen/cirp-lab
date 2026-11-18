@@ -11,6 +11,9 @@ pi: Huaijin Chen
 short: A transparent tactile sensor reads patterns of light to locate contact and estimate normal and shear forces.
 description: When an object presses on a photoelastic block, stress changes the polarization of light passing through it. Front and side cameras observe the resulting fringes. The same transparent surface also lets a camera see the object in contact.
 approach: A finite-element model simulates stress inside the block. A polarized-light renderer translates that stress into images used to train a network, which is then fine-tuned on real camera pairs. The network estimates contact footprint, pressure and shear, and integrates them to recover net force.
+question: How can a camera measure contact forces?
+preview: images/previews/fringetact.webp
+summary: FringeTact reads patterns of polarized light in a transparent sensor to locate contact and measure forces both into and across its surface.
 cover: contact-force.webp
 caption: Front and side views of the sensor, simulated fringes and predicted contact maps during a sphere drag. Arrows show shear direction.
 detail: sensor.webp
@@ -29,6 +32,8 @@ description: We develop diffractive optical elements (DOEs) for snapshot hypersp
 
 ### Autonomous Coconut Rhinoceros Beetle Infestation Management
 folder: FRC2026
+field_photo: images/gallery/palm_capture.jpg
+field_caption: Members of the field team observing palms in Hawaiʻi.
 name: Field robotics for palm health
 lead: Christian Moore
 pi: Huaijin Chen
@@ -79,6 +84,9 @@ members: Chuanjun Zheng | Jasper Tan | Jingxi Li
 short: Can an image model reconstruct what produced a measurement, or predict what a camera would measure?
 description: ImagingBench tests 22 tasks in five areas: ray and wave optics, image signal processing, inverse reconstruction, computational sensing, and calibration. Models return pixels directly, without external code execution or task-specific optimization.
 approach: In the Expert setting, a model reconstructs an image with fixed expert guidance. In Planner, it uses a model-generated plan. Forward reverses the question, asking the model to simulate the measurement from the scene. Across the tasks tested, general-purpose models lag specialized methods on problems such as lensless imaging and holography.
+question: Can AI predict what a camera sees and recover the scene?
+preview: images/previews/imagingbench.webp
+summary: ImagingBench tests both directions across 22 imaging tasks, from simulating a diffraction pattern to reconstructing an image from a lensless camera.
 cover: benchmark.webp
 caption: The five task families and three evaluation settings, alongside the aggregate performance reported for each model.
 detail: reconstructions.webp
