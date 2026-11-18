@@ -86,7 +86,15 @@ nav a[aria-current] {color:var(--green);font-weight:700;text-decoration:underlin
 .roster a {display:flex;align-items:center;gap:10px;min-height:44px;width:fit-content;color:var(--ink);font-size:15px;line-height:1.24;text-decoration:none}
 .roster a:hover,.roster a:focus-visible {color:var(--green);text-decoration:underline}
 .roster :is(.person-face,.initials) {width:44px;height:44px;border-radius:50%;font:13px var(--mono);box-shadow:inset 0 0 0 1px var(--line)}
-.work-grid {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.work-grid {display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:25px 22px}
+.work-grid > article {grid-column:span 2}
+.work-grid > .card {display:block;grid-column:span 3;border:0;background:transparent}
+.work-grid .plate {border:1px solid var(--line)}
+.work-grid .plate img {height:clamp(145px,17vw,205px)}
+.work-grid .card-copy {padding:16px 0 0}
+.work-grid .card h3 a {color:var(--ink);text-decoration:none}
+.work-grid .card h3 a:hover {text-decoration:underline}
+.work-more {margin-top:16px;text-align:right;font:12px/1.5 var(--mono)}
 .work-link {display:block;color:var(--ink);text-decoration:none}
 .work-link img {width:100%;aspect-ratio:1.85;object-fit:contain;background:#fff;border:1px solid var(--line)}
 .work-link .metadata {display:block;margin:12px 0 5px}
@@ -171,13 +179,16 @@ summary {color:var(--green);cursor:pointer;width:fit-content}
 
 .citation pre {white-space:pre-wrap;overflow-wrap:anywhere;background:var(--panel);padding:12px}
 .prose {max-width:80ch}
-.partners {list-style:none;margin:0;padding:8px 16px;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));align-items:center;gap:16px;background:white;border:1px solid var(--line)}
-.partners li {min-width:0}
-.partners a {display:flex;align-items:center;justify-content:center;gap:6px;min-height:78px;text-decoration:none}
-.partners img {max-width:94%;width:125px;height:50px;object-fit:contain}
-.partners img[src$="nsf_logo.png"] {width:55px;height:55px}
-.partners img[src$="usda.jpg"] {width:43px;height:auto}
-.partners span {font-weight:650;color:#183850}
+.partners {list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;border:1px solid var(--line);background:var(--line)}
+.partners li {min-width:0;background:white}
+.partners a {display:flex;align-items:center;justify-content:center;gap:7px;height:91px;padding:12px;text-decoration:none}
+.partners img {display:block;width:var(--mark-width,142px);height:60px;max-width:100%;object-fit:contain}
+.partners img[src$="nsf_logo.png"] {--mark-width:62px}
+.partners img[src$="nvidia-wordmark.svg"] {--mark-width:154px}
+.partners img[src$="google.png"] {--mark-width:123px}
+.partners img[src$="hcf_log.jpg"] {--mark-width:152px}
+.partners img[src$="minderoo.svg"] {--mark-width:182px}
+.partners img[src$="usda.jpg"] {--mark-width:72px}
 .visit {grid-template-columns:minmax(220px,.8fr) minmax(0,1.6fr);gap:5%}
 .visit-info address {font-style:normal}
 .visit-info h3 {margin-top:22px}
@@ -188,7 +199,6 @@ summary {color:var(--green);cursor:pointer;width:fit-content}
   .theme {grid-column:2;grid-row:1}
   nav {grid-column:1/-1;gap:8px 17px;margin-top:5px}
   .people {grid-template-columns:repeat(2,minmax(0,1fr))}
-  .partners {grid-template-columns:repeat(3,minmax(0,1fr))}
 }
 @media (max-width:640px) {
   .wrap,.mast-inner {width:calc(100% - 32px)}
@@ -215,11 +225,12 @@ summary {color:var(--green);cursor:pointer;width:fit-content}
   .roster ul {grid-template-columns:repeat(2,minmax(0,1fr));column-gap:10px}
   .roster a {gap:8px}
   .work-grid {grid-template-columns:1fr;gap:24px}
+  .work-grid > article,.work-grid > .card {grid-column:auto}
   .foot {padding:18px 0}.foot span {order:3;width:100%}
   .paper-figure > a {padding:4px}
   .gallery,.partners {grid-template-columns:repeat(2,minmax(0,1fr))}
   .gallery {gap:10px}
   .visit {gap:20px}
-  .partners {gap:3px 15px}
-  .partners a {min-height:65px}
+  .partners a {height:78px;padding:10px}
+  .partners img {height:48px}
 }

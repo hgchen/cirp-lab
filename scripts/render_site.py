@@ -169,6 +169,8 @@ def research(projects, people):
             title = project["title"]
             crumb = '<p class="crumb">' + link("../", "Research") + " / " + escape(theme) + "</p>"
             body = page_head(title, project["short"], crumb)
+            if project.get("preview_caption"):
+                body += figure("../../" + project["preview"], project["preview_caption"])
             body += figure("../../" + folder + cover, project.get("caption", project.get("name", title)))
             desc = f'<section class="section"><div class="paper-extra"><div><h2>Project overview</h2><p>{escape(project["description"])}</p>'
             if project.get("approach"):
@@ -278,19 +280,12 @@ def home(projects, people, items, pubs):
     Our work spans robotic perception and scientific discovery, from mapping contact forces with polarized light to tracking changes in materials with X-ray diffraction.</p>
     <p class="byline">Led by {link("people/#huaijin-chen", "Huaijin Chen")} at the University of Hawaiʻi at Mānoa.</p>
     <div class="hero-links">{link("#research-directions", "Explore our research")}{link("contact/#prospective-students", "Join the lab")}</div></section>'''
-    content += '<section class="section" id="research-directions">' + home_heading("Research", "Questions we study", "research/", "All projects")
-    content += '<div class="catalog">' + "".join(card(group[0], "./", theme) for theme, group in projects.items()) + '</div></section>'
     content += '<section class="section" id="lab-news"><header class="home-heading"><span><img class="news-mark" src="images/cirp-mark.png" width="36" height="36" alt=""></span><h2>Lab news</h2>' + link("news/", "All news →") + '</header>'
     for stamp, title, _ in items[:3]:
         content += f'<div class="news-row">{news_time(stamp)}{link("news/#" + news_anchor(stamp, title), title)}</div>'
     content += '</section>'
-    content += '<section class="section" id="the-group">' + home_heading("People", "The group", "people/", "People & alumni") + '<dl class="roster">'
-    for group, members in people.items():
-        if group != "Alumni":
-            names = [f'<li><a href="people/#{slug(m["title"])}">{portrait(m, "", compact=True)}<span>{escape(m["title"])}</span></a></li>'
-                     for m in members]
-            content += f'<div><dt>{escape(GROUP_LABELS.get(group, group))}</dt><dd><ul>{"".join(names)}</ul></dd></div>'
-    content += '</dl></section><section class="section" id="selected-work">' + home_heading("Publications", "Selected work", "publications/", "All publications") + '<div class="work-grid">'
+    content += '<section class="section" id="selected-work">' + home_heading("Research", "Selected work", "research/", "All projects")
+    content += '<div class="work-grid" id="research-directions">' + "".join(card(group[0], "./", theme) for theme, group in projects.items())
     for item in pubs:
         key = item["key"]
         if key not in WORK_CAPTIONS:
@@ -300,20 +295,26 @@ def home(projects, people, items, pubs):
                     f'<img src="images/previews/{escape(key)}.webp" alt="{escape(WORK_CAPTIONS[key])}" loading="lazy" decoding="async">'
                     f'<span class="metadata">{escape(venue)} · {escape(item["year"])}</span>'
                     f'<h3>{escape(item["title"])}</h3></a></article>')
-    content += '</div></section>'
+    content += '</div><p class="work-more">' + link('publications/', 'All publications →') + '</p></section>'
+    content += '<section class="section" id="the-group">' + home_heading("People", "The group", "people/", "People & alumni") + '<dl class="roster">'
+    for group, members in people.items():
+        if group != "Alumni":
+            names = [f'<li><a href="people/#{slug(m["title"])}">{portrait(m, "", compact=True)}<span>{escape(m["title"])}</span></a></li>'
+                     for m in members]
+            content += f'<div><dt>{escape(GROUP_LABELS.get(group, group))}</dt><dd><ul>{"".join(names)}</ul></dd></div>'
+    content += '</dl></section>'
     partners = [
         ("National Science Foundation", "https://www.nsf.gov/", "nsf_logo.png"),
-        ("NVIDIA", "https://www.nvidia.com/", "nvidia_logo.png"),
+        ("NVIDIA", "https://www.nvidia.com/", "nvidia-wordmark.svg"),
         ("Google", "https://www.google.com/", "google.png"),
         ("Hawaiʻi Community Foundation", "https://www.hawaiicommunityfoundation.org/", "hcf_log.jpg"),
         ("Minderoo Foundation", "https://www.minderoo.org/", "minderoo.svg"),
-        ("USDA APHIS", "https://www.aphis.usda.gov/", "usda.jpg"),
+        ("USDA", "https://www.usda.gov/", "usda.jpg"),
     ]
     content += '<section class="section" id="sponsors">' + home_heading("Support", "Sponsors and collaborators") + '<ul class="partners">'
     for name, url, image in partners:
-        agency = '<span aria-hidden="true">APHIS</span>' if name == "USDA APHIS" else ""
         content += (f'<li><a href="{url}" aria-label="{escape(name)}">'
-                    f'<img src="images/{image}" alt="{escape(name)}" loading="lazy">{agency}</a></li>')
+                    f'<img src="images/{image}" alt="{escape(name)}" loading="lazy"></a></li>')
     page("", LAB, "Computational imaging, tactile sensing and physics-informed AI at the University of Hawaiʻi at Mānoa.",
          content + "</ul></section>")
 
