@@ -205,6 +205,8 @@ def research(projects, people):
             for label, field in [("Project lead", "lead"), ("Principal investigator", "pi"), ("Contributors", "members")]:
                 names = [n.strip() for n in project.get(field, "").split("|") if n.strip()]
                 if names:
+                    if field == "lead" and len(names) > 1:
+                        label = "Project leads"
                     links = [link("../../people/#" + slug(n), n) if n in directory else escape(n) for n in names]
                     credits.append(f'<p><strong>{label}</strong><br>' + " · ".join(links) + "</p>")
             body += desc + '</div><div><h2>Project team</h2>' + "".join(credits) + '</div></div></section>'

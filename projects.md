@@ -5,8 +5,8 @@
 ### FringeTact: Contact and Force Sensing with Photoelastic Imaging
 folder: FringeTact
 name: FringeTact
-lead: Feimei Chen
-members: Asif Sijan | Munir Zarea | Roxanne Kate Balanay | Riki MacMillan | Christian Moore | Tyler R. Ray | Frankie Zhu | Akshat Dave | Tianlu Wang
+lead: Feimei Chen | Asif Sijan
+members: Munir Zarea | Roxanne Kate Balanay | Riki MacMillan | Christian Moore | Tyler R. Ray | Frankie Zhu | Akshat Dave | Tianlu Wang
 pi: Huaijin Chen
 short: A transparent tactile sensor reads patterns of light to locate contact and estimate normal and shear forces.
 description: When an object presses on a photoelastic block, stress changes the polarization of light passing through it. Front and side cameras observe the resulting fringes. The same transparent surface also lets a camera see the object in contact.
