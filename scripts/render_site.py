@@ -4,6 +4,7 @@ import re
 import sys
 import unicodedata
 from datetime import date
+from hashlib import sha256
 from html import escape
 from pathlib import Path
 from string import Template
@@ -11,6 +12,7 @@ from string import Template
 ROOT = Path(__file__).resolve().parents[1]
 DIST = Path(sys.argv[1]) if __name__ == "__main__" and len(sys.argv) > 1 else ROOT / "dist"
 SHELL = Template((ROOT / "index.html").read_text())
+STYLES_VERSION = sha256((ROOT / "styles.css").read_bytes()).hexdigest()[:12]
 NAV = {"": "Home", "research": "Research", "publications": "Publications",
        "people": "People", "news": "News", "contact": "Contact"}
 GROUP_LABELS = {"PhD": "PhD students", "Masters": "Master’s students",
@@ -115,7 +117,7 @@ def page(route, title, description, body):
     folder = DIST / route
     folder.mkdir(parents=True, exist_ok=True)
     output = SHELL.substitute(root=root, title=escape(title + " · CIRP Lab" if route else "CIRP Lab · University of Hawaiʻi at Mānoa"),
-                              description=escape(description), legacy="" if route else LEGACY,
+                              description=escape(description), styles_version=STYLES_VERSION, legacy="" if route else LEGACY,
                               nav="".join(nav), content=body)
     (folder / "index.html").write_text(output)
 
@@ -298,7 +300,7 @@ def home(projects, people, items, pubs):
     Our work spans robotic perception and scientific discovery, from mapping contact forces with polarized light to tracking changes in materials with X-ray diffraction.</p>
     <p class="byline">Led by {link("people/#huaijin-chen", "Huaijin Chen")} at the University of Hawaiʻi at Mānoa.</p>
     <div class="hero-links">{link("#research-directions", "Explore our research")}{link("contact/#prospective-students", "Join the lab")}</div>
-    <img class="hero-logo" src="images/cirp-hero.webp" width="576" height="576" alt=""></section>'''
+    <img class="hero-logo" src="images/cirp-hero.webp" width="144" height="144" alt=""></section>'''
     content += '<section class="section" id="lab-news"><header class="home-heading"><span><img class="news-mark" src="images/cirp-mark.png" width="36" height="36" alt=""></span><h2>Lab news</h2>' + link("news/", "All news →") + '</header>'
     for stamp, title, _ in items[:5]:
         content += f'<div class="news-row">{news_time(stamp)}{link("news/#" + news_anchor(stamp, title), title)}</div>'
