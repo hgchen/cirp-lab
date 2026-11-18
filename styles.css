@@ -107,7 +107,8 @@ nav a[aria-current] {color:var(--green);font-weight:700;text-decoration:underlin
 .work-grid .card h3 a:hover {text-decoration:underline}
 .work-more {margin-top:16px;text-align:right;font:12px/1.5 var(--mono)}
 .work-link {display:block;color:var(--ink);text-decoration:none}
-.work-link img {width:100%;aspect-ratio:1.85;object-fit:contain;background:#fff;border:1px solid var(--line)}
+.work-link img,.work-grid video {display:block;width:100%;aspect-ratio:1.85;object-fit:contain;background:#fff;border:1px solid var(--line)}
+.work-grid video {background:#101213}
 .work-link .metadata {display:block;margin:12px 0 5px}
 .work-link h3 {font-size:clamp(17px,1.55vw,20px);line-height:1.23;text-wrap:pretty}
 .work-link:hover,.work-link:focus-visible {text-decoration:none}
@@ -131,6 +132,7 @@ time[data-quarter="4"] {color:light-dark(#845d43,#dab9a2)}
 .paper-figure {margin:0 0 26px}
 .paper-figure > a {display:block;border:1px solid var(--line);background:white;padding:10px}
 .paper-figure img {max-height:600px;object-fit:contain;margin:auto}
+.paper-figure video {display:block;width:100%;aspect-ratio:16/9;background:#101213}
 figcaption {margin-top:7px}
 .paper-extra,.people,.gallery,.visit {display:grid;gap:26px}
 .paper-extra {grid-template-columns:1.5fr 1fr;gap:8%}

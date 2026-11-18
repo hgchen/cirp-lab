@@ -18,8 +18,8 @@ NAV = {"": "Home", "research": "Research", "publications": "Publications",
 GROUP_LABELS = {"PhD": "PhD students", "Masters": "Master’s students",
                 "Undergrads": "Undergraduates", "Visiting Students": "Visiting students"}
 WORK_CAPTIONS = {
-    "kalra2026_3ptv2": "3PTv2 pose estimates on a YCB-Video test frame.",
-    "kalra2026_3pt": "3PT detects, segments and estimates the pose of metal parts.",
+    "kalra2026_3ptv2": "A robot locates a charging port, estimates its pose and inserts the plug on three electric vehicles.",
+    "kalra2026_3pt": "3PT estimates the poses of a pile of metal parts.",
     "motsoehli2025simulating": "A simulated lens flare in a dashcam recording.",
 }
 LAB = "Computational Imaging and Robotic Perception Lab"
@@ -169,6 +169,11 @@ def figure(path, caption):
     <img src="{escape(path)}" alt="{escape(caption)}" loading="lazy"></a><figcaption>{escape(caption)}</figcaption></figure>'''
 
 
+def video_player(src, poster, label):
+    return (f'<video controls playsinline preload="none" poster="{escape(poster)}" '
+            f'src="{escape(src)}" aria-label="{escape(label)}">{link(src, "Open video")}</video>')
+
+
 def research(projects, people):
     cards = []
     directory = {person["title"] for members in people.values() for person in members}
@@ -183,6 +188,10 @@ def research(projects, people):
             if project.get("preview_caption"):
                 body += figure("../../" + project["preview"], project["preview_caption"])
             body += figure("../../" + folder + cover, project.get("caption", project.get("name", title)))
+            if project.get("video"):
+                base = "../../" + folder
+                player = video_player(base + project["video"], base + project["video_poster"], title + " demonstration")
+                body += f'<figure class="paper-figure">{player}<figcaption>{escape(project["video_caption"])}</figcaption></figure>'
             desc = f'<section class="section"><div class="paper-extra"><div><h2>Project overview</h2><p>{escape(project["description"])}</p>'
             if project.get("approach"):
                 desc += f'<h3>Method</h3><p>{escape(project["approach"])}</p>'
@@ -311,10 +320,16 @@ def home(projects, people, items, pubs):
         key = item["key"]
         if key not in WORK_CAPTIONS:
             continue
+        path = f"images/previews/{key}.webp"
+        version = sha256((ROOT / path).read_bytes()).hexdigest()[:12]
+        preview = f"{path}?v={version}"
+        paper_link = f'<a class="work-link" href="publications/#{escape(key)}">'
+        if item.get("video", "").lower().endswith(".mp4"):
+            media = video_player(item["video"], preview, WORK_CAPTIONS[key]) + paper_link
+        else:
+            media = paper_link + f'<img src="{escape(preview)}" alt="{escape(WORK_CAPTIONS[key])}" loading="lazy" decoding="async">'
         venue = item.get("abbr") or item.get("booktitle") or item.get("journal", "")
-        content += (f'<article><a class="work-link" href="publications/#{escape(key)}">'
-                    f'<img src="images/previews/{escape(key)}.webp" alt="{escape(WORK_CAPTIONS[key])}" loading="lazy" decoding="async">'
-                    f'<span class="metadata">{escape(venue)} · {escape(item["year"])}</span>'
+        content += (f'<article>{media}<span class="metadata">{escape(venue)} · {escape(item["year"])}</span>'
                     f'<h3>{escape(item["title"])}</h3></a></article>')
     content += '</div><p class="work-more">' + link('publications/', 'All publications →') + '</p></section>'
     content += '<section class="section" id="the-group">' + home_heading("People", "The group", "people/", "People & alumni") + '<dl class="roster">'

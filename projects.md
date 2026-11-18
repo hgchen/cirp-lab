@@ -16,6 +16,9 @@ preview: images/previews/fringetact.webp
 summary: FringeTact reads patterns of polarized light in a transparent sensor to locate contact and measure forces both into and across its surface.
 cover: contact-force.webp
 caption: Front and side views of the sensor, simulated fringes and predicted contact maps during a sphere drag. Arrows show shear direction.
+video: contact-demo.mp4
+video_poster: contact-demo-poster.webp
+video_caption: Real camera footage and predicted fringe patterns are shown side by side as the load changes. The plot tracks force over time.
 detail: sensor.webp
 detail_caption: Two cameras view the photoelastic cube through crossed polarizers. The exploded view shows the optical and mechanical components.
 ---
