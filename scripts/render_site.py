@@ -301,7 +301,7 @@ def publication(item):
     title = link(landing, item["title"]) if landing else escape(item["title"])
     venue = item.get("booktitle") or item.get("journal") or item.get("publisher") or item.get("abbr", "")
     links = []
-    for k, label in [("pdf", "PDF"), ("doi", "DOI"), ("project", "Project"), ("code", "Code"), ("model", "Model"),
+    for k, label in [("pdf", item.get("pdf_label", "PDF")), ("doi", "DOI"), ("project", "Project"), ("code", "Code"), ("model", "Model"),
                      ("data", "Data"), ("website", "Link"), ("arxiv", "arXiv"), ("slides", "Slides"), ("video", "Video"),
                      ("workshop", "Workshop"), ("results", "Benchmark results")]:
         if k in item:
@@ -312,7 +312,7 @@ def publication(item):
                 url = "https://doi.org/" + url
             if url.startswith("https://web.archive.org/"):
                 label += " (archived)"
-            links.append(f'<a class="res-{k}" href="{escape(url)}">{label}</a>')
+            links.append(f'<a class="res-{k}" href="{escape(url)}">{escape(label)}</a>')
     citation = ""
     if item.get("bibtex_show", "true").lower() != "false":
         citation = f'<details class="citation"><summary>BibTeX</summary><pre><code>{escape(item["bibtex"])}</code></pre></details>'
