@@ -59,7 +59,9 @@ field_caption: Members of the field team observing palms in Hawaiʻi.
 name: Field robotics for palm health
 selected_work: 1
 preview: images/previews/crb-symposium-demo.webp
+preview_fit: cover
 caption: The team demonstrates a robotic arm and palm simulation.
+gallery_title: Simulation and fieldwork
 gallery_caption_frc_2: A team member uses the physical arm to control the simulated arm.
 gallery_caption_frc_3: A palm tree and nearby test objects in the simulation.
 summary: We are developing a palm-climbing robot to inspect trees and treat coconut rhinoceros beetle infestations.

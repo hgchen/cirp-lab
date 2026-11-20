@@ -175,14 +175,16 @@ def card(project, root, theme=None):
     category = f'<p class="category">{link(root + "research/#" + slug(theme), theme)}</p>' if theme else ""
     headline = project.get("question", title) if theme else title
     summary = project.get("summary", project["short"]) if theme else project["short"]
-    return f'''<article class="card"><a class="plate" href="{url}" aria-label="View {escape(title)}">
+    plate = "plate photo-preview" if project.get("preview_fit") == "cover" else "plate"
+    return f'''<article class="card"><a class="{plate}" href="{url}" aria-label="View {escape(title)}">
     <img loading="lazy" src="{escape(src)}" alt=""></a><div class="card-copy">{category}
     <h3>{link(url, headline)}</h3><p>{escape(summary)}</p></div></article>'''
 
 
-def figure(path, caption):
-    return f'''<figure class="paper-figure"><a href="{escape(path)}" aria-label="Open full-size figure: {escape(caption)}">
-    <img src="{escape(path)}" alt="{escape(caption)}" loading="lazy"></a><figcaption>{escape(caption)}</figcaption></figure>'''
+def figure(path, caption, kind=""):
+    loading = 'fetchpriority="high"' if kind == "project-hero" else 'loading="lazy"'
+    return f'''<figure class="paper-figure {kind}"><a href="{escape(path)}" aria-label="Open full-size figure: {escape(caption)}">
+    <img src="{escape(path)}" alt="{escape(caption)}" {loading} decoding="async"></a><figcaption>{escape(caption)}</figcaption></figure>'''
 
 
 def video_player(src, poster, label):
@@ -202,19 +204,42 @@ def research(projects, people):
             title = project["title"]
             crumb = '<p class="crumb">' + link("../", "Research") + " / " + escape(theme) + "</p>"
             body = page_head(title, project["short"], crumb, project_website(project))
-            if project.get("preview_caption"):
-                body += figure("../../" + project["preview"], project["preview_caption"])
-            body += figure("../../" + folder + cover, project.get("caption", project.get("name", title)))
+            body += figure("../../" + folder + cover, project.get("caption", project.get("name", title)), "project-hero")
+            body += f'<section class="section project-overview"><h2>Project overview</h2><p>{escape(project["description"])}</p>'
+            if project.get("approach"):
+                body += f'<h3>Method</h3><p>{escape(project["approach"])}</p>'
+            if related := projects_by_folder.get(project.get("related")):
+                name = related.get("name", related["title"])
+                body += f'<p>{link("../../" + project_path(related), "Related project · " + name)}</p>'
+            body += '</section>'
+
+            media = []
             if project.get("video"):
                 base = "../../" + folder
                 player = video_player(base + project["video"], base + project["video_poster"], title + " demonstration")
-                body += f'<figure class="paper-figure">{player}<figcaption>{escape(project["video_caption"])}</figcaption></figure>'
-            desc = f'<section class="section"><div class="paper-extra"><div><h2>Project overview</h2><p>{escape(project["description"])}</p>'
-            if project.get("approach"):
-                desc += f'<h3>Method</h3><p>{escape(project["approach"])}</p>'
-            if related := projects_by_folder.get(project.get("related")):
-                name = related.get("name", related["title"])
-                desc += f'<p>{link("../../" + project_path(related), "Related project · " + name)}</p>'
+                media.append(f'<figure class="paper-figure project-feature">{player}<figcaption>{escape(project["video_caption"])}</figcaption></figure>')
+            if project.get("preview_caption"):
+                media.append(figure("../../" + project["preview"], project["preview_caption"], "project-feature"))
+            if project.get("detail"):
+                media.append(figure("../../" + folder + project["detail"], project["detail_caption"], "project-feature"))
+            else:
+                gallery = []
+                for image in images:
+                    if image == cover:
+                        continue
+                    stem = Path(image).stem
+                    caption_key = "gallery_caption_" + slug(stem).replace("-", "_")
+                    caption = project.get(caption_key, stem.replace("_", " ").replace("-", " "))
+                    gallery.append(figure("../../" + folder + image, caption))
+                if gallery:
+                    columns = 3 if len(gallery) == 3 or len(gallery) >= 5 else 2
+                    media.append(f'<div class="project-gallery" data-columns="{columns}">' + "".join(gallery) + "</div>")
+            if project.get("field_photo"):
+                media.append(figure("../../" + project["field_photo"], project["field_caption"], "project-feature project-field"))
+            if media:
+                media_title = project.get("gallery_title", "Project media")
+                body += '<section class="section project-media">' + heading(media_title) + "".join(media) + "</section>"
+
             credits = []
             for label, field in [("Project lead", "lead"), ("Principal investigator", "pi"), ("Advisors", "advisors"),
                                  ("Contributors", "members"), ("Collaborators", "collaborators")]:
@@ -225,24 +250,7 @@ def research(projects, people):
                     links = [link("../../people/#" + slug(n), n) if n in directory else escape(n) for n in names]
                     label = project.get(field + "_label", label)
                     credits.append(f'<p><strong>{escape(label)}</strong><br>' + " · ".join(links) + "</p>")
-            body += desc + '</div><div><h2>Project team</h2>' + "".join(credits) + '</div></div></section>'
-            if project.get("detail"):
-                body += figure("../../" + folder + project["detail"], project["detail_caption"])
-            elif len(images) > 1:
-                gallery = []
-                for image in images:
-                    if image == cover:
-                        continue
-                    stem = Path(image).stem
-                    caption_key = "gallery_caption_" + slug(stem).replace("-", "_")
-                    caption = project.get(caption_key, stem.replace("_", " ").replace("-", " "))
-                    gallery.append(figure("../../" + folder + image, caption))
-                grid = '<div class="gallery">' + "".join(gallery) + "</div>"
-                if gallery_title := project.get("gallery_title"):
-                    grid = '<section class="section">' + heading(gallery_title) + grid + "</section>"
-                body += grid
-            if project.get("field_photo"):
-                body += figure("../../" + project["field_photo"], project["field_caption"])
+            body += '<section class="section project-team" id="project-team"><h2>Project team</h2><div>' + "".join(credits) + '</div></section>'
             page(project_path(project), title, project["short"], body)
         cards.append("</div></section>")
     jump = '<div class="jump">' + "".join(link("#" + slug(theme), theme) for theme in projects) + "</div>"
@@ -366,10 +374,10 @@ def home_heading(label, title, url="", action=""):
     return f'<header class="home-heading"><span>{escape(label)}</span><h2>{escape(title)}</h2>{more}</header>'
 
 
-def work_card(title, href, path, caption, metadata, summary, video="", resources=()):
+def work_card(title, href, path, caption, metadata, summary, video="", resources=(), photo_preview=False):
     version = sha256((ROOT / path).read_bytes()).hexdigest()[:12]
     preview = f"{path}?v={version}"
-    work_link = f'<a class="work-link" href="{escape(href)}">'
+    work_link = f'<a class="work-link{" photo-preview" if photo_preview else ""}" href="{escape(href)}">'
     if video.lower().endswith(".mp4"):
         media = video_player(video, preview, caption) + work_link
     else:
@@ -409,7 +417,8 @@ def home(projects, people, items, pubs):
         folder, cover, _ = project_media(project)
         name = project.get("name", project["title"])
         content += work_card(name, project_path(project), project.get("preview", folder + cover),
-                             project.get("caption", name), "Research project", project.get("summary", project["short"]))
+                             project.get("caption", name), "Research project", project.get("summary", project["short"]),
+                             photo_preview=project.get("preview_fit") == "cover")
     content += '</div><p class="work-more">' + link('publications/', 'All publications →') + '</p></section>'
     content += '<section class="section" id="the-group">' + home_heading("People", "The group", "people/", "People & alumni") + '<dl class="roster">'
     for group, members in people.items():
