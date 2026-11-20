@@ -313,44 +313,63 @@ def people_page(groups):
 def gallery_page():
     album = json.loads((ROOT / "gallery.json").read_text())
     tiles = []
-    for index, photo in enumerate(album["images"], 1):
-        name = Path(photo).stem
-        thumbnail = Path("images/gallery/thumbs") / (name + ".webp")
-        src = thumbnail.as_posix() if (ROOT / thumbnail).is_file() else photo
-        description = album.get("descriptions", {}).get(photo, f"CIRP Lab photo {index}")
-        tile = (
-            f'<a href="../{escape(photo)}" aria-label="Open full-size photo: {escape(description)}">'
-            f'<img src="../{escape(src)}" alt="{escape(description)}" loading="lazy" decoding="async"></a>'
+    for index, photo in enumerate(album["images"]):
+        path = Path(photo)
+        thumbnail = Path("images/gallery/thumbs") / (path.stem + ".webp")
+        src = thumbnail if (ROOT / thumbnail).is_file() else path
+        size = album.get("dimensions", {}).get(photo)
+        size_attrs = f' width="{size[0]}" height="{size[1]}"' if size else ""
+        ratio = size[0] / size[1] if size else 4 / 3
+        description = album.get("descriptions", {}).get(photo, f"CIRP Lab photo {index + 1}")
+        caption = album.get("captions", {}).get(photo, "")
+        loading = "eager" if index < 4 else "lazy"
+        tiles.append(
+            f'<figure id="{escape(path.stem)}" style="--ratio:{ratio:.6f}">'
+            f'<a href="../{escape(path.as_posix())}"><img src="../{escape(src.as_posix())}" '
+            f'alt="{escape(description)}"{size_attrs} loading="{loading}" decoding="async"></a>'
+            + (f'<figcaption>{escape(caption)}</figcaption>' if caption else "") + '</figure>'
         )
-        if caption := album.get("captions", {}).get(photo):
-            tile = f'<figure id="{escape(name)}">{tile}<figcaption>{escape(caption)}</figcaption></figure>'
-        tiles.append(tile)
-    intro = "Group photos and life around the lab."
-    controls = """
-    <div class="gallery-view" role="group" aria-label="Gallery view" hidden>
-      <button type="button" id="show-thumbnails" aria-pressed="true" aria-controls="gallery-thumbnails">Thumbnails</button>
-      <button type="button" id="show-slideshow" aria-pressed="false" aria-controls="gallery-slideshow">Slideshow</button>
-    </div>
+
+    def icon(name):
+        return (f'<svg width="20" height="20" aria-hidden="true">'
+                f'<use href="../images/gallery-controls.svg#{name}"/></svg>')
+
+    header = f"""
+    <header class="page-head gallery-head"><h1>Gallery</h1>
+      <div class="gallery-view" role="group" aria-label="Gallery view" hidden>
+        <button type="button" id="show-thumbnails" aria-label="Photo grid" title="Photo grid"
+          aria-pressed="true" aria-controls="gallery-thumbnails">{icon("grid")}</button>
+        <button type="button" id="show-slideshow" aria-label="Slideshow" title="Slideshow"
+          aria-pressed="false" aria-controls="gallery-slideshow">{icon("slides")}</button>
+      </div>
+    </header>
     """
-    slideshow = """
+    slideshow = f"""
     <section class="gallery-slideshow" id="gallery-slideshow" aria-label="Photo slideshow" tabindex="-1" hidden>
       <figure>
-        <a class="gallery-stage" id="slide-original" aria-label="Open full-size photo">
-          <img id="slide-image" alt="" decoding="async">
-        </a>
-        <figcaption id="slide-caption"></figcaption>
+        <div class="gallery-reel">
+          <div class="slide-peek" aria-hidden="true"><img id="previous-preview" alt=""></div>
+          <a class="gallery-stage" id="slide-original" aria-label="Open full-size photo" title="Open full-size photo">
+            <img id="slide-image" alt="">
+          </a>
+          <div class="slide-peek" aria-hidden="true"><img id="next-preview" alt=""></div>
+          <button type="button" id="slide-previous" aria-label="Previous photo" title="Previous photo">{icon("previous")}</button>
+          <button type="button" id="slide-next" aria-label="Next photo" title="Next photo">{icon("next")}</button>
+        </div>
+        <figcaption class="slide-footer">
+          <span id="slide-caption"></span>
+          <span class="slide-tools">
+            <span id="slide-position" role="status" aria-atomic="true"></span>
+            <button type="button" id="slide-play" aria-label="Play slideshow" title="Play slideshow">{icon("play")}</button>
+          </span>
+        </figcaption>
       </figure>
-      <div class="gallery-navigation" aria-label="Slideshow controls" role="group">
-        <button type="button" id="slide-previous" aria-label="Previous photo">← Previous</button>
-        <span id="slide-position" role="status" aria-atomic="true"></span>
-        <button type="button" id="slide-next" aria-label="Next photo">Next →</button>
-        <button type="button" id="slide-play">Play slideshow</button>
-      </div>
     </section>
-    <script src="slideshow.js" defer></script>
     """
-    thumbnails = '<div class="gallery lab-gallery" id="gallery-thumbnails">' + "".join(tiles) + "</div>"
-    page("gallery", "Gallery", intro, page_head("Gallery", intro) + controls + thumbnails + slideshow)
+    grid = '<div class="lab-gallery" id="gallery-thumbnails">' + "".join(tiles) + "</div>"
+    version = sha256((ROOT / "scripts/gallery-slideshow.js").read_bytes()).hexdigest()[:12]
+    script = f'<script src="slideshow.js?v={version}" defer></script>'
+    page("gallery", "Gallery", "Group photos and life around the lab.", header + grid + slideshow + script)
 
 
 def publication(item):

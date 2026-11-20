@@ -61,5 +61,29 @@
     "images/gallery/hawaii-island-farm-visit.webp": "Visiting a farm on Hawaiʻi Island to learn what growers need from automation.",
     "images/gallery/construction-visit.webp": "A visit to Hawaiian Dredging Construction Company to discuss applications of robotic perception.",
     "images/gallery/usda-research-center-visit.webp": "A visit to the USDA Pacific Basin Agricultural Research Center in Hilo to discuss robotics for pest control."
+  },
+  "dimensions": {
+    "images/gallery/corl-2026-lockhart-bbq.webp": [1440, 1080],
+    "images/gallery/corl-2026-proto-town.webp": [1440, 1080],
+    "images/gallery/end-of-semester-lunch-2026.webp": [1440, 1080],
+    "images/gallery/early-lab-group-2024.webp": [1440, 1080],
+    "images/gallery/rss-2025-dinner.webp": [1440, 1080],
+    "images/gallery/assembling-amiga.webp": [1080, 1440],
+    "images/gallery/hilo-field-trip-2026.webp": [1600, 1200],
+    "images/gallery/himb-field-trip-2026.webp": [1080, 1440],
+    "images/gallery/fish-measurement.webp": [1080, 1440],
+    "images/gallery/cacao-farm-visit.webp": [1440, 1080],
+    "images/gallery/hawaii-island-farm-visit.webp": [1440, 1080],
+    "images/gallery/construction-visit.webp": [1080, 1440],
+    "images/gallery/usda-research-center-visit.webp": [1440, 1080],
+    "images/gallery/group_1.jpg": [2000, 1500],
+    "images/gallery/group_2.jpg": [1126, 2000],
+    "images/gallery/group_3.jpg": [2000, 1500],
+    "images/gallery/group_4.jpeg": [768, 1024],
+    "images/gallery/group_5.jpeg": [768, 1024],
+    "images/gallery/group_6.jpg": [4000, 2252],
+    "images/gallery/group_7.jpeg": [1024, 768],
+    "images/events/iccv-2025-uh-manoa-group.webp": [1500, 1125],
+    "images/events/aps-plant-health-2025-workshop.webp": [1400, 733]
   }
 }
