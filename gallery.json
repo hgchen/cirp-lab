@@ -2,6 +2,7 @@
   "images": [
     "images/gallery/end-of-semester-lunch-2026.webp",
     "images/gallery/early-lab-group-2024.webp",
+    "images/gallery/rss-2025-dinner.webp",
     "images/gallery/assembling-amiga.webp",
     "images/gallery/hilo-field-trip-2026.webp",
     "images/gallery/himb-field-trip-2026.webp",
@@ -22,6 +23,7 @@
   "descriptions": {
     "images/gallery/end-of-semester-lunch-2026.webp": "Lab members gathered around a restaurant table.",
     "images/gallery/early-lab-group-2024.webp": "Five lab members pose together on campus.",
+    "images/gallery/rss-2025-dinner.webp": "Researchers gather around a dinner table during RSS 2025.",
     "images/gallery/assembling-amiga.webp": "Team members work on a wheeled robot in the lab.",
     "images/gallery/hilo-field-trip-2026.webp": "Four researchers with an underwater robot on the rocky shore in Hilo.",
     "images/gallery/himb-field-trip-2026.webp": "Two researchers on a boat with equipment for underwater imaging.",
@@ -42,6 +44,7 @@
   "captions": {
     "images/gallery/end-of-semester-lunch-2026.webp": "End-of-semester lab lunch, May 2026.",
     "images/gallery/early-lab-group-2024.webp": "An early CIRP Lab group photo, November 2024.",
+    "images/gallery/rss-2025-dinner.webp": "Kai Garcia and Huaijin Chen had dinner with Tobi Delbrück and his group during RSS 2025.",
     "images/gallery/assembling-amiga.webp": "Assembling the Farm-ng Amiga robot.",
     "images/gallery/hilo-field-trip-2026.webp": "Hilo field trip, March 2026. Tianlu Wang, Huaijin Chen, Feimei Chen, and Munir Zarea.",
     "images/gallery/himb-field-trip-2026.webp": "Feimei Chen and Munir Zarea at the Hawaiʻi Institute of Marine Biology on Oʻahu, March 2026.",
