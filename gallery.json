@@ -20,7 +20,6 @@
     "images/gallery/group_3.jpg",
     "images/gallery/group_4.jpeg",
     "images/gallery/group_5.jpeg",
-    "images/gallery/group_6.jpg",
     "images/gallery/group_7.jpeg",
     "images/events/iccv-2025-uh-manoa-group.webp",
     "images/events/aps-plant-health-2025-workshop.webp"
@@ -41,14 +40,6 @@
     "images/gallery/hawaii-island-farm-visit.webp": "Visitors pose in front of a painted farm sign.",
     "images/gallery/construction-visit.webp": "Five visitors pose in front of the Hawaiian Dredging Construction Company sign.",
     "images/gallery/usda-research-center-visit.webp": "Visitors gather outside the USDA agricultural research center.",
-    "images/gallery/group_1.jpg": "Lab members share a meal.",
-    "images/gallery/group_2.jpg": "A lab member tries a camera rig.",
-    "images/gallery/group_3.jpg": "Lab members pose with their projects.",
-    "images/gallery/group_4.jpeg": "A lab member with a research poster.",
-    "images/gallery/group_5.jpeg": "A lab member poses beside a poster.",
-    "images/gallery/group_6.jpg": "A camera demonstration in the lab.",
-    "images/gallery/group_7.jpeg": "Visitors try a hands-on lab demo.",
-    "images/events/iccv-2025-uh-manoa-group.webp": "Participants pose for a group photo under trees.",
     "images/events/aps-plant-health-2025-workshop.webp": "Plant Health 2025 workshop group photo."
   },
   "captions": {
@@ -65,7 +56,15 @@
     "images/gallery/hawaii-island-farm-visit.webp": "Visiting a farm to learn what growers need from automation.",
     "images/gallery/construction-visit.webp": "A visit to Hawaiian Dredging Construction Company to discuss applications of robotic perception.",
     "images/gallery/usda-research-center-visit.webp": "A visit to the USDA Pacific Basin Agricultural Research Center to discuss robotics for pest control.",
-    "images/events/iccv-2025-uh-manoa-group.webp": "Group photo from the After-ICCV AI/CV Gathering."
+    "images/events/iccv-2025-uh-manoa-group.webp": "Group photo from the After-ICCV AI/CV Gathering.",
+    "images/gallery/group_7.jpeg": "Undergraduate students Bibiana Garcia and Michaelyn Tolmie setting up their digital Pepper's Ghost demo for the capstone presentation.",
+    "images/gallery/group_4.jpeg": "Feimei Chen presenting her poster at ICS Project Day.",
+    "images/gallery/group_5.jpeg": "Hok Wai Chan presenting his work at the ICS Project Day.",
+    "images/gallery/group_2.jpg": "Huaijin Chen trying out Bibiana Garcia and Michaelyn Tolmie's prototype telepresence project demo.",
+    "images/events/iccv-2025-uh-manoa-group.webp": "ICCV 2025 after-conference event hosted by CIRP Lab and ICS.",
+    "images/events/aps-plant-health-2025-workshop.webp": "Plant Health 2025 Python and machine learning workshop group photo. Huaijin Chen co-hosted the workshop with CTAHR colleagues Xing Wei and Josiah Marquez.",    
+    "images/gallery/group_3.jpg": "CIRP Lab members appreciating NVIDIA's equipment donation as part of the NVIDIA academic research grant.",
+    "images/gallery/group_1.jpg": "Lab group lunch March 2024."
   },
   "locations": {
     "images/gallery/corl-2026-lockhart-bbq.webp": "Lockhart, Texas",
