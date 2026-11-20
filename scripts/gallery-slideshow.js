@@ -7,7 +7,7 @@ const previousButton = document.querySelector("#slide-previous");
 const nextButton = document.querySelector("#slide-next");
 const playButton = document.querySelector("#slide-play");
 const reel = document.querySelector(".gallery-reel");
-const wheel = document.querySelector(".gallery-wheel");
+const strip = document.querySelector(".gallery-strip");
 const slideCaption = document.querySelector("#slide-caption");
 const slidePlace = document.querySelector("#slide-place");
 const slideInfo = document.querySelector(".slide-info");
@@ -17,13 +17,13 @@ const photos = [...thumbnails.querySelectorAll("figure")].map(figure => {
   const image = figure.querySelector("img");
   const link = figure.querySelector("a");
   const panel = new Image();
-  panel.className = "wheel-photo";
+  panel.className = "strip-photo";
   panel.alt = "";
   panel.hidden = true;
   panel.addEventListener("error", () => {
     if (panel.src === image.src && panel.src !== link.href) panel.src = link.href;
   });
-  wheel.append(panel);
+  strip.append(panel);
   return {
     panel,
     ratio: Number(figure.style.getPropertyValue("--ratio")) || 4 / 3,
@@ -44,7 +44,8 @@ let position = target;
 let index = -1;
 let frame = 0;
 let timer = null;
-let width, desktopHeight, arcLength;
+let width, stripWidth;
+const gap = 4;
 
 function selectPhoto(current) {
   if (current === index) return;
@@ -67,57 +68,57 @@ function selectPhoto(current) {
   }
 }
 
-function drawWheel() {
-  const left = photos[wrap(Math.floor(position))];
-  const right = photos[wrap(Math.floor(position) + 1)];
-  const fraction = position - Math.floor(position);
-  const angle = left.angle + fraction * (left.halfArc + right.halfArc);
-  const height = portraitPhone.matches
-    ? width * ((1 - fraction) / left.ratio + fraction / right.ratio)
-    : desktopHeight;
-  const centerDepth = left.depth + (right.depth - left.depth) * fraction;
-  reel.style.height = height + "px";
-  wheel.style.transform = `translateZ(${-centerDepth * height}px)`;
+function drawStrip() {
+  const leftIndex = Math.floor(position);
+  const left = photos[wrap(leftIndex)];
+  const right = photos[wrap(leftIndex + 1)];
+  const fraction = position - leftIndex;
+  const distance = (left.width + right.width) / 2 + gap;
+  const center = left.center + fraction * distance;
+  const current = fraction < 0.5 ? left : right;
+  reel.style.height = (left.height + (right.height - left.height) * fraction) + "px";
+  reel.style.setProperty("--active-width", current.width + "px");
+
   for (const photo of photos) {
-    // Use the nearest copy of the angle across the album's wrap point.
-    let offset = photo.angle - angle;
-    offset -= arcLength * Math.round(offset / arcLength);
+    // When the album loops, place each photo on the closest side of the frame.
+    let offset = photo.center - center;
+    offset -= stripWidth * Math.round(offset / stripWidth);
     const panel = photo.panel;
-    panel.hidden = Math.abs(offset) > Math.PI / 2 + photo.halfArc;
+    panel.hidden = Math.abs(offset) > width + photo.width / 2;
     if (panel.hidden) continue;
     if (!panel.hasAttribute("src")) panel.src = photo.thumbnail.src;
-    panel.style.width = height * photo.ratio + "px";
-    panel.style.transform = `rotateY(${offset}rad) translateZ(${photo.depth * height}px) translateX(-50%)`;
+    const x = offset - photo.width / 2;
+    panel.style.transform = `translateX(${x}px)`;
+    if (photo === current) slideOriginal.style.transform = panel.style.transform;
   }
   selectPhoto(wrap(Math.round(position)));
-  reel.style.setProperty("--active-width", Math.min(width, photos[index].ratio * height) + "px");
 }
 
-function layoutWheel() {
+function layoutStrip() {
   if (slideshow.hidden) return;
   width = reel.clientWidth;
   const widest = Math.max(...photos.map(photo => photo.ratio));
-  desktopHeight = Math.min(innerHeight * 0.55, 500, (width - 8) / Math.max(1.92, widest));
-  const radius = Math.max(1.7, widest * 0.6, width / desktopHeight);
-  arcLength = 0;
-  // Each photo is a chord of the same circle. Its width determines its arc.
+  const preview = Math.min(70, width * 0.065);
+  const height = Math.min(innerHeight * 0.55, 500, (width - 2 * preview) / Math.max(1.92, widest));
+  stripWidth = 0;
   for (const photo of photos) {
-    photo.halfArc = Math.asin((photo.ratio + 0.006) / (2 * radius));
-    photo.angle = arcLength + photo.halfArc;
-    photo.depth = radius * Math.cos(photo.halfArc);
-    arcLength += 2 * photo.halfArc;
+    photo.width = portraitPhone.matches ? width : height * photo.ratio;
+    photo.height = photo.width / photo.ratio;
+    photo.center = stripWidth + photo.width / 2;
+    photo.panel.style.width = photo.width + "px";
+    stripWidth += photo.width + gap;
   }
-  drawWheel();
+  drawStrip();
 }
 
 function settle() {
   cancelAnimationFrame(frame);
   target = wrap(target);
   position = target;
-  if (!slideshow.hidden) drawWheel();
+  if (!slideshow.hidden) drawStrip();
 }
 
-function rotate(direction) {
+function slideBy(direction) {
   target += direction;
   cancelAnimationFrame(frame);
   if (reducedMotion.matches) {
@@ -126,7 +127,7 @@ function rotate(direction) {
   }
   const from = position;
   const start = performance.now();
-  const duration = Math.min(600, 420 + 45 * Math.abs(target - from));
+  const duration = Math.min(400, 220 + 55 * Math.abs(target - from));
   function tick(now) {
     const t = Math.min(1, (now - start) / duration);
     if (t === 1) {
@@ -134,7 +135,7 @@ function rotate(direction) {
       return;
     }
     position = from + (target - from) * t * t * (3 - 2 * t);
-    drawWheel();
+    drawStrip();
     frame = requestAnimationFrame(tick);
   }
   frame = requestAnimationFrame(tick);
@@ -142,7 +143,7 @@ function rotate(direction) {
 
 function setPlaying(playing) {
   clearInterval(timer);
-  timer = playing ? setInterval(() => rotate(1), 5000) : null;
+  timer = playing ? setInterval(() => slideBy(1), 5000) : null;
   const label = playing ? "Pause slideshow" : "Play slideshow";
   playButton.setAttribute("aria-label", label);
   playButton.title = label;
@@ -152,7 +153,7 @@ function setPlaying(playing) {
 
 function step(direction) {
   setPlaying(false);
-  rotate(direction);
+  slideBy(direction);
 }
 
 function setSlideshow(open, focusPhoto = false) {
@@ -163,7 +164,7 @@ function setSlideshow(open, focusPhoto = false) {
   slideshowButton.setAttribute("aria-pressed", String(open));
   if (open) {
     position = target;
-    layoutWheel();
+    layoutStrip();
     slideshow.focus({ preventScroll: true });
     if (viewButtons.getBoundingClientRect().top < 0) viewButtons.scrollIntoView({ block: "start" });
   } else {
@@ -178,7 +179,7 @@ if (photos.length) {
   reducedMotion.addEventListener("change", () => {
     if (reducedMotion.matches) settle();
   });
-  window.addEventListener("resize", layoutWheel);
+  window.addEventListener("resize", layoutStrip);
   viewButtons.hidden = false;
   thumbnails.classList.add("interactive");
   photos.forEach((photo, position) => {
