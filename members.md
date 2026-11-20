@@ -125,6 +125,13 @@ bio: Riki MacMillan is a Master's student in Computer Science. His research focu
 
 ## Undergrads
 
+### Lukas Moroz
+role: Undergraduate Researcher
+affiliation: University of Hawaii at Manoa
+tags: Information and Computer Sciences
+bio: Lukas Moroz is a computer science undergraduate at UH Mānoa.
+---
+
 ### Christian Komo
 role: Undergraduate Researcher
 affiliation: University of Hawai'i at Manoa
