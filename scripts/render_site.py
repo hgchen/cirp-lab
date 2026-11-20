@@ -14,8 +14,8 @@ DIST = Path(sys.argv[1]) if __name__ == "__main__" and len(sys.argv) > 1 else RO
 SHELL = Template((ROOT / "index.html").read_text())
 STYLES_VERSION = sha256((ROOT / "styles.css").read_bytes()).hexdigest()[:12]
 NAV = {"": "Home", "research": "Research", "publications": "Publications",
-       "people": "People", "news": "News", "outreach": "Outreach", "gallery": "Gallery",
-       "service": "Service", "contact": "Contact"}
+       "people": "People", "news": "News", "service": "Service & Outreach",
+       "gallery": "Gallery", "contact": "Contact"}
 GROUP_LABELS = {"PhD": "PhD students", "Masters": "Master’s students",
                 "Undergrads": "Undergraduates", "Visiting Students": "Visiting students"}
 LAB = "Computational Imaging and Robotic Perception Lab"
@@ -512,11 +512,24 @@ def main():
         content += f'<section class="section pub-year" data-year="{escape(year)}">' + heading(year) + "".join(publication(p) for p in pubs if p["year"] == year) + "</section>"
     content += '<script src="search.js" defer></script>'
     page("publications", "Publications", "Publications by members of CIRP Lab.", content)
-    outreach = (ROOT / "outreach.html").read_text()
-    page("outreach", "Outreach", "Student robotics and community projects from CIRP Lab.", page_head("Outreach") + outreach)
+    title = NAV["service"]
     service = (ROOT / "service.html").read_text()
-    service_intro = "We organize conferences and workshops and teach short courses in computer vision and machine learning."
-    page("service", "Service", service_intro, page_head("Service", service_intro) + service)
+    outreach = (ROOT / "outreach.html").read_text()
+    jump = '<div class="jump">' + link("#service", "Service") + link("#outreach", "Outreach") + "</div>"
+    content = page_head(title) + jump
+    content += '<section id="service">' + heading("Service") + service + "</section>"
+    content += '<section id="outreach">' + heading("Outreach") + outreach + "</section>"
+    page("service", title, "Conferences, workshops, student robotics and community projects from CIRP Lab.", content)
+
+    retired = DIST / "outreach"
+    retired.mkdir(exist_ok=True)
+    (retired / "index.html").write_text('''<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex">
+<link rel="canonical" href="../service/"><title>Service &amp; Outreach · CIRP Lab</title>
+<script>location.replace("../service/" + location.search + (location.hash || "#outreach"))</script>
+<meta http-equiv="refresh" content="0;url=../service/#outreach"></head>
+<body><a href="../service/#outreach">View outreach activities</a></body></html>
+''')
     contact = (ROOT / "contact.html").read_text()
     page("contact", "Contact & join", "Visit CIRP Lab or learn how to join the group.", page_head("Contact & join") + contact)
     home(projects, people, news, pubs)

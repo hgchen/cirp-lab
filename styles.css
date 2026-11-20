@@ -244,7 +244,7 @@ summary {color:var(--green);cursor:pointer;width:fit-content}
   .project-gallery[data-columns="3"] {grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 .pub,.news-item {padding:20px 0;border-top:1px solid var(--line)}
-.pub h3,.news-item h2 {font-size:clamp(21px,2vw,26px);margin:6px 0}
+.pub h3,.news-item h2,.service-item h3 {font-size:clamp(21px,2vw,26px);margin:6px 0}
 .service-photo > a {display:block;border-radius:8px}
 .news-item .prose:has(> .news-photos-featured) {max-width:none}
 .news-item .prose:has(> .news-photos-featured) > :is(p,ul) {max-width:80ch}
