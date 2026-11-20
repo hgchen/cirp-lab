@@ -6,6 +6,12 @@
 Two other UH Mānoa contributions appeared at the conference. Justin Fletcher’s [Telescopes are Optomechanical Robots](https://openreview.net/forum?id=RS2INStAhX) was also accepted as a main-conference poster. At the [UMI Arena workshop](https://umi-arena.airoa.io/accepted), Yosub Shin, Yuan Liu, and Igor Molybog presented a poster on head-camera glove tracking (P09) and a hands-on exhibit of the [YAM-UMI](https://github.com/YosubShin/yam-umi) device (D10).
 ---
 
+## 2026-10-01 | Riki MacMillan receives the Bubba Cook Award at SAFET 2026 {#2026-10-01-riki-macmillan-safet-2026}
+CIRP graduate researcher Riki MacMillan received the **Bubba Cook Award for Emerging Technology** at the 2026 Seafood and Fisheries Emerging Technologies (SAFET) Conference in Cebu, Philippines. In his September 9 talk, *Scalable Metric Measurement of Marine Life with Low-Cost Commodity Hardware*, he presented work on measuring marine life with affordable smartphone cameras. Huaijin Chen and UH Mānoa colleague Erik Franklin also joined the panel on emerging technologies.
+
+[SAFET award announcement](https://www.safet.fish/bubba-cook-award-for-emerging-technology-2026/) · [Panel recording](https://www.youtube.com/watch?v=AjQOYXbQYXo) · [Huaijin Chen’s conference recap](https://www.linkedin.com/posts/huaijinchen_safet2026-marineconservation-fisheriesscience-activity-7515553296754069504-KUXt)
+---
+
 ## 2026-07 | Thank you to USDA for supporting plant pathogen risk assessment ($154,517) {#2026-07-usda-aphis-supports-plant-pathogen-risk-assessment}
 Huaijin Chen is co-PI on a $154,517 USDA APHIS project to develop a machine learning decision-support tool for phytopathogen risk assessments.
 ---
