@@ -63,9 +63,10 @@ selected_work: 1
 preview: images/previews/crb-symposium-demo.webp
 preview_fit: cover
 caption: The team demonstrates a robotic arm and palm simulation.
-gallery_title: Simulation and fieldwork
+gallery_title: Robot development and fieldwork
 gallery_caption_frc_2: A team member uses the physical arm to control the simulated arm.
 gallery_caption_frc_3: A palm tree and nearby test objects in the simulation.
+gallery_caption_team_assembly: The UH Mānoa and University of Michigan teams assemble the palm-climbing robot for the 2026 Farm Robotics Challenge.
 summary: We are developing a palm-climbing robot to inspect trees and treat coconut rhinoceros beetle infestations.
 lead: Christian Moore
 pi: Huaijin Chen

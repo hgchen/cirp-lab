@@ -1,5 +1,7 @@
 {
   "images": [
+    "images/gallery/corl-2026-lockhart-bbq.webp",
+    "images/gallery/corl-2026-proto-town.webp",
     "images/gallery/end-of-semester-lunch-2026.webp",
     "images/gallery/early-lab-group-2024.webp",
     "images/gallery/rss-2025-dinner.webp",
@@ -22,6 +24,8 @@
     "images/events/aps-plant-health-2025-workshop.webp"
   ],
   "descriptions": {
+    "images/gallery/corl-2026-lockhart-bbq.webp": "Huaijin Chen, Kai Garcia, and UH alumni gather around a table at Black’s BBQ.",
+    "images/gallery/corl-2026-proto-town.webp": "Huaijin Chen and Kai Garcia stand beneath a Proto-Town sign.",
     "images/gallery/end-of-semester-lunch-2026.webp": "Lab members gathered around a restaurant table.",
     "images/gallery/early-lab-group-2024.webp": "Five lab members pose together on campus.",
     "images/gallery/rss-2025-dinner.webp": "Researchers gather around a dinner table during RSS 2025.",
@@ -44,6 +48,8 @@
     "images/events/aps-plant-health-2025-workshop.webp": "Plant Health 2025 workshop group photo."
   },
   "captions": {
+    "images/gallery/corl-2026-lockhart-bbq.webp": "Huaijin Chen and Kai Garcia with UH alumni at Black’s BBQ in Lockhart, Texas, during the CoRL 2026 trip.",
+    "images/gallery/corl-2026-proto-town.webp": "Huaijin Chen reunites with Kai Garcia at Proto-Town in Lockhart, Texas, during the CoRL 2026 trip.",
     "images/gallery/end-of-semester-lunch-2026.webp": "End-of-semester lab lunch, May 2026.",
     "images/gallery/early-lab-group-2024.webp": "An early CIRP Lab group photo, November 2024.",
     "images/gallery/rss-2025-dinner.webp": "Kai Garcia and Huaijin Chen had dinner with Tobi Delbrück and his group during RSS 2025.",
