@@ -87,8 +87,8 @@ related: FishPod
 lead: Ethan Chung
 pi: Huaijin Chen
 members: Vincent Chan
-short: We develop a low-cost computer vision pipeline for estimating fish length and volume from single images or videos using detection, segmentation, depth estimation, and 3D reconstruction.
-description: FishEye measures fish in 3D using consumer-grade devices such as smartphone cameras. The system detects and segments fish with deep learning. It uses transformer-based camera calibration and depth estimation to reconstruct fish in 3D from one or more images. It measures length from those reconstructions and can use a ping-pong ball as an optional scale reference. The goal is to provide practical, field-deployable fish measurement tools for sustainable fisheries, ecological research, and aquaculture monitoring.
+short: We’re developing a low-cost way to estimate a fish’s length and volume from a photo or video.
+description: FishEye uses deep learning to detect and segment fish in photos or videos from ordinary cameras, including smartphones. It uses transformer-based camera calibration and depth estimation to reconstruct each fish in 3D and estimate its length. A ping-pong ball can serve as a scale reference. We’re developing FishEye for field measurements in fisheries, ecological research, and aquaculture.
 caption: FishEye detects the fish, estimates depth, and reconstructs its body in 3D for measurement.
 ---
 
@@ -119,7 +119,7 @@ lead: Yang Qian
 pi: Huaijin Chen
 members: Christian Moore | Ethan Chung | Sean Hiroki Flynn | Riki MacMillan
 short: We use a robot and tablet in brief, standardized sessions with older adults to measure behavioral markers of cognitive concern that are difficult to capture with paper-based, tablet-only, or static voice-based screening.
-description: This project develops an embodied assessment platform for brief, standardized sessions with older adults. A humanoid robot delivers contingent speech, orienting cues, and task prompts, while a tablet captures response timing, task performance, and interaction events with high precision. The project measures clinically relevant behaviors, including speech, response timing, drawing, tapping, motion, and conversational adaptation, to study cognitive concern without directly diagnosing mild cognitive impairment (MCI).
+description: A humanoid robot introduces each task, directs the participant’s attention, and responds as the conversation unfolds. The tablet records answers, drawings, taps, and response times. We study these records alongside speech and movement to see how cognitive concerns relate to a participant’s responses. The study does not provide a clinical diagnosis of mild cognitive impairment (MCI).
 caption: The assessment platform combines a humanoid robot with a tablet for delivering tasks and recording responses.
 gallery_caption_cube_task_active_2026_04_14: The tablet shows the numbered and lettered circles used in the sequencing task.
 gallery_caption_cube_task_briefing_2026_04_14: The briefing shows participants how to connect the circles in order.
@@ -155,8 +155,8 @@ name: Learning ultrafast X-ray dynamics
 lead: Ethan Chung
 pi: Huaijin Chen
 members: Vincent Chan
-short: We develop physics-informed machine learning methods that connect atomistic simulations with ultrafast X-ray measurements for faster discovery and dynamics analysis.
-description: This project develops machine learning methods for interpreting ultrafast X-ray photon correlation spectroscopy (XPCS), which tracks structural changes over time from the atomic scale to the microscale. A central challenge is connecting atomistic simulations to quantities that XPCS can measure, especially in studies of the glass transition and supercooled liquids. Models learn from simulated dynamics and predict the temporal correlation functions that XPCS measures. This lets researchers compare simulations directly with experiments and study the microscopic processes behind changes in materials.
+short: We use physics-informed machine learning to compare how atoms move in simulations with what ultrafast X-ray experiments measure.
+description: Ultrafast X-ray photon correlation spectroscopy (XPCS) tracks how materials change over time, from atomic to microscopic scales. We train models on simulated atomic motion to predict the temporal correlation functions measured in XPCS experiments. That gives us a way to test simulations against measurements of supercooled liquids and materials undergoing the glass transition.
 caption: Simulated argon structures at different densities and temperatures.
 ---
 
@@ -167,7 +167,7 @@ lead: Joel Nicolow
 pi: Dr. Charles Fletcher
 members:
 short: We develop and test methods for mapping shorelines from satellite imagery across different coastal environments in Hawaiʻi and beyond.
-description: This project develops methods for mapping shorelines from satellite imagery and evaluates how well they work across regions. Coastal erosion is an urgent challenge in Hawaiʻi. Field and aerial surveys are costly and limited in coverage, and existing automated methods often work well only in certain regions or on certain types of coasts. The project combines reference shoreline positions from local and global sources with hand-annotated satellite scenes to compare foundation and pretrained geospatial vision models, lightweight neural networks, and traditional thresholding methods. The goal is to provide a standardized benchmark and more reliable open-source tools for researchers, coastal managers, and communities.
+description: Field and aerial surveys are costly, and a method that detects the shoreline on one coast can miss it on another. We use hand-labeled satellite images and reference shorelines from Hawaiʻi and elsewhere to compare geospatial foundation models, other pretrained vision models, lightweight neural networks, and traditional thresholding methods. We’re building a common benchmark and open-source mapping tools for researchers, coastal managers, and communities.
 caption: The map shows where shorelines in Hawaiʻi eroded or grew over a five-year period.
 gallery_caption_sds_shorelines_superimposed_on_drone_image: Shorelines derived from satellite imagery overlaid on a drone photo.
 gallery_caption_sandies_sds_example_and_transect_intersections: Examples of shoreline detection and intersections with coastal transects.
@@ -181,7 +181,7 @@ name: Modeling free-electron lasers
 lead: Ethan Chung
 pi: Huaijin Chen
 members:
-short: We build machine learning surrogate models to accelerate free-electron laser oscillator simulations and support faster cavity design, tuning, and optimization.
-description: Free-electron laser (FEL) oscillators are commonly modeled with computationally intensive tools such as GINGER. This project develops surrogate models to predict how changes in cavity geometry, including mirror spacing and cavity length, affect electron beam energy and the resulting radiation. The goal is to replace some full simulation sweeps so researchers can explore designs faster, tune the cavity in real time, and better control gain, stability, and spectral properties.
+short: We build surrogate models to speed up simulations of free-electron laser oscillators and help researchers tune the laser cavity.
+description: Testing a range of cavity designs in a simulator such as GINGER can take considerable computing time. We’re training models to predict how changes in mirror spacing and cavity length affect the electron beam energy and the radiation it produces. If the models can replace some full simulation sweeps, researchers could compare designs faster and tune the laser’s gain, stability, and spectrum in real time.
 caption: A free-electron laser oscillator showing the electron source, accelerator, undulator, and cavity mirrors.
 ---

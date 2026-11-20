@@ -32,7 +32,7 @@ function filterPapers() {
     count += shown;
   }
   clear.disabled = !query.value && !year.value;
-  status.textContent = count ? count + (count === 1 ? " publication" : " publications") : "No matching publications. Try another search or clear the filters.";
+  status.textContent = count ? count + (count === 1 ? " publication" : " publications") : "No matching publications.";
 }
 
 form.addEventListener("submit", event => { event.preventDefault(); filterPapers(); });

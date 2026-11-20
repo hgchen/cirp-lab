@@ -27,51 +27,36 @@ The Minderoo Foundation awarded $153,311 for an app that measures fish and recon
 ---
 
 ## 2026-03-18 | CIRP Lab receives a $50,000 gift from Google for 3D vision research in robotics {#2026-03-18-cirp-lab-receiving-a-50k-gift-from-google-for-research-in-3d-vision-for-robotics}
-CIRP Lab has received a **2026 research gift from Google** to support our work on **3D vision for robotics**.
-This support will help advance our research on visual perception for robots, including methods for **novel sensors**, **3D scene understanding**, **robotic manipulation**, and **real-world autonomy**.
-
-We are grateful to Google for supporting academic research and collaboration with the CIRP Lab.
+Thank you to Google for a **$50,000 research gift**. We’ll use it to develop new sensors and study how robots can use 3D vision to understand a scene, manipulate objects, and work autonomously.
 ---
 
 ## 2026-03-06 | One Paper Accepted at CVPR 2026
-Congratulations to lab member and PhD student **Agastya Kalra** on the acceptance of his first-author paper on **6-DoF object pose estimation** at **CVPR 2026**.
-The paper introduces a unified framework for detecting and segmenting objects and estimating their 6-DoF poses.
-This work demonstrates strong performance on **BOP benchmarks** and targets real-world robotics applications such as bin picking and precise insertion.
-
-Great work by Agastya and his collaborators.
+Congratulations to PhD student **Agastya Kalra**, first author of *3D-Object Perception Transformer (3PT)*, and his co-authors on their **CVPR 2026** acceptance. Their method detects and segments objects and estimates their 6-DoF poses for tasks such as bin picking and precise insertion. It won seven of eleven tracks in the 2025 BOP Challenge.
 ---
 
 ## 2026-03-06 | PhD Student Christian Moore to Join GM Cruise for Summer Internship
-Congratulations to lab member and PhD student **Christian Moore** on his **summer 2026 internship** with the **GM Cruise** autonomous driving team.
-Christian has been working on perception and robotics systems in the CIRP Lab, and we are excited to see him bring these skills to real-world autonomous driving systems.
-
-We look forward to seeing what he builds this summer and hearing what he learns.
+PhD student **Christian Moore**, who studies robot perception at CIRP, will spend summer 2026 with the **GM Cruise** autonomous driving team. Congratulations, Christian!
 ---
 
 ## 2026-03-06 | New Paper on Imaging Through Turbulence on arXiv
-A new paper on computational imaging through turbulence is now [available on arXiv](https://arxiv.org/abs/2603.02048).
-MS student **Ethan Chung** and PhD student **Norman Luo** are the paper’s second and third authors, respectively.
-The paper studies imaging and reconstruction methods for scenes degraded by atmospheric turbulence, an important challenge for long-range vision and sensing systems.
+MS student **Ethan Chung** and PhD student **Norman Luo** are the second and third authors of a [preprint](https://arxiv.org/abs/2603.02048) on reconstructing distant scenes from images distorted by atmospheric turbulence.
 ---
 
 ## 2026-01-14 | NVIDIA Academic Grant Awarded! Thanks, NVIDIA!
-CIRP Lab has received an **NVIDIA Academic Grant** to support our agricultural robotics research project.
-The award provides high-performance computing hardware to support the development of AI-enabled farm robots, including **two RTX PRO 6000 Blackwell GPUs** for training large AI models and **four Jetson AGX Orin** edge computers that will serve as onboard computing systems for field robots.
-The project focuses on combining robotics, computer vision, and edge AI to build practical tools that can operate directly in farm environments, helping address labor challenges and improve agricultural productivity in Hawai'i and beyond.
+An **NVIDIA Academic Grant** provides **two RTX PRO 6000 Blackwell GPUs** to train models for farm robots and **four Jetson AGX Orin computers** to run those models in the field. We’re developing these tools to help growers in Hawaiʻi and elsewhere manage labor-intensive farm work.
 
 [Read the full story on UH News](https://www.hawaii.edu/news/2026/01/14/nvidia-awards-next-gen-tech/).
 ---
 
 ## 2025-10-15 | CIRP Lab at ICCV 2025 {#2025-10-15-cirp-lab-iccv-2025-two-workshop-papers-invited-talk-and-local-chair-role}
-**CIRP Lab** contributed to **ICCV 2025** with **two workshop papers**, **one invited talk**, and a **local chair role**.
+At **ICCV 2025** in Honolulu, CIRP members presented two workshop papers and an invited talk. Huaijin Chen served as Local Chair.
 
-- Paper 1 by PhD student **Moseli Mots'oehli**: *Simulating Refractive Distortions and Weather-Induced Artifacts for Resource-Constrained Autonomous Perception* at the [CV4DC Workshop](https://cv4dc.github.io/).
-- Paper 2 by PhD student **Yang Qian**: *Hashtag2Action: Data Engineering and Self-Supervised Pre-Training for Action Recognition in Short-Form Videos* at the [SVU Workshop](https://short-form-video-understanding.github.io/).
-- Invited talk by **Agastya Kalra** at the [BOP Workshop](https://cmp.felk.cvut.cz/sixd/workshop_2025/#bop).
-- **Huaijin Chen** served as **Local Chair** for ICCV 2025 in Honolulu.
+- PhD student **Moseli Mots'oehli** presented *Simulating Refractive Distortions and Weather-Induced Artifacts for Resource-Constrained Autonomous Perception* at the [CV4DC Workshop](https://cv4dc.github.io/).
+- PhD student **Yang Qian** presented *Hashtag2Action: Data Engineering and Self-Supervised Pre-Training for Action Recognition in Short-Form Videos* at the [SVU Workshop](https://short-form-video-understanding.github.io/).
+- **Agastya Kalra** gave an invited talk at the [BOP Workshop](https://cmp.felk.cvut.cz/sixd/workshop_2025/#bop).
 
-![Moseli Mots'oehli stands at a lectern beside a slide discussing the limitations of simulated distortions.](images/events/iccv-2025-moseli-presentation.webp "Moseli Mots'oehli presents research on refractive distortions at the ICCV 2025 CV4DC Workshop. Photo provided by Huaijin Chen.")
-![Yang Qian stands at a lectern beside a slide showing the Hashtag2Action workflow.](images/events/iccv-2025-yang-presentation.webp "Yang Qian presents Hashtag2Action at the ICCV 2025 Short-Form Video Understanding Workshop. Photo provided by Huaijin Chen.")
+![Moseli Mots'oehli stands at a lectern beside a slide discussing the limitations of simulated distortions.](images/events/iccv-2025-moseli-presentation.webp "Moseli Mots'oehli presents research on refractive distortions at the ICCV 2025 CV4DC Workshop. Photo courtesy of Huaijin Chen.")
+![Yang Qian stands at a lectern beside a slide showing the Hashtag2Action workflow.](images/events/iccv-2025-yang-presentation.webp "Yang Qian presents Hashtag2Action at the ICCV 2025 Short-Form Video Understanding Workshop. Photo courtesy of Huaijin Chen.")
 
 ### After-ICCV gathering at UH Mānoa
 
@@ -79,8 +64,8 @@ The October 24, 2025, gathering included research presentations and a campus tou
 
 [Event program (PDF)](../images/events/iccv-2025-uh-manoa-program.pdf)
 
-![A presenter addresses an audience in a lecture room at UH Mānoa.](images/events/iccv-2025-uh-manoa-research-session.webp "Research presentations at UH Mānoa. Photo provided by Huaijin Chen.")
-![Participants pose for a group photo under trees on the UH Mānoa campus.](images/events/iccv-2025-uh-manoa-group.webp "Participants at UH Mānoa. Photo provided by Huaijin Chen.")
+![A presenter addresses an audience in a lecture room at UH Mānoa.](images/events/iccv-2025-uh-manoa-research-session.webp "Research presentations at UH Mānoa. Photo courtesy of Huaijin Chen.")
+![Participants pose for a group photo under trees on the UH Mānoa campus.](images/events/iccv-2025-uh-manoa-group.webp "Participants at UH Mānoa. Photo courtesy of Huaijin Chen.")
 ---
 
 ## 2025-09-16 | CIRP Lab receives a $300,000 NSF grant for ultrafast X-ray diffraction research {#2025-09-16-received-a-300k-nsf-grant-to-study-physics-informed-vlm-for-ultrafast-x-ray-diffraction-at-the-slac-national-lab-of-stanford-university}
@@ -101,17 +86,13 @@ Congratulations to **Kai Garcia** and **Mairi Yoshioka**, whose *PolarTact3D* pa
 ![Kai Garcia stands next to the PolarTact3D research poster.](images/events/rss-2025-polartact3d-poster.webp "Kai Garcia presents PolarTact3D at the RSS workshop on June 25, 2025.")
 ![Kai Garcia shakes hands at the RSS 2025 workshop award presentation.](images/events/rss-2025-polartact3d-award.webp "Kai Garcia receives the workshop’s third-place Best Paper Award for PolarTact3D on June 25, 2025.")
 
-Learn more at [polartact3d.github.io](https://polartact3d.github.io/).
+[PolarTact3D project website](https://polartact3d.github.io/)
 ---
 
 ## 2025-06-25 | CIRP Lab co-hosts the CVPR 2025 Bin-Picking Workshop and Competition with OpenCV and Intrinsic {#2025-06-25-cirp-lab-co-hosting-the-cvpr-2025-bin-picking-workshop-and-competition-with-opencv-and-intrinsic}
-The **CIRP Lab** co-hosted the **CVPR 2025 Bin-Picking Workshop and Competition** with **OpenCV** and **Intrinsic**.
+CIRP co-hosted the **CVPR 2025 Bin-Picking Workshop and Competition** with **OpenCV** and **Intrinsic**. The challenge focused on transferring perception methods from simulation to real robots. More than **450 teams** from around the world took part, and the organizers awarded **$60,000 in prizes**.
 
-- More than **450 teams** participated worldwide.
-- The event advanced industrial robotic perception through simulation-to-reality innovation.
-- A total of **$60,000 in prizes** was awarded.
-
-Learn more at [bpc.opencv.org](https://bpc.opencv.org/) and [github.com/opencv/bpc](https://github.com/opencv/bpc).
+[Bin-Picking Challenge](https://bpc.opencv.org/) · [Challenge code](https://github.com/opencv/bpc)
 ---
 
 ## 2025-06-15 | Invited Talk at Colorado School of Mines — Visual Sensing for Real-World Robotics

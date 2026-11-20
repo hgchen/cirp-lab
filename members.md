@@ -265,7 +265,7 @@ role: Undergraduate Researcher, 2025
 affiliation: Kapi'olani Community College
 tags: Electrical Engineering | FRC 2025
 image: images/members/erik-bendickson.jpg
-bio: Erik Bendickson contributed to the 2025 Farm Robotics Challenge team while studying engineering in Honolulu. Public STEM Pre-Academy materials highlight his interests in power systems, 3D printing, AI, and advanced manufacturing.
+bio: Erik Bendickson worked on the 2025 Farm Robotics Challenge team while studying engineering in Honolulu. His interests at the time included power systems, 3D printing, AI, and advanced manufacturing.
 ---
 
 ### Mikhail Shkaralevich
@@ -292,7 +292,7 @@ tags: Information and Computer Sciences | Capstone 2025
 image: images/members/mairi-yoshioka.png
 website: https://mair1.github.io/
 linkedin: https://www.linkedin.com/in/mairi-yoshioka/
-bio: Mairi Yoshioka contributed to CIRP Lab capstone work in 2025 as an undergraduate at UH Manoa and is listed as a co-author on PolarTact3D.
+bio: As a UH Mānoa undergraduate, Mairi Yoshioka worked on a CIRP capstone project in 2025 and co-authored PolarTact3D.
 ---
 
 ### Michaelyn Tolmie
