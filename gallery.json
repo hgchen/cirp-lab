@@ -6,6 +6,19 @@
     "images/gallery/group_4.jpeg",
     "images/gallery/group_5.jpeg",
     "images/gallery/group_6.jpg",
-    "images/gallery/group_7.jpeg"
-  ]
+    "images/gallery/group_7.jpeg",
+    "images/events/iccv-2025-uh-manoa-group.webp",
+    "images/events/aps-plant-health-2025-workshop.webp"
+  ],
+  "descriptions": {
+    "images/gallery/group_1.jpg": "Lab members share a meal.",
+    "images/gallery/group_2.jpg": "A lab member tries a camera rig.",
+    "images/gallery/group_3.jpg": "Lab members pose with their projects.",
+    "images/gallery/group_4.jpeg": "A lab member with a research poster.",
+    "images/gallery/group_5.jpeg": "A lab member poses beside a poster.",
+    "images/gallery/group_6.jpg": "A camera demonstration in the lab.",
+    "images/gallery/group_7.jpeg": "Visitors try a hands-on lab demo.",
+    "images/events/iccv-2025-uh-manoa-group.webp": "After-ICCV gathering at UH Mānoa.",
+    "images/events/aps-plant-health-2025-workshop.webp": "Plant Health 2025 workshop group photo."
+  }
 }

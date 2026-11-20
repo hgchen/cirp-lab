@@ -14,7 +14,8 @@ DIST = Path(sys.argv[1]) if __name__ == "__main__" and len(sys.argv) > 1 else RO
 SHELL = Template((ROOT / "index.html").read_text())
 STYLES_VERSION = sha256((ROOT / "styles.css").read_bytes()).hexdigest()[:12]
 NAV = {"": "Home", "research": "Research", "publications": "Publications",
-       "people": "People", "news": "News", "outreach": "Outreach", "service": "Service", "contact": "Contact"}
+       "people": "People", "news": "News", "outreach": "Outreach", "gallery": "Gallery",
+       "service": "Service", "contact": "Contact"}
 GROUP_LABELS = {"PhD": "PhD students", "Masters": "Master’s students",
                 "Undergrads": "Undergraduates", "Visiting Students": "Visiting students"}
 LAB = "Computational Imaging and Robotic Perception Lab"
@@ -290,17 +291,29 @@ def member(person, category):
 
 
 def people_page(groups):
-    jump = '<div class="jump">' + "".join(link("#" + slug(g), GROUP_LABELS.get(g, g)) for g in groups) + link("#photos", "Group photos") + "</div>"
+    jump = '<div class="jump">' + "".join(link("#" + slug(g), GROUP_LABELS.get(g, g)) for g in groups) + link("../gallery/", "Group photos") + "</div>"
     parts = [page_head("People"), jump]
     for category, members in groups.items():
         parts.append(f'<section class="section" id="{slug(category)}">{heading(GROUP_LABELS.get(category, category))}<div class="people">')
         parts.extend(member(m, category) for m in members)
         parts.append("</div></section>")
-    photos = json.loads((ROOT / "gallery.json").read_text())["images"]
-    parts.append('<section class="section" id="photos">' + heading("Group photos") + '<div class="gallery">')
-    for i, photo in enumerate(photos, 1):
-        parts.append(f'<a href="../{escape(photo)}"><img src="../{escape(photo)}" alt="CIRP Lab group photo {i}" loading="lazy"></a>')
-    page("people", "People", "Current members and alumni of CIRP Lab.", "".join(parts) + "</div></section>")
+    parts.append('<section class="section" id="photos">' + heading("Group photos", "../gallery/", "View gallery →") + "</section>")
+    page("people", "People", "Current members and alumni of CIRP Lab.", "".join(parts))
+
+
+def gallery_page():
+    album = json.loads((ROOT / "gallery.json").read_text())
+    tiles = []
+    for index, photo in enumerate(album["images"], 1):
+        thumbnail = Path("images/gallery/thumbs") / (Path(photo).stem + ".webp")
+        src = thumbnail.as_posix() if (ROOT / thumbnail).is_file() else photo
+        description = album.get("descriptions", {}).get(photo, f"CIRP Lab photo {index}")
+        tiles.append(
+            f'<a href="../{escape(photo)}" aria-label="Open full-size photo: {escape(description)}">'
+            f'<img src="../{escape(src)}" alt="{escape(description)}" loading="lazy" decoding="async"></a>'
+        )
+    intro = "Group photos and life around the lab."
+    page("gallery", "Gallery", intro, page_head("Gallery", intro) + '<div class="gallery lab-gallery">' + "".join(tiles) + "</div>")
 
 
 def publication(item):
@@ -376,7 +389,7 @@ def home(projects, people, items, pubs):
     content += '<div class="work-grid" id="research-directions">' + "".join(card(group[0], "./", theme) for theme, group in projects.items())
     if three_pt := next((item for item in pubs if item["key"] == "kalra2026_3pt"), None):
         content += work_card(
-            "3PT", "publications/#kalra2026_3pt", "images/previews/kalra2026_3pt.webp",
+            three_pt["title"], "publications/#kalra2026_3pt", "images/previews/kalra2026_3pt.webp",
             "3PT estimates the poses of a pile of metal parts.", "CVPR & CoRL · 2026",
             "3PT estimates 6DoF poses for unseen objects from RGB images and won 7 of 11 tracks at the 2025 BOP Challenge. For unseen-object detection on BOP-Classic-Core, average precision was 68.9% for 3PT and 70.2% for 3PTv2.",
             video=three_pt.get("video", ""),
@@ -421,6 +434,7 @@ def main():
     news, pubs = news_records(), bibliography()
     research(projects, people)
     people_page(people)
+    gallery_page()
     content = page_head("News")
     for stamp, title, body, anchor in news:
         content += (f'<article class="news-item" id="{anchor}">{news_time(stamp)}'
