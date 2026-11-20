@@ -428,7 +428,8 @@ def main():
     outreach = (ROOT / "outreach.html").read_text()
     page("outreach", "Outreach", "Student robotics and community projects from CIRP Lab.", page_head("Outreach") + outreach)
     service = (ROOT / "service.html").read_text()
-    page("service", "Service", "Conferences, workshops, and challenges organized by CIRP Lab members.", page_head("Service") + service)
+    service_intro = "Conference organization, research workshops, and technical instruction by CIRP Lab members."
+    page("service", "Service", service_intro, page_head("Service", service_intro) + service)
     contact = (ROOT / "contact.html").read_text()
     page("contact", "Contact & join", "Visit CIRP Lab or learn how to join the group.", page_head("Contact & join") + contact)
     home(projects, people, news, pubs)
