@@ -14,7 +14,7 @@ DIST = Path(sys.argv[1]) if __name__ == "__main__" and len(sys.argv) > 1 else RO
 SHELL = Template((ROOT / "index.html").read_text())
 STYLES_VERSION = sha256((ROOT / "styles.css").read_bytes()).hexdigest()[:12]
 NAV = {"": "Home", "research": "Research", "publications": "Publications",
-       "people": "People", "news": "News", "outreach": "Outreach", "contact": "Contact"}
+       "people": "People", "news": "News", "outreach": "Outreach", "service": "Service", "contact": "Contact"}
 GROUP_LABELS = {"PhD": "PhD students", "Masters": "Master’s students",
                 "Undergrads": "Undergraduates", "Visiting Students": "Visiting students"}
 LAB = "Computational Imaging and Robotic Perception Lab"
@@ -201,7 +201,8 @@ def research(projects, people):
                 name = related.get("name", related["title"])
                 desc += f'<p>{link("../../" + project_path(related), "Related project · " + name)}</p>'
             credits = []
-            for label, field in [("Project lead", "lead"), ("Principal investigator", "pi"), ("Contributors", "members")]:
+            for label, field in [("Project lead", "lead"), ("Principal investigator", "pi"),
+                                 ("Contributors", "members"), ("Collaborators", "collaborators")]:
                 names = [n.strip() for n in project.get(field, "").split("|") if n.strip()]
                 if names:
                     if field == "lead" and len(names) > 1:
@@ -289,12 +290,18 @@ def people_page(groups):
 
 
 def publication(item):
+    authors = item["author"]
     author_names = []
-    for author in item["author"].split(" and "):
+    for author in authors.removesuffix(" and others").split(" and "):
         author_names.append(" ".join(reversed(author.split(", ", 1))))
+    author_line = ", ".join(author_names)
+    if authors.endswith(" and others"):
+        author_line += ", et al."
     landing = item.get("website") or item.get("project")
     title = link(landing, item["title"]) if landing else escape(item["title"])
     venue = item.get("booktitle") or item.get("journal") or item.get("publisher") or item.get("abbr", "")
+    year = item["year"]
+    venue_year = venue if re.search(rf"\b{re.escape(year)}\b", venue) else " · ".join(filter(None, (venue, year)))
     links = []
     for k, label in [("pdf", item.get("pdf_label", "PDF")), ("doi", "DOI"), ("project", "Project"), ("code", "Code"), ("model", "Model"),
                      ("data", "Data"), ("website", "Link"), ("arxiv", "arXiv"), ("slides", "Slides"), ("video", "Video"),
@@ -313,7 +320,7 @@ def publication(item):
         citation = f'<details class="citation"><summary>BibTeX</summary><pre><code>{escape(item["bibtex"])}</code></pre></details>'
     note = f'<p class="metadata">{escape(item["note"])}</p>' if item.get("note") else ""
     return (f'<article class="pub" id="{escape(item["key"])}" data-abbr="{escape(item.get("abbr", ""))}"><h3>{title}</h3>'
-            f'<p class="pub-meta">{escape(", ".join(author_names))} · <span>{escape(venue)} · {escape(item["year"])}</span></p>'
+            f'<p class="pub-meta">{escape(author_line)} · <span>{escape(venue_year)}</span></p>'
             f'{note}<div class="pub-actions">{"".join(links)}{citation}</div></article>')
 
 
@@ -344,7 +351,7 @@ def home(projects, people, items, pubs):
     content = f'''<section class="hero"><h1>{LAB}</h1>
     <p class="mission">We combine <em>computational imaging</em> and <em>physics-informed AI</em> to design sensors and interpret their measurements.
     Our work spans robotic perception and scientific discovery, from mapping contact forces with polarized light to tracking changes in materials with X-ray diffraction.</p>
-    <p class="byline">Led by {link("people/#huaijin-chen", "Huaijin Chen")} at the University of Hawaiʻi at Mānoa.</p>
+    <p class="byline">{link("people/#huaijin-chen", "Huaijin Chen")} leads the lab at the University of Hawaiʻi at Mānoa.</p>
     <div class="hero-links">{link("#research-directions", "Explore our research")}{link("contact/#prospective-students", "Join the lab")}</div>
     <img class="hero-logo" src="images/cirp-hero.webp" width="176" height="176" alt=""></section>'''
     content += '<section class="section" id="lab-news"><header class="home-heading"><span><img class="news-mark" src="images/cirp-mark.png" width="36" height="36" alt=""></span><h2>Lab news</h2>' + link("news/", "All news →") + '</header>'
@@ -357,7 +364,7 @@ def home(projects, people, items, pubs):
         content += work_card(
             "3PT", "publications/#kalra2026_3pt", "images/previews/kalra2026_3pt.webp",
             "3PT estimates the poses of a pile of metal parts.", "CVPR & CoRL · 2026",
-            "3PT won 7 of 11 tracks at the BOP Challenge 2025. On BOP-Classic-Core, average precision for zero-shot 6DoF pose detection rose from 68.9% with 3PT to 70.2% with 3PTv2.",
+            "3PT estimates 6DoF poses for unseen objects from RGB images and won 7 of 11 tracks at the 2025 BOP Challenge. For unseen-object detection on BOP-Classic-Core, average precision was 68.9% for 3PT and 70.2% for 3PTv2.",
             video=three_pt.get("video", ""),
             resources=(
                 ("publications/#kalra2026_3pt", "3PT paper"),
@@ -420,6 +427,8 @@ def main():
     page("publications", "Publications", "Publications by members of CIRP Lab.", content)
     outreach = (ROOT / "outreach.html").read_text()
     page("outreach", "Outreach", "Student robotics and community projects from CIRP Lab.", page_head("Outreach") + outreach)
+    service = (ROOT / "service.html").read_text()
+    page("service", "Service", "Conferences, workshops, and challenges organized by CIRP Lab members.", page_head("Service") + service)
     contact = (ROOT / "contact.html").read_text()
     page("contact", "Contact & join", "Visit CIRP Lab or learn how to join the group.", page_head("Contact & join") + contact)
     home(projects, people, news, pubs)

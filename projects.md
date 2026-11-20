@@ -23,19 +23,32 @@ detail: sensor.webp
 detail_caption: Two cameras view the photoelastic cube through crossed polarizers. The exploded view shows the optical and mechanical components.
 ---
 
+### PolarTact3D: Single-Shot Tactile 3D Shape and Color Sensing with Polarization Imaging
+folder: PolarTact3D
+name: PolarTact3D
+website: https://polartact3d.github.io/
+members: Kai Garcia | Mairi Yoshioka | Tyler Ray | Tianlu Wang | Frances Zhu | Huaijin Chen
+short: A polarization camera captures both the 3D shape and color of a contact surface in a single shot.
+description: A clear polyethylene film conforms to an object when the sensor is pressed against it. A polarization camera sees the object’s color through the film and records polarization patterns that reveal the surface orientation. The team compared physics-based and neural methods for recovering shape and tested the sensor on surfaces that included transparent and reflective objects. PolarTact3D received the third-place Best Paper Award at the RSS 2025 Workshop on Navigating Contact Dynamics in Robotics.
+cover: sensor-pipeline.webp
+caption: The sensor design and the steps for reconstructing surface shape from polarization images.
+detail: surface-reconstructions.webp
+detail_caption: Example contact surfaces reconstructed with the neural and physics-based methods.
+---
+
 ### Snapshot Hyperspectral Imaging with Diffractive Optical Elements
 folder: DOE-HSI
 name: Snapshot hyperspectral imaging
 selected_work: 2
 cover: doe-otf-map.png
 caption: A diffractive optical element encodes the scene on a monochrome sensor. The diagram shows how the optical measurement and its simulation are used for spectral reconstruction.
-summary: Diffractive optics encode wavelength information in a single exposure so a computational method can recover the spectrum at each pixel.
+summary: Diffractive optics encode wavelength information in a single exposure, enabling reconstruction of the spectrum at each pixel.
 detail: doe-psf-grid.png
 detail_caption: Reconstructed spectral bands (left) and the corresponding ground-truth bands (right) for the same scene.
 lead: Chuanjun Zheng
 pi: Huaijin Chen
 members: Feimei Chen
-short: We develop diffractive optical elements for snapshot hyperspectral imaging that encode spectral information into a single sensor measurement for compact, high-speed, and light-efficient spectral perception.
+short: We develop diffractive optical elements that encode spectral information in a single sensor measurement, enabling compact, fast, and light-efficient hyperspectral imaging.
 description: We develop diffractive optical elements (DOEs) for snapshot hyperspectral imaging, where wavelength-dependent information is optically encoded into a single sensor measurement. An optimized DOE transforms different spectral components into distinct, spatially varying point spread functions on the detector. The DOE can be engineered to achieve narrow spectral responses, characterized by a small full width at half maximum (FWHM). Narrower responses improve spectral resolution and reduce inter-band interference. Together with computational reconstruction, this optical encoding supports accurate recovery of the full spectral profile at each pixel and enables a compact, high-speed, and light-efficient hyperspectral imaging system.
 ---
 
@@ -46,11 +59,15 @@ field_caption: Members of the field team observing palms in Hawaiʻi.
 name: Field robotics for palm health
 selected_work: 1
 preview: images/previews/crb-symposium-demo.webp
+caption: The team demonstrates a robotic arm and palm simulation.
+gallery_caption_frc_2: A team member uses the physical arm to control the simulated arm.
+gallery_caption_frc_3: A palm tree and nearby test objects in the simulation.
 summary: We are developing a palm-climbing robot to inspect trees and treat coconut rhinoceros beetle infestations.
 lead: Christian Moore
 pi: Huaijin Chen
 members: Riki MacMillan | Kanta Saito | Wilson Huynh | Elijah Saloma
-short: A climbing robot for inspecting and treating coconut rhinoceros beetle infestations in palms.
+collaborators: University of Michigan team advised by Xiaonan (Sean) Huang | Daniel Drew and UH Mānoa mechanical engineering students
+short: A palm-climbing robot designed to inspect trees and treat coconut rhinoceros beetle infestations.
 description: The team is developing a palm-climbing mechanism and an end effector for pesticide deployment and flower trimming. Simulated and teleoperated trials are used to study how the arm can interact with the tree before testing on hardware.
 ---
 
@@ -62,7 +79,8 @@ lead: Ethan Chung
 pi: Huaijin Chen
 members: Vincent Chan
 short: We develop a low-cost computer vision pipeline for estimating fish length and volume from single images or videos using detection, segmentation, depth estimation, and 3D reconstruction.
-description: FishEye is a scalable pipeline for automatic 3D fish morphometry using consumer-grade devices such as smartphone cameras. The system uses deep learning for detection and segmentation, then uses transformer-based camera calibration and depth estimation to reconstruct fish in 3D from one or more images. It derives length measurements from the reconstructed models and can detect a ping-pong ball as an optional reference for scale calibration. The goal is to provide practical, field-deployable fish measurement tools for sustainable fisheries, ecological research, and aquaculture monitoring.
+description: FishEye measures fish in 3D using consumer-grade devices such as smartphone cameras. The system detects and segments fish with deep learning. It uses transformer-based camera calibration and depth estimation to reconstruct fish in 3D from one or more images. It measures length from those reconstructions and can use a ping-pong ball as an optional scale reference. The goal is to provide practical, field-deployable fish measurement tools for sustainable fisheries, ecological research, and aquaculture monitoring.
+caption: FishEye detects the fish, estimates depth, and reconstructs its body in 3D for measurement.
 ---
 
 ### FishPod: Underwater Stereo Vision for Fish Measurement
@@ -91,8 +109,12 @@ name: Robot–tablet interaction in older adults
 lead: Yang Qian
 pi: Huaijin Chen
 members: Christian Moore | Ethan Chung | Sean Hiroki Flynn | Riki MacMillan
-short: We develop a robot-tablet platform for brief, standardized interaction with older adults to capture multimodal behavioral biomarkers of cognitive concern beyond what paper, tablet-only, or static voice-based screening can measure.
-description: Robot-Tablet Multimodal Behavioral Phenotyping for Cognitive Concern in Older Adults develops an embodied assessment platform for brief, standardized interaction with older adults. A humanoid robot delivers contingent speech, orienting cues, and task prompts, while a tablet captures response timing, task performance, and interaction events with high precision. Rather than diagnosing MCI directly, the project focuses on measuring clinically relevant multimodal behavioral biomarkers, including speech, response timing, drawing, tapping, motion, and conversational adaptation, that are difficult to capture with paper-only, tablet-only, or static voice-based screening.
+short: We use a robot and tablet in brief, standardized sessions with older adults to measure behavioral markers of cognitive concern that are difficult to capture with paper-based, tablet-only, or static voice-based screening.
+description: This project develops an embodied assessment platform for brief, standardized sessions with older adults. A humanoid robot delivers contingent speech, orienting cues, and task prompts, while a tablet captures response timing, task performance, and interaction events with high precision. The project measures clinically relevant behaviors, including speech, response timing, drawing, tapping, motion, and conversational adaptation, to study cognitive concern without directly diagnosing mild cognitive impairment (MCI).
+caption: The assessment platform combines a humanoid robot with a tablet for delivering tasks and recording responses.
+gallery_caption_cube_task_active_2026_04_14: The tablet shows the numbered and lettered circles used in the sequencing task.
+gallery_caption_cube_task_briefing_2026_04_14: The briefing shows participants how to connect the circles in order.
+gallery_caption_task2_animals_demo_2026_04_14: The instructions introduce the animal-naming task and show the pictures participants will see.
 ---
 
 ## Physics-Informed AI
@@ -110,7 +132,7 @@ description: Can an image model recover a scene when the sensor measurement look
 approach: Inverse tasks ask a model to reconstruct an image using either an expert’s instructions or an image-specific plan written by a vision–language model. Five tasks also run in the forward direction, asking the model to simulate a sensor measurement from a clean image. Specialized methods outperform general-purpose models on lensless imaging and holography, where a plausible picture can still be an inaccurate reconstruction.
 question: What have multimodal AI models learned about image formation?
 preview: images/previews/imagingbench-expert.png
-preview_caption: ImagingBench Expert protocol. Overall scores on the 0–100 scale are Gemini-3.1-Flash-Image 61.4, GPT-Image-2 57.3, FLUX.2-Pro 56.6, GPT-Image-1.5 50.2, Qwen-Image-Edit-2511 42.7 and HunyuanImage-3.0 26.5.
+preview_caption: Under the ImagingBench Expert protocol, Gemini-3.1-Flash-Image scored 61.4 out of 100, followed by GPT-Image-2 (57.3), FLUX.2-Pro (56.6), GPT-Image-1.5 (50.2), Qwen-Image-Edit-2511 (42.7), and HunyuanImage-3.0 (26.5).
 summary: ImagingBench tests six models on 22 computational imaging tasks. Can they recover a scene from a lensless measurement or simulate what a sensor would record for a given scene?
 cover: benchmark.webp
 caption: The five task families and three evaluation settings, alongside the aggregate performance reported for each model.
@@ -125,7 +147,8 @@ lead: Ethan Chung
 pi: Huaijin Chen
 members: Vincent Chan
 short: We develop physics-informed machine learning methods that connect atomistic simulations with ultrafast X-ray measurements for faster discovery and dynamics analysis.
-description: This project builds machine learning methods for interpreting ultrafast X-ray photon correlation spectroscopy, which provides time-resolved access to structural dynamics across atomic to microscale regimes. A central challenge is the gap between atomistic simulations and experimentally measurable XPCS observables, especially for glass transition and supercooled liquid studies. The project learns dynamical representations from simulation data and predicts temporal correlation functions measured in XPCS, enabling direct quantitative comparison between simulation and experiment. This creates a pathway for interpreting XPCS data and studying microscopic mechanisms behind complex material dynamics.
+description: This project develops machine learning methods for interpreting ultrafast X-ray photon correlation spectroscopy (XPCS), which tracks structural changes over time from the atomic scale to the microscale. A central challenge is connecting atomistic simulations to quantities that XPCS can measure, especially in studies of the glass transition and supercooled liquids. Models learn from simulated dynamics and predict the temporal correlation functions that XPCS measures. This lets researchers compare simulations directly with experiments and study the microscopic processes behind changes in materials.
+caption: Simulated argon structures at different densities and temperatures.
 ---
 
 ### Satellite-Derived Shorelines
@@ -134,8 +157,13 @@ name: Satellite-derived shorelines
 lead: Joel Nicolow
 pi: Dr. Charles Fletcher
 members:
-short: We develop and benchmark satellite-derived shoreline segmentation methods that generalize across diverse coastal environments, enabling more reliable and scalable shoreline monitoring in Hawaii and beyond.
-description: Satellite-Derived Shorelines develops and evaluates shoreline segmentation methods for satellite-derived shoreline monitoring under realistic geographic domain shifts. Coastal erosion is an urgent challenge in Hawaii, but traditional field and aerial surveys are costly and sparse, while existing SDS extraction approaches often fail to generalize beyond narrow coastal morphologies or regions. This project combines global and local ground-truth shoreline positions with hand-annotated satellite scenes spanning diverse coastal environments to benchmark foundation and pretrained geospatial vision models, lightweight neural networks, and traditional thresholding methods. The goal is to provide a standardized benchmark and more robust open-source SDS tools that support reliable shoreline monitoring for researchers, coastal managers, and communities worldwide.
+short: We develop and test methods for mapping shorelines from satellite imagery across different coastal environments in Hawaiʻi and beyond.
+description: This project develops methods for mapping shorelines from satellite imagery and evaluates how well they work across regions. Coastal erosion is an urgent challenge in Hawaiʻi. Field and aerial surveys are costly and limited in coverage, and existing automated methods often work well only in certain regions or on certain types of coasts. The project combines reference shoreline positions from local and global sources with hand-annotated satellite scenes to compare foundation and pretrained geospatial vision models, lightweight neural networks, and traditional thresholding methods. The goal is to provide a standardized benchmark and more reliable open-source tools for researchers, coastal managers, and communities.
+caption: The map shows where shorelines in Hawaiʻi eroded or grew over a five-year period.
+gallery_caption_sds_shorelines_superimposed_on_drone_image: Shorelines derived from satellite imagery overlaid on a drone photo.
+gallery_caption_sandies_sds_example_and_transect_intersections: Examples of shoreline detection and intersections with coastal transects.
+gallery_caption_sat_image_examples: The same coastline seen by different satellite sensors.
+gallery_caption_segmentation_method_comparison: Comparison of land and water segmentation methods on the same stretch of coast.
 ---
 
 ### ML-Driven Surrogate Modeling for FEL Oscillator Cavity Optimization
@@ -145,5 +173,6 @@ lead: Ethan Chung
 pi: Huaijin Chen
 members:
 short: We build machine learning surrogate models to accelerate free-electron laser oscillator simulations and support faster cavity design, tuning, and optimization.
-description: This project develops a machine learning framework to accelerate and augment simulations of free-electron laser oscillators, which are commonly modeled with computationally intensive tools such as GINGER. The work focuses on predicting electron beam energy evolution and output radiation characteristics as functions of cavity geometry, including mirror spacing and cavity length. By replacing some expensive simulation sweeps with learned surrogate models, the system can support rapid parameter exploration, real-time tuning, more efficient design optimization, and improved control over FEL performance metrics such as gain, stability, and spectral properties.
+description: Free-electron laser (FEL) oscillators are commonly modeled with computationally intensive tools such as GINGER. This project develops surrogate models to predict how changes in cavity geometry, including mirror spacing and cavity length, affect electron beam energy and the resulting radiation. The goal is to replace some full simulation sweeps so researchers can explore designs faster, tune the cavity in real time, and better control gain, stability, and spectral properties.
+caption: A free-electron laser oscillator showing the electron source, accelerator, undulator, and cavity mirrors.
 ---

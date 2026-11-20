@@ -32,7 +32,7 @@ affiliation: University of Hawaii at Manoa
 image: images/members/christian_moore.jpeg
 email: moorechr@hawaii.edu
 linkedin: https://www.linkedin.com/in/chrismoore-morehouse/
-bio: I'm a computer science and math enthusiast on the exciting journey of earning my PhD and Master's. My research concerns Vision-Language-Action models merging robotics, computational imaging, and perception. Outside the tech world, you'll find me tinkering with machine learning models, self-hosting, and lending a hand as a mentor, helping students navigate STEM coursework. I'm eager to bring my unique perspective to your company with a mix of academic, professional, and hands-on experience, and a genuine passion for community and innovation.
+bio: I study computer science and mathematics as I work toward my PhD and master’s degrees. My research focuses on vision–language–action models in robotics, computational imaging, and perception. I also experiment with machine learning models, self-host software, and mentor students in STEM.
 ---
 
 ### Man Luo
@@ -76,7 +76,7 @@ email: asif@hawaii.edu
 website: https://portfolio-asifsijan.vercel.app/
 scholar: https://scholar.google.com/citations?user=EhesAkUAAAAJ&hl=en
 linkedin: https://www.linkedin.com/in/asifsijan/
-bio: I am a front-end developer and researcher. I have been building various applications using industry-leading technologies, including React.js, Tailwind, Next.js, Node.js, Express, and Laravel since 2019. Besides development, I am also actively researching in the biomedical domain using machine learning and deep learning technologies.
+bio: I am a front-end developer and researcher. Since 2019, I have built applications with tools including React.js, Tailwind, Next.js, Node.js, Express, and Laravel. I also use machine learning and deep learning in biomedical research.
 ---
 
 ### Chuanjun Zheng
@@ -85,7 +85,7 @@ affiliation: University of Hawaii at Manoa
 image: images/members/chuanjun.jpeg
 email: chuanjun@hawaii.edu
 scholar: https://scholar.google.com/citations?user=9Jk_LC8AAAAJ&hl=zh-CN
-bio: Chuanjun Zheng is a PhD student. His current research focuses on phase mask-based imaging and computational imaging VLM benchmarks.
+bio: Chuanjun Zheng is a PhD student. He studies imaging with phase masks and develops benchmarks for vision–language models on computational imaging tasks.
 ---
 
 ### Moseli Mots'oehli
@@ -132,7 +132,7 @@ tags: Information and Computer Sciences | FRC 2025 | FRC 2026
 image: images/members/christian-komo.png
 email: ckomo@hawaii.edu
 github: https://github.com/komochristian
-bio: Christian Komo is an undergraduate researcher contributing to agricultural robotics and autonomous perception. He was part of Team 'Aina in the 2025 Farm Robotics Challenge and continues with the lab's 2026 farm robotics effort.
+bio: Christian Komo is an undergraduate researcher contributing to agricultural robotics and autonomous perception. He was part of Team ʻĀina at the 2025 Farm Robotics Challenge and continues to work on the lab’s 2026 effort.
 ---
 
 ### Ella Self
@@ -140,7 +140,7 @@ role: Undergraduate Researcher
 affiliation: University of Hawai'i at Manoa
 tags: FRC 2026
 linkedin: https://www.linkedin.com/in/ella-self-3b869b368/
-bio: Ella Self is an undergraduate researcher contributing to the lab's agricultural robotics work for the 2026 Farm Robotics Challenge cycle.
+bio: Ella Self is an undergraduate researcher working on the lab’s entry in the 2026 Farm Robotics Challenge.
 ---
 
 ### Rona Lei Duldulao
@@ -149,7 +149,7 @@ affiliation: University of Hawai'i at Manoa
 tags: Mechanical Engineering | FRC 2025 | FRC 2026
 image: images/members/rona-duldulao.jpg
 linkedin: https://www.linkedin.com/in/ronaleid/
-bio: Rona Lei Duldulao is a Mechanical Engineering undergraduate working on agricultural robotics and field automation. She helped organize Team 'Aina for the 2025 Farm Robotics Challenge and continues on the 2026 effort.
+bio: Rona Lei Duldulao is a mechanical engineering undergraduate working on agricultural robotics and field automation. She helped organize Team ʻĀina for the 2025 Farm Robotics Challenge and continues to work on the lab’s 2026 effort.
 ---
 
 ### Lucas Horsman
@@ -186,6 +186,11 @@ affiliation: University of Minnesota
 ---
 
 ## Alumni
+
+### Munir Zarea
+role: Alumni
+placement: Mechanical Engineer at Pearl Harbor Naval Shipyard
+---
 
 ### Ethan Chung
 role: MS alumnus
@@ -231,7 +236,7 @@ role: Alumni
 placement: Amazon Web Services
 affiliation: University of Hawaii at Manoa
 linkedin: https://www.linkedin.com/in/vincentchan26/
-bio: Vincent Chan is a CIRP Lab alumnus from the University of Hawaii at Manoa.
+bio: Vincent Chan is an alumnus of the CIRP Lab at UH Mānoa.
 ---
 
 ### Kai Garcia
@@ -293,5 +298,5 @@ role: Alumni
 placement: UH Office of Procurement
 affiliation: University of Hawai'i at Manoa
 linkedin: https://www.linkedin.com/in/azibun-nuder-35b3891b0/
-bio: Azibun Nuder is a CIRP Lab alumna from the University of Hawai'i at Manoa.
+bio: Azibun Nuder is an alumna of the CIRP Lab at UH Mānoa.
 ---
