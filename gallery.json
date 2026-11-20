@@ -1,5 +1,7 @@
 {
   "images": [
+    "images/gallery/hilo-field-trip-2026.webp",
+    "images/gallery/himb-field-trip-2026.webp",
     "images/gallery/group_1.jpg",
     "images/gallery/group_2.jpg",
     "images/gallery/group_3.jpg",
@@ -11,6 +13,8 @@
     "images/events/aps-plant-health-2025-workshop.webp"
   ],
   "descriptions": {
+    "images/gallery/hilo-field-trip-2026.webp": "Four researchers with an underwater robot on the rocky shore in Hilo.",
+    "images/gallery/himb-field-trip-2026.webp": "Two researchers on a boat with equipment for underwater imaging.",
     "images/gallery/group_1.jpg": "Lab members share a meal.",
     "images/gallery/group_2.jpg": "A lab member tries a camera rig.",
     "images/gallery/group_3.jpg": "Lab members pose with their projects.",
@@ -20,5 +24,9 @@
     "images/gallery/group_7.jpeg": "Visitors try a hands-on lab demo.",
     "images/events/iccv-2025-uh-manoa-group.webp": "After-ICCV gathering at UH Mānoa.",
     "images/events/aps-plant-health-2025-workshop.webp": "Plant Health 2025 workshop group photo."
+  },
+  "captions": {
+    "images/gallery/hilo-field-trip-2026.webp": "Hilo field trip, March 2026. Tianlu Wang, Huaijin Chen, Feimei Chen, and Munir Zarea.",
+    "images/gallery/himb-field-trip-2026.webp": "Feimei Chen and Munir Zarea at the Hawaiʻi Institute of Marine Biology on Oʻahu, March 2026."
   }
 }

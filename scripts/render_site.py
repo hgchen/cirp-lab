@@ -305,13 +305,17 @@ def gallery_page():
     album = json.loads((ROOT / "gallery.json").read_text())
     tiles = []
     for index, photo in enumerate(album["images"], 1):
-        thumbnail = Path("images/gallery/thumbs") / (Path(photo).stem + ".webp")
+        name = Path(photo).stem
+        thumbnail = Path("images/gallery/thumbs") / (name + ".webp")
         src = thumbnail.as_posix() if (ROOT / thumbnail).is_file() else photo
         description = album.get("descriptions", {}).get(photo, f"CIRP Lab photo {index}")
-        tiles.append(
+        tile = (
             f'<a href="../{escape(photo)}" aria-label="Open full-size photo: {escape(description)}">'
             f'<img src="../{escape(src)}" alt="{escape(description)}" loading="lazy" decoding="async"></a>'
         )
+        if caption := album.get("captions", {}).get(photo):
+            tile = f'<figure id="{escape(name)}">{tile}<figcaption>{escape(caption)}</figcaption></figure>'
+        tiles.append(tile)
     intro = "Group photos and life around the lab."
     page("gallery", "Gallery", intro, page_head("Gallery", intro) + '<div class="gallery lab-gallery">' + "".join(tiles) + "</div>")
 
