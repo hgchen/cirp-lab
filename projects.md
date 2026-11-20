@@ -65,8 +65,11 @@ gallery_caption_frc_3: A palm tree and nearby test objects in the simulation.
 summary: We are developing a palm-climbing robot to inspect trees and treat coconut rhinoceros beetle infestations.
 lead: Christian Moore
 pi: Huaijin Chen
-members: Riki MacMillan | Kanta Saito | Wilson Huynh | Elijah Saloma
-collaborators: University of Michigan team advised by Xiaonan (Sean) Huang | Daniel Drew and UH Mānoa mechanical engineering students
+advisors: Daniel Jenkins | Ryan Kurasaki | Tianlu Wang | Daniel Drew | Xiaonan (Sean) Huang
+members_label: University of Hawaiʻi at Mānoa team
+members: Rona Lei Duldulao | Lucas Horsman | Wilson Huynh | Erik Bendickson | Christian Komo | Zadon Padello | Tyler Mak | Elijah Saloma | Kanta Saito | Ella Self | Andrew He | Lukas Moroz | Riki MacMillan | Alex Tokunaga | Owen Bramley
+collaborators_label: University of Michigan team
+collaborators: Nilay Choudhury | Xinqi Zhang | Yuchen You | Haobo Fang | Siyuan Zheng | Ronen Dujovny | Adrian Wang | Mingxuan He
 short: A palm-climbing robot designed to inspect trees and treat coconut rhinoceros beetle infestations.
 description: The team is developing a palm-climbing mechanism and an end effector for pesticide deployment and flower trimming. Simulated and teleoperated trials are used to study how the arm can interact with the tree before testing on hardware.
 ---

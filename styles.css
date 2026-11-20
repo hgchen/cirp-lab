@@ -137,7 +137,7 @@ time[data-quarter="4"] {color:light-dark(#845d43,#dab9a2)}
 .paper-figure video {display:block;width:100%;aspect-ratio:16/9;background:#101213}
 figcaption {margin-top:7px}
 .paper-extra,.people,.gallery,.visit {display:grid;gap:26px}
-.paper-extra {grid-template-columns:1.5fr 1fr;gap:8%}
+.paper-extra {grid-template-columns:1.5fr 1fr;gap:24px 8%}
 .paper-extra h2,.prose h2 {margin-bottom:14px}
 .paper-extra p,.prose p,.person p,.visit-info p,.visit-info address {margin-top:9px;color:var(--body)}
 .paper-extra h3 {margin-top:20px}

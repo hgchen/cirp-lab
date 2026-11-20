@@ -216,14 +216,15 @@ def research(projects, people):
                 name = related.get("name", related["title"])
                 desc += f'<p>{link("../../" + project_path(related), "Related project · " + name)}</p>'
             credits = []
-            for label, field in [("Project lead", "lead"), ("Principal investigator", "pi"),
+            for label, field in [("Project lead", "lead"), ("Principal investigator", "pi"), ("Advisors", "advisors"),
                                  ("Contributors", "members"), ("Collaborators", "collaborators")]:
                 names = [n.strip() for n in project.get(field, "").split("|") if n.strip()]
                 if names:
                     if field == "lead" and len(names) > 1:
                         label = "Project leads"
                     links = [link("../../people/#" + slug(n), n) if n in directory else escape(n) for n in names]
-                    credits.append(f'<p><strong>{label}</strong><br>' + " · ".join(links) + "</p>")
+                    label = project.get(field + "_label", label)
+                    credits.append(f'<p><strong>{escape(label)}</strong><br>' + " · ".join(links) + "</p>")
             body += desc + '</div><div><h2>Project team</h2>' + "".join(credits) + '</div></div></section>'
             if project.get("detail"):
                 body += figure("../../" + folder + project["detail"], project["detail_caption"])
