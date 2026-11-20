@@ -47,16 +47,22 @@ def inline(text):
 
 def paragraphs(text):
     blocks = []
+    is_followup = False
     for paragraph in text.strip().split("\n\n"):
         lines = paragraph.splitlines()
         photos = re.findall(r'^!\[([^\]\n]+)\]\((images/[\w./-]+) "([^"\n]+)"\)$', paragraph, re.M)
         if photos and len(photos) == len(lines):
-            figures = (
-                f'<figure><img src="../{escape(path)}" alt="{escape(alt)}" loading="lazy" decoding="async">'
+            figures = "".join(
+                f'<figure><a href="../{escape(path)}" aria-label="Open full-size photo: {escape(alt)}">'
+                f'<img src="../{escape(path)}" alt="{escape(alt)}" loading="lazy" decoding="async"></a>'
                 f'<figcaption>{escape(caption)}</figcaption></figure>'
                 for alt, path, caption in photos
             )
-            blocks.append('<div class="news-photos">' + "".join(figures) + '</div>')
+            photo_class = "news-photos" if is_followup else "news-photos news-photos-featured"
+            blocks.append(f'<div class="{photo_class}">{figures}</div>')
+        elif len(lines) == 1 and paragraph.startswith("### "):
+            is_followup = True
+            blocks.append(f"<h3>{inline(paragraph[4:])}</h3>")
         elif lines and all(line.startswith("- ") for line in lines):
             blocks.append("<ul>" + "".join(f"<li>{inline(line[2:])}</li>" for line in lines) + "</ul>")
         else:

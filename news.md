@@ -12,6 +12,8 @@ Huaijin Chen is co-PI on a $154,517 USDA APHIS project to develop a machine lear
 
 ## 2026-06-04 | Huaijin Chen gives a keynote at the CVPR 2026 UG2+ Workshop
 Huaijin Chen presented “Do AI Agents Understand Computational Imaging?” at the [8th UG2+ Workshop and Challenge](https://cvpr2026ug2challenge.github.io/program24.html) in Denver.
+
+![The CVPR 2026 UG2+ Workshop program lists five keynote speakers, including Huaijin Chen.](images/events/cvpr-2026-ug2-workshop.webp "Keynote speakers listed in the CVPR 2026 UG2+ Workshop program.")
 ---
 
 ## 2026-06 | Thank you to the Minderoo Foundation for supporting AI-based fish measurement ($153,311) {#2026-06-minderoo-foundation-supports-ai-based-fish-measurement}
@@ -54,18 +56,25 @@ The project focuses on combining robotics, computer vision, and edge AI to build
 [Read the full story on UH News](https://www.hawaii.edu/news/2026/01/14/nvidia-awards-next-gen-tech/).
 ---
 
-## 2025-10-15 | CIRP Lab @ ICCV 2025 — Two Workshop Papers, Invited Talk, and Local Chair Role
-**CIRP Lab** will contribute to **ICCV 2025** with **two accepted workshop papers**, **one invited talk**, and a **local chair role**.
+## 2025-10-15 | CIRP Lab at ICCV 2025 {#2025-10-15-cirp-lab-iccv-2025-two-workshop-papers-invited-talk-and-local-chair-role}
+**CIRP Lab** contributed to **ICCV 2025** with **two workshop papers**, **one invited talk**, and a **local chair role**.
 
 - Paper 1 by PhD student **Moseli Mots'oehli**: *Simulating Refractive Distortions and Weather-Induced Artifacts for Resource-Constrained Autonomous Perception* at the [CV4DC Workshop](https://cv4dc.github.io/).
 - Paper 2 by PhD student **Yang Qian**: *Hashtag2Action: Data Engineering and Self-Supervised Pre-Training for Action Recognition in Short-Form Videos* at the [SVU Workshop](https://short-form-video-understanding.github.io/).
 - Invited talk by **Agastya Kalra** at the [BOP Workshop](https://cmp.felk.cvut.cz/sixd/workshop_2025/#bop).
-- **Huaijin Chen** will serve as the **Local Chair** for ICCV 2025 in Honolulu.
+- **Huaijin Chen** served as **Local Chair** for ICCV 2025 in Honolulu.
 
-The After-ICCV AI/CV Gathering at UH Mānoa on October 24, 2025, included research presentations and a campus tour. [Event program (PDF)](../images/events/iccv-2025-uh-manoa-program.pdf)
+![Moseli Mots'oehli stands at a lectern beside a slide discussing the limitations of simulated distortions.](images/events/iccv-2025-moseli-presentation.webp "Moseli Mots'oehli presents research on refractive distortions at the ICCV 2025 CV4DC Workshop. Photo provided by Huaijin Chen.")
+![Yang Qian stands at a lectern beside a slide showing the Hashtag2Action workflow.](images/events/iccv-2025-yang-presentation.webp "Yang Qian presents Hashtag2Action at the ICCV 2025 Short-Form Video Understanding Workshop. Photo provided by Huaijin Chen.")
 
-![A presenter addresses an audience in a lecture room at UH Mānoa.](images/events/iccv-2025-uh-manoa-research-session.webp "Research presentations at the After-ICCV AI/CV Gathering. Photo provided by Huaijin Chen.")
-![Participants pose for a group photo under trees on the UH Mānoa campus.](images/events/iccv-2025-uh-manoa-group.webp "Participants at the After-ICCV AI/CV Gathering. Photo provided by Huaijin Chen.")
+### After-ICCV gathering at UH Mānoa
+
+The October 24, 2025, gathering included research presentations and a campus tour.
+
+[Event program (PDF)](../images/events/iccv-2025-uh-manoa-program.pdf)
+
+![A presenter addresses an audience in a lecture room at UH Mānoa.](images/events/iccv-2025-uh-manoa-research-session.webp "Research presentations at UH Mānoa. Photo provided by Huaijin Chen.")
+![Participants pose for a group photo under trees on the UH Mānoa campus.](images/events/iccv-2025-uh-manoa-group.webp "Participants at UH Mānoa. Photo provided by Huaijin Chen.")
 ---
 
 ## 2025-09-16 | CIRP Lab receives a $300,000 NSF grant for ultrafast X-ray diffraction research {#2025-09-16-received-a-300k-nsf-grant-to-study-physics-informed-vlm-for-ultrafast-x-ray-diffraction-at-the-slac-national-lab-of-stanford-university}
