@@ -48,6 +48,7 @@ with tempfile.TemporaryDirectory(prefix="cirp-build-") as temporary:
         (stage / name).write_text(json.dumps(data, indent=2) + "\n")
     subprocess.run([sys.executable, root / "scripts/render_site.py", stage], check=True)
     shutil.copy2(root / "scripts/publication-search.js", stage / "publications/search.js")
+    shutil.copy2(root / "scripts/gallery-slideshow.js", stage / "gallery/slideshow.js")
     dist.mkdir(exist_ok=True)
     subprocess.run(["rsync", "-ac", "--delete-after", str(stage) + "/", str(dist) + "/"], check=True)
 print(f"Built static site into {dist}")

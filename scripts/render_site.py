@@ -326,7 +326,31 @@ def gallery_page():
             tile = f'<figure id="{escape(name)}">{tile}<figcaption>{escape(caption)}</figcaption></figure>'
         tiles.append(tile)
     intro = "Group photos and life around the lab."
-    page("gallery", "Gallery", intro, page_head("Gallery", intro) + '<div class="gallery lab-gallery">' + "".join(tiles) + "</div>")
+    controls = """
+    <div class="gallery-view" role="group" aria-label="Gallery view" hidden>
+      <button type="button" id="show-thumbnails" aria-pressed="true" aria-controls="gallery-thumbnails">Thumbnails</button>
+      <button type="button" id="show-slideshow" aria-pressed="false" aria-controls="gallery-slideshow">Slideshow</button>
+    </div>
+    """
+    slideshow = """
+    <section class="gallery-slideshow" id="gallery-slideshow" aria-label="Photo slideshow" tabindex="-1" hidden>
+      <figure>
+        <a class="gallery-stage" id="slide-original" aria-label="Open full-size photo">
+          <img id="slide-image" alt="" decoding="async">
+        </a>
+        <figcaption id="slide-caption"></figcaption>
+      </figure>
+      <div class="gallery-navigation" aria-label="Slideshow controls" role="group">
+        <button type="button" id="slide-previous" aria-label="Previous photo">← Previous</button>
+        <span id="slide-position" role="status" aria-atomic="true"></span>
+        <button type="button" id="slide-next" aria-label="Next photo">Next →</button>
+        <button type="button" id="slide-play">Play slideshow</button>
+      </div>
+    </section>
+    <script src="slideshow.js" defer></script>
+    """
+    thumbnails = '<div class="gallery lab-gallery" id="gallery-thumbnails">' + "".join(tiles) + "</div>"
+    page("gallery", "Gallery", intro, page_head("Gallery", intro) + controls + thumbnails + slideshow)
 
 
 def publication(item):
