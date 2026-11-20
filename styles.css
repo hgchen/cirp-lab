@@ -180,6 +180,7 @@ summary {color:var(--green);cursor:pointer;width:fit-content}
 .lab-gallery {max-width:780px;gap:16px;align-items:start}
 .lab-gallery a,.lab-gallery img {display:block;border-radius:8px}
 .lab-gallery img {aspect-ratio:6/5;object-fit:cover;object-position:50% 35%;background:var(--panel)}
+.lab-gallery #fish-measurement img {object-fit:contain}
 .outreach-feature,.service-item {display:grid;grid-template-columns:minmax(0,1fr) minmax(0,min(44%,440px));align-items:start;gap:clamp(18px,4vw,48px)}
 .service-item {grid-template-columns:minmax(0,1fr) minmax(0,min(35%,335px))}
 .outreach-feature p {margin-top:12px;color:var(--body)}
@@ -189,6 +190,10 @@ summary {color:var(--green);cursor:pointer;width:fit-content}
 .outreach-pair figcaption {grid-column:1/-1;margin:0}
 .outreach-followups {grid-column:1/-1;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:clamp(24px,4vw,52px)}
 .outreach-followups > section {border-top:1px solid var(--line);padding-top:18px}
+.outreach-trip-photos {margin-top:16px}
+.outreach-trip-photos > a:first-child {grid-column:1/-1}
+.outreach-trip-photos img {aspect-ratio:4/3;object-fit:cover;object-position:50% 46%}
+.outreach-trip-photos > a:first-child img {aspect-ratio:16/9}
 .outreach-player {display:block;position:relative;width:100%;aspect-ratio:16/9;border:0;border-radius:8px;background:#15221e;overflow:hidden}
 .outreach-player img {width:100%;height:100%;object-fit:cover}
 .outreach-player span {position:absolute;bottom:12px;left:12px;padding:7px 12px;border-radius:3px;color:#fff;background:#17241ff0;font:600 13px/1.4 var(--sans)}
