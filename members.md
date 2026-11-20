@@ -197,6 +197,7 @@ affiliation: University of Minnesota
 ### Munir Zarea
 role: Alumni
 placement: Mechanical Engineer at Pearl Harbor Naval Shipyard
+image: images/members/munir-zarea.webp
 ---
 
 ### Ethan Chung
