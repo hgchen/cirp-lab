@@ -17,10 +17,6 @@ NAV = {"": "Home", "research": "Research", "publications": "Publications",
        "people": "People", "news": "News", "outreach": "Outreach", "contact": "Contact"}
 GROUP_LABELS = {"PhD": "PhD students", "Masters": "Master’s students",
                 "Undergrads": "Undergraduates", "Visiting Students": "Visiting students"}
-WORK_CAPTIONS = {
-    "kalra2026_3ptv2": "A robot locates a charging port, estimates its pose and inserts the plug on three electric vehicles.",
-    "kalra2026_3pt": "3PT estimates the poses of a pile of metal parts.",
-}
 LAB = "Computational Imaging and Robotic Perception Lab"
 LEGACY = """<script>
 const routes = {members:"people",projects:"research",publications:"publications",news:"news",contact:"contact"};
@@ -331,7 +327,7 @@ def home_heading(label, title, url="", action=""):
     return f'<header class="home-heading"><span>{escape(label)}</span><h2>{escape(title)}</h2>{more}</header>'
 
 
-def work_card(title, href, path, caption, metadata, video=""):
+def work_card(title, href, path, caption, metadata, summary, video="", resources=()):
     version = sha256((ROOT / path).read_bytes()).hexdigest()[:12]
     preview = f"{path}?v={version}"
     work_link = f'<a class="work-link" href="{escape(href)}">'
@@ -339,8 +335,9 @@ def work_card(title, href, path, caption, metadata, video=""):
         media = video_player(video, preview, caption) + work_link
     else:
         media = work_link + f'<img src="{escape(preview)}" alt="{escape(caption)}" loading="lazy" decoding="async">'
+    actions = '<div class="work-resources">' + "".join(link(url, label) for url, label in resources) + "</div>" if resources else ""
     return (f'<article>{media}<span class="metadata">{escape(metadata)}</span>'
-            f'<h3>{escape(title)}</h3></a></article>')
+            f'<h3>{escape(title)}</h3></a><p class="work-summary">{escape(summary)}</p>{actions}</article>')
 
 
 def home(projects, people, items, pubs):
@@ -356,21 +353,24 @@ def home(projects, people, items, pubs):
     content += '</section>'
     content += '<section class="section" id="selected-work">' + home_heading("Research", "Selected work", "research/", "All projects")
     content += '<div class="work-grid" id="research-directions">' + "".join(card(group[0], "./", theme) for theme, group in projects.items())
-    for item in pubs:
-        key = item["key"]
-        if key not in WORK_CAPTIONS:
-            continue
-        venue = item.get("abbr") or item.get("booktitle") or item.get("journal", "")
-        content += work_card(item["title"], f"publications/#{key}", f"images/previews/{key}.webp",
-                             WORK_CAPTIONS[key], f"{venue} · {item['year']}", item.get("video", ""))
-    for group in projects.values():
-        for project in group:
-            if project.get("selected_work") != "true":
-                continue
-            folder, cover, _ = project_media(project)
-            name = project.get("name", project["title"])
-            content += work_card(name, project_path(project), folder + cover,
-                                 project.get("caption", name), "Research project")
+    if three_pt := next((item for item in pubs if item["key"] == "kalra2026_3pt"), None):
+        content += work_card(
+            "3PT", "publications/#kalra2026_3pt", "images/previews/kalra2026_3pt.webp",
+            "3PT estimates the poses of a pile of metal parts.", "CVPR & CoRL · 2026",
+            "3PT won 7 of 11 tracks at the BOP Challenge 2025. On BOP-Classic-Core, average precision for zero-shot 6DoF pose detection rose from 68.9% with 3PT to 70.2% with 3PTv2.",
+            video=three_pt.get("video", ""),
+            resources=(
+                ("publications/#kalra2026_3pt", "3PT paper"),
+                ("publications/#kalra2026_3ptv2", "3PTv2 paper"),
+                ("https://bop.felk.cvut.cz/leaderboards/pose-detection-unseen-bop24/bop-classic-core/", "BOP results"),
+            ),
+        )
+    featured_projects = (project for group in projects.values() for project in group if "selected_work" in project)
+    for project in sorted(featured_projects, key=lambda project: int(project["selected_work"])):
+        folder, cover, _ = project_media(project)
+        name = project.get("name", project["title"])
+        content += work_card(name, project_path(project), project.get("preview", folder + cover),
+                             project.get("caption", name), "Research project", project.get("summary", project["short"]))
     content += '</div><p class="work-more">' + link('publications/', 'All publications →') + '</p></section>'
     content += '<section class="section" id="the-group">' + home_heading("People", "The group", "people/", "People & alumni") + '<dl class="roster">'
     for group, members in people.items():

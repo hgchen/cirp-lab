@@ -113,6 +113,8 @@ nav a[aria-current] {color:var(--green);font-weight:700;text-decoration:underlin
 .work-link h3 {font-size:clamp(17px,1.55vw,20px);line-height:1.23;text-wrap:pretty}
 .work-link:hover,.work-link:focus-visible {text-decoration:none}
 .work-link:hover h3,.work-link:focus-visible h3 {color:var(--green);text-decoration:underline}
+.work-summary {margin-top:9px;font-size:15px;color:var(--body)}
+.work-resources {display:flex;flex-wrap:wrap;gap:5px 12px;margin-top:10px;font:12px/1.5 var(--mono)}
 .news-row {align-items:baseline}
 .news-row a {color:var(--ink);font-weight:600;line-height:1.5;text-decoration:none}
 .news-row a:hover {color:var(--green);text-decoration:underline}

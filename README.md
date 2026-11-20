@@ -13,7 +13,7 @@ Run `bash scripts/dev_static_site.sh --port 7017` and open [localhost:7017](http
 - Edit `news.md` for dated items. Use YYYY-MM when the source gives only the month, or YYYY-MM-DD for a specific day.
 - Add public bibliographic records to `publications.bib`. Keep private manuscripts outside the repository. Only place figures and other assets intended for the site in `images/`.
 
-For **Selected work**, add a publication’s BibTeX key and image description to `WORK_CAPTIONS` in `scripts/render_site.py` and save the thumbnail as `images/previews/<key>.webp`. To feature a project page, set `selected_work: true` in its `projects.md` record. The card uses the project’s cover figure and appears after the publication cards. The 3PT card plays the demonstration from the [paper’s project page](https://www.intrinsic.ai/publications/3pt-cvpr2026) and uses a frame from that video as its poster. The 3PTv2 thumbnail shows the electric vehicle charging experiment in the figure supplied by Huaijin Chen.
+For **Selected work**, use `selected_work` in `projects.md` to set a project’s numeric order on the second row. Cards use the project’s `preview` or cover figure and its `summary` or short description. The combined 3PT card in `scripts/render_site.py` plays the [CVPR project demonstration](https://www.intrinsic.ai/publications/3pt-cvpr2026) and links to both papers and their benchmark results.
 
 The homepage uses the original lab sponsor artwork plus the header marks from [NVIDIA](https://www.nvidia.com/en-us/), the [Minderoo Foundation](https://www.minderoo.org/) and [USDA APHIS](https://www.aphis.usda.gov/). Member resource icons are in `images/profile-links.svg`. The site uses locally hosted Archivo and Spectral Semibold Italic. Both licenses are in `fonts/`.
 

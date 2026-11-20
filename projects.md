@@ -26,9 +26,10 @@ detail_caption: Two cameras view the photoelastic cube through crossed polarizer
 ### Snapshot Hyperspectral Imaging with Diffractive Optical Elements
 folder: DOE-HSI
 name: Snapshot hyperspectral imaging
-selected_work: true
+selected_work: 2
 cover: doe-otf-map.png
 caption: A diffractive optical element encodes the scene on a monochrome sensor. The diagram shows how the optical measurement and its simulation are used for spectral reconstruction.
+summary: Diffractive optics encode wavelength information in a single exposure so a computational method can recover the spectrum at each pixel.
 detail: doe-psf-grid.png
 detail_caption: Reconstructed spectral bands (left) and the corresponding ground-truth bands (right) for the same scene.
 lead: Chuanjun Zheng
@@ -43,6 +44,9 @@ folder: FRC2026
 field_photo: images/gallery/palm_capture.jpg
 field_caption: Members of the field team observing palms in Hawaiʻi.
 name: Field robotics for palm health
+selected_work: 1
+preview: images/previews/crb-symposium-demo.webp
+summary: We are developing a palm-climbing robot to inspect trees and treat coconut rhinoceros beetle infestations.
 lead: Christian Moore
 pi: Huaijin Chen
 members: Riki MacMillan | Kanta Saito | Wilson Huynh | Elijah Saloma
