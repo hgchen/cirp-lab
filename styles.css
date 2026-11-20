@@ -176,7 +176,8 @@ summary {color:var(--green);cursor:pointer;width:fit-content}
 .pub,.news-item {padding:20px 0;border-top:1px solid var(--line)}
 .pub h3,.news-item h2 {font-size:clamp(21px,2vw,26px);margin:6px 0}
 .service-photo {max-width:640px;margin-top:18px}
-.service-photo img {width:100%;height:auto}
+.news-photos {display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr));gap:16px;margin-top:18px}
+.service-photo img,.news-photos img {width:100%;height:auto}
 .pub h3 a {color:inherit;text-decoration:none}
 .pub h3 a:hover {text-decoration:underline}
 .pub-year {border-top:0;padding:20px 0}

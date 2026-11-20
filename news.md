@@ -61,6 +61,11 @@ The project focuses on combining robotics, computer vision, and edge AI to build
 - Paper 2 by PhD student **Yang Qian**: *Hashtag2Action: Data Engineering and Self-Supervised Pre-Training for Action Recognition in Short-Form Videos* at the [SVU Workshop](https://short-form-video-understanding.github.io/).
 - Invited talk by **Agastya Kalra** at the [BOP Workshop](https://cmp.felk.cvut.cz/sixd/workshop_2025/#bop).
 - **Huaijin Chen** will serve as the **Local Chair** for ICCV 2025 in Honolulu.
+
+The After-ICCV AI/CV Gathering at UH Mānoa on October 24, 2025, included research presentations and a campus tour. [Event program (PDF)](../images/events/iccv-2025-uh-manoa-program.pdf)
+
+![A presenter addresses an audience in a lecture room at UH Mānoa.](images/events/iccv-2025-uh-manoa-research-session.webp "Research presentations at the After-ICCV AI/CV Gathering. Photo provided by Huaijin Chen.")
+![Participants pose for a group photo under trees on the UH Mānoa campus.](images/events/iccv-2025-uh-manoa-group.webp "Participants at the After-ICCV AI/CV Gathering. Photo provided by Huaijin Chen.")
 ---
 
 ## 2025-09-16 | CIRP Lab receives a $300,000 NSF grant for ultrafast X-ray diffraction research {#2025-09-16-received-a-300k-nsf-grant-to-study-physics-informed-vlm-for-ultrafast-x-ray-diffraction-at-the-slac-national-lab-of-stanford-university}

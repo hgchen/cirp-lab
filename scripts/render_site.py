@@ -40,7 +40,7 @@ def link(url, label):
 
 def inline(text):
     safe = escape(text)
-    safe = re.sub(r'\[([^\]]+)\]\((https?://[^)]+)\)', r'<a href="\2">\1</a>', safe)
+    safe = re.sub(r'\[([^\]]+)\]\((https?://[^)]+|\.\./[\w./-]+)\)', r'<a href="\2">\1</a>', safe)
     safe = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', safe)
     return re.sub(r'\*([^*]+)\*', r'<em>\1</em>', safe)
 
@@ -49,7 +49,15 @@ def paragraphs(text):
     blocks = []
     for paragraph in text.strip().split("\n\n"):
         lines = paragraph.splitlines()
-        if lines and all(line.startswith("- ") for line in lines):
+        photos = re.findall(r'^!\[([^\]\n]+)\]\((images/[\w./-]+) "([^"\n]+)"\)$', paragraph, re.M)
+        if photos and len(photos) == len(lines):
+            figures = (
+                f'<figure><img src="../{escape(path)}" alt="{escape(alt)}" loading="lazy" decoding="async">'
+                f'<figcaption>{escape(caption)}</figcaption></figure>'
+                for alt, path, caption in photos
+            )
+            blocks.append('<div class="news-photos">' + "".join(figures) + '</div>')
+        elif lines and all(line.startswith("- ") for line in lines):
             blocks.append("<ul>" + "".join(f"<li>{inline(line[2:])}</li>" for line in lines) + "</ul>")
         else:
             blocks.append(f"<p>{inline(' '.join(lines))}</p>")
