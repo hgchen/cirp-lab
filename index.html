@@ -22,27 +22,40 @@
     <div class="mast-inner">
       <a class="brand" href="${root}" aria-label="CIRP Lab home"><img src="${root}images/cirp-mark.png" alt="" width="30" height="30"><strong>CIRP</strong><span>/</span> UH Mānoa</a>
       <nav aria-label="Main navigation">$nav</nav>
-      <button class="theme" type="button" hidden></button>
+      <button class="theme" type="button" hidden>
+        <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <g class="sun"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></g>
+          <path class="moon" d="M20.5 14a8.6 8.6 0 0 1-10.6-10.5A8.7 8.7 0 1 0 20.5 14Z"/>
+        </svg>
+      </button>
     </div>
   </header>
   <main id="content" class="wrap">$content</main>
   <footer class="wrap foot"><a class="foot-brand" href="${root}">CIRP Lab</a><span><a href="https://www.ics.hawaii.edu/">Information and Computer Sciences</a> · <a href="https://manoa.hawaii.edu/">University of Hawaiʻi at Mānoa</a></span><a href="${root}contact/">Contact</a></footer>
   <script>
     const button = document.querySelector(".theme");
-    const choices = ["system", "light", "dark"];
     const site = document.documentElement;
-    function showChoice() {
-      const choice = site.dataset.theme || "system";
-      button.textContent = "Theme: " + choice;
-      button.setAttribute("aria-label", "Color theme: " + choice + ". Switch to " + choices[(choices.indexOf(choice) + 1) % choices.length]);
+    const systemDark = matchMedia("(prefers-color-scheme: dark)");
+    function updateThemeButton() {
+      const current = site.dataset.theme || (systemDark.matches ? "dark" : "light");
+      button.value = current === "dark" ? "light" : "dark";
+      button.title = "Switch to " + button.value + " mode";
+      button.setAttribute("aria-label", button.title);
     }
-    showChoice();
+    updateThemeButton();
     button.hidden = false;
     button.addEventListener("click", () => {
-      const next = choices[(choices.indexOf(site.dataset.theme || "system") + 1) % choices.length];
+      const next = button.value;
       site.dataset.theme = next;
       try { localStorage.setItem("cirp-theme", next); } catch {}
-      showChoice();
+      updateThemeButton();
+    });
+    systemDark.addEventListener("change", updateThemeButton);
+    window.addEventListener("storage", event => {
+      if (event.key !== "cirp-theme" && event.key !== null) return;
+      if (event.newValue === "dark" || event.newValue === "light") site.dataset.theme = event.newValue;
+      else delete site.dataset.theme;
+      updateThemeButton();
     });
   </script>
 </body>

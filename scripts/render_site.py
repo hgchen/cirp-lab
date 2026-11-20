@@ -360,11 +360,8 @@ def gallery_page():
           </span>
         </figcaption>
         <div class="gallery-reel">
-          <div class="slide-peek" aria-hidden="true"><img id="previous-preview" alt=""></div>
-          <a class="gallery-stage" id="slide-original" aria-label="Open full-size photo" title="Open full-size photo">
-            <img id="slide-image" alt="">
-          </a>
-          <div class="slide-peek" aria-hidden="true"><img id="next-preview" alt=""></div>
+          <div class="gallery-wheel" aria-hidden="true"></div>
+          <a class="gallery-stage" id="slide-original" aria-label="Open full-size photo" title="Open full-size photo"></a>
           <button type="button" id="slide-previous" aria-label="Previous photo" title="Previous photo">{icon("previous")}</button>
           <button type="button" id="slide-next" aria-label="Next photo" title="Next photo">{icon("next")}</button>
         </div>

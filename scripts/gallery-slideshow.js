@@ -7,19 +7,28 @@ const previousButton = document.querySelector("#slide-previous");
 const nextButton = document.querySelector("#slide-next");
 const playButton = document.querySelector("#slide-play");
 const reel = document.querySelector(".gallery-reel");
-const slideImage = document.querySelector("#slide-image");
+const wheel = document.querySelector(".gallery-wheel");
 const slideCaption = document.querySelector("#slide-caption");
 const slidePlace = document.querySelector("#slide-place");
 const slideInfo = document.querySelector(".slide-info");
 const slideOriginal = document.querySelector("#slide-original");
 const slidePosition = document.querySelector("#slide-position");
-const previousPreview = document.querySelector("#previous-preview");
-const nextPreview = document.querySelector("#next-preview");
 const photos = [...thumbnails.querySelectorAll("figure")].map(figure => {
   const image = figure.querySelector("img");
+  const link = figure.querySelector("a");
+  const panel = new Image();
+  panel.className = "wheel-photo";
+  panel.alt = "";
+  panel.hidden = true;
+  panel.addEventListener("error", () => {
+    if (panel.src === image.src && panel.src !== link.href) panel.src = link.href;
+  });
+  wheel.append(panel);
   return {
+    panel,
+    ratio: Number(figure.style.getPropertyValue("--ratio")) || 4 / 3,
     id: figure.id,
-    link: figure.querySelector("a"),
+    link,
     thumbnail: image,
     alt: image.alt,
     caption: figure.querySelector(".photo-caption").textContent,
@@ -27,92 +36,113 @@ const photos = [...thumbnails.querySelectorAll("figure")].map(figure => {
   };
 });
 
-let index = Math.max(0, photos.findIndex(photo => photo.id === location.hash.slice(1)));
-let requestedIndex = index;
-let revision = 0;
-let timer = null;
+const wrap = n => ((n % photos.length) + photos.length) % photos.length;
+const portraitPhone = matchMedia("(max-width:640px) and (orientation:portrait)");
 const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
+let target = Math.max(0, photos.findIndex(photo => photo.id === location.hash.slice(1)));
+let position = target;
+let index = -1;
+let frame = 0;
+let timer = null;
+let width, desktopHeight, arcLength;
 
-function finishTransition() {
-  reel.querySelector(".slide-leaving")?.remove();
-  reel.getAnimations({ subtree: true }).forEach(animation => animation.cancel());
-  slideInfo.getAnimations().forEach(animation => animation.cancel());
-}
-
-function turnPhoto(previous, direction) {
-  const travel = direction * Math.min(200, reel.clientWidth * 0.36);
-  const timing = { duration: 360, easing: "cubic-bezier(.2,.75,.22,1)" };
-  const leaving = new Image();
-  leaving.src = previous.src;
-  leaving.alt = "";
-  leaving.className = "slide-leaving";
-  leaving.style.left = previous.left + "px";
-  leaving.style.width = previous.width + "px";
-  reel.append(leaving);
-  const back = leaving.animate([
-    { transform: "none", opacity: 1 },
-    { transform: `translate3d(${-travel}px,0,-80px) rotateY(${direction * 9}deg)`, opacity: 0 }
-  ], timing);
-  back.onfinish = () => leaving.remove();
-  slideOriginal.animate([
-    { transform: `translate3d(${travel}px,0,-85px) rotateY(${-direction * 12}deg)`, boxShadow: "0 7px 22px #0005" },
-    { transform: "none", boxShadow: "0 0 0 #0000" }
-  ], timing);
-  const height = reel.offsetHeight;
-  if (Math.abs(height - previous.height) > 1) {
-    reel.animate([{ height: previous.height + "px" }, { height: height + "px" }], timing);
-  }
-  slideInfo.animate([{ opacity: 0.5 }, { opacity: 1 }], { duration: 200 });
-}
-
-async function showPhoto(nextIndex, direction = 0) {
-  const request = ++revision;
-  requestedIndex = (nextIndex + photos.length) % photos.length;
-  const photo = photos[requestedIndex];
-  const thumb = photo.thumbnail;
-  let preview = thumb;
-  if (!thumb.complete || !thumb.naturalWidth) {
-    preview = new Image();
-    preview.src = thumb.src;
-    try {
-      await preview.decode();
-    } catch {
-      preview.src = photo.link.href;
-      try { await preview.decode(); } catch { return; }
-    }
-  }
-  if (request !== revision) return false;
-  finishTransition();
-  const previous = direction && !reducedMotion.matches && slideImage.naturalWidth ? {
-    src: slideImage.currentSrc, left: slideOriginal.offsetLeft,
-    width: slideOriginal.offsetWidth, height: reel.offsetHeight
-  } : null;
-  index = requestedIndex;
-  const ratio = preview.naturalWidth / preview.naturalHeight;
-  slideshow.style.setProperty("--ratio", ratio);
-  previousPreview.src = photos[(index + photos.length - 1) % photos.length].thumbnail.src;
-  nextPreview.src = photos[(index + 1) % photos.length].thumbnail.src;
+function selectPhoto(current) {
+  if (current === index) return;
+  if (index >= 0) photos[index].panel.removeAttribute("id");
+  index = current;
+  const photo = photos[index];
+  photo.panel.id = "slide-image";
   slideOriginal.href = photo.link.href;
-  slideImage.alt = photo.alt;
-  slideImage.src = preview.src;
+  slideOriginal.setAttribute("aria-label", "Open full-size photo: " + photo.alt);
   slidePlace.textContent = photo.place;
   slidePlace.hidden = !photo.place;
   slideCaption.textContent = photo.caption;
   slidePosition.textContent = `${index + 1} / ${photos.length}`;
-  if (previous) turnPhoto(previous, direction);
-  const full = new Image();
-  full.src = photo.link.href;
-  full.decode().then(() => {
-    if (request !== revision) return;
-    slideshow.style.setProperty("--ratio", full.naturalWidth / full.naturalHeight);
-    slideImage.src = full.src;
-  }).catch(() => {}); // Keep the preview if the original is unavailable.
-  return true;
+  if (photo.panel.src !== photo.link.href) {
+    const full = new Image();
+    full.src = photo.link.href;
+    full.decode().then(() => {
+      photo.panel.src = full.src;
+    }).catch(() => {}); // Keep the preview if the original is unavailable.
+  }
+}
+
+function drawWheel() {
+  const left = photos[wrap(Math.floor(position))];
+  const right = photos[wrap(Math.floor(position) + 1)];
+  const fraction = position - Math.floor(position);
+  const angle = left.angle + fraction * (left.halfArc + right.halfArc);
+  const height = portraitPhone.matches
+    ? width * ((1 - fraction) / left.ratio + fraction / right.ratio)
+    : desktopHeight;
+  const centerDepth = left.depth + (right.depth - left.depth) * fraction;
+  reel.style.height = height + "px";
+  wheel.style.transform = `translateZ(${-centerDepth * height}px)`;
+  for (const photo of photos) {
+    // Use the nearest copy of the angle across the album's wrap point.
+    let offset = photo.angle - angle;
+    offset -= arcLength * Math.round(offset / arcLength);
+    const panel = photo.panel;
+    panel.hidden = Math.abs(offset) > Math.PI / 2 + photo.halfArc;
+    if (panel.hidden) continue;
+    if (!panel.hasAttribute("src")) panel.src = photo.thumbnail.src;
+    panel.style.width = height * photo.ratio + "px";
+    panel.style.transform = `rotateY(${offset}rad) translateZ(${photo.depth * height}px) translateX(-50%)`;
+  }
+  selectPhoto(wrap(Math.round(position)));
+  reel.style.setProperty("--active-width", Math.min(width, photos[index].ratio * height) + "px");
+}
+
+function layoutWheel() {
+  if (slideshow.hidden) return;
+  width = reel.clientWidth;
+  const widest = Math.max(...photos.map(photo => photo.ratio));
+  desktopHeight = Math.min(innerHeight * 0.55, 500, (width - 8) / Math.max(1.92, widest));
+  const radius = Math.max(1.7, widest * 0.6, width / desktopHeight);
+  arcLength = 0;
+  // Each photo is a chord of the same circle. Its width determines its arc.
+  for (const photo of photos) {
+    photo.halfArc = Math.asin((photo.ratio + 0.006) / (2 * radius));
+    photo.angle = arcLength + photo.halfArc;
+    photo.depth = radius * Math.cos(photo.halfArc);
+    arcLength += 2 * photo.halfArc;
+  }
+  drawWheel();
+}
+
+function settle() {
+  cancelAnimationFrame(frame);
+  target = wrap(target);
+  position = target;
+  if (!slideshow.hidden) drawWheel();
+}
+
+function rotate(direction) {
+  target += direction;
+  cancelAnimationFrame(frame);
+  if (reducedMotion.matches) {
+    settle();
+    return;
+  }
+  const from = position;
+  const start = performance.now();
+  const duration = Math.min(600, 420 + 45 * Math.abs(target - from));
+  function tick(now) {
+    const t = Math.min(1, (now - start) / duration);
+    if (t === 1) {
+      settle();
+      return;
+    }
+    position = from + (target - from) * t * t * (3 - 2 * t);
+    drawWheel();
+    frame = requestAnimationFrame(tick);
+  }
+  frame = requestAnimationFrame(tick);
 }
 
 function setPlaying(playing) {
   clearInterval(timer);
-  timer = playing ? setInterval(() => showPhoto(requestedIndex + 1, 1), 5000) : null;
+  timer = playing ? setInterval(() => rotate(1), 5000) : null;
   const label = playing ? "Pause slideshow" : "Play slideshow";
   playButton.setAttribute("aria-label", label);
   playButton.title = label;
@@ -122,21 +152,23 @@ function setPlaying(playing) {
 
 function step(direction) {
   setPlaying(false);
-  showPhoto(requestedIndex + direction, direction);
+  rotate(direction);
 }
 
-async function setSlideshow(open, focusPhoto = false) {
-  if (open && !await showPhoto(index)) return;
+function setSlideshow(open, focusPhoto = false) {
+  if (open && !slideshow.hidden) return;
   thumbnails.hidden = open;
   slideshow.hidden = !open;
   thumbnailButton.setAttribute("aria-pressed", String(!open));
   slideshowButton.setAttribute("aria-pressed", String(open));
   if (open) {
+    position = target;
+    layoutWheel();
     slideshow.focus({ preventScroll: true });
     if (viewButtons.getBoundingClientRect().top < 0) viewButtons.scrollIntoView({ block: "start" });
   } else {
-    revision++;
-    finishTransition();
+    cancelAnimationFrame(frame);
+    target = Math.max(index, 0);
     setPlaying(false);
     (focusPhoto ? photos[index].link : thumbnailButton).focus();
   }
@@ -144,15 +176,16 @@ async function setSlideshow(open, focusPhoto = false) {
 
 if (photos.length) {
   reducedMotion.addEventListener("change", () => {
-    if (reducedMotion.matches) finishTransition();
+    if (reducedMotion.matches) settle();
   });
+  window.addEventListener("resize", layoutWheel);
   viewButtons.hidden = false;
   thumbnails.classList.add("interactive");
   photos.forEach((photo, position) => {
     photo.link.addEventListener("click", event => {
       if (event.ctrlKey || event.metaKey || event.altKey || event.shiftKey || event.button !== 0) return;
       event.preventDefault();
-      index = position;
+      target = position;
       setSlideshow(true);
     });
   });
