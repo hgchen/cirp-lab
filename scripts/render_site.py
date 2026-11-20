@@ -20,7 +20,6 @@ GROUP_LABELS = {"PhD": "PhD students", "Masters": "Master’s students",
 WORK_CAPTIONS = {
     "kalra2026_3ptv2": "A robot locates a charging port, estimates its pose and inserts the plug on three electric vehicles.",
     "kalra2026_3pt": "3PT estimates the poses of a pile of metal parts.",
-    "motsoehli2025simulating": "A simulated lens flare in a dashcam recording.",
 }
 LAB = "Computational Imaging and Robotic Perception Lab"
 LEGACY = """<script>
@@ -332,6 +331,18 @@ def home_heading(label, title, url="", action=""):
     return f'<header class="home-heading"><span>{escape(label)}</span><h2>{escape(title)}</h2>{more}</header>'
 
 
+def work_card(title, href, path, caption, metadata, video=""):
+    version = sha256((ROOT / path).read_bytes()).hexdigest()[:12]
+    preview = f"{path}?v={version}"
+    work_link = f'<a class="work-link" href="{escape(href)}">'
+    if video.lower().endswith(".mp4"):
+        media = video_player(video, preview, caption) + work_link
+    else:
+        media = work_link + f'<img src="{escape(preview)}" alt="{escape(caption)}" loading="lazy" decoding="async">'
+    return (f'<article>{media}<span class="metadata">{escape(metadata)}</span>'
+            f'<h3>{escape(title)}</h3></a></article>')
+
+
 def home(projects, people, items, pubs):
     content = f'''<section class="hero"><h1>{LAB}</h1>
     <p class="mission">We combine <em>computational imaging</em> and <em>physics-informed AI</em> to design sensors and interpret their measurements.
@@ -349,17 +360,17 @@ def home(projects, people, items, pubs):
         key = item["key"]
         if key not in WORK_CAPTIONS:
             continue
-        path = f"images/previews/{key}.webp"
-        version = sha256((ROOT / path).read_bytes()).hexdigest()[:12]
-        preview = f"{path}?v={version}"
-        paper_link = f'<a class="work-link" href="publications/#{escape(key)}">'
-        if item.get("video", "").lower().endswith(".mp4"):
-            media = video_player(item["video"], preview, WORK_CAPTIONS[key]) + paper_link
-        else:
-            media = paper_link + f'<img src="{escape(preview)}" alt="{escape(WORK_CAPTIONS[key])}" loading="lazy" decoding="async">'
         venue = item.get("abbr") or item.get("booktitle") or item.get("journal", "")
-        content += (f'<article>{media}<span class="metadata">{escape(venue)} · {escape(item["year"])}</span>'
-                    f'<h3>{escape(item["title"])}</h3></a></article>')
+        content += work_card(item["title"], f"publications/#{key}", f"images/previews/{key}.webp",
+                             WORK_CAPTIONS[key], f"{venue} · {item['year']}", item.get("video", ""))
+    for group in projects.values():
+        for project in group:
+            if project.get("selected_work") != "true":
+                continue
+            folder, cover, _ = project_media(project)
+            name = project.get("name", project["title"])
+            content += work_card(name, project_path(project), folder + cover,
+                                 project.get("caption", name), "Research project")
     content += '</div><p class="work-more">' + link('publications/', 'All publications →') + '</p></section>'
     content += '<section class="section" id="the-group">' + home_heading("People", "The group", "people/", "People & alumni") + '<dl class="roster">'
     for group, members in people.items():
