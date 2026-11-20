@@ -1,9 +1,9 @@
 # News
 
 ## 2026-11-12 | CIRP and UH Mānoa at CoRL in Austin
-[3PTv2](https://openreview.net/forum?id=WNZ4Dr57JS), a paper by CIRP PhD student Agastya Kalra and his colleagues, was selected for a main-conference poster at the Conference on Robot Learning (CoRL). The paper studies zero-shot 6D object pose estimation for robotic manipulation. Huaijin Chen co-authored the work.
+The Conference on Robot Learning (CoRL) selected [3PTv2](https://openreview.net/forum?id=WNZ4Dr57JS) for a main-conference poster. CIRP PhD student Agastya Kalra and his co-authors, including Huaijin Chen, study zero-shot 6D object pose estimation for robotic manipulation.
 
-Two other UH Mānoa contributions appeared at the conference. Justin Fletcher’s [Telescopes are Optomechanical Robots](https://openreview.net/forum?id=RS2INStAhX) was also accepted as a main-conference poster. At the [UMI Arena workshop](https://umi-arena.airoa.io/accepted), Yosub Shin, Yuan Liu, and Igor Molybog presented a poster on head-camera glove tracking (P09) and a hands-on exhibit of the [YAM-UMI](https://github.com/YosubShin/yam-umi) device (D10).
+CoRL also accepted [Telescopes are Optomechanical Robots](https://openreview.net/forum?id=RS2INStAhX) by UH Mānoa’s Justin Fletcher as a main-conference poster. At the [UMI Arena workshop](https://umi-arena.airoa.io/accepted), Yosub Shin, Yuan Liu, and Igor Molybog presented a poster on head-camera glove tracking (P09) and a hands-on exhibit of the [YAM-UMI](https://github.com/YosubShin/yam-umi) device (D10).
 ---
 
 ## 2026-10-01 | Riki MacMillan receives the Bubba Cook Award at SAFET 2026 {#2026-10-01-riki-macmillan-safet-2026}
@@ -13,7 +13,7 @@ CIRP graduate researcher Riki MacMillan received the **Bubba Cook Award for Emer
 ---
 
 ## 2026-07 | Thank you to USDA for supporting plant pathogen risk assessment ($154,517) {#2026-07-usda-aphis-supports-plant-pathogen-risk-assessment}
-Huaijin Chen is co-PI on a $154,517 USDA APHIS project to develop a machine learning decision-support tool for phytopathogen risk assessments.
+Huaijin Chen is co-PI on a $154,517 USDA APHIS project to develop a machine learning tool that helps assess risks from plant pathogens.
 ---
 
 ## 2026-06-04 | Huaijin Chen gives a keynote at the CVPR 2026 UG2+ Workshop
@@ -30,7 +30,7 @@ The Minderoo Foundation awarded $153,311 for an app that measures fish and recon
 Thank you to Google for a **$50,000 research gift**. We’ll use it to develop new sensors and study how robots can use 3D vision to understand a scene, manipulate objects, and work autonomously.
 ---
 
-## 2026-03-06 | One Paper Accepted at CVPR 2026
+## 2026-03-06 | 3PT accepted at CVPR 2026 {#2026-03-06-one-paper-accepted-at-cvpr-2026}
 Congratulations to PhD student **Agastya Kalra**, first author of *3D-Object Perception Transformer (3PT)*, and his co-authors on their **CVPR 2026** acceptance. Their method detects and segments objects and estimates their 6-DoF poses for tasks such as bin picking and precise insertion. It won seven of eleven tracks in the 2025 BOP Challenge.
 ---
 
@@ -38,11 +38,11 @@ Congratulations to PhD student **Agastya Kalra**, first author of *3D-Object Per
 PhD student **Christian Moore**, who studies robot perception at CIRP, will spend summer 2026 with the **GM Cruise** autonomous driving team. Congratulations, Christian!
 ---
 
-## 2026-03-06 | New Paper on Imaging Through Turbulence on arXiv
+## 2026-03-06 | New arXiv preprint on imaging through turbulence {#2026-03-06-new-paper-on-imaging-through-turbulence-on-arxiv}
 MS student **Ethan Chung** and PhD student **Norman Luo** are the second and third authors of a [preprint](https://arxiv.org/abs/2603.02048) on reconstructing distant scenes from images distorted by atmospheric turbulence.
 ---
 
-## 2026-01-14 | NVIDIA Academic Grant Awarded! Thanks, NVIDIA!
+## 2026-01-14 | Thank you to NVIDIA for supporting our farm robotics research {#2026-01-14-nvidia-academic-grant-awarded-thanks-nvidia}
 An **NVIDIA Academic Grant** provides **two RTX PRO 6000 Blackwell GPUs** to train models for farm robots and **four Jetson AGX Orin computers** to run those models in the field. We’re developing these tools to help growers in Hawaiʻi and elsewhere manage labor-intensive farm work.
 
 [Read the full story on UH News](https://www.hawaii.edu/news/2026/01/14/nvidia-awards-next-gen-tech/).

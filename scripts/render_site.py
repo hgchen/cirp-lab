@@ -321,13 +321,15 @@ def gallery_page():
         size_attrs = f' width="{size[0]}" height="{size[1]}"' if size else ""
         ratio = size[0] / size[1] if size else 4 / 3
         description = album.get("descriptions", {}).get(photo, f"CIRP Lab photo {index + 1}")
-        caption = album.get("captions", {}).get(photo, "")
+        caption = album.get("captions", {}).get(photo) or description
+        place = album.get("locations", {}).get(photo, "")
+        label = f'<span class="photo-place">{escape(place)}</span>' if place else ""
         loading = "eager" if index < 4 else "lazy"
         tiles.append(
             f'<figure id="{escape(path.stem)}" style="--ratio:{ratio:.6f}">'
             f'<a href="../{escape(path.as_posix())}"><img src="../{escape(src.as_posix())}" '
             f'alt="{escape(description)}"{size_attrs} loading="{loading}" decoding="async"></a>'
-            + (f'<figcaption>{escape(caption)}</figcaption>' if caption else "") + '</figure>'
+            f'<figcaption>{label}<span class="photo-caption">{escape(caption)}</span></figcaption></figure>'
         )
 
     def icon(name):
@@ -347,6 +349,16 @@ def gallery_page():
     slideshow = f"""
     <section class="gallery-slideshow" id="gallery-slideshow" aria-label="Photo slideshow" tabindex="-1" hidden>
       <figure>
+        <figcaption class="slide-footer">
+          <span class="slide-info" role="status" aria-live="polite" aria-atomic="true">
+            <span id="slide-place" class="photo-place" hidden></span>
+            <span id="slide-caption"></span>
+          </span>
+          <span class="slide-tools">
+            <span id="slide-position"></span>
+            <button type="button" id="slide-play" aria-label="Play slideshow" title="Play slideshow">{icon("play")}</button>
+          </span>
+        </figcaption>
         <div class="gallery-reel">
           <div class="slide-peek" aria-hidden="true"><img id="previous-preview" alt=""></div>
           <a class="gallery-stage" id="slide-original" aria-label="Open full-size photo" title="Open full-size photo">
@@ -356,13 +368,6 @@ def gallery_page():
           <button type="button" id="slide-previous" aria-label="Previous photo" title="Previous photo">{icon("previous")}</button>
           <button type="button" id="slide-next" aria-label="Next photo" title="Next photo">{icon("next")}</button>
         </div>
-        <figcaption class="slide-footer">
-          <span id="slide-caption"></span>
-          <span class="slide-tools">
-            <span id="slide-position" role="status" aria-atomic="true"></span>
-            <button type="button" id="slide-play" aria-label="Play slideshow" title="Play slideshow">{icon("play")}</button>
-          </span>
-        </figcaption>
       </figure>
     </section>
     """

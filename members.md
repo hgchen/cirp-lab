@@ -12,7 +12,7 @@ website: https://hgchen.com
 scholar: https://scholar.google.com/citations?user=6E9elWUAAAAJ
 github: https://github.com/hgchen
 cv: https://hgchen.com/assets/pdf/hgc_cv.pdf
-bio: Huaijin Chen is an Assistant Professor of Computer Science at the University of Hawaii at Manoa, where he directs the Computational Imaging and Robotic Perception (CIRP) Lab. His work spans computational imaging, computer vision, and robotic perception.
+bio: Huaijin Chen is an Assistant Professor of Computer Science at the University of Hawaiʻi at Mānoa, where he directs the Computational Imaging and Robotic Perception (CIRP) Lab. He works on computational imaging, computer vision, and robotic perception.
 ---
 
 ## PhD
@@ -23,7 +23,7 @@ affiliation: University of Hawaii at Manoa
 image: images/members/feimei-chen.jpg
 email: feimei@hawaii.edu
 linkedin: https://www.linkedin.com/in/feimei-chen-4b1206204/
-bio: Feimei Chen is a PhD student in Computer Science. Her work spans imaging-based tactile sensing, fish tracking, computer vision, and computational imaging for robotic perception.
+bio: Feimei Chen is a PhD student in Computer Science. She studies imaging-based tactile sensing, fish tracking, and computer vision, and uses computational imaging for robotic perception.
 ---
 
 ### Christian Moore
@@ -105,7 +105,7 @@ image: images/members/joel.jpeg
 website: https://jnicolow.github.io/
 scholar: https://scholar.google.com/citations?user=zSGvQXcAAAAJ&hl=en
 linkedin: https://www.linkedin.com/in/joelnicolow/
-bio: I am currently a graduate student researcher in computer science. My specific interests include data science, machine learning, and deep learning. I enjoy finding interdisciplinary applications for these interests. **Co-advised by [Charles Fletcher](https://www.linkedin.com/in/chip-fletcher-phd-29046825/).**
+bio: I am a graduate researcher in computer science. I look for ways to apply data science, machine learning, and deep learning across disciplines. **Co-advised by [Charles Fletcher](https://www.linkedin.com/in/chip-fletcher-phd-29046825/).**
 ---
 
 ### Nykolas Rekasius
@@ -120,7 +120,7 @@ affiliation: University of Hawaii at Manoa
 image: images/members/riki.jpg
 email: rikimacm@hawaii.edu
 linkedin: https://www.linkedin.com/in/riki-macmillan/
-bio: Riki MacMillan is a Master's student in Computer Science. His research focuses on computer vision and robotics, with an emphasis on multi-drone systems for automated 3D reconstruction and environmental mapping. His work involves designing drone coordination systems, ground-station software, and computer vision pipelines for processing aerial imagery.
+bio: Riki MacMillan is a master’s student in Computer Science. He uses computer vision and robotics to develop multi-drone systems for automated 3D reconstruction and environmental mapping. He designs systems for coordinating drones, writes ground-station software, and builds computer vision pipelines to process aerial imagery.
 ---
 
 ## Undergrads
@@ -139,7 +139,7 @@ tags: Information and Computer Sciences | FRC 2025 | FRC 2026
 image: images/members/christian-komo.png
 email: ckomo@hawaii.edu
 github: https://github.com/komochristian
-bio: Christian Komo is an undergraduate researcher contributing to agricultural robotics and autonomous perception. He was part of Team ʻĀina at the 2025 Farm Robotics Challenge and continues to work on the lab’s 2026 effort.
+bio: Christian Komo is an undergraduate researcher in agricultural robotics and autonomous perception. He was on Team ʻĀina at the 2025 Farm Robotics Challenge and works on the lab’s 2026 entry.
 ---
 
 ### Ella Self
@@ -156,7 +156,7 @@ affiliation: University of Hawai'i at Manoa
 tags: Mechanical Engineering | FRC 2025 | FRC 2026
 image: images/members/rona-duldulao.jpg
 linkedin: https://www.linkedin.com/in/ronaleid/
-bio: Rona Lei Duldulao is a mechanical engineering undergraduate working on agricultural robotics and field automation. She helped organize Team ʻĀina for the 2025 Farm Robotics Challenge and continues to work on the lab’s 2026 effort.
+bio: Rona Lei Duldulao is a mechanical engineering undergraduate working on agricultural robotics and field automation. She helped organize Team ʻĀina for the 2025 Farm Robotics Challenge and works on the lab’s 2026 entry.
 ---
 
 ### Lucas Horsman
@@ -167,14 +167,14 @@ image: images/members/lucas-horsman.png
 website: https://lucashorsman.github.io/
 github: https://github.com/lucashorsman
 linkedin: https://www.linkedin.com/in/lucas-horsman-b9b09523a/
-bio: Lucas Horsman is an undergraduate interested in programming, robotics, and interactive systems. He contributes software and robotics work to the lab's Farm Robotics Challenge teams.
+bio: Lucas Horsman is an undergraduate interested in programming, robotics, and interactive systems. He writes software and works on robots for the lab’s Farm Robotics Challenge teams.
 ---
 
 ### Zadon Padello
 role: Undergraduate Researcher
 affiliation: University of Hawai'i at Manoa
 tags: Information and Computer Sciences | FRC 2025 | FRC 2026
-bio: Zadon Padello is an undergraduate researcher working on the lab's farm robotics systems and field testing efforts.
+bio: Zadon Padello is an undergraduate researcher who works on the lab’s farm robots and helps test them in the field.
 ---
 
 ### Tyler Mak
@@ -257,7 +257,7 @@ image: images/members/kai-garcia.jpg
 email: contact@kaigarcia.dev
 website: https://kaigarcia.framer.website/
 linkedin: https://www.linkedin.com/in/kai-garcia/
-bio: Kai Garcia contributed to the lab's robotics and tactile perception projects as an undergraduate researcher, including the award-winning PolarTact3D work.
+bio: As an undergraduate researcher, Kai Garcia worked on robotics and tactile perception at CIRP, including the award-winning PolarTact3D project.
 ---
 
 ### Erik Bendickson

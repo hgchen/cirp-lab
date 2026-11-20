@@ -187,24 +187,29 @@ summary {color:var(--green);cursor:pointer;width:fit-content}
 .lab-gallery a {display:block;aspect-ratio:var(--ratio);overflow:hidden;border-radius:3px}
 .lab-gallery img {width:100%;height:100%;object-fit:cover}
 .lab-gallery figcaption {max-width:none;margin:4px 0 0}
+.photo-place {display:block;font:600 11px/1.35 var(--sans);letter-spacing:.025em}
+.lab-gallery .photo-place {margin-bottom:2px}
 .lab-gallery.interactive figcaption {position:absolute;inset:auto 0 0;margin:0;padding:25px 9px 8px;pointer-events:none;border-radius:0 0 3px 3px;background:linear-gradient(transparent,rgba(0,0,0,.85));color:white;line-height:1.35;opacity:0}
 .lab-gallery.interactive figure:focus-within figcaption {opacity:1}
 @media (hover:hover) {.lab-gallery.interactive figure:hover figcaption {opacity:1}}
 .gallery-slideshow {container-type:inline-size;margin-bottom:24px}
-.gallery-slideshow figure {--slide-height:min(55svh,500px,calc((100cqw - 8px) / var(--ratio)))}
-.gallery-reel {position:relative;display:flex;gap:4px;height:var(--slide-height);overflow:hidden;border-radius:4px;touch-action:pan-y pinch-zoom}
-.gallery-stage {display:block;height:100%;aspect-ratio:var(--ratio);flex:none}
+.gallery-slideshow figure {display:flex;flex-direction:column;--slide-height:min(55svh,500px,calc((100cqw - 10px) / max(1.92,var(--ratio))));overflow:hidden;border:1px solid var(--line);border-radius:8px}
+.gallery-reel {order:-1;position:relative;display:flex;gap:3px;height:var(--slide-height);overflow:hidden;background:#202725;perspective:1000px;isolation:isolate;touch-action:pan-y pinch-zoom}
+.gallery-stage {position:relative;z-index:2;display:block;height:100%;aspect-ratio:var(--ratio);flex:none;backface-visibility:hidden}
 .gallery-stage img,.slide-peek img {width:100%;height:100%;object-fit:cover}
 .gallery-stage img {object-fit:contain}
 .slide-peek {flex:1;min-width:0;overflow:hidden;filter:brightness(.72) saturate(.85)}
-.gallery-reel button {position:absolute;top:0;bottom:0;width:max(44px,calc((100% - var(--slide-height) * var(--ratio)) / 2));color:#fff}
+.slide-leaving {position:absolute;z-index:1;top:0;height:100%;max-width:none;object-fit:cover;pointer-events:none}
+.gallery-reel button {z-index:3;position:absolute;top:0;bottom:0;width:max(44px,calc((100% - var(--slide-height) * var(--ratio)) / 2));color:#fff}
 #slide-previous {left:0;justify-items:start;padding-left:6px}
 #slide-next {right:0;justify-items:end;padding-right:6px}
 .gallery-reel button svg {box-sizing:content-box;padding:7px;border-radius:50%;background:rgba(15,21,20,.58)}
 .gallery-reel button:hover svg,.gallery-reel button:focus-visible svg {background:rgba(15,21,20,.83)}
 .gallery-reel :focus-visible {outline-offset:-3px}
-.slide-footer {display:flex;align-items:flex-start;justify-content:space-between;gap:12px;max-width:none;margin-top:6px;padding-inline-start:max(0px,calc((100% - var(--slide-height) * var(--ratio)) / 2))}
-#slide-caption {padding-top:9px;max-width:72ch;font-size:14px}
+.slide-footer {display:flex;align-items:center;justify-content:space-between;gap:clamp(10px,2vw,22px);min-height:68px;max-width:none;margin:0;padding:9px clamp(12px,2vw,22px);background:var(--panel);color:var(--ink)}
+.slide-info {display:grid;align-content:center;gap:3px;max-width:76ch}
+.slide-info .photo-place {color:var(--green)}
+#slide-caption {font:400 clamp(14px,1.1vw,16px)/1.45 var(--sans)}
 .slide-tools {gap:4px;white-space:nowrap}
 #slide-position {color:var(--muted);font:12px/1.4 var(--mono)}
 .slide-tools button {border-radius:50%}
@@ -214,11 +219,11 @@ summary {color:var(--green);cursor:pointer;width:fit-content}
   .lab-gallery.interactive figcaption {font-size:12px}
 }
 @media (max-width:640px) and (orientation:portrait) {
-  .gallery-reel {height:auto;gap:0}
+  .gallery-reel {height:auto;gap:0;order:0;align-items:center}
   .slide-peek {display:none}
   .gallery-stage {width:100%;height:auto}
   .gallery-reel button {width:44px}
-  .slide-footer {padding-inline-start:0}
+  .slide-footer {min-height:72px;padding:9px 12px}
 }
 .outreach-feature,.service-item {display:grid;grid-template-columns:minmax(0,1fr) minmax(0,min(44%,440px));align-items:start;gap:clamp(18px,4vw,48px)}
 .service-item {grid-template-columns:minmax(0,1fr) minmax(0,min(35%,335px))}

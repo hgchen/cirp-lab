@@ -18,7 +18,7 @@ cover: contact-force.webp
 caption: Front and side views of the sensor, simulated fringes and predicted contact maps during a sphere drag. Arrows show shear direction.
 video: contact-demo.mp4
 video_poster: contact-demo-poster.webp
-video_caption: Real camera footage and predicted fringe patterns are shown side by side as the load changes. The plot tracks force over time.
+video_caption: The video shows real camera footage next to predicted fringe patterns as the load changes. The plot tracks force over time.
 detail: sensor.webp
 detail_caption: Two cameras view the photoelastic cube through crossed polarizers. The exploded view shows the optical and mechanical components.
 ---
@@ -44,14 +44,14 @@ name: Snapshot hyperspectral imaging
 selected_work: 2
 cover: doe-otf-map.png
 caption: A diffractive optical element encodes the scene on a monochrome sensor. The diagram shows how the optical measurement and its simulation are used for spectral reconstruction.
-summary: Diffractive optics encode wavelength information in a single exposure, enabling reconstruction of the spectrum at each pixel.
+summary: Diffractive optics encode wavelength information in one exposure so we can reconstruct the spectrum at each pixel.
 detail: doe-psf-grid.png
 detail_caption: Reconstructed spectral bands (left) and the corresponding ground-truth bands (right) for the same scene.
 lead: Chuanjun Zheng
 pi: Huaijin Chen
 members: Feimei Chen
-short: We develop diffractive optical elements that encode spectral information in a single sensor measurement, enabling compact, fast, and light-efficient hyperspectral imaging.
-description: We develop diffractive optical elements (DOEs) for snapshot hyperspectral imaging, where wavelength-dependent information is optically encoded into a single sensor measurement. An optimized DOE transforms different spectral components into distinct, spatially varying point spread functions on the detector. The DOE can be engineered to achieve narrow spectral responses, characterized by a small full width at half maximum (FWHM). Narrower responses improve spectral resolution and reduce inter-band interference. Together with computational reconstruction, this optical encoding supports accurate recovery of the full spectral profile at each pixel and enables a compact, high-speed, and light-efficient hyperspectral imaging system.
+short: We design diffractive optical elements for compact, fast, light-efficient hyperspectral cameras that capture spectral information in one exposure.
+description: With an optimized diffractive optical element (DOE), different spectral components produce distinct, spatially varying point spread functions on the detector. We can design the element for narrow spectral responses, measured by their full width at half maximum (FWHM). Narrower responses improve spectral resolution and reduce interference between bands. Using one sensor measurement, we can reconstruct the full spectrum at each pixel.
 ---
 
 ### Autonomous Coconut Rhinoceros Beetle Infestation Management
@@ -77,7 +77,7 @@ members: Rona Lei Duldulao | Lucas Horsman | Wilson Huynh | Erik Bendickson | Ch
 collaborators_label: University of Michigan team
 collaborators: Nilay Choudhury | Xinqi Zhang | Yuchen You | Haobo Fang | Siyuan Zheng | Ronen Dujovny | Adrian Wang | Mingxuan He
 short: A palm-climbing robot designed to inspect trees and treat coconut rhinoceros beetle infestations.
-description: The team is developing a palm-climbing mechanism and an end effector for pesticide deployment and flower trimming. Simulated and teleoperated trials are used to study how the arm can interact with the tree before testing on hardware.
+description: The team is developing a mechanism to climb palms and an end effector to apply pesticides and trim flowers. They use simulation and teleoperated trials to study how the arm interacts with a tree before hardware tests.
 ---
 
 ### FishEye: Robust 3D Fish Measurement from Single Image or Video
@@ -98,8 +98,8 @@ name: FishPod
 related: FishEye
 pi: Huaijin Chen
 members: Feimei Chen | Riki MacMillan | Munir
-short: FishPod mounts a stereo camera on an underwater remotely operated vehicle to estimate fish length from paired video frames.
-description: The system detects and tracks fish, segments their outlines, and matches points along their body axes between the two camera views. Stereo triangulation recovers the endpoints in 3D and yields an estimate of body length.
+short: FishPod uses a stereo camera mounted on a remotely operated underwater vehicle to estimate fish length from paired video frames.
+description: The system detects and tracks fish, segments their outlines, and matches points along their body axes between the two camera views. Stereo triangulation locates the endpoints in 3D so the system can estimate body length.
 cover: stereo-pipeline.webp
 preview: images/projects/FishPod/03-field-deployment.webp
 caption: The FishPod workflow, from stereo video capture on an underwater vehicle to a 3D estimate of fish length.
@@ -120,7 +120,7 @@ pi: Huaijin Chen
 members: Christian Moore | Ethan Chung | Sean Hiroki Flynn | Riki MacMillan
 short: We use a robot and tablet in brief, standardized sessions with older adults to measure behavioral markers of cognitive concern that are difficult to capture with paper-based, tablet-only, or static voice-based screening.
 description: A humanoid robot introduces each task, directs the participant’s attention, and responds as the conversation unfolds. The tablet records answers, drawings, taps, and response times. We study these records alongside speech and movement to see how cognitive concerns relate to a participant’s responses. The study does not provide a clinical diagnosis of mild cognitive impairment (MCI).
-caption: The assessment platform combines a humanoid robot with a tablet for delivering tasks and recording responses.
+caption: The humanoid robot introduces the tasks, and the tablet records participants’ responses.
 gallery_caption_cube_task_active_2026_04_14: The tablet shows the numbered and lettered circles used in the sequencing task.
 gallery_caption_cube_task_briefing_2026_04_14: The briefing shows participants how to connect the circles in order.
 gallery_caption_task2_animals_demo_2026_04_14: The instructions introduce the animal-naming task and show the pictures participants will see.
@@ -168,7 +168,7 @@ pi: Dr. Charles Fletcher
 members:
 short: We develop and test methods for mapping shorelines from satellite imagery across different coastal environments in Hawaiʻi and beyond.
 description: Field and aerial surveys are costly, and a method that detects the shoreline on one coast can miss it on another. We use hand-labeled satellite images and reference shorelines from Hawaiʻi and elsewhere to compare geospatial foundation models, other pretrained vision models, lightweight neural networks, and traditional thresholding methods. We’re building a common benchmark and open-source mapping tools for researchers, coastal managers, and communities.
-caption: The map shows where shorelines in Hawaiʻi eroded or grew over a five-year period.
+caption: The map shows where Hawaiʻi’s shorelines advanced or retreated over five years.
 gallery_caption_sds_shorelines_superimposed_on_drone_image: Shorelines derived from satellite imagery overlaid on a drone photo.
 gallery_caption_sandies_sds_example_and_transect_intersections: Examples of shoreline detection and intersections with coastal transects.
 gallery_caption_sat_image_examples: The same coastline seen by different satellite sensors.
