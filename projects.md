@@ -34,6 +34,8 @@ cover: sensor-pipeline.webp
 caption: The sensor design and the steps for reconstructing surface shape from polarization images.
 detail: surface-reconstructions.webp
 detail_caption: Example contact surfaces reconstructed with the neural and physics-based methods.
+field_photo: images/events/rss-2025-polartact3d-poster.webp
+field_caption: Kai Garcia presents PolarTact3D at the RSS 2025 Workshop on Navigating Contact Dynamics in Robotics.
 ---
 
 ### Snapshot Hyperspectral Imaging with Diffractive Optical Elements

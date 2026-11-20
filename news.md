@@ -98,6 +98,8 @@ A [$59,152 grant from the Hawaiʻi Community Foundation](https://www.hawaiicommu
 ## 2025-07-20 | Lab undergraduates win 3rd Place Best Paper Award (and $250) at RSS 2025 Workshop
 Congratulations to **Kai Garcia** and **Mairi Yoshioka**, whose *PolarTact3D* paper won the **3rd Place Best Paper Award** at the **RSS 2025 Workshop on Navigating Contact Dynamics in Robotics**.
 
+![Kai Garcia stands next to the PolarTact3D research poster.](images/events/rss-2025-polartact3d-poster.webp "Kai Garcia presents PolarTact3D at the RSS 2025 workshop.")
+
 Learn more at [polartact3d.github.io](https://polartact3d.github.io/).
 ---
 
