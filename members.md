@@ -41,7 +41,7 @@ affiliation: University of Hawaii at Manoa
 image: images/members/man_luo.jpeg
 email: mluo3@hawaii.edu
 linkedin: https://www.linkedin.com/in/man-luo-23380b19a/
-bio: Man Luo is a PhD student in Computer Science with research interests in AI, robotics, and computer vision. Working on a single-pixel camera with a novel physical design.
+bio: Man Luo is a PhD student in Computer Science with research interests in AI, robotics, and computer vision. He is working on a single-pixel camera with a novel physical design.
 ---
 
 ### Yang Qian
@@ -95,7 +95,7 @@ image: images/members/moseli.jpeg
 email: moselim@hawaii.edu
 scholar: https://scholar.google.com/citations?user=kxa1cKgAAAAJ&hl=en
 linkedin: https://www.linkedin.com/in/moseli-mots-oehli-64b51985/
-bio: I am a final year PhD candidate in Computer Science working on autonomous perception and safety on South African roads using active learning and assistive annotation techniques. I previously completed an MS in Computer Science at UHM focused on computer vision for marine life conservation, and before that worked on natural language processing and adversarial music generation during my Data Science studies at the University of Pretoria. **Co-advised by [Kyungim Baek](http://www2.hawaii.edu/~kyungim/).**
+bio: I am a final-year PhD candidate in Computer Science working on autonomous perception and safety on South African roads using active learning and assistive annotation techniques. I completed an MS in Computer Science at UH Mānoa, where I focused on computer vision for marine life conservation. Before that, I worked on natural language processing and adversarial music generation during my Data Science studies at the University of Pretoria. **Co-advised by [Kyungim Baek](http://www2.hawaii.edu/~kyungim/).**
 ---
 
 ### Joel Nicolow

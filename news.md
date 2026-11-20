@@ -1,9 +1,9 @@
 # News
 
 ## 2026-11-12 | CIRP and UH Mānoa at CoRL in Austin
-The Conference on Robot Learning (CoRL) selected CIRP PhD student Agastya Kalra and colleagues’ paper [3PTv2](https://openreview.net/forum?id=WNZ4Dr57JS), on zero-shot 6D object pose estimation for robotic manipulation, for a main-conference poster. Huaijin Chen co-authored the work.
+[3PTv2](https://openreview.net/forum?id=WNZ4Dr57JS), a paper by CIRP PhD student Agastya Kalra and his colleagues, was selected for a main-conference poster at the Conference on Robot Learning (CoRL). The paper studies zero-shot 6D object pose estimation for robotic manipulation. Huaijin Chen co-authored the work.
 
-Two other UH Mānoa contributions appeared at the conference. Justin Fletcher’s [Telescopes are Optomechanical Robots](https://openreview.net/forum?id=RS2INStAhX) was also accepted as a main-conference poster. At the [UMI Arena workshop](https://umi-arena.airoa.io/accepted), Yosub Shin, Yuan Liu and Igor Molybog had a paper poster on head-camera glove tracking (P09) and a hands-on [YAM-UMI](https://github.com/YosubShin/yam-umi) device exhibit (D10).
+Two other UH Mānoa contributions appeared at the conference. Justin Fletcher’s [Telescopes are Optomechanical Robots](https://openreview.net/forum?id=RS2INStAhX) was also accepted as a main-conference poster. At the [UMI Arena workshop](https://umi-arena.airoa.io/accepted), Yosub Shin, Yuan Liu, and Igor Molybog presented a poster on head-camera glove tracking (P09) and a hands-on exhibit of the [YAM-UMI](https://github.com/YosubShin/yam-umi) device (D10).
 ---
 
 ## 2026-07 | Thank you to USDA for supporting plant pathogen risk assessment ($154,517) {#2026-07-usda-aphis-supports-plant-pathogen-risk-assessment}
@@ -26,11 +26,11 @@ We are grateful to Google for supporting academic research and collaboration wit
 ---
 
 ## 2026-03-06 | One Paper Accepted at CVPR 2026
-Congratulations to lab member and PhD student **Agastya Kalra** for his first-author paper on **6-DoF object pose estimation** accepted to **CVPR 2026**.
+Congratulations to lab member and PhD student **Agastya Kalra** on the acceptance of his first-author paper on **6-DoF object pose estimation** at **CVPR 2026**.
 The paper introduces a unified framework for object detection, segmentation, and 6DoF pose estimation for robotic perception.
 This work demonstrates strong performance on **BOP benchmarks** and targets real-world robotics applications such as bin picking and precise insertion.
 
-Great work from Agastya and collaborators.
+Great work by Agastya and his collaborators.
 ---
 
 ## 2026-03-06 | PhD Student Christian Moore to Join GM Cruise for Summer Internship
@@ -42,7 +42,7 @@ We look forward to seeing what he builds this summer and welcoming him back with
 
 ## 2026-03-06 | New Paper on Imaging Through Turbulence on arXiv
 A new paper on **computational imaging through turbulence** is now available on **arXiv**.
-MS student **Ethan Chung** and PhD student **Norman Luo** contributed as second and third authors on the work:
+MS student **Ethan Chung** and PhD student **Norman Luo** are the paper’s second and third authors, respectively.
 [arxiv.org/abs/2603.02048](https://arxiv.org/abs/2603.02048)
 The paper studies imaging and reconstruction methods for scenes degraded by atmospheric turbulence, an important challenge for long-range vision and sensing systems.
 ---
@@ -56,7 +56,7 @@ Full story: [hawaii.edu/news/2026/01/14/nvidia-awards-next-gen-tech](https://www
 ---
 
 ## 2025-10-15 | CIRP Lab @ ICCV 2025 — Two Workshop Papers, Invited Talk, and Local Chair Role
-**CIRP Lab** will have several presences at **ICCV 2025** with **two accepted workshop papers**, **one invited talk**, and a **local chair role**.
+**CIRP Lab** will contribute to **ICCV 2025** with **two accepted workshop papers**, **one invited talk**, and a **local chair role**.
 
 - Paper 1 by PhD student **Moseli Mots'oehli**: *Simulating Refractive Distortions and Weather-Induced Artifacts for Resource-Constrained Autonomous Perception* at the [CV4DC Workshop](https://cv4dc.github.io/).
 - Paper 2 by PhD student **Yang Qian**: *Hashtag2Action: Data Engineering and Self-Supervised Pre-Training for Action Recognition in Short-Form Videos* at the [SVU Workshop](https://short-form-video-understanding.github.io/).

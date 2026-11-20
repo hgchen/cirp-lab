@@ -34,7 +34,7 @@ lead: Chuanjun Zheng
 pi: Huaijin Chen
 members: Feimei Chen
 short: We develop diffractive optical elements for snapshot hyperspectral imaging that encode spectral information into a single sensor measurement for compact, high-speed, and light-efficient spectral perception.
-description: We develop diffractive optical elements (DOEs) for snapshot hyperspectral imaging, where wavelength-dependent information is optically encoded into a single sensor measurement. By optimizing the DOE structure, different spectral components are transformed into distinct spatially varying point spread functions on the detector. The DOE can be engineered to achieve narrow spectral responses, characterized by a small full width at half maximum (FWHM), which improves spectral resolution and reduces inter-band interference. Together with computational reconstruction, this optical encoding supports accurate recovery of the full spectral profile at each pixel and enables a compact, high-speed, and light-efficient hyperspectral imaging system.
+description: We develop diffractive optical elements (DOEs) for snapshot hyperspectral imaging, where wavelength-dependent information is optically encoded into a single sensor measurement. An optimized DOE transforms different spectral components into distinct, spatially varying point spread functions on the detector. The DOE can be engineered to achieve narrow spectral responses, characterized by a small full width at half maximum (FWHM). Narrower responses improve spectral resolution and reduce inter-band interference. Together with computational reconstruction, this optical encoding supports accurate recovery of the full spectral profile at each pixel and enables a compact, high-speed, and light-efficient hyperspectral imaging system.
 ---
 
 ### Autonomous Coconut Rhinoceros Beetle Infestation Management
@@ -57,7 +57,7 @@ lead: Ethan Chung
 pi: Huaijin Chen
 members: Vincent Chan
 short: We develop a low-cost computer vision pipeline for estimating fish length and volume from single images or videos using detection, segmentation, depth estimation, and 3D reconstruction.
-description: FishEye is a scalable pipeline for automatic 3D fish morphometry using consumer-grade devices such as smartphone cameras. The system combines deep learning based detection and segmentation, transformer-based camera calibration, depth estimation, and 3D reconstruction from single or multiple images. It then derives geometric length measurements from reconstructed models and can use ping pong ball detection as an optional fiducial marker for scale calibration. The goal is to provide practical, field-deployable fish measurement tools for sustainable fisheries, ecological research, and aquaculture monitoring.
+description: FishEye is a scalable pipeline for automatic 3D fish morphometry using consumer-grade devices such as smartphone cameras. The system uses deep learning for detection and segmentation, then uses transformer-based camera calibration and depth estimation to reconstruct fish in 3D from one or more images. It derives length measurements from the reconstructed models and can detect a ping-pong ball as an optional reference for scale calibration. The goal is to provide practical, field-deployable fish measurement tools for sustainable fisheries, ecological research, and aquaculture monitoring.
 ---
 
 ### FishPod: Underwater Stereo Vision for Fish Measurement
@@ -106,7 +106,7 @@ approach: Inverse tasks ask a model to reconstruct an image using either an expe
 question: What have multimodal AI models learned about image formation?
 preview: images/previews/imagingbench-expert.png
 preview_caption: ImagingBench Expert protocol. Overall scores on the 0–100 scale are Gemini-3.1-Flash-Image 61.4, GPT-Image-2 57.3, FLUX.2-Pro 56.6, GPT-Image-1.5 50.2, Qwen-Image-Edit-2511 42.7 and HunyuanImage-3.0 26.5.
-summary: ImagingBench tests six models on 22 computational imaging tasks. Can they recover a scene from a lensless measurement, or simulate what a sensor records when given the scene?
+summary: ImagingBench tests six models on 22 computational imaging tasks. Can they recover a scene from a lensless measurement or simulate what a sensor would record for a given scene?
 cover: benchmark.webp
 caption: The five task families and three evaluation settings, alongside the aggregate performance reported for each model.
 detail: reconstructions.webp

@@ -160,7 +160,7 @@ summary {color:var(--green);cursor:pointer;width:fit-content}
 .outreach-feature {display:grid;grid-template-columns:1fr 1.2fr;align-items:start;gap:clamp(24px,4vw,52px)}
 .outreach-feature p {margin-top:12px;color:var(--body)}
 .outreach-feature time {display:block;margin-bottom:6px}
-.outreach-photo {width:100%;height:auto;aspect-ratio:16/9;object-fit:contain;background:var(--panel)}
+.outreach-photo {width:100%;height:auto}
 .outreach-pair {grid-column:1/-1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 16px}
 .outreach-pair img {width:100%;height:auto}
 .outreach-pair figcaption {grid-column:1/-1;margin:0}
