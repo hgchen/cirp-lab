@@ -21,7 +21,7 @@ const photos = [...thumbnails.querySelectorAll("figure")].map(figure => {
   panel.alt = "";
   panel.hidden = true;
   panel.addEventListener("error", () => {
-    if (panel.src === image.src && panel.src !== link.href) panel.src = link.href;
+    if (panel.src === link.href && panel.src !== image.src) panel.src = image.src;
   });
   strip.append(panel);
   return {
@@ -29,7 +29,6 @@ const photos = [...thumbnails.querySelectorAll("figure")].map(figure => {
     ratio: Number(figure.style.getPropertyValue("--ratio")) || 4 / 3,
     id: figure.id,
     link,
-    thumbnail: image,
     alt: image.alt,
     caption: figure.querySelector(".photo-caption").textContent,
     place: figure.querySelector(".photo-place")?.textContent || "",
@@ -59,13 +58,6 @@ function selectPhoto(current) {
   slidePlace.hidden = !photo.place;
   slideCaption.textContent = photo.caption;
   slidePosition.textContent = `${index + 1} / ${photos.length}`;
-  if (photo.panel.src !== photo.link.href) {
-    const full = new Image();
-    full.src = photo.link.href;
-    full.decode().then(() => {
-      photo.panel.src = full.src;
-    }).catch(() => {}); // Keep the preview if the original is unavailable.
-  }
 }
 
 function drawStrip() {
@@ -86,10 +78,10 @@ function drawStrip() {
     const panel = photo.panel;
     panel.hidden = Math.abs(offset) > width + photo.width / 2;
     if (panel.hidden) continue;
-    if (!panel.hasAttribute("src")) panel.src = photo.thumbnail.src;
-    const x = offset - photo.width / 2;
-    panel.style.transform = `translateX(${x}px)`;
-    if (photo === current) slideOriginal.style.transform = panel.style.transform;
+    if (!panel.hasAttribute("src")) panel.src = photo.link.href;
+    const leftEdge = (width / 2 + offset - photo.width / 2) + "px";
+    panel.style.left = leftEdge;
+    if (photo === current) slideOriginal.style.left = leftEdge;
   }
   selectPhoto(wrap(Math.round(position)));
 }
