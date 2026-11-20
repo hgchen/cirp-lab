@@ -67,6 +67,7 @@ gallery_title: Robot development and fieldwork
 gallery_caption_frc_2: A team member uses the physical arm to control the simulated arm.
 gallery_caption_frc_3: A palm tree and nearby test objects in the simulation.
 gallery_caption_team_assembly: The UH Mānoa and University of Michigan teams assemble the palm-climbing robot for the 2026 Farm Robotics Challenge.
+gallery_caption_visit_crb_response: A field visit with the CRB Response team and UH Mānoa collaborators Daniel Jenkins and Xing Wei to learn about drone-based beetle control.
 summary: We are developing a palm-climbing robot to inspect trees and treat coconut rhinoceros beetle infestations.
 lead: Christian Moore
 pi: Huaijin Chen
