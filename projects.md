@@ -59,6 +59,27 @@ short: We design diffractive optical elements for compact, fast, light-efficient
 description: With an optimized diffractive optical element (DOE), different spectral components produce distinct, spatially varying point spread functions on the detector. We can design the element for narrow spectral responses, measured by their full width at half maximum (FWHM). Narrower responses improve spectral resolution and reduce interference between bands. Using one sensor measurement, we can reconstruct the full spectrum at each pixel.
 ---
 
+### 3PT and 3PTv2 for Robotic Manipulation
+folder: 3PT
+topic: Perception for robotic manipulation
+name: 3PT and 3PTv2
+page_layout: brief
+short: We developed the 3D-Object Perception Transformer (3PT) with Google Intrinsic. Given a 3D model of a part, 3PT estimates the part’s position and orientation in a color image. Its successor, 3PTv2, can guide a robot as it aligns a charging plug with a vehicle’s port.
+website: https://www.intrinsic.ai/publications/3pt-cvpr2026
+website_label: Learn more on the Intrinsic website
+resources: [3PT paper](publications/#kalra2026_3pt) · [3PTv2 paper](publications/#kalra2026_3ptv2) · [BOP results](https://bop.felk.cvut.cz/leaderboards/pose-detection-unseen-bop24/bop-classic-core/)
+members_label: CIRP researchers
+members: Agastya Kalra | Huaijin Chen
+cover: robot-charging.webp
+caption: A robot uses 3PTv2 to locate a charging port and guide a plug into place on three different vehicles.
+selected_work: 4
+question: How can a robot estimate the pose of an unfamiliar object from a color image?
+summary: The 3D-Object Perception Transformer (3PT) and its successor, 3PTv2, use a part’s 3D model to estimate its pose in camera images for tasks such as bin picking and plug insertion.
+preview: images/previews/kalra2026_3pt.webp
+preview_caption: 3PT estimates the poses of metal parts piled in a bin.
+highlight_video_from: kalra2026_3pt
+---
+
 ### Autonomous Coconut Rhinoceros Beetle Infestation Management
 folder: FRC2026
 topic: Agricultural robotics
@@ -82,14 +103,14 @@ members: Rona Lei Duldulao | Lucas Horsman | Wilson Huynh | Erik Bendickson | Ch
 collaborators_label: University of Michigan team
 collaborators: Nilay Choudhury | Xinqi Zhang | Yuchen You | Haobo Fang | Siyuan Zheng | Ronen Dujovny | Adrian Wang | Mingxuan He
 short: A palm-climbing robot designed to inspect trees and treat coconut rhinoceros beetle infestations.
-description: The team is developing a mechanism to climb palms and an end effector to apply pesticides and trim flowers. They use simulation and teleoperated trials to study how the arm interacts with a tree before hardware tests.
+description: The team is developing a mechanism to climb palms and an end effector to apply pesticides and trim flowers. They use simulation and teleoperated trials to study how the arm interacts with a tree before hardware tests. We thank NVIDIA for supporting this work on palm health for the 2026 Farm Robotics Challenge.
 ---
 
 ### Pineapple Counting and Sizing with Aerial and Ground Robots
 folder: FRC2025
 topic: Agricultural robotics
 short: Team ʻĀina paired a drone that counts pineapples with a ground robot that measures fruit size at Dole Plantation.
-description: The UH Mānoa undergraduate team used aerial images to count pineapples across a field and rover footage to reconstruct individual fruit in 3D. The system won the $10,000 Excellence in Productivity (Air) award at the 2025 Farm Robotics Challenge.
+description: The UH Mānoa undergraduate team used aerial images to count pineapples across a field and rover footage to reconstruct individual fruit in 3D. The system won the $10,000 Excellence in Productivity (Air) award at the 2025 Farm Robotics Challenge. We thank NVIDIA for supporting Team ʻĀina’s pineapple mapping project.
 website: https://www.hawaii.edu/news/2025/05/13/farm-robotics-challenge-2025-winner/
 cover: pineapple-field-rover.jpg
 caption: Team ʻĀina prepares its rover to survey pineapples at Dole Plantation. Photo from UH News.
@@ -185,22 +206,21 @@ caption: A free-electron laser oscillator showing the electron source, accelerat
 folder: CIBench
 topic: Evaluating frontier models for imaging applications
 name: ImagingBench
+selected_work: 3
 slug: imagingbench
 website: https://cirplab-fourier.taildc92d1.ts.net/
+website_label: Learn more on the ImagingBench website
+page_layout: brief
 lead: Ethan Chung
 pi: Huaijin Chen
 members: Chuanjun Zheng | Jasper Tan | Jingxi Li
-short: ImagingBench tests what multimodal AI models have learned about image formation and reconstruction.
-description: Can an image model recover a scene when the sensor measurement looks nothing like a photograph? ImagingBench evaluates six models on tasks spanning optics, image processing, inverse reconstruction, computational sensing and calibration. Twenty of the 22 tasks produce images. Lens design and camera calibration produce text and are scored separately.
-approach: Inverse tasks ask a model to reconstruct an image using either an expert’s instructions or an image-specific plan written by a vision–language model. Five tasks also run in the forward direction, asking the model to simulate a sensor measurement from a clean image. Specialized methods outperform general-purpose models on lensless imaging and holography, where a plausible picture can still be an inaccurate reconstruction.
-question: What have multimodal AI models learned about image formation?
+short: ImagingBench evaluates frontier multimodal AI models on 22 tasks, from predicting what a camera will record to reconstructing a scene from sensor measurements.
+question: What have frontier multimodal AI models learned about image formation?
 preview: images/previews/imagingbench-expert.png
 preview_caption: Under the ImagingBench Expert protocol, Gemini-3.1-Flash-Image scored 61.4 out of 100, followed by GPT-Image-2 (57.3), FLUX.2-Pro (56.6), GPT-Image-1.5 (50.2), Qwen-Image-Edit-2511 (42.7), and HunyuanImage-3.0 (26.5).
-summary: ImagingBench tests six models on 22 computational imaging tasks. Can they recover a scene from a lensless measurement or simulate what a sensor would record for a given scene?
+summary: ImagingBench tests six models on 22 computational imaging tasks, including reconstructing scenes from lensless measurements and predicting what a sensor would record.
 cover: benchmark.webp
-caption: The five task families and three evaluation settings, alongside the aggregate performance reported for each model.
-detail: reconstructions.webp
-detail_caption: Example measurements, model outputs and reference images across 12 benchmark tasks. Open the figure to inspect individual rows.
+caption: ImagingBench task families and model comparisons.
 ---
 
 ### Satellite-Derived Shorelines

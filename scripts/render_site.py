@@ -194,10 +194,19 @@ def project_path(project):
 def project_website(project):
     if not project.get("website"):
         return ""
-    name = escape(project.get("name", project["title"]))
+    name = project.get("name", project["title"])
+    label = project.get("website_label", "Learn more")
+    accessible_label = project.get("website_label", f"Learn more about {name} on its project website")
     return (f'<a class="project-site" href="{escape(project["website"])}" '
-            f'aria-label="Learn more about {name} on its project website">'
-            'Learn more <span aria-hidden="true">↗</span></a>')
+            f'aria-label="{escape(accessible_label)}">'
+            f'{escape(label)} <span aria-hidden="true">↗</span></a>')
+
+
+def project_resources(project, root=""):
+    anchors = []
+    for label, url in re.findall(r'\[([^\]]+)\]\((https?://[^)]+|[\w./#-]+)\)', project.get("resources", "")):
+        anchors.append(link(url if url.startswith(("https://", "http://")) else root + url, label))
+    return '<div class="work-resources">' + "".join(anchors) + "</div>" if anchors else ""
 
 
 def project_media(project):
@@ -283,45 +292,47 @@ def research(projects, profiles):
             title = project["title"]
             crumb = '<p class="crumb">' + link("../", "Research") + " / " + link("../#" + theme_id, theme)
             crumb += " / " + link("../#" + topic_id, topic) + "</p>"
-            body = page_head(title, project["short"], crumb, project_website(project))
+            actions = project_website(project) + project_resources(project, "../../")
+            body = page_head(title, project["short"], crumb, actions)
             body += figure("../../" + folder + cover, project.get("caption", project.get("name", title)), "project-hero")
-            body += f'<section class="section project-overview"><h2>Project overview</h2><p>{escape(project["description"])}</p>'
-            if project.get("approach"):
-                body += f'<h3>Method</h3><p>{escape(project["approach"])}</p>'
-            if related := projects_by_folder.get(project.get("related")):
-                name = related.get("name", related["title"])
-                body += f'<p>{link("../../" + project_path(related), "Related project · " + name)}</p>'
-            body += '</section>'
+            if project.get("page_layout") != "brief":
+                body += f'<section class="section project-overview"><h2>Project overview</h2><p>{escape(project["description"])}</p>'
+                if project.get("approach"):
+                    body += f'<h3>Method</h3><p>{escape(project["approach"])}</p>'
+                if related := projects_by_folder.get(project.get("related")):
+                    name = related.get("name", related["title"])
+                    body += f'<p>{link("../../" + project_path(related), "Related project · " + name)}</p>'
+                body += '</section>'
 
-            media = []
-            if project.get("video"):
-                base = "../../" + folder
-                player = video_player(base + project["video"], base + project["video_poster"], title + " demonstration")
-                media.append(f'<figure class="paper-figure project-feature">{player}<figcaption>{escape(project["video_caption"])}</figcaption></figure>')
-            if project.get("preview_caption"):
-                media.append(figure("../../" + project["preview"], project["preview_caption"], "project-feature"))
-            if project.get("detail"):
-                media.append(figure("../../" + folder + project["detail"], project["detail_caption"], "project-feature"))
-            else:
-                gallery = []
-                for image in images:
-                    if image == cover:
-                        continue
-                    stem = Path(image).stem
-                    caption_key = "gallery_caption_" + slug(stem).replace("-", "_")
-                    caption = project.get(caption_key, stem.replace("_", " ").replace("-", " "))
-                    gallery.append(figure("../../" + folder + image, caption))
-                if gallery:
-                    columns = 3 if len(gallery) == 3 or len(gallery) >= 5 else 2
-                    media.append(f'<div class="project-gallery" data-columns="{columns}">' + "".join(gallery) + "</div>")
-            if project.get("field_photo"):
-                media.append(figure("../../" + project["field_photo"], project["field_caption"], "project-feature project-field"))
-            if media:
-                media_title = project.get("gallery_title", "Project media")
-                body += '<section class="section project-media">' + heading(media_title) + "".join(media) + "</section>"
+                media = []
+                if project.get("video"):
+                    base = "../../" + folder
+                    player = video_player(base + project["video"], base + project["video_poster"], title + " demonstration")
+                    media.append(f'<figure class="paper-figure project-feature">{player}<figcaption>{escape(project["video_caption"])}</figcaption></figure>')
+                if project.get("preview_caption"):
+                    media.append(figure("../../" + project["preview"], project["preview_caption"], "project-feature"))
+                if project.get("detail"):
+                    media.append(figure("../../" + folder + project["detail"], project["detail_caption"], "project-feature"))
+                else:
+                    gallery = []
+                    for image in images:
+                        if image == cover:
+                            continue
+                        stem = Path(image).stem
+                        caption_key = "gallery_caption_" + slug(stem).replace("-", "_")
+                        caption = project.get(caption_key, stem.replace("_", " ").replace("-", " "))
+                        gallery.append(figure("../../" + folder + image, caption))
+                    if gallery:
+                        columns = 3 if len(gallery) == 3 or len(gallery) >= 5 else 2
+                        media.append(f'<div class="project-gallery" data-columns="{columns}">' + "".join(gallery) + "</div>")
+                if project.get("field_photo"):
+                    media.append(figure("../../" + project["field_photo"], project["field_caption"], "project-feature project-field"))
+                if media:
+                    media_title = project.get("gallery_title", "Project media")
+                    body += '<section class="section project-media">' + heading(media_title) + "".join(media) + "</section>"
 
-            if project.get("supplement"):
-                body += (ROOT / project["supplement"]).read_text()
+                if project.get("supplement"):
+                    body += (ROOT / project["supplement"]).read_text()
 
             credits = []
             for label, field in [("Project lead", "lead"), ("Principal investigator", "pi"), ("Advisors", "advisors"),
@@ -452,7 +463,7 @@ def gallery_page():
             f'<figure id="{escape(path.stem)}" style="--ratio:{ratio:.6f}">'
             f'<a href="../{escape(path.as_posix())}"><img src="../{escape(src.as_posix())}" '
             f'alt="{escape(description)}"{size_attrs} loading="{loading}" decoding="async"></a>'
-            f'<figcaption>{label}<span class="photo-caption">{escape(caption)}</span>{sources}</figcaption></figure>'
+            f'<figcaption>{label}<span class="photo-caption">{inline(caption)}</span>{sources}</figcaption></figure>'
         )
 
     def icon(name):
@@ -540,41 +551,30 @@ def news_anchor(stamp, title):
     return stamp + "-" + slug(re.sub(r" \(\$[\d,]+\)$", "", title))
 
 
-def work_card(title, href, path, caption, summary, video="", resources=(), photo_preview=False):
+def work_card(project, publications):
+    title = project.get("name", project["title"])
+    question = project.get("question", title)
+    folder, cover, _ = project_media(project)
+    path = project.get("preview", folder + cover)
+    caption = project.get("preview_caption", title)
+    summary = project.get("summary", project["short"])
+    video = publications.get(project.get("highlight_video_from"), {}).get("video", "")
+    photo_preview = project.get("preview_fit") == "cover"
     version = sha256((ROOT / path).read_bytes()).hexdigest()[:12]
     preview = f"{path}?v={version}"
-    work_link = f'<a class="work-link{" photo-preview" if photo_preview else ""}" href="{escape(href)}">'
+    work_link = f'<a class="work-link{" photo-preview" if photo_preview else ""}" href="{escape(project_path(project))}">'
     if video.lower().endswith(".mp4"):
         media = video_player(video, preview, caption) + work_link
     else:
         media = work_link + f'<img src="{escape(preview)}" alt="{escape(caption)}" loading="lazy" decoding="async">'
-    actions = '<div class="work-resources">' + "".join(link(url, label) for url, label in resources) + "</div>" if resources else ""
     return (f'<article>{media}'
-            f'<h3>{escape(title)}</h3></a><p class="work-summary">{escape(summary)}</p>{actions}</article>')
+            f'<h3>{escape(question)}</h3></a><p class="work-summary">{escape(summary)}</p>{project_resources(project)}</article>')
 
 
 def selected_research(projects, pubs):
-    highlights = []
     selected = (project for group in projects.values() for project in group if "selected_work" in project)
-    for project in sorted(selected, key=lambda p: int(p["selected_work"])):
-        folder, cover, _ = project_media(project)
-        title = project.get("name", project["title"])
-        highlights.append(work_card(project.get("question", title), project_path(project), project.get("preview", folder + cover),
-                                    project.get("preview_caption", title), project.get("summary", project["short"]),
-                                    photo_preview=project.get("preview_fit") == "cover"))
-    if three_pt := next((item for item in pubs if item["key"] == "kalra2026_3pt"), None):
-        highlights.append(work_card(
-            "How can a robot estimate the pose of an unfamiliar object from a color image?",
-            "publications/#kalra2026_3pt", "images/previews/kalra2026_3pt.webp",
-            "3PT estimates the poses of a pile of metal parts.",
-            "3PT uses color images to detect unfamiliar objects and estimate their 3D positions and orientations for robotic manipulation.",
-            video=three_pt.get("video", ""),
-            resources=(
-                ("publications/#kalra2026_3pt", "3PT paper"),
-                ("publications/#kalra2026_3ptv2", "3PTv2 paper"),
-                ("https://bop.felk.cvut.cz/leaderboards/pose-detection-unseen-bop24/bop-classic-core/", "BOP results"),
-            ),
-        ))
+    publications = {item["key"]: item for item in pubs}
+    highlights = [work_card(p, publications) for p in sorted(selected, key=lambda p: int(p["selected_work"]))]
     return ('<section class="section" id="selected-work"><header class="section-head">'
             '<h2>Research highlight</h2>' + link("research/", "All projects →") + '</header>'
             '<div class="work-grid" id="research-directions">' + "".join(highlights)

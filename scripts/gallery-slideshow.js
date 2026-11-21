@@ -31,7 +31,7 @@ const photos = [...thumbnails.querySelectorAll("figure")].map(figure => {
     id: figure.id,
     link,
     alt: image.alt,
-    caption: figure.querySelector(".photo-caption").textContent,
+    caption: figure.querySelector(".photo-caption"),
     related: figure.querySelectorAll(".photo-links a"),
     place: figure.querySelector(".photo-place")?.textContent || "",
   };
@@ -58,7 +58,7 @@ function selectPhoto(current) {
   slideOriginal.setAttribute("aria-label", "Open full-size photo: " + photo.alt);
   slidePlace.textContent = photo.place;
   slidePlace.hidden = !photo.place;
-  slideCaption.textContent = photo.caption;
+  slideCaption.replaceChildren(...Array.from(photo.caption.childNodes, node => node.cloneNode(true)));
   slideLinks.replaceChildren(...Array.from(photo.related, anchor => anchor.cloneNode(true)));
   slidePosition.textContent = `${index + 1} / ${photos.length}`;
 }
@@ -171,7 +171,7 @@ function setSlideshow(open, focusPhoto = false) {
 }
 
 if (photos.length) {
-  slideLinks.addEventListener("focusin", () => setPlaying(false));
+  slideInfo.addEventListener("focusin", () => setPlaying(false));
   reducedMotion.addEventListener("change", () => {
     if (reducedMotion.matches) settle();
   });
