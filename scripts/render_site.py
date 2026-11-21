@@ -231,9 +231,10 @@ def video_player(src, poster, label):
 
 def research(projects, profiles):
     sections = []
+    perception_theme = "Imaging and Perception Systems for Robotics"
     instrument_theme = "Physics-Informed AI for Scientific Instrumentation"
     summaries = {
-        "Computational Imaging for Robotic Perception": (
+        perception_theme: (
             "We design optics and algorithms together so robots can measure what they see and feel. "
             "Patterns of polarized light reveal contact forces at a gripper. In the field, drone images "
             "help us count pineapples and rover images let us measure their size."
@@ -244,19 +245,34 @@ def research(projects, profiles):
             "optical data or trace a shoreline in a satellite image."
         ),
     }
+    perception_id = slug(perception_theme)
+    old_perception_id = "computational-imaging-for-robotic-perception"
+    previous_perception_id = "imaging-and-perception-system"
     instrument_id = slug(instrument_theme)
     # Preserve published bookmarks to the two directions and their former topics.
-    bookmarks = {
-        "computational-imaging-for-robotic-perception-marine-robotics-and-perception": (
-            '<span id="computational-imaging-for-robotic-perception-field-robotics-and-perception"></span>'
+    former_ids = {
+        perception_id: (old_perception_id, previous_perception_id),
+        perception_id + "-sensor-design-and-prototyping": (
+            old_perception_id + "-optical-sensor-design", previous_perception_id + "-sensor-design",
         ),
-        instrument_id: '<span id="physics-informed-ai"></span><span id="scientific-instrumentation"></span>',
-        instrument_id + "-predicting-instrument-response": '<span id="scientific-instrumentation-modeling-physical-systems"></span>',
+        perception_id + "-agricultural-robotics": (
+            old_perception_id + "-agricultural-robotics", previous_perception_id + "-agricultural-robotics",
+        ),
+        perception_id + "-humanrobot-interaction": (
+            old_perception_id + "-humanrobot-interaction", previous_perception_id + "-humanrobot-interaction",
+        ),
+        perception_id + "-marine-robotics-and-perception": (
+            old_perception_id + "-marine-robotics-and-perception", old_perception_id + "-field-robotics-and-perception",
+            previous_perception_id + "-marine-robotics-and-perception",
+        ),
+        instrument_id: ("physics-informed-ai", "scientific-instrumentation"),
+        instrument_id + "-predicting-instrument-response": ("scientific-instrumentation-modeling-physical-systems",),
         instrument_id + "-evaluating-frontier-models-for-imaging-applications": (
-            f'<span id="{instrument_id}-interpreting-sensor-measurements"></span>'
-            '<span id="physics-informed-ai-evaluating-vision-models"></span>'
+            instrument_id + "-interpreting-sensor-measurements", "physics-informed-ai-evaluating-vision-models",
         ),
     }
+    bookmarks = {current: "".join(f'<span id="{previous}"></span>' for previous in aliases)
+                 for current, aliases in former_ids.items()}
     projects_by_folder = {project["folder"]: project for group in projects.values() for project in group}
     for theme, group in projects.items():
         theme_id = slug(theme)
@@ -333,11 +349,11 @@ def research(projects, profiles):
             sections.append(f'<p class="section-summary">{escape(summaries[theme])}</p>')
         for topic, cards in topics.items():
             topic_id = theme_id + "-" + slug(topic)
-            sections.append(f'<section class="research-topic" id="{topic_id}">{bookmarks.get(topic_id, "")}<h3>{escape(topic)}</h3>'
+            sections.append(f'<section class="research-topic" id="{topic_id}"><h3>{bookmarks.get(topic_id, "")}{escape(topic)}</h3>'
                             + '<div class="catalog">' + "".join(cards) + "</div></section>")
         sections.append("</section>")
     jump = '<div class="jump">' + "".join(link("#" + slug(theme), theme) for theme in projects) + "</div>"
-    page("research", "Research", "Computational imaging for robotic perception and physics-informed AI for scientific instrumentation.",
+    page("research", "Research", "Imaging and perception systems for robotics and physics-informed AI for scientific instrumentation.",
          page_head("Research", "We design sensors that turn light into measurements of touch, shape and spectra. "
                    "For scientific instruments, we use physics-informed AI to predict signals and interpret measurements.")
          + jump + "".join(sections))

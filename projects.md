@@ -1,10 +1,10 @@
 # Projects
 
-## Computational Imaging for Robotic Perception
+## Imaging and Perception Systems for Robotics
 
 ### FringeTact: Contact and Force Sensing with Photoelastic Imaging
 folder: FringeTact
-topic: Optical sensor design
+topic: Sensor design and prototyping
 name: FringeTact
 selected_work: 1
 lead: Feimei Chen | Asif Sijan
@@ -27,10 +27,10 @@ detail_caption: Two cameras view the photoelastic cube through crossed polarizer
 
 ### PolarTact3D: Single-Shot Tactile 3D Shape and Color Sensing with Polarization Imaging
 folder: PolarTact3D
-topic: Optical sensor design
+topic: Sensor design and prototyping
 name: PolarTact3D
 website: https://polartact3d.github.io/
-members: Kai Garcia | Mairi Yoshioka | Tyler Ray | Tianlu Wang | Frances Zhu | Huaijin Chen
+members: Kai Garcia | Mairi Yoshioka | Christian Moore | Tyler Ray | Tianlu Wang | Frances Zhu | Huaijin Chen
 short: A polarization camera captures both the 3D shape and color of a contact surface in a single shot.
 description: A clear polyethylene film conforms to an object when the sensor is pressed against it. A polarization camera sees the object’s color through the film and records polarization patterns that reveal the surface orientation. The team compared physics-based and neural methods for recovering shape and tested the sensor on surfaces that included transparent and reflective objects. PolarTact3D received the third-place Best Paper Award at the RSS 2025 Workshop on Navigating Contact Dynamics in Robotics.
 cover: sensor-pipeline.webp
@@ -43,7 +43,7 @@ field_caption: Kai Garcia presents PolarTact3D at the RSS Workshop on Navigating
 
 ### Snapshot Hyperspectral Imaging with Diffractive Optical Elements
 folder: DOE-HSI
-topic: Optical sensor design
+topic: Sensor design and prototyping
 name: Snapshot hyperspectral imaging
 selected_work: 2
 question: How can a camera capture a spectrum at every pixel in one exposure?
@@ -76,7 +76,7 @@ gallery_caption_visit_crb_response: A field visit with the CRB Response team and
 summary: We are developing a palm-climbing robot to inspect trees and treat coconut rhinoceros beetle infestations.
 lead_label: Perception system lead
 lead: Christian Moore
-advisors: Huaijin Chen | Daniel Jenkins | Ryan Kurasaki | [Tianlu Wang](https://sites.google.com/view/uhm-sail/people) | [Daniel Drew](https://danieldrew.me/) | Xiaonan (Sean) Huang
+advisors: Huaijin Chen | [Daniel Jenkins](https://www.ctahr.hawaii.edu/site/Bio.aspx?ID=JENKIDAN) | [Ryan Kurasaki](https://www.ctahr.hawaii.edu/site/Bio.aspx?ID=KURASRYA) | [Tianlu Wang](https://sites.google.com/view/uhm-sail/people) | [Daniel Drew](https://danieldrew.me/) | [Xiaonan (Sean) Huang](https://soft.robotics.umich.edu/team/)
 members_label: University of Hawaiʻi at Mānoa team
 members: Rona Lei Duldulao | Lucas Horsman | Wilson Huynh | Erik Bendickson | Christian Komo | Zadon Padello | Tyler Mak | Elijah Saloma | Kanta Saito | Ella Self | Andrew He | Lukas Moroz | Riki MacMillan | Alex Tokunaga | Owen Bramley
 collaborators_label: University of Michigan team
