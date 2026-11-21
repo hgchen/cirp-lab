@@ -235,9 +235,7 @@ def research(projects, profiles):
     instrument_theme = "Physics-Informed AI for Scientific Instrumentation"
     summaries = {
         perception_theme: (
-            "We design optics and algorithms together so robots can measure what they see and feel. "
-            "Patterns of polarized light reveal contact forces at a gripper. In the field, drone images "
-            "help us count pineapples and rover images let us measure their size."
+            "We start with what a robot needs to measure, then design the sensor and perception algorithm together."
         ),
         instrument_theme: (
             "We model how moving atoms scatter X-rays and how a laser cavity’s geometry changes its output. "
@@ -354,7 +352,7 @@ def research(projects, profiles):
         sections.append("</section>")
     jump = '<div class="jump">' + "".join(link("#" + slug(theme), theme) for theme in projects) + "</div>"
     page("research", "Research", "Imaging and perception systems for robotics and physics-informed AI for scientific instrumentation.",
-         page_head("Research", "We design sensors that turn light into measurements of touch, shape and spectra. "
+         page_head("Research", "We design sensors that encode touch, shape and spectra as measurable patterns of light. "
                    "For scientific instruments, we use physics-informed AI to predict signals and interpret measurements.")
          + jump + "".join(sections))
     # Keep the retired project URL useful for visitors following old links.
