@@ -7,7 +7,7 @@
   </div>
   <figure>
     <img class="outreach-photo" src="../images/previews/liholiho-robot-demo.webp" width="1395" height="1127" alt="Liholiho students and lab members gather around a humanoid robot during the demonstration.">
-    <figcaption>Liholiho Elementary students at the humanoid robot demonstration. Photo courtesy of Huaijin Chen.</figcaption>
+    <figcaption>Liholiho Elementary students at the humanoid robot demonstration.</figcaption>
   </figure>
 </article>
 <article class="section outreach-feature" id="hawaii-ffa-teacher-training">
@@ -17,7 +17,6 @@
   </div>
   <figure>
     <img class="outreach-photo" src="../images/previews/hawaii-ffa-teacher-training.webp" width="1550" height="1163" loading="lazy" alt="Teachers gather around a table with robotic arms during an outdoor demonstration.">
-    <figcaption>Photo courtesy of Huaijin Chen.</figcaption>
   </figure>
 </article>
 <article class="section outreach-feature" id="gofarm-waimanalo">
@@ -48,57 +47,3 @@
     <figcaption>Attendees gather around the palm robotics demonstration at UH Mānoa. Photos from Christian Moore’s symposium recap.</figcaption>
   </figure>
 </article>
-<article class="section outreach-feature" id="farm-robotics-challenge">
-  <div>
-    <h3>2025 Farm Robotics Challenge</h3>
-    <p>At Dole Plantation, Team ʻĀina used a drone to count pineapples across a field and a ground robot to reconstruct individual fruit in 3D and estimate their size.</p>
-    <p>The UH Mānoa undergraduates won the $10,000 Excellence in Productivity (Air) award. Huaijin Chen led the faculty team that advised them.</p>
-    <div class="hero-links">
-      <a href="https://www.hawaii.edu/news/2025/05/13/farm-robotics-challenge-2025-winner/">Read the UH News story</a>
-      <a href="https://www.youtube.com/watch?v=Dpz_9Qo64MM">Watch on YouTube</a>
-    </div>
-  </div>
-  <figure>
-    <a class="outreach-player" href="https://www.youtube.com/watch?v=Dpz_9Qo64MM" aria-label="Play the Farm Robotics Challenge video">
-      <img src="https://i.ytimg.com/vi/Dpz_9Qo64MM/maxresdefault.jpg" width="1280" height="720" alt="">
-      <span aria-hidden="true">▶ Play video</span>
-    </a>
-    <figcaption>Team ʻĀina in the pineapple fields. Video by UH Mānoa’s College of Tropical Agriculture and Human Resilience.</figcaption>
-  </figure>
-  <div class="outreach-followups">
-    <section id="fira-usa-2025">
-      <time datetime="2025-10">October 2025</time>
-      <h4>FIRA USA</h4>
-      <p>Tyler Mak helped present Team ʻĀina’s system at the agricultural robotics forum in Woodland, California. He showed how the team uses rover footage to reconstruct the pineapples in 3D and estimate their size.</p>
-      <div class="hero-links"><a href="https://www.linkedin.com/posts/tylermak-hi_firausa25-frc-agtech-activity-7387533343745196033-4_cz">Tyler’s FIRA recap</a></div>
-    </section>
-    <section id="plug-and-play-summit">
-      <time datetime="2025-06">June 2025</time>
-      <h4>Plug and Play Summit</h4>
-      <p>Team ʻĀina was invited to the summit after winning its 2025 Farm Robotics Challenge award. Student lead Christian Komo explained how the team uses a drone and a rover to map pineapple blooms for harvest planning. Teammates Kai Garcia and Mikhail Shkaralevich joined him with adviser Huaijin Chen.</p>
-      <div class="hero-links"><a href="https://www.linkedin.com/posts/aifoodsystems_agtech-innovation-entrepreneurship-ugcPost-7340531616458424321-peGZ">Read the AIFS summit recap</a></div>
-      <figure class="outreach-pair outreach-trip-photos">
-        <a href="../images/events/komo-agtech-summit-pitch.webp" aria-label="Open the full-size summit presentation photo"><img src="../images/events/komo-agtech-summit-pitch.webp" width="1440" height="1080" loading="lazy" decoding="async" alt="Christian Komo presents Team ʻĀina’s farm robotics project onstage."></a>
-        <a href="../images/events/frc-organizers-agtech-summit.webp" aria-label="Open the full-size photo with Farm Robotics Challenge organizers"><img src="../images/events/frc-organizers-agtech-summit.webp" width="1080" height="810" loading="lazy" decoding="async" alt="Team members and Farm Robotics Challenge organizers pose together at the summit."></a>
-        <a href="../images/events/google-agtech-summit-visit.webp" aria-label="Open the full-size Google visit photo"><img src="../images/events/google-agtech-summit-visit.webp" width="1080" height="1440" loading="lazy" decoding="async" alt="Three team members pose outside a Google office."></a>
-        <figcaption>Christian Komo presents at the summit. The team also met the Farm Robotics Challenge organizers and visited Google during the trip.</figcaption>
-      </figure>
-    </section>
-  </div>
-</article>
-<script>
-  const preview = document.querySelector(".outreach-player");
-  preview.addEventListener("click", event => {
-    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-    event.preventDefault();
-    const player = document.createElement("iframe");
-    player.className = "outreach-player";
-    player.title = "Team ʻĀina at the 2025 Farm Robotics Challenge";
-    player.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
-    player.allowFullscreen = true;
-    player.referrerPolicy = "strict-origin-when-cross-origin";
-    player.src = "https://www.youtube-nocookie.com/embed/Dpz_9Qo64MM?autoplay=1";
-    preview.replaceWith(player);
-    player.focus();
-  });
-</script>

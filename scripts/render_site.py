@@ -104,8 +104,7 @@ def news_time(stamp):
     full = len(stamp) == 10
     parsed = date.fromisoformat(stamp if full else stamp + "-01")
     label = parsed.strftime("%b %d, %Y" if full else "%b %Y").replace(" 0", " ")
-    quarter = (parsed.month - 1) // 3 + 1
-    return f'<time datetime="{stamp}" data-quarter="{quarter}">{label}</time>'
+    return f'<time datetime="{stamp}">{label}</time>'
 
 
 def bibliography():
@@ -167,18 +166,15 @@ def project_media(project):
     return directory.relative_to(ROOT).as_posix() + "/", cover, images
 
 
-def card(project, root, theme=None):
+def card(project, root):
     folder, cover, _ = project_media(project)
     title = project.get("name", project["title"])
     url = root + project_path(project)
     src = root + project.get("preview", folder + cover)
-    category = f'<p class="category">{link(root + "research/#" + slug(theme), theme)}</p>' if theme else ""
-    headline = project.get("question", title) if theme else title
-    summary = project.get("summary", project["short"]) if theme else project["short"]
     plate = "plate photo-preview" if project.get("preview_fit") == "cover" else "plate"
     return f'''<article class="card"><a class="{plate}" href="{url}" aria-label="View {escape(title)}">
-    <img loading="lazy" src="{escape(src)}" alt=""></a><div class="card-copy">{category}
-    <h3>{link(url, headline)}</h3><p>{escape(summary)}</p></div></article>'''
+    <img loading="lazy" src="{escape(src)}" alt=""></a><div class="card-copy">
+    <h4>{link(url, title)}</h4><p>{escape(project["short"])}</p></div></article>'''
 
 
 def figure(path, caption, kind=""):
@@ -193,16 +189,19 @@ def video_player(src, poster, label):
 
 
 def research(projects, people):
-    cards = []
+    sections = []
     directory = {person["title"] for members in people.values() for person in members}
     projects_by_folder = {project["folder"]: project for group in projects.values() for project in group}
     for theme, group in projects.items():
-        cards.append(f'<section class="section" id="{slug(theme)}">{heading(theme)}<div class="catalog">')
+        topics = {}
         for project in group:
-            cards.append(card(project, "../"))
+            topic = project["topic"]
+            topic_id = slug(theme) + "-" + slug(topic)
+            topics.setdefault(topic, []).append(card(project, "../"))
             folder, cover, images = project_media(project)
             title = project["title"]
-            crumb = '<p class="crumb">' + link("../", "Research") + " / " + escape(theme) + "</p>"
+            crumb = '<p class="crumb">' + link("../", "Research") + " / " + link("../#" + slug(theme), theme)
+            crumb += " / " + link("../#" + topic_id, topic) + "</p>"
             body = page_head(title, project["short"], crumb, project_website(project))
             body += figure("../../" + folder + cover, project.get("caption", project.get("name", title)), "project-hero")
             body += f'<section class="section project-overview"><h2>Project overview</h2><p>{escape(project["description"])}</p>'
@@ -240,6 +239,9 @@ def research(projects, people):
                 media_title = project.get("gallery_title", "Project media")
                 body += '<section class="section project-media">' + heading(media_title) + "".join(media) + "</section>"
 
+            if project.get("supplement"):
+                body += (ROOT / project["supplement"]).read_text()
+
             credits = []
             for label, field in [("Project lead", "lead"), ("Principal investigator", "pi"), ("Advisors", "advisors"),
                                  ("Contributors", "members"), ("Collaborators", "collaborators")]:
@@ -252,10 +254,17 @@ def research(projects, people):
                     credits.append(f'<p><strong>{escape(label)}</strong><br>' + " · ".join(links) + "</p>")
             body += '<section class="section project-team" id="project-team"><h2>Project team</h2><div>' + "".join(credits) + '</div></section>'
             page(project_path(project), title, project["short"], body)
-        cards.append("</div></section>")
+        sections.append(f'<section class="section direction" id="{slug(theme)}">{heading(theme)}')
+        for topic, cards in topics.items():
+            topic_id = slug(theme) + "-" + slug(topic)
+            sections.append(f'<section class="research-topic" id="{topic_id}"><h3>{escape(topic)}</h3>'
+                            + '<div class="catalog">' + "".join(cards) + "</div></section>")
+        sections.append("</section>")
     jump = '<div class="jump">' + "".join(link("#" + slug(theme), theme) for theme in projects) + "</div>"
-    page("research", "Research", "Research projects in computational imaging, robotic perception and physics-informed AI.",
-         page_head("Research") + jump + "".join(cards))
+    page("research", "Research", "Research in computational imaging, robotic perception, physics-informed AI and scientific instrumentation.",
+         page_head("Research", "We design sensors that turn light into measurements of touch, shape and spectra. "
+                   "We also study how well computational models can interpret images and predict physical behavior.")
+         + jump + "".join(sections))
     # Keep the retired project URL useful for visitors following old links.
     retired = DIST / "research/sfm-comparison"
     retired.mkdir(exist_ok=True)
@@ -419,7 +428,7 @@ def home_heading(label, title, url="", action=""):
     return f'<header class="home-heading"><span>{escape(label)}</span><h2>{escape(title)}</h2>{more}</header>'
 
 
-def work_card(title, href, path, caption, metadata, summary, video="", resources=(), photo_preview=False):
+def work_card(title, href, path, caption, summary, video="", resources=(), photo_preview=False):
     version = sha256((ROOT / path).read_bytes()).hexdigest()[:12]
     preview = f"{path}?v={version}"
     work_link = f'<a class="work-link{" photo-preview" if photo_preview else ""}" href="{escape(href)}">'
@@ -428,43 +437,50 @@ def work_card(title, href, path, caption, metadata, summary, video="", resources
     else:
         media = work_link + f'<img src="{escape(preview)}" alt="{escape(caption)}" loading="lazy" decoding="async">'
     actions = '<div class="work-resources">' + "".join(link(url, label) for url, label in resources) + "</div>" if resources else ""
-    return (f'<article>{media}<span class="metadata">{escape(metadata)}</span>'
+    return (f'<article>{media}'
             f'<h3>{escape(title)}</h3></a><p class="work-summary">{escape(summary)}</p>{actions}</article>')
 
 
-def home(projects, people, items, pubs):
-    content = f'''<section class="hero"><h1>{LAB}</h1>
-    <p class="mission">We combine <em>computational imaging</em> and <em>physics-informed AI</em> to design sensors and interpret their measurements.
-    Our work spans robotic perception and scientific discovery, from mapping contact forces with polarized light to tracking changes in materials with X-ray diffraction.</p>
-    <p class="byline">{link("people/#huaijin-chen", "Huaijin Chen")} leads the lab at the University of Hawaiʻi at Mānoa.</p>
-    <div class="hero-links">{link("#research-directions", "Explore our research")}{link("contact/#prospective-students", "Join the lab")}</div>
-    <img class="hero-logo" src="images/cirp-hero.webp" width="176" height="176" alt=""></section>'''
-    content += '<section class="section" id="lab-news"><header class="home-heading"><span><img class="news-mark" src="images/cirp-mark.png" width="36" height="36" alt=""></span><h2>Lab news</h2>' + link("news/", "All news →") + '</header>'
-    for stamp, title, _, anchor in items[:5]:
-        content += f'<div class="news-row">{news_time(stamp)}{link("news/#" + anchor, title)}</div>'
-    content += '</section>'
-    content += '<section class="section" id="selected-work">' + home_heading("Research", "Selected work", "research/", "All projects")
-    content += '<div class="work-grid" id="research-directions">' + "".join(card(group[0], "./", theme) for theme, group in projects.items())
+def selected_research(projects, pubs):
+    highlights = []
+    selected = (project for group in projects.values() for project in group if "selected_work" in project)
+    for project in sorted(selected, key=lambda p: int(p["selected_work"])):
+        folder, cover, _ = project_media(project)
+        title = project.get("name", project["title"])
+        highlights.append(work_card(project.get("question", title), project_path(project), project.get("preview", folder + cover),
+                                    project.get("preview_caption", title), project.get("summary", project["short"]),
+                                    photo_preview=project.get("preview_fit") == "cover"))
     if three_pt := next((item for item in pubs if item["key"] == "kalra2026_3pt"), None):
-        content += work_card(
-            three_pt["title"], "publications/#kalra2026_3pt", "images/previews/kalra2026_3pt.webp",
-            "3PT estimates the poses of a pile of metal parts.", "CVPR & CoRL · 2026",
-            "3PT estimates 6DoF poses for unseen objects from RGB images and won 7 of 11 tracks at the 2025 BOP Challenge. For unseen-object detection on BOP-Classic-Core, average precision was 68.9% for 3PT and 70.2% for 3PTv2.",
+        highlights.append(work_card(
+            "How can a robot estimate the pose of an unfamiliar object from a color image?",
+            "publications/#kalra2026_3pt", "images/previews/kalra2026_3pt.webp",
+            "3PT estimates the poses of a pile of metal parts.",
+            "3PT uses color images to detect unfamiliar objects and estimate their 3D positions and orientations for robotic manipulation.",
             video=three_pt.get("video", ""),
             resources=(
                 ("publications/#kalra2026_3pt", "3PT paper"),
                 ("publications/#kalra2026_3ptv2", "3PTv2 paper"),
                 ("https://bop.felk.cvut.cz/leaderboards/pose-detection-unseen-bop24/bop-classic-core/", "BOP results"),
             ),
-        )
-    featured_projects = (project for group in projects.values() for project in group if "selected_work" in project)
-    for project in sorted(featured_projects, key=lambda project: int(project["selected_work"])):
-        folder, cover, _ = project_media(project)
-        name = project.get("name", project["title"])
-        content += work_card(name, project_path(project), project.get("preview", folder + cover),
-                             project.get("caption", name), "Research project", project.get("summary", project["short"]),
-                             photo_preview=project.get("preview_fit") == "cover")
-    content += '</div><p class="work-more">' + link('publications/', 'All publications →') + '</p></section>'
+        ))
+    return ('<section class="section" id="selected-work"><header class="section-head">'
+            '<h2>Selected research</h2>' + link("research/", "All projects →") + '</header>'
+            '<div class="work-grid" id="research-directions">' + "".join(highlights)
+            + '</div><p class="work-more">' + link("publications/", "All publications →") + '</p></section>')
+
+
+def home(projects, people, items, pubs):
+    content = f'''<section class="hero"><h1>{LAB}</h1>
+    <p class="mission">We develop imaging and perception systems for <em>robotics</em> and <em>scientific instrumentation</em>.
+    We use polarized light to measure contact forces, computer vision to guide robotic manipulation, and physics-informed models to interpret X-ray measurements and simulate free-electron lasers.</p>
+    <p class="byline">{link("people/#huaijin-chen", "Huaijin Chen")} leads the lab at the University of Hawaiʻi at Mānoa.</p>
+    <div class="hero-links">{link("research/", "Explore our research")}{link("contact/#prospective-students", "Join the lab")}</div>
+    <img class="hero-logo" src="images/cirp-hero.webp" width="176" height="176" alt=""></section>'''
+    content += '<section class="section" id="lab-news"><header class="home-heading"><span><img class="news-mark" src="images/cirp-mark.png" width="36" height="36" alt=""></span><h2>Lab news</h2>' + link("news/", "All news →") + '</header>'
+    for stamp, title, _, anchor in items[:5]:
+        content += f'<div class="news-row">{news_time(stamp)}{link("news/#" + anchor, title)}</div>'
+    content += '</section>'
+    content += selected_research(projects, pubs)
     content += '<section class="section" id="the-group">' + home_heading("People", "The group", "people/", "People & alumni") + '<dl class="roster">'
     for group, members in people.items():
         if group != "Alumni":
@@ -484,7 +500,7 @@ def home(projects, people, items, pubs):
     for name, url, image in partners:
         content += (f'<li><a href="{url}" aria-label="{escape(name)}">'
                     f'<img src="images/{image}" alt="{escape(name)}" loading="lazy"></a></li>')
-    page("", LAB, "Computational imaging, tactile sensing and physics-informed AI at the University of Hawaiʻi at Mānoa.",
+    page("", LAB, "Imaging and perception systems for robotics and scientific instrumentation at the University of Hawaiʻi at Mānoa.",
          content + "</ul></section>")
 
 
@@ -519,6 +535,17 @@ def main():
     content = page_head(title) + jump
     content += '<section id="service">' + heading("Service") + service + "</section>"
     content += '<section id="outreach">' + heading("Outreach") + outreach + "</section>"
+    # Forward bookmarks for the challenge and its two event reports to Research.
+    content += """<script>
+function forwardProjectBookmark() {
+  if (["#farm-robotics-challenge", "#fira-usa-2025", "#plug-and-play-summit"].includes(location.hash)) {
+    const section = location.hash === "#farm-robotics-challenge" ? "" : location.hash;
+    location.replace("../research/frc2025/" + location.search + section);
+  }
+}
+forwardProjectBookmark();
+window.addEventListener("hashchange", forwardProjectBookmark);
+</script>"""
     page("service", title, "Conferences, workshops, student robotics and community projects from CIRP Lab.", content)
 
     retired = DIST / "outreach"

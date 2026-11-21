@@ -1,62 +1,62 @@
 # News
 
-## 2026-11-12 | CIRP and UH Mānoa at CoRL in Austin
-The Conference on Robot Learning (CoRL) selected [3PTv2](https://openreview.net/forum?id=WNZ4Dr57JS) for a main-conference poster. CIRP PhD student Agastya Kalra and his co-authors, including Huaijin Chen, study zero-shot 6D object pose estimation for robotic manipulation.
+## 2026-11-12 | UH Mānoa researchers present work on robot perception and learning at CoRL {#2026-11-12-cirp-and-uh-manoa-at-corl-in-austin}
+The Conference on Robot Learning (CoRL) in Austin selected [3PTv2](https://openreview.net/forum?id=WNZ4Dr57JS) for a main-conference poster. CIRP doctoral student Agastya Kalra and co-authors, including Huaijin Chen, developed the method to estimate the poses of previously unseen objects for robotic manipulation.
 
-CoRL also accepted [Telescopes are Optomechanical Robots](https://openreview.net/forum?id=RS2INStAhX) by UH Mānoa’s Justin Fletcher as a main-conference poster. At the [UMI Arena workshop](https://umi-arena.airoa.io/accepted), Yosub Shin, Yuan Liu, and Igor Molybog presented a poster on head-camera glove tracking (P09) and a hands-on exhibit of the [YAM-UMI](https://github.com/YosubShin/yam-umi) device (D10).
+CoRL also selected [Telescopes are Optomechanical Robots](https://openreview.net/forum?id=RS2INStAhX) by UH Mānoa researcher Justin Fletcher for a main-conference poster. At the [UMI Arena workshop](https://umi-arena.airoa.io/accepted), Yosub Shin, Yuan Liu, and Igor Molybog presented a poster on tracking gloves with a head-mounted camera (P09) and demonstrated their [YAM-UMI device](https://github.com/YosubShin/yam-umi) (D10).
 ---
 
-## 2026-10-01 | Riki MacMillan receives the Bubba Cook Award at SAFET 2026 {#2026-10-01-riki-macmillan-safet-2026}
-CIRP graduate researcher Riki MacMillan received the **Bubba Cook Award for Emerging Technology** at the 2026 Seafood and Fisheries Emerging Technologies (SAFET) Conference in Cebu, Philippines. In his September 9 talk, *Scalable Metric Measurement of Marine Life with Low-Cost Commodity Hardware*, he presented work on measuring marine life with affordable smartphone cameras. Huaijin Chen and UH Mānoa colleague Erik Franklin also joined the panel on emerging technologies.
+## 2026-10-01 | Riki MacMillan receives the Bubba Cook Award for fish measurement research {#2026-10-01-riki-macmillan-safet-2026}
+CIRP graduate researcher Riki MacMillan received the Bubba Cook Award for Emerging Technology at the 2026 Seafood and Fisheries Emerging Technologies (SAFET) Conference in Cebu, Philippines. His September 9 talk, “Scalable Metric Measurement of Marine Life with Low-Cost Commodity Hardware,” described how smartphone cameras can measure marine life. Huaijin Chen and UH Mānoa colleague Erik Franklin also participated in the emerging technologies panel.
 
 [SAFET award announcement](https://www.safet.fish/bubba-cook-award-for-emerging-technology-2026/) · [Panel recording](https://www.youtube.com/watch?v=AjQOYXbQYXo) · [Huaijin Chen’s conference recap](https://www.linkedin.com/posts/huaijinchen_safet2026-marineconservation-fisheriesscience-activity-7515553296754069504-KUXt)
 ---
 
-## 2026-07 | Thank you to USDA for supporting plant pathogen risk assessment ($154,517) {#2026-07-usda-aphis-supports-plant-pathogen-risk-assessment}
-Huaijin Chen is co-PI on a $154,517 USDA APHIS project to develop a machine learning tool that helps assess risks from plant pathogens.
+## 2026-07 | USDA awards $154,517 for plant pathogen risk assessment with CIRP’s Huaijin Chen as Co-PI {#2026-07-usda-aphis-supports-plant-pathogen-risk-assessment}
+CIRP Lab director Huaijin Chen serves as Co-PI on the project funded by USDA’s Animal and Plant Health Inspection Service. The team is developing a machine learning tool to assess risks posed by plant pathogens.
 ---
 
-## 2026-06-04 | Huaijin Chen gives a keynote at the CVPR 2026 UG2+ Workshop
-Huaijin Chen presented “Do AI Agents Understand Computational Imaging?” at the [8th UG2+ Workshop and Challenge](https://cvpr2026ug2challenge.github.io/program24.html) in Denver.
+## 2026-06-04 | Huaijin Chen delivers computational imaging keynote at CVPR {#2026-06-04-huaijin-chen-gives-a-keynote-at-the-cvpr-2026-ug2-workshop}
+Huaijin Chen gave the keynote “Do AI Agents Understand Computational Imaging?” at the [8th UG2+ Workshop and Challenge](https://cvpr2026ug2challenge.github.io/program24.html) during CVPR 2026 in Denver.
 
 ![The CVPR 2026 UG2+ Workshop program lists five keynote speakers, including Huaijin Chen.](images/events/cvpr-2026-ug2-workshop.webp "Keynote speakers listed in the CVPR 2026 UG2+ Workshop program.")
 ---
 
-## 2026-06 | Thank you to the Minderoo Foundation for supporting AI-based fish measurement ($153,311) {#2026-06-minderoo-foundation-supports-ai-based-fish-measurement}
-The Minderoo Foundation awarded $153,311 for an app that measures fish and reconstructs them in 3D for fisheries and ecosystem monitoring. Huaijin Chen leads the project.
+## 2026-06 | Minderoo Foundation awards $153,311 for CIRP-led research on 3D fish measurement {#2026-06-minderoo-foundation-supports-ai-based-fish-measurement}
+CIRP Lab director Huaijin Chen leads the Minderoo Foundation project. His team is developing an app that reconstructs fish in 3D and estimates their size to help researchers monitor fisheries and ecosystems.
 ---
 
-## 2026-03-18 | CIRP Lab receives a $50,000 gift from Google for 3D vision research in robotics {#2026-03-18-cirp-lab-receiving-a-50k-gift-from-google-for-research-in-3d-vision-for-robotics}
-Thank you to Google for a **$50,000 research gift**. We’ll use it to develop new sensors and study how robots can use 3D vision to understand a scene, manipulate objects, and work autonomously.
+## 2026-03-18 | Google awards CIRP Lab $50,000 for 3D vision research in robotics {#2026-03-18-cirp-lab-receiving-a-50k-gift-from-google-for-research-in-3d-vision-for-robotics}
+A $50,000 research gift from Google supports sensor development at CIRP Lab. The team will study how robots can use 3D vision to interpret scenes, manipulate objects, and operate autonomously.
 ---
 
-## 2026-03-06 | 3PT accepted at CVPR 2026 {#2026-03-06-one-paper-accepted-at-cvpr-2026}
-Congratulations to PhD student **Agastya Kalra**, first author of *3D-Object Perception Transformer (3PT)*, and his co-authors on their **CVPR 2026** acceptance. Their method detects and segments objects and estimates their 6-DoF poses for tasks such as bin picking and precise insertion. It won seven of eleven tracks in the 2025 BOP Challenge.
+## 2026-03-06 | CVPR accepts 3PT paper on object pose estimation {#2026-03-06-one-paper-accepted-at-cvpr-2026}
+CVPR 2026 accepted “3D-Object Perception Transformer (3PT),” led by doctoral student Agastya Kalra. The method detects and segments objects and estimates their position and orientation for tasks such as bin picking and precise insertion. It won seven of the eleven tracks in the 2025 BOP Challenge.
 ---
 
-## 2026-03-06 | PhD Student Christian Moore to Join GM Cruise for Summer Internship
-PhD student **Christian Moore**, who studies robot perception at CIRP, will spend summer 2026 with the **GM Cruise** autonomous driving team. Congratulations, Christian!
+## 2026-03-06 | Christian Moore to join GM Cruise for a summer internship {#2026-03-06-phd-student-christian-moore-to-join-gm-cruise-for-summer-internship}
+CIRP doctoral student Christian Moore will join the GM Cruise autonomous driving team for summer 2026. His research at CIRP focuses on robotic perception.
 ---
 
-## 2026-03-06 | New arXiv preprint on imaging through turbulence {#2026-03-06-new-paper-on-imaging-through-turbulence-on-arxiv}
-MS student **Ethan Chung** and PhD student **Norman Luo** are the second and third authors of a [preprint](https://arxiv.org/abs/2603.02048) on reconstructing distant scenes from images distorted by atmospheric turbulence.
+## 2026-03-06 | Ethan Chung and Norman Luo co-author preprint on imaging through turbulence {#2026-03-06-new-paper-on-imaging-through-turbulence-on-arxiv}
+Master’s student Ethan Chung and doctoral student Norman Luo are the second and third authors, respectively, of a [preprint](https://arxiv.org/abs/2603.02048) on reconstructing distant scenes from images distorted by atmospheric turbulence.
 ---
 
-## 2026-01-14 | Thank you to NVIDIA for supporting our farm robotics research {#2026-01-14-nvidia-academic-grant-awarded-thanks-nvidia}
-An **NVIDIA Academic Grant** provides **two RTX PRO 6000 Blackwell GPUs** to train models for farm robots and **four Jetson AGX Orin computers** to run those models in the field. We’re developing these tools to help growers in Hawaiʻi and elsewhere manage labor-intensive farm work.
+## 2026-01-14 | NVIDIA Academic Grant supports farm robotics in Hawaiʻi {#2026-01-14-nvidia-academic-grant-awarded-thanks-nvidia}
+An NVIDIA Academic Grant provides two RTX PRO 6000 Blackwell GPUs for training farm robotics models and four Jetson AGX Orin computers for running them in the field. CIRP is developing these tools to help growers in Hawaiʻi and elsewhere with labor-intensive tasks.
 
 [Read the full story on UH News](https://www.hawaii.edu/news/2026/01/14/nvidia-awards-next-gen-tech/).
 ---
 
-## 2025-10-15 | CIRP Lab at ICCV 2025 {#2025-10-15-cirp-lab-iccv-2025-two-workshop-papers-invited-talk-and-local-chair-role}
-At **ICCV 2025** in Honolulu, CIRP members presented two workshop papers and an invited talk. Huaijin Chen served as Local Chair.
+## 2025-10-15 | CIRP researchers present two workshop papers and an invited talk at ICCV {#2025-10-15-cirp-lab-iccv-2025-two-workshop-papers-invited-talk-and-local-chair-role}
+At ICCV 2025 in Honolulu, CIRP researchers contributed two workshop papers and an invited talk. Huaijin Chen served as local chair.
 
-- PhD student **Moseli Mots'oehli** presented *Simulating Refractive Distortions and Weather-Induced Artifacts for Resource-Constrained Autonomous Perception* at the [CV4DC Workshop](https://cv4dc.github.io/).
-- PhD student **Yang Qian** presented *Hashtag2Action: Data Engineering and Self-Supervised Pre-Training for Action Recognition in Short-Form Videos* at the [SVU Workshop](https://short-form-video-understanding.github.io/).
-- **Agastya Kalra** gave an invited talk at the [BOP Workshop](https://cmp.felk.cvut.cz/sixd/workshop_2025/#bop).
+- Doctoral student Moseli Mots'oehli presented “Simulating Refractive Distortions and Weather-Induced Artifacts for Resource-Constrained Autonomous Perception” at the [CV4DC Workshop](https://cv4dc.github.io/).
+- Doctoral student Yang Qian presented “Hashtag2Action: Data Engineering and Self-Supervised Pre-Training for Action Recognition in Short-Form Videos” at the [SVU Workshop](https://short-form-video-understanding.github.io/).
+- Agastya Kalra gave an invited talk at the [BOP Workshop](https://cmp.felk.cvut.cz/sixd/workshop_2025/#bop).
 
-![Moseli Mots'oehli stands at a lectern beside a slide discussing the limitations of simulated distortions.](images/events/iccv-2025-moseli-presentation.webp "Moseli Mots'oehli presents research on refractive distortions at the ICCV 2025 CV4DC Workshop. Photo courtesy of Huaijin Chen.")
-![Yang Qian stands at a lectern beside a slide showing the Hashtag2Action workflow.](images/events/iccv-2025-yang-presentation.webp "Yang Qian presents Hashtag2Action at the ICCV 2025 Short-Form Video Understanding Workshop. Photo courtesy of Huaijin Chen.")
+![Moseli Mots'oehli stands at a lectern beside a slide discussing the limitations of simulated distortions.](images/events/iccv-2025-moseli-presentation.webp "Moseli Mots'oehli presents research on refractive distortions at the ICCV 2025 CV4DC Workshop.")
+![Yang Qian stands at a lectern beside a slide showing the Hashtag2Action workflow.](images/events/iccv-2025-yang-presentation.webp "Yang Qian presents Hashtag2Action at the ICCV 2025 Short-Form Video Understanding Workshop.")
 
 ### After-ICCV gathering at UH Mānoa
 
@@ -64,24 +64,20 @@ The October 24, 2025, gathering included research presentations and a campus tou
 
 [Event program (PDF)](../images/events/iccv-2025-uh-manoa-program.pdf)
 
-![A presenter addresses an audience in a lecture room at UH Mānoa.](images/events/iccv-2025-uh-manoa-research-session.webp "Research presentations at UH Mānoa. Photo courtesy of Huaijin Chen.")
-![Participants pose for a group photo under trees on the UH Mānoa campus.](images/events/iccv-2025-uh-manoa-group.webp "Participants at UH Mānoa. Photo courtesy of Huaijin Chen.")
+![A presenter addresses an audience in a lecture room at UH Mānoa.](images/events/iccv-2025-uh-manoa-research-session.webp "Research presentations at UH Mānoa.")
+![Participants pose for a group photo under trees on the UH Mānoa campus.](images/events/iccv-2025-uh-manoa-group.webp "Participants at UH Mānoa.")
 ---
 
-## 2025-09-16 | CIRP Lab receives a $300,000 NSF grant for ultrafast X-ray diffraction research {#2025-09-16-received-a-300k-nsf-grant-to-study-physics-informed-vlm-for-ultrafast-x-ray-diffraction-at-the-slac-national-lab-of-stanford-university}
-Huaijin Chen received an [NSF EPSCoR Research Fellows Award (#2531897)](https://www.nsf.gov/awardsearch/showAward?AWD_ID=2531897) as principal investigator. The award supports a collaboration with SLAC National Accelerator Laboratory on physics-informed AI for ultrafast X-ray diffraction and AI-driven scientific discovery.
-
-**Thank you, NSF and SLAC!**
+## 2025-09-16 | NSF awards $300,000 for research on ultrafast X-ray diffraction {#2025-09-16-received-a-300k-nsf-grant-to-study-physics-informed-vlm-for-ultrafast-x-ray-diffraction-at-the-slac-national-lab-of-stanford-university}
+Huaijin Chen received an [NSF EPSCoR Research Fellows Award (#2531897)](https://www.nsf.gov/awardsearch/showAward?AWD_ID=2531897) to study ultrafast X-ray diffraction with researchers at SLAC National Accelerator Laboratory. The collaboration uses physics-informed AI to interpret diffraction measurements.
 ---
 
-## 2025-07-31 | Hawaiʻi Community Foundation supports early screening research {#2025-07-31-received-60k-hawaii-community-foundation-grant-for-computer-vision-based-early-screening-of-mild-cognitive-decline-and-alzheimer-s}
-A [$59,152 grant from the Hawaiʻi Community Foundation](https://www.hawaiicommunityfoundation.org/) supports the development of computer vision and AI methods for early screening of mild cognitive decline and Alzheimer’s disease.
-
-**Thank you, HCF!**
+## 2025-07-31 | Hawaiʻi Community Foundation funds research on cognitive screening {#2025-07-31-received-60k-hawaii-community-foundation-grant-for-computer-vision-based-early-screening-of-mild-cognitive-decline-and-alzheimer-s}
+A [$59,152 grant from the Hawaiʻi Community Foundation](https://www.hawaiicommunityfoundation.org/) supports CIRP research on computer vision and AI methods for early screening of mild cognitive decline and Alzheimer’s disease.
 ---
 
-## 2025-07-20 | Lab undergraduates win 3rd Place Best Paper Award (and $250) at RSS 2025 Workshop
-Congratulations to **Kai Garcia** and **Mairi Yoshioka**, whose *PolarTact3D* paper won the **3rd Place Best Paper Award** at the **RSS 2025 Workshop on Navigating Contact Dynamics in Robotics**.
+## 2025-07-20 | PolarTact3D earns third-place paper award at RSS workshop {#2025-07-20-lab-undergraduates-win-3rd-place-best-paper-award-and-250-at-rss-2025-workshop}
+CIRP undergraduates Kai Garcia and Mairi Yoshioka received the third-place Best Paper Award and a $250 prize for PolarTact3D at the RSS 2025 Workshop on Navigating Contact Dynamics in Robotics. Their tactile sensor uses polarization imaging to capture the shape and color of a contact surface in a single shot.
 
 ![Kai Garcia stands next to the PolarTact3D research poster.](images/events/rss-2025-polartact3d-poster.webp "Kai Garcia presents PolarTact3D at the RSS workshop on June 25, 2025.")
 ![Kai Garcia shakes hands at the RSS 2025 workshop award presentation.](images/events/rss-2025-polartact3d-award.webp "Kai Garcia receives the workshop’s third-place Best Paper Award for PolarTact3D on June 25, 2025.")
@@ -89,22 +85,20 @@ Congratulations to **Kai Garcia** and **Mairi Yoshioka**, whose *PolarTact3D* pa
 [PolarTact3D project website](https://polartact3d.github.io/)
 ---
 
-## 2025-06-25 | CIRP Lab co-hosts the CVPR 2025 Bin-Picking Workshop and Competition with OpenCV and Intrinsic {#2025-06-25-cirp-lab-co-hosting-the-cvpr-2025-bin-picking-workshop-and-competition-with-opencv-and-intrinsic}
-CIRP co-hosted the **CVPR 2025 Bin-Picking Workshop and Competition** with **OpenCV** and **Intrinsic**. The challenge focused on transferring perception methods from simulation to real robots. More than **450 teams** from around the world took part, and the organizers awarded **$60,000 in prizes**.
+## 2025-06-25 | CIRP, OpenCV, and Intrinsic co-host the CVPR Bin-Picking Challenge {#2025-06-25-cirp-lab-co-hosting-the-cvpr-2025-bin-picking-workshop-and-competition-with-opencv-and-intrinsic}
+CIRP co-hosted the CVPR 2025 Bin-Picking Workshop and Competition with OpenCV and Intrinsic. More than 450 teams worldwide competed to transfer perception methods from simulation to physical robots. The organizers awarded $60,000 in prizes.
 
 [Bin-Picking Challenge](https://bpc.opencv.org/) · [Challenge code](https://github.com/opencv/bpc)
 ---
 
-## 2025-06-15 | Invited Talk at Colorado School of Mines — Visual Sensing for Real-World Robotics
-Huaijin Chen gave an invited talk at the **Colorado School of Mines** on how visual sensing can improve productivity on farms and factory floors. He highlighted work on multimodal imaging, the **CVPR 2025 Bin-Picking Workshop**, the **Farm Robotics Challenge**, and **PolarTact3D**.
+## 2025-06-15 | Huaijin Chen speaks on visual sensing for robotics at Colorado School of Mines {#2025-06-15-invited-talk-at-colorado-school-of-mines-visual-sensing-for-real-world-robotics}
+In an invited talk at Colorado School of Mines, Huaijin Chen discussed how robots use visual sensing on farms and factory floors. Examples included multimodal imaging, the CVPR 2025 Bin-Picking Workshop, the Farm Robotics Challenge, and the PolarTact3D tactile sensor.
 ---
 
-## 2025-05-13 | Team ʻĀina wins a $10,000 award at the 2025 Farm Robotics Challenge {#2025-05-13-congrats-to-my-students-for-winning-the-10-000-grand-prize-at-the-2025-farm-robotics-challenge}
-Congratulations to the undergraduate team for winning the **Excellence in Productivity (Air)** award at the [2025 Farm Robotics Challenge](https://www.hawaii.edu/news/2025/05/13/farm-robotics-challenge-2025-winner/).
-
-Their AI-powered robot and drone system, developed with **Dole Plantation**, automatically counts and sizes pineapples in the field.
+## 2025-05-13 | Team ʻĀina wins $10,000 at the Farm Robotics Challenge {#2025-05-13-congrats-to-my-students-for-winning-the-10-000-grand-prize-at-the-2025-farm-robotics-challenge}
+Team ʻĀina received the Excellence in Productivity (Air) award at the [2025 Farm Robotics Challenge](https://www.hawaii.edu/news/2025/05/13/farm-robotics-challenge-2025-winner/). The undergraduate team worked with Dole Plantation to develop a [drone and ground robot system](../research/frc2025/) that counts pineapples and estimates their size in the field.
 ---
 
-## 2024-08-01 | Huaijin Chen joins UH Mānoa and starts CIRP Lab {#2024-08-01-joining-uhm}
-Huaijin Chen joined the **University of Hawaiʻi at Mānoa** as an assistant professor in the Department of Information and Computer Sciences and founded the CIRP Lab.
+## 2024-08-01 | Huaijin Chen founds CIRP Lab at UH Mānoa {#2024-08-01-joining-uhm}
+Huaijin Chen joined the Department of Information and Computer Sciences at the University of Hawaiʻi at Mānoa as an assistant professor and founded the Computational Imaging and Robotic Perception Lab.
 ---

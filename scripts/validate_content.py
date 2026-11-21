@@ -237,6 +237,8 @@ def validate_projects(path: Path) -> list[str]:
             errors.append(
                 f"{path.name}:{current_project['line']}: project '{current_project['name']}' must include a 'folder' field."
             )
+        if "topic" not in current_project["fields"]:
+            errors.append(f"{path.name}:{current_project['line']}: project '{current_project['name']}' must include a 'topic' field.")
         current_project = None
 
     for lineno, raw_line in enumerate(lines, start=1):
@@ -298,6 +300,8 @@ def validate_projects(path: Path) -> list[str]:
                     )
                 fields.add(key)
 
+                if key == "topic" and not value:
+                    errors.append(f"{path.name}:{lineno}: project topic cannot be empty.")
                 if key == "folder" and value:
                     folder_path = PROJECTS_IMAGE_DIR / value
                     if not folder_path.is_dir():

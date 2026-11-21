@@ -30,6 +30,7 @@ WATCH_FILES = [
     ROOT_DIR / "gallery.json",
     ROOT_DIR / "contact.html",
     ROOT_DIR / "outreach.html",
+    ROOT_DIR / "frc2025.html",
     ROOT_DIR / "service.html",
     ROOT_DIR / "scripts" / "render_site.py",
     ROOT_DIR / "scripts" / "publication-search.js",

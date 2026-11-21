@@ -4,7 +4,9 @@
 
 ### FringeTact: Contact and Force Sensing with Photoelastic Imaging
 folder: FringeTact
+topic: Optical sensor design
 name: FringeTact
+selected_work: 1
 lead: Feimei Chen | Asif Sijan
 members: Munir Zarea | Roxanne Kate Balanay | Riki MacMillan | Christian Moore | Tyler R. Ray | Frankie Zhu | Akshat Dave | Tianlu Wang
 pi: Huaijin Chen
@@ -13,7 +15,7 @@ description: When an object presses on a photoelastic block, stress changes the 
 approach: A finite-element model simulates stress inside the block. A polarized-light renderer translates that stress into images used to train a network, which is then fine-tuned on real camera pairs. The network estimates contact footprint, pressure and shear, and integrates them to recover net force.
 question: How can a camera measure contact forces?
 preview: images/previews/fringetact.webp
-summary: FringeTact reads patterns of polarized light in a transparent sensor to locate contact and measure forces both into and across its surface.
+summary: FringeTact reads patterns of polarized light in a transparent sensor to locate contact and measure normal and shear forces.
 cover: contact-force.webp
 caption: Front and side views of the sensor, simulated fringes and predicted contact maps during a sphere drag. Arrows show shear direction.
 video: contact-demo.mp4
@@ -25,6 +27,7 @@ detail_caption: Two cameras view the photoelastic cube through crossed polarizer
 
 ### PolarTact3D: Single-Shot Tactile 3D Shape and Color Sensing with Polarization Imaging
 folder: PolarTact3D
+topic: Optical sensor design
 name: PolarTact3D
 website: https://polartact3d.github.io/
 members: Kai Garcia | Mairi Yoshioka | Tyler Ray | Tianlu Wang | Frances Zhu | Huaijin Chen
@@ -40,8 +43,10 @@ field_caption: Kai Garcia presents PolarTact3D at the RSS Workshop on Navigating
 
 ### Snapshot Hyperspectral Imaging with Diffractive Optical Elements
 folder: DOE-HSI
+topic: Optical sensor design
 name: Snapshot hyperspectral imaging
 selected_work: 2
+question: How can a camera capture a spectrum at every pixel in one exposure?
 cover: doe-otf-map.png
 caption: A diffractive optical element encodes the scene on a monochrome sensor. The diagram shows how the optical measurement and its simulation are used for spectral reconstruction.
 summary: Diffractive optics encode wavelength information in one exposure so we can reconstruct the spectrum at each pixel.
@@ -56,10 +61,10 @@ description: With an optimized diffractive optical element (DOE), different spec
 
 ### Autonomous Coconut Rhinoceros Beetle Infestation Management
 folder: FRC2026
+topic: Agricultural robotics
 field_photo: images/gallery/palm_capture.jpg
 field_caption: Members of the field team observing palms in Hawaiʻi.
 name: Field robotics for palm health
-selected_work: 1
 preview: images/previews/crb-symposium-demo.webp
 preview_fit: cover
 caption: The team demonstrates a robotic arm and palm simulation.
@@ -80,8 +85,30 @@ short: A palm-climbing robot designed to inspect trees and treat coconut rhinoce
 description: The team is developing a mechanism to climb palms and an end effector to apply pesticides and trim flowers. They use simulation and teleoperated trials to study how the arm interacts with a tree before hardware tests.
 ---
 
+### Pineapple Counting and Sizing with Aerial and Ground Robots
+folder: FRC2025
+topic: Agricultural robotics
+short: Team ʻĀina paired a drone that counts pineapples with a ground robot that measures fruit size at Dole Plantation.
+description: The UH Mānoa undergraduate team used aerial images to count pineapples across a field and rover footage to reconstruct individual fruit in 3D. The system won the $10,000 Excellence in Productivity (Air) award at the 2025 Farm Robotics Challenge.
+website: https://www.hawaii.edu/news/2025/05/13/farm-robotics-challenge-2025-winner/
+cover: pineapple-field-rover.jpg
+caption: Team ʻĀina prepares its rover to survey pineapples at Dole Plantation. Photo from UH News.
+gallery_title: Fieldwork and presentations
+gallery_caption_adjusting_the_rover: Team members adjust the rover’s frame to clear the pineapple leaves. Photo from UH News.
+gallery_caption_surveying_pineapple_rows: The rover travels between pineapple rows to collect images of individual fruit. Photo from UH News.
+gallery_caption_team_aina: Team ʻĀina with the survey drone and ground robot. Photo from UH News.
+gallery_caption_summit_presentation: Christian Komo presents Team ʻĀina’s pineapple mapping system at the Plug and Play Summit.
+preview_fit: cover
+supplement: frc2025.html
+lead: Christian Komo
+advisors_label: Faculty advising team lead
+advisors: Huaijin Chen
+members: Kai Garcia | Mikhail Shkaralevich | Tyler Mak | Rona Lei Duldulao | Lucas Horsman | Zadon Padello | Wilson Huynh | Erik Bendickson
+---
+
 ### FishEye: Robust 3D Fish Measurement from Single Image or Video
 folder: FishEye
+topic: Field robotics and perception
 name: FishEye
 related: FishPod
 lead: Ethan Chung
@@ -94,6 +121,7 @@ caption: FishEye detects the fish, estimates depth, and reconstructs its body in
 
 ### FishPod: Underwater Stereo Vision for Fish Measurement
 folder: FishPod
+topic: Field robotics and perception
 name: FishPod
 related: FishEye
 pi: Huaijin Chen
@@ -114,6 +142,7 @@ gallery_caption_06_length_estimates: Four examples with estimated fish depth and
 
 ### Robot-Tablet Multimodal Behavioral Phenotyping for Cognitive Concern in Older Adults
 folder: MCI
+topic: Human–robot interaction
 name: Robot–tablet interaction in older adults
 lead: Yang Qian
 pi: Huaijin Chen
@@ -130,6 +159,7 @@ gallery_caption_task2_animals_demo_2026_04_14: The instructions introduce the an
 
 ### ImagingBench: Can AI Solve Imaging Problems?
 folder: CIBench
+topic: Evaluating vision models
 name: ImagingBench
 slug: imagingbench
 website: https://cirplab-fourier.taildc92d1.ts.net/
@@ -149,19 +179,9 @@ detail: reconstructions.webp
 detail_caption: Example measurements, model outputs and reference images across 12 benchmark tasks. Open the figure to inspect individual rows.
 ---
 
-### Physics-Informed Machine Learning for Accelerated Discovery and Dynamics Analysis in Ultrafast X-Ray Diffraction
-folder: XRD-ML
-name: Learning ultrafast X-ray dynamics
-lead: Ethan Chung
-pi: Huaijin Chen
-members: Vincent Chan
-short: We use physics-informed machine learning to compare how atoms move in simulations with what ultrafast X-ray experiments measure.
-description: Ultrafast X-ray photon correlation spectroscopy (XPCS) tracks how materials change over time, from atomic to microscopic scales. We train models on simulated atomic motion to predict the temporal correlation functions measured in XPCS experiments. That gives us a way to test simulations against measurements of supercooled liquids and materials undergoing the glass transition.
-caption: Simulated argon structures at different densities and temperatures.
----
-
 ### Satellite-Derived Shorelines
 folder: SDS
+topic: Evaluating vision models
 name: Satellite-derived shorelines
 lead: Joel Nicolow
 pi: Dr. Charles Fletcher
@@ -175,8 +195,23 @@ gallery_caption_sat_image_examples: The same coastline seen by different satelli
 gallery_caption_segmentation_method_comparison: Comparison of land and water segmentation methods on the same stretch of coast.
 ---
 
+## Scientific Instrumentation
+
+### Physics-Informed Machine Learning for Accelerated Discovery and Dynamics Analysis in Ultrafast X-Ray Diffraction
+folder: XRD-ML
+topic: Modeling physical systems
+name: Learning ultrafast X-ray dynamics
+lead: Ethan Chung
+pi: Huaijin Chen
+members: Vincent Chan
+short: We use physics-informed machine learning to compare how atoms move in simulations with what ultrafast X-ray experiments measure.
+description: Ultrafast X-ray photon correlation spectroscopy (XPCS) tracks how materials change over time, from atomic to microscopic scales. We train models on simulated atomic motion to predict the temporal correlation functions measured in XPCS experiments. That gives us a way to test simulations against measurements of supercooled liquids and materials undergoing the glass transition.
+caption: Simulated argon structures at different densities and temperatures.
+---
+
 ### ML-Driven Surrogate Modeling for FEL Oscillator Cavity Optimization
 folder: FEL-Oscillator
+topic: Modeling physical systems
 name: Modeling free-electron lasers
 lead: Ethan Chung
 pi: Huaijin Chen
