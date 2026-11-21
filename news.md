@@ -1,7 +1,7 @@
 # News
 
 ## 2026-11-12 | UH Mānoa researchers present work on robot perception and learning at CoRL {#2026-11-12-cirp-and-uh-manoa-at-corl-in-austin}
-The Conference on Robot Learning (CoRL) in Austin selected [3PTv2](https://openreview.net/forum?id=WNZ4Dr57JS), the successor to the [3D-Object Perception Transformer (3PT)](../research/3pt/), for a main-conference poster. CIRP doctoral student [Agastya Kalra](../people/#agastya-kalra) and co-authors, including [Huaijin Chen](../people/#huaijin-chen), developed the method to estimate the poses of previously unseen objects for robotic manipulation.
+The Conference on Robot Learning (CoRL) in Austin selected [3PTv2](https://openreview.net/forum?id=WNZ4Dr57JS), the successor to the [3D-Object Perception Transformer (3PT)](../research/3pt/), for a main-conference poster. CIRP doctoral student [Agastya Kalra](../people/#agastya-kalra) and co-authors, including [Huaijin Chen](../people/#huaijin-chen), developed 3PTv2 for zero-shot pose estimation. It estimates the poses of objects unseen during training with substantially faster inference and higher accuracy.
 
 CoRL also selected [Telescopes are Optomechanical Robots](https://openreview.net/forum?id=RS2INStAhX) by UH Mānoa researcher Justin Fletcher for a main-conference poster. At the [UMI Arena workshop](https://umi-arena.airoa.io/accepted), Yosub Shin, Yuan Liu, and Igor Molybog presented a poster on tracking gloves with a head-mounted camera (P09) and demonstrated their [YAM-UMI device](https://github.com/YosubShin/yam-umi) (D10).
 ---

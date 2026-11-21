@@ -64,7 +64,7 @@ folder: 3PT
 topic: Perception for robotic manipulation
 name: 3PT and 3PTv2
 page_layout: brief
-short: We developed the 3D-Object Perception Transformer (3PT) with Google Intrinsic. Given a 3D model of a part, 3PT estimates the part’s position and orientation in a color image. Its successor, 3PTv2, can guide a robot as it aligns a charging plug with a vehicle’s port.
+short: With Google Intrinsic, we developed the 3D-Object Perception Transformer (3PT) to estimate a part’s position and orientation from its 3D model and a color image. Its successor, 3PTv2, estimates poses for parts it never saw during training. In this zero-shot setting, 3PTv2 substantially reduces inference time and improves pose accuracy.
 website: https://www.intrinsic.ai/publications/3pt-cvpr2026
 website_label: Learn more on the Intrinsic website
 resources: [3PT paper](publications/#kalra2026_3pt) · [3PTv2 paper](publications/#kalra2026_3ptv2) · [BOP results](https://bop.felk.cvut.cz/leaderboards/pose-detection-unseen-bop24/bop-classic-core/)
@@ -74,7 +74,7 @@ cover: robot-charging.webp
 caption: A robot uses 3PTv2 to locate a charging port and guide a plug into place on three different vehicles.
 selected_work: 4
 question: How can a robot estimate the pose of an unfamiliar object from a color image?
-summary: The 3D-Object Perception Transformer (3PT) and its successor, 3PTv2, use a part’s 3D model to estimate its pose in camera images for tasks such as bin picking and plug insertion.
+summary: The 3D-Object Perception Transformer (3PT) uses a part’s 3D model to estimate its pose in a color image. 3PTv2 makes zero-shot pose estimation substantially faster and more accurate for previously unseen parts.
 catalog_preview: images/previews/3pt-overview.png
 preview: images/previews/kalra2026_3pt.webp
 preview_caption: 3PT estimates the poses of metal parts piled in a bin.
