@@ -125,7 +125,7 @@ topic: Field robotics and perception
 name: FishPod
 related: FishEye
 pi: Huaijin Chen
-members: Feimei Chen | Riki MacMillan | Munir
+members: Feimei Chen | Riki MacMillan | Munir Zarea
 short: FishPod uses a stereo camera mounted on a remotely operated underwater vehicle to estimate fish length from paired video frames.
 description: The system detects and tracks fish, segments their outlines, and matches points along their body axes between the two camera views. Stereo triangulation locates the endpoints in 3D so the system can estimate body length.
 cover: stereo-pipeline.webp

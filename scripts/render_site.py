@@ -6,6 +6,7 @@ import unicodedata
 from datetime import date
 from hashlib import sha256
 from html import escape
+from html.parser import HTMLParser
 from pathlib import Path
 from string import Template
 
@@ -18,6 +19,8 @@ NAV = {"": "Home", "research": "Research", "publications": "Publications",
        "gallery": "Gallery", "contact": "Contact"}
 GROUP_LABELS = {"PhD": "PhD students", "Masters": "Master’s students",
                 "Undergrads": "Undergraduates", "Visiting Students": "Visiting students"}
+ACTIVITY_PAGES = {"Research": "research/", "Publications": "publications/", "News": "news/",
+                  "Outreach": "service/#outreach", "Service": "service/#service"}
 LAB = "Computational Imaging and Robotic Perception Lab"
 LEGACY = """<script>
 const routes = {members:"people",projects:"research",publications:"publications",news:"news",contact:"contact"};
@@ -39,9 +42,47 @@ def link(url, label):
     return f'<a href="{escape(url)}">{escape(label)}</a>'
 
 
+class ArticleCredits(HTMLParser):
+    """Index profile links in each article under its existing heading and bookmark."""
+
+    def __init__(self, profiles, category):
+        super().__init__()
+        self.profiles = profiles
+        self.category = category
+        self.page = ACTIVITY_PAGES[category].split("#")[0]
+        self.anchor = None
+        self.in_heading = False
+
+    def handle_starttag(self, tag, attrs):
+        attrs = dict(attrs)
+        if tag == "article":
+            self.anchor = attrs["id"]
+            self.names = set()
+            self.heading = []
+        elif self.anchor and tag in ("h2", "h3") and not self.heading:
+            self.in_heading = True
+        elif self.anchor and tag == "a":
+            href = attrs.get("href", "")
+            if href.startswith("../people/#"):
+                self.names.add(href.removeprefix("../people/#"))
+
+    def handle_data(self, text):
+        if self.in_heading:
+            self.heading.append(text)
+
+    def handle_endtag(self, tag):
+        if tag in ("h2", "h3"):
+            self.in_heading = False
+        elif tag == "article" and self.anchor:
+            for name in self.names:
+                items = self.profiles[name].setdefault(self.category, {})
+                items[self.page + "#" + self.anchor] = "".join(self.heading).strip()
+            self.anchor = None
+
+
 def inline(text):
     safe = escape(text)
-    safe = re.sub(r'\[([^\]]+)\]\((https?://[^)]+|\.\./[\w./-]+)\)', r'<a href="\2">\1</a>', safe)
+    safe = re.sub(r'\[([^\]]+)\]\((https?://[^)]+|\.\./[\w./#-]+)\)', r'<a href="\2">\1</a>', safe)
     safe = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', safe)
     return re.sub(r'\*([^*]+)\*', r'<em>\1</em>', safe)
 
@@ -188,7 +229,7 @@ def video_player(src, poster, label):
             f'src="{escape(src)}" aria-label="{escape(label)}">{link(src, "Open video")}</video>')
 
 
-def research(projects, people):
+def research(projects, profiles):
     sections = []
     instrument_theme = "Physics-Informed AI for Scientific Instrumentation"
     summaries = {
@@ -213,7 +254,6 @@ def research(projects, people):
             '<span id="physics-informed-ai-evaluating-vision-models"></span>'
         ),
     }
-    directory = {person["title"] for members in people.values() for person in members}
     projects_by_folder = {project["folder"]: project for group in projects.values() for project in group}
     for theme, group in projects.items():
         theme_id = slug(theme)
@@ -273,7 +313,14 @@ def research(projects, people):
                 if names:
                     if field == "lead" and len(names) > 1:
                         label = "Project leads"
-                    links = [link("../../people/#" + slug(n), n) if n in directory else escape(n) for n in names]
+                    links = []
+                    for name in names:
+                        key = slug(name)
+                        if key in profiles:
+                            profiles[key].setdefault("Research", {})[project_path(project)] = project.get("name", title)
+                            links.append(link("../../people/#" + key, name))
+                        else:
+                            links.append(escape(name))
                     label = project.get(field + "_label", label)
                     credits.append(f'<p><strong>{escape(label)}</strong><br>' + " · ".join(links) + "</p>")
             body += '<section class="section project-team" id="project-team"><h2>Project team</h2><div>' + "".join(credits) + '</div></section>'
@@ -310,7 +357,25 @@ def portrait(person, root, compact=False):
     return f'<span class="initials" aria-hidden="true">{escape(initials)}</span>'
 
 
-def member(person, category):
+def profile_activity(activity):
+    groups = []
+    browse = []
+    for category, path in ACTIVITY_PAGES.items():
+        category_link = link("../" + path, category)
+        if entries := activity.get(category):
+            items = "".join("<li>" + link("../" + url, title) + "</li>" for url, title in entries.items())
+            groups.append(f"<dt>{category_link}</dt><dd><ul>{items}</ul></dd>")
+        else:
+            browse.append(category_link)
+    if not groups:
+        return ""
+    listing = "<dl>" + "".join(groups) + "</dl>"
+    if browse:
+        listing += '<p class="activity-browse">Browse ' + " · ".join(browse) + "</p>"
+    return f'<details class="profile-activity"><summary>Research and activities</summary>{listing}</details>'
+
+
+def member(person, category, activity):
     name = person["title"]
     sub = escape(person.get("placement", person.get("role", "")))
     affiliation = person.get("affiliation", "")
@@ -330,16 +395,18 @@ def member(person, category):
                      f'<span aria-hidden="true">{escape(label)}</span></a>')
     profile = [v for v in [person.get("bio"), affiliation, person.get("tags", "").replace(" | ", " · ")] if v]
     more = '<details><summary>Profile</summary>' + "".join(f"<p>{inline(v)}</p>" for v in profile) + "</details>" if profile else ""
+    activity_html = "" if person.get("show_activity", "").lower() == "false" else profile_activity(activity)
     return (f'<article class="person" id="{slug(name)}"><div class="person-top">{portrait(person, "../")}<div><h3>{escape(name)}</h3>'
-            f'<div class="metadata">{sub}</div></div></div><div class="profile-links">{"".join(links)}</div>{more}</article>')
+            f'<div class="metadata">{sub}</div></div></div><div class="profile-links">{"".join(links)}</div>'
+            f'{more}{activity_html}</article>')
 
 
-def people_page(groups):
+def people_page(groups, profiles):
     jump = '<div class="jump">' + "".join(link("#" + slug(g), GROUP_LABELS.get(g, g)) for g in groups) + link("../gallery/", "Group photos") + "</div>"
     parts = [page_head("People"), jump]
     for category, members in groups.items():
         parts.append(f'<section class="section" id="{slug(category)}">{heading(GROUP_LABELS.get(category, category))}<div class="people">')
-        parts.extend(member(m, category) for m in members)
+        parts.extend(member(m, category, profiles[slug(m["title"])]) for m in members)
         parts.append("</div></section>")
     parts.append('<section class="section" id="photos">' + heading("Group photos", "../gallery/", "View gallery →") + "</section>")
     page("people", "People", "Current members and alumni of CIRP Lab.", "".join(parts))
@@ -416,11 +483,13 @@ def gallery_page():
     page("gallery", "Gallery", "Group photos and life around the lab.", header + grid + slideshow + script)
 
 
-def publication(item):
+def publication(item, profiles):
     authors = item["author"]
     author_names = []
     for author in authors.removesuffix(" and others").split(" and "):
-        author_names.append(" ".join(reversed(author.split(", ", 1))))
+        name = " ".join(reversed(author.split(", ", 1)))
+        key = slug(name)
+        author_names.append(link("../people/#" + key, name) if key in profiles else escape(name))
     author_line = ", ".join(author_names)
     if authors.endswith(" and others"):
         author_line += ", et al."
@@ -447,7 +516,7 @@ def publication(item):
         citation = f'<details class="citation"><summary>BibTeX</summary><pre><code>{escape(item["bibtex"])}</code></pre></details>'
     note = f'<p class="metadata">{escape(item["note"])}</p>' if item.get("note") else ""
     return (f'<article class="pub" id="{escape(item["key"])}" data-abbr="{escape(item.get("abbr", ""))}"><h3>{title}</h3>'
-            f'<p class="pub-meta">{escape(author_line)} · <span>{escape(venue_year)}</span></p>'
+            f'<p class="pub-meta">{author_line} · <span>{escape(venue_year)}</span></p>'
             f'{note}<div class="pub-actions">{"".join(links)}{citation}</div></article>')
 
 
@@ -541,13 +610,14 @@ def home(projects, people, items, pubs):
 def main():
     projects, people = records("projects.md"), records("members.md")
     news, pubs = news_records(), bibliography()
-    research(projects, people)
-    people_page(people)
+    profiles = {slug(person["title"]): {} for group in people.values() for person in group}
+    research(projects, profiles)
     gallery_page()
     content = page_head("News")
     for stamp, title, body, anchor in news:
         content += (f'<article class="news-item" id="{anchor}">{news_time(stamp)}'
                     f'<h2>{escape(title)}</h2><div class="prose">{paragraphs(body)}</div></article>')
+    ArticleCredits(profiles, "News").feed(content)
     page("news", "News", "News from CIRP Lab.", content)
     years = list(dict.fromkeys(item["year"] for item in pubs))
     options = "".join(f'<option>{escape(year)}</option>' for year in years)
@@ -559,12 +629,16 @@ def main():
       </form><a href="../publications.bib" download>Download .bib</a></div>
       <p id="pub-status" role="status" hidden></p>'''
     for year in years:
-        content += f'<section class="section pub-year" data-year="{escape(year)}">' + heading(year) + "".join(publication(p) for p in pubs if p["year"] == year) + "</section>"
+        content += f'<section class="section pub-year" data-year="{escape(year)}">' + heading(year) + "".join(publication(p, profiles) for p in pubs if p["year"] == year) + "</section>"
     content += '<script src="search.js" defer></script>'
+    ArticleCredits(profiles, "Publications").feed(content)
     page("publications", "Publications", "Publications by members of CIRP Lab.", content)
     title = NAV["service"]
     service = (ROOT / "service.html").read_text()
     outreach = (ROOT / "outreach.html").read_text()
+    ArticleCredits(profiles, "Service").feed(service)
+    ArticleCredits(profiles, "Outreach").feed(outreach)
+    people_page(people, profiles)
     jump = '<div class="jump">' + link("#service", "Service") + link("#outreach", "Outreach") + "</div>"
     content = page_head(title) + jump
     content += '<section id="service">' + heading("Service") + service + "</section>"

@@ -4,6 +4,7 @@
 
 ### Huaijin Chen
 role: Assistant Professor of Computer Science
+show_activity: false
 affiliation: University of Hawaii at Manoa
 image: images/members/huaijin-chen.jpg
 thumbnail: images/previews/huaijin-chen.webp
@@ -198,6 +199,7 @@ affiliation: University of Minnesota
 role: Alumni
 placement: Mechanical Engineer at Pearl Harbor Naval Shipyard
 image: images/members/munir-zarea.webp
+linkedin: https://www.linkedin.com/in/munir-zarea-722585159/
 ---
 
 ### Ethan Chung

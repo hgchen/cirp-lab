@@ -181,6 +181,10 @@ figcaption {margin-top:8px;max-width:74ch;color:var(--muted);font-size:var(--typ
 .profile-links a:focus-visible span {display:block}
 @media (hover:hover) {.profile-links a:hover span {display:block}}
 .person details,.citation {font-size:var(--type-label)}
+.profile-activity {margin-top:6px}
+.profile-activity dt {margin:12px 0 3px;font-weight:600}
+.profile-activity ul {margin:0;padding-inline-start:1.2rem}
+.profile-activity li + li {margin-top:4px}
 summary {color:var(--green);cursor:pointer;width:fit-content}
 .gallery-head {display:flex;align-items:center;justify-content:space-between;gap:16px;padding-bottom:clamp(15px,2vw,22px)}
 .gallery-view,.slide-tools {display:inline-flex;align-items:center;gap:2px}
