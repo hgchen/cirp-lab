@@ -220,7 +220,7 @@ def card(project, root):
     folder, cover, _ = project_media(project)
     title = project.get("name", project["title"])
     url = root + project_path(project)
-    src = root + project.get("preview", folder + cover)
+    src = root + (project.get("catalog_preview") or project.get("preview", folder + cover))
     plate = "plate photo-preview" if project.get("preview_fit") == "cover" else "plate"
     return f'''<article class="card"><a class="{plate}" href="{url}" aria-label="View {escape(title)}">
     <img loading="lazy" src="{escape(src)}" alt=""></a><div class="card-copy">
@@ -296,7 +296,7 @@ def research(projects, profiles):
             body = page_head(title, project["short"], crumb, actions)
             body += figure("../../" + folder + cover, project.get("caption", project.get("name", title)), "project-hero")
             if project.get("page_layout") != "brief":
-                body += f'<section class="section project-overview"><h2>Project overview</h2><p>{escape(project["description"])}</p>'
+                body += f'<section class="section project-overview"><h2>Project overview</h2><p>{inline(project["description"])}</p>'
                 if project.get("approach"):
                     body += f'<h3>Method</h3><p>{escape(project["approach"])}</p>'
                 if related := projects_by_folder.get(project.get("related")):

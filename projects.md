@@ -75,6 +75,7 @@ caption: A robot uses 3PTv2 to locate a charging port and guide a plug into plac
 selected_work: 4
 question: How can a robot estimate the pose of an unfamiliar object from a color image?
 summary: The 3D-Object Perception Transformer (3PT) and its successor, 3PTv2, use a part’s 3D model to estimate its pose in camera images for tasks such as bin picking and plug insertion.
+catalog_preview: images/previews/3pt-overview.png
 preview: images/previews/kalra2026_3pt.webp
 preview_caption: 3PT estimates the poses of metal parts piled in a bin.
 highlight_video_from: kalra2026_3pt
@@ -103,14 +104,14 @@ members: Rona Lei Duldulao | Lucas Horsman | Wilson Huynh | Erik Bendickson | Ch
 collaborators_label: University of Michigan team
 collaborators: Nilay Choudhury | Xinqi Zhang | Yuchen You | Haobo Fang | Siyuan Zheng | Ronen Dujovny | Adrian Wang | Mingxuan He
 short: A palm-climbing robot designed to inspect trees and treat coconut rhinoceros beetle infestations.
-description: The team is developing a mechanism to climb palms and an end effector to apply pesticides and trim flowers. They use simulation and teleoperated trials to study how the arm interacts with a tree before hardware tests. We thank NVIDIA for supporting this work on palm health for the 2026 Farm Robotics Challenge.
+description: The team is developing a mechanism to climb palms and an end effector to apply pesticides and trim flowers. They use simulation and teleoperated trials to study how the arm interacts with a tree before hardware tests. We thank [NVIDIA](../../news/#2026-01-14-nvidia-academic-grant-awarded-thanks-nvidia) for supporting this work on palm health for the 2026 Farm Robotics Challenge.
 ---
 
 ### Pineapple Counting and Sizing with Aerial and Ground Robots
 folder: FRC2025
 topic: Agricultural robotics
 short: Team ʻĀina paired a drone that counts pineapples with a ground robot that measures fruit size at Dole Plantation.
-description: The UH Mānoa undergraduate team used aerial images to count pineapples across a field and rover footage to reconstruct individual fruit in 3D. The system won the $10,000 Excellence in Productivity (Air) award at the 2025 Farm Robotics Challenge. We thank NVIDIA for supporting Team ʻĀina’s pineapple mapping project.
+description: The UH Mānoa undergraduate team used aerial images to count pineapples across a field and rover footage to reconstruct individual fruit in 3D. The system won the $10,000 Excellence in Productivity (Air) award at the 2025 Farm Robotics Challenge. We thank [NVIDIA](../../news/#2026-01-14-nvidia-academic-grant-awarded-thanks-nvidia) for supporting Team ʻĀina’s pineapple mapping project.
 website: https://www.hawaii.edu/news/2025/05/13/farm-robotics-challenge-2025-winner/
 cover: pineapple-field-rover.jpg
 caption: Team ʻĀina prepares its rover to survey pineapples at Dole Plantation. Photo from UH News.
