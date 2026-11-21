@@ -73,7 +73,7 @@ members: Agastya Kalra | Huaijin Chen
 cover: robot-charging.webp
 caption: A robot uses 3PTv2 to locate a charging port and guide a plug into place on three different vehicles.
 selected_work: 4
-question: How can a robot estimate the pose of an unfamiliar object from a color image?
+question: How can a robot quickly and accurately estimate the pose of an object it hasn’t seen during training?
 summary: The 3D-Object Perception Transformer (3PT) uses a part’s 3D model to estimate its pose in a color image. 3PTv2 makes zero-shot pose estimation substantially faster and more accurate for previously unseen parts.
 catalog_preview: images/previews/3pt-overview.png
 preview: images/previews/kalra2026_3pt.webp
