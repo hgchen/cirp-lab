@@ -74,9 +74,9 @@ gallery_caption_frc_3: A palm tree and nearby test objects in the simulation.
 gallery_caption_team_assembly: The UH Mānoa and University of Michigan teams assemble the palm-climbing robot for the 2026 Farm Robotics Challenge.
 gallery_caption_visit_crb_response: A field visit with the CRB Response team and UH Mānoa collaborators Daniel Jenkins and Xing Wei to learn about drone-based beetle control.
 summary: We are developing a palm-climbing robot to inspect trees and treat coconut rhinoceros beetle infestations.
+lead_label: Perception system lead
 lead: Christian Moore
-pi: Huaijin Chen
-advisors: Daniel Jenkins | Ryan Kurasaki | Tianlu Wang | Daniel Drew | Xiaonan (Sean) Huang
+advisors: Huaijin Chen | Daniel Jenkins | Ryan Kurasaki | [Tianlu Wang](https://sites.google.com/view/uhm-sail/people) | [Daniel Drew](https://danieldrew.me/) | Xiaonan (Sean) Huang
 members_label: University of Hawaiʻi at Mānoa team
 members: Rona Lei Duldulao | Lucas Horsman | Wilson Huynh | Erik Bendickson | Christian Komo | Zadon Padello | Tyler Mak | Elijah Saloma | Kanta Saito | Ella Self | Andrew He | Lukas Moroz | Riki MacMillan | Alex Tokunaga | Owen Bramley
 collaborators_label: University of Michigan team
@@ -108,7 +108,7 @@ members: Kai Garcia | Mikhail Shkaralevich | Tyler Mak | Rona Lei Duldulao | Luc
 
 ### FishEye: Robust 3D Fish Measurement from Single Image or Video
 folder: FishEye
-topic: Field robotics and perception
+topic: Marine robotics and perception
 name: FishEye
 related: FishPod
 lead: Ethan Chung
@@ -121,7 +121,7 @@ caption: FishEye detects the fish, estimates depth, and reconstructs its body in
 
 ### FishPod: Underwater Stereo Vision for Fish Measurement
 folder: FishPod
-topic: Field robotics and perception
+topic: Marine robotics and perception
 name: FishPod
 related: FishEye
 pi: Huaijin Chen

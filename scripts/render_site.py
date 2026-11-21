@@ -247,6 +247,9 @@ def research(projects, profiles):
     instrument_id = slug(instrument_theme)
     # Preserve published bookmarks to the two directions and their former topics.
     bookmarks = {
+        "computational-imaging-for-robotic-perception-marine-robotics-and-perception": (
+            '<span id="computational-imaging-for-robotic-perception-field-robotics-and-perception"></span>'
+        ),
         instrument_id: '<span id="physics-informed-ai"></span><span id="scientific-instrumentation"></span>',
         instrument_id + "-predicting-instrument-response": '<span id="scientific-instrumentation-modeling-physical-systems"></span>',
         instrument_id + "-evaluating-frontier-models-for-imaging-applications": (
@@ -320,7 +323,7 @@ def research(projects, profiles):
                             profiles[key].setdefault("Research", {})[project_path(project)] = project.get("name", title)
                             links.append(link("../../people/#" + key, name))
                         else:
-                            links.append(escape(name))
+                            links.append(inline(name))
                     label = project.get(field + "_label", label)
                     credits.append(f'<p><strong>{escape(label)}</strong><br>' + " · ".join(links) + "</p>")
             body += '<section class="section project-team" id="project-team"><h2>Project team</h2><div>' + "".join(credits) + '</div></section>'
@@ -523,11 +526,6 @@ def news_anchor(stamp, title):
     return stamp + "-" + slug(re.sub(r" \(\$[\d,]+\)$", "", title))
 
 
-def home_heading(label, title, url="", action=""):
-    more = link(url, action + " →") if url else ""
-    return f'<header class="home-heading"><span>{escape(label)}</span><h2>{escape(title)}</h2>{more}</header>'
-
-
 def work_card(title, href, path, caption, summary, video="", resources=(), photo_preview=False):
     version = sha256((ROOT / path).read_bytes()).hexdigest()[:12]
     preview = f"{path}?v={version}"
@@ -575,12 +573,12 @@ def home(projects, people, items, pubs):
     We design sensors and algorithms together to help robots understand their surroundings and scientists measure how physical systems change.</p>
     <div class="hero-links">{link("research/", "Explore our research")}{link("contact/#prospective-students", "Join the lab")}</div>
     <img class="hero-logo" src="images/cirp-hero.webp" width="176" height="176" alt=""></section>'''
-    content += '<section class="section" id="lab-news"><header class="home-heading"><span><img class="news-mark" src="images/cirp-mark.png" width="36" height="36" alt=""></span><h2>Lab news</h2>' + link("news/", "All news →") + '</header>'
+    content += '<section class="section" id="lab-news">' + heading("Lab news", "news/", "All news →")
     for stamp, title, _, anchor in items[:5]:
         content += f'<div class="news-row">{news_time(stamp)}{link("news/#" + anchor, title)}</div>'
     content += '</section>'
     content += selected_research(projects, pubs)
-    content += '<section class="section" id="the-group">' + home_heading("People", "The group", "people/", "People & alumni") + '<dl class="roster">'
+    content += '<section class="section" id="the-group">' + heading("The group", "people/", "People & alumni →") + '<dl class="roster">'
     for group, members in people.items():
         if group != "Alumni":
             names = [f'<li><a href="people/#{slug(m["title"])}">{portrait(m, "", compact=True)}<span>{escape(m["title"])}</span></a></li>'

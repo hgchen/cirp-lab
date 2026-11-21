@@ -83,11 +83,9 @@ nav a[aria-current] {color:var(--green);font-weight:700;text-decoration:underlin
 .hero-links a {font-size:12px;padding:2px 0;text-decoration:none;border-bottom:1px solid currentColor}
 .hero-links a:hover {border-bottom-width:2px;margin-bottom:-1px}
 .section {border-top:1px solid var(--line);padding:clamp(28px,3.4vw,45px) 0}
-.home-heading,.section-head {display:flex;align-items:baseline;gap:16px;margin-bottom:23px}
-.home-heading {display:grid;grid-template-columns:minmax(105px,.27fr) 1fr auto}
-.home-heading > span,.home-heading > a,.section-head > a,.crumb,.metadata,time,.foot,.roster dt {font:12px/1.5 var(--mono);color:var(--muted)}
-.home-heading > a,.section-head > a {color:var(--green);white-space:nowrap}
-.section-head {justify-content:space-between}
+.section-head {display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:23px}
+.section-head > a,.crumb,.metadata,time,.foot,.roster dt {font:12px/1.5 var(--mono);color:var(--muted)}
+.section-head > a {color:var(--green);white-space:nowrap}
 .section-summary {max-width:70ch;margin:0 0 20px;color:var(--body)}
 .direction > .section-head {margin-bottom:clamp(20px,3vw,32px)}
 .research-topic {padding-top:20px;border-top:1px solid var(--line)}
@@ -304,8 +302,6 @@ summary {color:var(--green);cursor:pointer;width:fit-content}
 .pub-tools button:disabled {color:var(--muted);cursor:default}
 .pub-tools > a {padding:8px 0}
 #pub-status {margin:12px 0 5px;color:var(--muted);font:12px/1.5 var(--mono)}
-#lab-news .home-heading {align-items:center}
-.news-mark {background:white;border-radius:50%}
 .student-form {display:inline-block;padding:9px 14px;background:var(--green);color:var(--paper);font-weight:600;text-decoration:none;border-radius:3px;margin:3px 8px 5px 0}
 .pub p,.news-item p {margin-top:5px}
 
@@ -341,12 +337,7 @@ summary {color:var(--green);cursor:pointer;width:fit-content}
   .hero h1 {margin-bottom:13px}
   .hero-links {margin-top:16px}
   .section {padding:26px 0}
-  .home-heading {grid-template-columns:minmax(0,1fr) auto;gap:4px 10px}
-  .home-heading > span {grid-column:1/-1}
-  .home-heading,.section-head {margin-bottom:16px}
-  #lab-news .home-heading {grid-template-columns:28px 1fr auto}
-  #lab-news .home-heading > span {grid-column:auto}
-  .news-mark {width:28px;height:28px}
+  .section-head {margin-bottom:16px}
   .pub-tools label:first-child {flex-basis:100%}
   .card,.project-team,.visit,.people {grid-template-columns:1fr}
   .plate {border-right:0;border-bottom:1px solid var(--line);padding:8px 14px}
