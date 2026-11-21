@@ -190,17 +190,41 @@ def video_player(src, poster, label):
 
 def research(projects, people):
     sections = []
+    instrument_theme = "Physics-Informed AI for Scientific Instrumentation"
+    summaries = {
+        "Computational Imaging for Robotic Perception": (
+            "We design optics and algorithms together so robots can measure what they see and feel. "
+            "Patterns of polarized light reveal contact forces at a gripper. In the field, drone images "
+            "help us count pineapples and rover images let us measure their size."
+        ),
+        instrument_theme: (
+            "We model how moving atoms scatter X-rays and how a laser cavity’s geometry changes its output. "
+            "We also work backward from measurements, testing how well models can reconstruct a scene from "
+            "optical data or trace a shoreline in a satellite image."
+        ),
+    }
+    instrument_id = slug(instrument_theme)
+    # Preserve published bookmarks to the two directions and their former topics.
+    bookmarks = {
+        instrument_id: '<span id="physics-informed-ai"></span><span id="scientific-instrumentation"></span>',
+        instrument_id + "-predicting-instrument-response": '<span id="scientific-instrumentation-modeling-physical-systems"></span>',
+        instrument_id + "-evaluating-frontier-models-for-imaging-applications": (
+            f'<span id="{instrument_id}-interpreting-sensor-measurements"></span>'
+            '<span id="physics-informed-ai-evaluating-vision-models"></span>'
+        ),
+    }
     directory = {person["title"] for members in people.values() for person in members}
     projects_by_folder = {project["folder"]: project for group in projects.values() for project in group}
     for theme, group in projects.items():
+        theme_id = slug(theme)
         topics = {}
         for project in group:
             topic = project["topic"]
-            topic_id = slug(theme) + "-" + slug(topic)
+            topic_id = theme_id + "-" + slug(topic)
             topics.setdefault(topic, []).append(card(project, "../"))
             folder, cover, images = project_media(project)
             title = project["title"]
-            crumb = '<p class="crumb">' + link("../", "Research") + " / " + link("../#" + slug(theme), theme)
+            crumb = '<p class="crumb">' + link("../", "Research") + " / " + link("../#" + theme_id, theme)
             crumb += " / " + link("../#" + topic_id, topic) + "</p>"
             body = page_head(title, project["short"], crumb, project_website(project))
             body += figure("../../" + folder + cover, project.get("caption", project.get("name", title)), "project-hero")
@@ -254,16 +278,18 @@ def research(projects, people):
                     credits.append(f'<p><strong>{escape(label)}</strong><br>' + " · ".join(links) + "</p>")
             body += '<section class="section project-team" id="project-team"><h2>Project team</h2><div>' + "".join(credits) + '</div></section>'
             page(project_path(project), title, project["short"], body)
-        sections.append(f'<section class="section direction" id="{slug(theme)}">{heading(theme)}')
+        sections.append(f'<section class="section direction" id="{theme_id}">{bookmarks.get(theme_id, "")}{heading(theme)}')
+        if theme in summaries:
+            sections.append(f'<p class="section-summary">{escape(summaries[theme])}</p>')
         for topic, cards in topics.items():
-            topic_id = slug(theme) + "-" + slug(topic)
-            sections.append(f'<section class="research-topic" id="{topic_id}"><h3>{escape(topic)}</h3>'
+            topic_id = theme_id + "-" + slug(topic)
+            sections.append(f'<section class="research-topic" id="{topic_id}">{bookmarks.get(topic_id, "")}<h3>{escape(topic)}</h3>'
                             + '<div class="catalog">' + "".join(cards) + "</div></section>")
         sections.append("</section>")
     jump = '<div class="jump">' + "".join(link("#" + slug(theme), theme) for theme in projects) + "</div>"
-    page("research", "Research", "Research in computational imaging, robotic perception, physics-informed AI and scientific instrumentation.",
+    page("research", "Research", "Computational imaging for robotic perception and physics-informed AI for scientific instrumentation.",
          page_head("Research", "We design sensors that turn light into measurements of touch, shape and spectra. "
-                   "We also study how well computational models can interpret images and predict physical behavior.")
+                   "For scientific instruments, we use physics-informed AI to predict signals and interpret measurements.")
          + jump + "".join(sections))
     # Keep the retired project URL useful for visitors following old links.
     retired = DIST / "research/sfm-comparison"
@@ -321,6 +347,11 @@ def people_page(groups):
 
 def gallery_page():
     album = json.loads((ROOT / "gallery.json").read_text())
+    related = {}
+    for entry in album.get("related_pages", []):
+        anchor = link("../" + entry["href"], entry["label"])
+        for photo in entry["photos"]:
+            related.setdefault(photo, []).append(anchor)
     tiles = []
     for index, photo in enumerate(album["images"]):
         path = Path(photo)
@@ -333,12 +364,13 @@ def gallery_page():
         caption = album.get("captions", {}).get(photo) or description
         place = album.get("locations", {}).get(photo, "")
         label = f'<span class="photo-place">{escape(place)}</span>' if place else ""
+        sources = '<span class="photo-links">' + "".join(related[photo]) + '</span>' if photo in related else ""
         loading = "eager" if index < 4 else "lazy"
         tiles.append(
             f'<figure id="{escape(path.stem)}" style="--ratio:{ratio:.6f}">'
             f'<a href="../{escape(path.as_posix())}"><img src="../{escape(src.as_posix())}" '
             f'alt="{escape(description)}"{size_attrs} loading="{loading}" decoding="async"></a>'
-            f'<figcaption>{label}<span class="photo-caption">{escape(caption)}</span></figcaption></figure>'
+            f'<figcaption>{label}<span class="photo-caption">{escape(caption)}</span>{sources}</figcaption></figure>'
         )
 
     def icon(name):
@@ -362,6 +394,7 @@ def gallery_page():
           <span class="slide-info" role="status" aria-live="polite" aria-atomic="true">
             <span id="slide-place" class="photo-place" hidden></span>
             <span id="slide-caption"></span>
+            <span id="slide-links" class="photo-links"></span>
           </span>
           <span class="slide-tools">
             <span id="slide-position"></span>
@@ -464,7 +497,7 @@ def selected_research(projects, pubs):
             ),
         ))
     return ('<section class="section" id="selected-work"><header class="section-head">'
-            '<h2>Selected research</h2>' + link("research/", "All projects →") + '</header>'
+            '<h2>Research highlight</h2>' + link("research/", "All projects →") + '</header>'
             '<div class="work-grid" id="research-directions">' + "".join(highlights)
             + '</div><p class="work-more">' + link("publications/", "All publications →") + '</p></section>')
 
@@ -472,8 +505,7 @@ def selected_research(projects, pubs):
 def home(projects, people, items, pubs):
     content = f'''<section class="hero"><h1>{LAB}</h1>
     <p class="mission">We develop imaging and perception systems for <em>robotics</em> and <em>scientific instrumentation</em>.
-    We use polarized light to measure contact forces, computer vision to guide robotic manipulation, and physics-informed models to interpret X-ray measurements and simulate free-electron lasers.</p>
-    <p class="byline">{link("people/#huaijin-chen", "Huaijin Chen")} leads the lab at the University of Hawaiʻi at Mānoa.</p>
+    We design sensors and algorithms together to help robots understand their surroundings and scientists measure how physical systems change.</p>
     <div class="hero-links">{link("research/", "Explore our research")}{link("contact/#prospective-students", "Join the lab")}</div>
     <img class="hero-logo" src="images/cirp-hero.webp" width="176" height="176" alt=""></section>'''
     content += '<section class="section" id="lab-news"><header class="home-heading"><span><img class="news-mark" src="images/cirp-mark.png" width="36" height="36" alt=""></span><h2>Lab news</h2>' + link("news/", "All news →") + '</header>'
@@ -496,7 +528,9 @@ def home(projects, people, items, pubs):
         ("Minderoo Foundation", "https://www.minderoo.org/", "minderoo.svg"),
         ("USDA", "https://www.usda.gov/", "usda.jpg"),
     ]
-    content += '<section class="section" id="sponsors">' + home_heading("Support", "Sponsors and collaborators") + '<ul class="partners">'
+    content += '<section class="section" id="sponsors">' + heading("Sponsors")
+    content += ('<p class="section-summary">We thank our sponsors for supporting student research '
+                'with funding and equipment.</p><ul class="partners">')
     for name, url, image in partners:
         content += (f'<li><a href="{url}" aria-label="{escape(name)}">'
                     f'<img src="images/{image}" alt="{escape(name)}" loading="lazy"></a></li>')

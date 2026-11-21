@@ -155,11 +155,35 @@ gallery_caption_cube_task_briefing_2026_04_14: The briefing shows participants h
 gallery_caption_task2_animals_demo_2026_04_14: The instructions introduce the animal-naming task and show the pictures participants will see.
 ---
 
-## Physics-Informed AI
+## Physics-Informed AI for Scientific Instrumentation
+
+### Physics-Informed Machine Learning for Accelerated Discovery and Dynamics Analysis in Ultrafast X-Ray Diffraction
+folder: XRD-ML
+topic: Predicting instrument response
+name: Learning ultrafast X-ray dynamics
+lead: Ethan Chung
+pi: Huaijin Chen
+members: Vincent Chan
+short: We use simulated atomic motion to predict how X-ray scattering changes over time, then compare those predictions with experimental measurements.
+description: Ultrafast X-ray photon correlation spectroscopy (XPCS) tracks how materials change over time, from atomic to microscopic scales. We train models on simulated atomic motion to predict the temporal correlation functions measured in XPCS experiments. That gives us a way to test simulations against measurements of supercooled liquids and materials undergoing the glass transition.
+caption: Simulated argon structures at different densities and temperatures.
+---
+
+### ML-Driven Surrogate Modeling for FEL Oscillator Cavity Optimization
+folder: FEL-Oscillator
+topic: Predicting instrument response
+name: Modeling free-electron lasers
+lead: Ethan Chung
+pi: Huaijin Chen
+members:
+short: We build surrogate models to speed up simulations of free-electron laser oscillators and help researchers tune the laser cavity.
+description: Testing a range of cavity designs in a simulator such as GINGER can take considerable computing time. We’re training models to predict how changes in mirror spacing and cavity length affect the electron beam energy and the radiation it produces. If the models can replace some full simulation sweeps, researchers could compare designs faster and tune the laser’s gain, stability, and spectrum in real time.
+caption: A free-electron laser oscillator showing the electron source, accelerator, undulator, and cavity mirrors.
+---
 
 ### ImagingBench: Can AI Solve Imaging Problems?
 folder: CIBench
-topic: Evaluating vision models
+topic: Evaluating frontier models for imaging applications
 name: ImagingBench
 slug: imagingbench
 website: https://cirplab-fourier.taildc92d1.ts.net/
@@ -181,42 +205,16 @@ detail_caption: Example measurements, model outputs and reference images across 
 
 ### Satellite-Derived Shorelines
 folder: SDS
-topic: Evaluating vision models
+topic: Evaluating frontier models for imaging applications
 name: Satellite-derived shorelines
 lead: Joel Nicolow
 pi: Dr. Charles Fletcher
 members:
-short: We develop and test methods for mapping shorelines from satellite imagery across different coastal environments in Hawaiʻi and beyond.
+short: We compare shorelines estimated from satellite images with reference shorelines to test how well mapping methods transfer from one coast to another.
 description: Field and aerial surveys are costly, and a method that detects the shoreline on one coast can miss it on another. We use hand-labeled satellite images and reference shorelines from Hawaiʻi and elsewhere to compare geospatial foundation models, other pretrained vision models, lightweight neural networks, and traditional thresholding methods. We’re building a common benchmark and open-source mapping tools for researchers, coastal managers, and communities.
 caption: The map shows where Hawaiʻi’s shorelines advanced or retreated over five years.
 gallery_caption_sds_shorelines_superimposed_on_drone_image: Shorelines derived from satellite imagery overlaid on a drone photo.
 gallery_caption_sandies_sds_example_and_transect_intersections: Examples of shoreline detection and intersections with coastal transects.
 gallery_caption_sat_image_examples: The same coastline seen by different satellite sensors.
 gallery_caption_segmentation_method_comparison: Comparison of land and water segmentation methods on the same stretch of coast.
----
-
-## Scientific Instrumentation
-
-### Physics-Informed Machine Learning for Accelerated Discovery and Dynamics Analysis in Ultrafast X-Ray Diffraction
-folder: XRD-ML
-topic: Modeling physical systems
-name: Learning ultrafast X-ray dynamics
-lead: Ethan Chung
-pi: Huaijin Chen
-members: Vincent Chan
-short: We use physics-informed machine learning to compare how atoms move in simulations with what ultrafast X-ray experiments measure.
-description: Ultrafast X-ray photon correlation spectroscopy (XPCS) tracks how materials change over time, from atomic to microscopic scales. We train models on simulated atomic motion to predict the temporal correlation functions measured in XPCS experiments. That gives us a way to test simulations against measurements of supercooled liquids and materials undergoing the glass transition.
-caption: Simulated argon structures at different densities and temperatures.
----
-
-### ML-Driven Surrogate Modeling for FEL Oscillator Cavity Optimization
-folder: FEL-Oscillator
-topic: Modeling physical systems
-name: Modeling free-electron lasers
-lead: Ethan Chung
-pi: Huaijin Chen
-members:
-short: We build surrogate models to speed up simulations of free-electron laser oscillators and help researchers tune the laser cavity.
-description: Testing a range of cavity designs in a simulator such as GINGER can take considerable computing time. We’re training models to predict how changes in mirror spacing and cavity length affect the electron beam energy and the radiation it produces. If the models can replace some full simulation sweeps, researchers could compare designs faster and tune the laser’s gain, stability, and spectrum in real time.
-caption: A free-electron laser oscillator showing the electron source, accelerator, undulator, and cavity mirrors.
 ---

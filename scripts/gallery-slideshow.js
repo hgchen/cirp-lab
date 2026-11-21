@@ -9,13 +9,14 @@ const playButton = document.querySelector("#slide-play");
 const reel = document.querySelector(".gallery-reel");
 const strip = document.querySelector(".gallery-strip");
 const slideCaption = document.querySelector("#slide-caption");
+const slideLinks = document.querySelector("#slide-links");
 const slidePlace = document.querySelector("#slide-place");
 const slideInfo = document.querySelector(".slide-info");
 const slideOriginal = document.querySelector("#slide-original");
 const slidePosition = document.querySelector("#slide-position");
 const photos = [...thumbnails.querySelectorAll("figure")].map(figure => {
   const image = figure.querySelector("img");
-  const link = figure.querySelector("a");
+  const link = figure.querySelector(":scope > a");
   const panel = new Image();
   panel.className = "strip-photo";
   panel.alt = "";
@@ -31,6 +32,7 @@ const photos = [...thumbnails.querySelectorAll("figure")].map(figure => {
     link,
     alt: image.alt,
     caption: figure.querySelector(".photo-caption").textContent,
+    related: figure.querySelectorAll(".photo-links a"),
     place: figure.querySelector(".photo-place")?.textContent || "",
   };
 });
@@ -57,6 +59,7 @@ function selectPhoto(current) {
   slidePlace.textContent = photo.place;
   slidePlace.hidden = !photo.place;
   slideCaption.textContent = photo.caption;
+  slideLinks.replaceChildren(...Array.from(photo.related, anchor => anchor.cloneNode(true)));
   slidePosition.textContent = `${index + 1} / ${photos.length}`;
 }
 
@@ -168,6 +171,7 @@ function setSlideshow(open, focusPhoto = false) {
 }
 
 if (photos.length) {
+  slideLinks.addEventListener("focusin", () => setPlaying(false));
   reducedMotion.addEventListener("change", () => {
     if (reducedMotion.matches) settle();
   });

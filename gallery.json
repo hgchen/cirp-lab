@@ -2,6 +2,30 @@
   "images": [
     "images/gallery/corl-2026-lockhart-bbq.webp",
     "images/gallery/corl-2026-proto-town.webp",
+    "images/events/cvpr-2025-bpc-workshop.webp",
+    "images/previews/siggraph-2023-course.webp",
+    "images/previews/liholiho-robot-demo.webp",
+    "images/previews/hawaii-ffa-teacher-training.webp",
+    "images/events/gofarm-waimanalo-visit.webp",
+    "images/previews/crb-symposium-demo.webp",
+    "images/previews/crb-symposium-audience.webp",
+    "images/events/iccv-2025-moseli-presentation.webp",
+    "images/events/iccv-2025-yang-presentation.webp",
+    "images/events/iccv-2025-uh-manoa-research-session.webp",
+    "images/events/rss-2025-polartact3d-poster.webp",
+    "images/events/rss-2025-polartact3d-award.webp",
+    "images/projects/FRC2025/pineapple-field-rover.jpg",
+    "images/projects/FRC2025/adjusting-the-rover.jpg",
+    "images/projects/FRC2025/summit-presentation.webp",
+    "images/projects/FRC2025/surveying-pineapple-rows.jpg",
+    "images/projects/FRC2025/team-aina.jpg",
+    "images/events/frc-organizers-agtech-summit.webp",
+    "images/events/google-agtech-summit-visit.webp",
+    "images/projects/FRC2026/FRC_1.png",
+    "images/projects/FRC2026/FRC_2.png",
+    "images/projects/FRC2026/FRC_3.png",
+    "images/projects/FRC2026/team-assembly.webp",
+    "images/projects/FRC2026/visit-crb-response.webp",
     "images/gallery/end-of-semester-lunch-2026.webp",
     "images/gallery/early-lab-group-2024.webp",
     "images/gallery/rss-2025-dinner.webp",
@@ -40,7 +64,32 @@
     "images/gallery/hawaii-island-farm-visit.webp": "Visitors pose in front of a painted farm sign.",
     "images/gallery/construction-visit.webp": "Five visitors pose in front of the Hawaiian Dredging Construction Company sign.",
     "images/gallery/usda-research-center-visit.webp": "Visitors gather outside the USDA agricultural research center.",
-    "images/events/aps-plant-health-2025-workshop.webp": "Plant Health 2025 workshop group photo."
+    "images/events/aps-plant-health-2025-workshop.webp": "Plant Health 2025 workshop group photo.",
+    "images/events/iccv-2025-uh-manoa-group.webp": "Participants pose for a group photo under trees on the UH Mānoa campus.",
+    "images/events/cvpr-2025-bpc-workshop.webp": "A speaker presents a pose estimation method to the workshop audience.",
+    "images/previews/siggraph-2023-course.webp": "A speaker presents a slide on polarization to an audience in a lecture theater.",
+    "images/previews/liholiho-robot-demo.webp": "Liholiho students and lab members gather around a humanoid robot during the demonstration.",
+    "images/previews/hawaii-ffa-teacher-training.webp": "Teachers gather around a table with robotic arms during an outdoor demonstration.",
+    "images/events/gofarm-waimanalo-visit.webp": "Christian Moore and Laura Ediger look out over the teaching farm at Waimānalo Research Station.",
+    "images/previews/crb-symposium-demo.webp": "A presenter points to a simulated palm on the monitor while a teammate operates the blue robot arm.",
+    "images/previews/crb-symposium-audience.webp": "Symposium attendees gather around the outdoor CIRP demonstration booth.",
+    "images/events/iccv-2025-moseli-presentation.webp": "Moseli Mots'oehli stands at a lectern beside a slide discussing the limitations of simulated distortions.",
+    "images/events/iccv-2025-yang-presentation.webp": "Yang Qian stands at a lectern beside a slide showing the Hashtag2Action workflow.",
+    "images/events/iccv-2025-uh-manoa-research-session.webp": "A presenter addresses an audience in a lecture room at UH Mānoa.",
+    "images/events/rss-2025-polartact3d-poster.webp": "Kai Garcia stands next to the PolarTact3D research poster.",
+    "images/events/rss-2025-polartact3d-award.webp": "Kai Garcia shakes hands at the RSS 2025 workshop award presentation.",
+    "images/projects/FRC2025/pineapple-field-rover.jpg": "Team ʻĀina prepares its rover to survey pineapples at Dole Plantation.",
+    "images/projects/FRC2025/adjusting-the-rover.jpg": "Team members adjust the rover’s frame to clear the pineapple leaves.",
+    "images/projects/FRC2025/summit-presentation.webp": "Christian Komo presents Team ʻĀina’s pineapple mapping system at the Plug and Play Summit.",
+    "images/projects/FRC2025/surveying-pineapple-rows.jpg": "The rover travels between pineapple rows to collect images of individual fruit.",
+    "images/projects/FRC2025/team-aina.jpg": "Team ʻĀina with the survey drone and ground robot.",
+    "images/events/frc-organizers-agtech-summit.webp": "Team members and Farm Robotics Challenge organizers pose together at the summit.",
+    "images/events/google-agtech-summit-visit.webp": "Three team members pose outside a Google office.",
+    "images/projects/FRC2026/FRC_1.png": "The team demonstrates a robotic arm and palm simulation.",
+    "images/projects/FRC2026/FRC_2.png": "A team member uses the physical arm to control the simulated arm.",
+    "images/projects/FRC2026/FRC_3.png": "A palm tree and nearby test objects in the simulation.",
+    "images/projects/FRC2026/team-assembly.webp": "The UH Mānoa and University of Michigan teams assemble the palm-climbing robot for the 2026 Farm Robotics Challenge.",
+    "images/projects/FRC2026/visit-crb-response.webp": "A field visit with the CRB Response team and UH Mānoa collaborators Daniel Jenkins and Xing Wei to learn about drone-based beetle control."
   },
   "captions": {
     "images/gallery/corl-2026-lockhart-bbq.webp": "Huaijin Chen and Kai Garcia with UH alumni at Black’s BBQ during the November 2026 CoRL trip.",
@@ -56,16 +105,197 @@
     "images/gallery/hawaii-island-farm-visit.webp": "Visiting a farm to learn what growers need from automation.",
     "images/gallery/construction-visit.webp": "A visit to Hawaiian Dredging Construction Company to discuss applications of robotic perception.",
     "images/gallery/usda-research-center-visit.webp": "A visit to the USDA Pacific Basin Agricultural Research Center to discuss robotics for pest control.",
-    "images/events/iccv-2025-uh-manoa-group.webp": "Group photo from the After-ICCV AI/CV Gathering.",
+    "images/events/iccv-2025-uh-manoa-group.webp": "ICCV 2025 after-conference event hosted by CIRP Lab and ICS.",
     "images/gallery/group_7.jpeg": "Undergraduate students Bibiana Garcia and Michaelyn Tolmie setting up their digital Pepper's Ghost demo for the capstone presentation.",
     "images/gallery/group_4.jpeg": "Feimei Chen presenting her poster at ICS Project Day.",
     "images/gallery/group_5.jpeg": "Hok Wai Chan presenting his work at the ICS Project Day.",
     "images/gallery/group_2.jpg": "Huaijin Chen trying out Bibiana Garcia and Michaelyn Tolmie's prototype telepresence project demo.",
-    "images/events/iccv-2025-uh-manoa-group.webp": "ICCV 2025 after-conference event hosted by CIRP Lab and ICS.",
-    "images/events/aps-plant-health-2025-workshop.webp": "Plant Health 2025 Python and machine learning workshop group photo. Huaijin Chen co-hosted the workshop with CTAHR colleagues Xing Wei and Josiah Marquez.",    
+    "images/events/aps-plant-health-2025-workshop.webp": "Plant Health 2025 Python and machine learning workshop group photo. Huaijin Chen co-hosted the workshop with CTAHR colleagues Xing Wei and Josiah Marquez.",
     "images/gallery/group_3.jpg": "CIRP Lab members appreciating NVIDIA's equipment donation as part of the NVIDIA academic research grant.",
-    "images/gallery/group_1.jpg": "Lab group lunch March 2024."
+    "images/gallery/group_1.jpg": "Lab group lunch March 2024.",
+    "images/events/cvpr-2025-bpc-workshop.webp": "Presentations at the CVPR 2025 PIRA Workshop.",
+    "images/previews/siggraph-2023-course.webp": "A session from the Polarization-Based Visual Computing course at SIGGRAPH 2023 in Los Angeles.",
+    "images/previews/liholiho-robot-demo.webp": "Liholiho Elementary students at the humanoid robot demonstration.",
+    "images/previews/hawaii-ffa-teacher-training.webp": "Hawaiʻi FFA educators try robotic arms at a teacher training event.",
+    "images/events/gofarm-waimanalo-visit.webp": "Christian Moore and Laura Ediger at the Waimānalo Research Station.",
+    "images/previews/crb-symposium-demo.webp": "CIRP demonstrates its palm robotics system at the Coconut Rhinoceros Beetle Symposium. Photo from Christian Moore’s symposium recap.",
+    "images/previews/crb-symposium-audience.webp": "Symposium attendees watch the palm robotics demonstration at UH Mānoa. Photo from Christian Moore’s symposium recap.",
+    "images/events/iccv-2025-moseli-presentation.webp": "Moseli Mots'oehli presents research on refractive distortions at the ICCV 2025 CV4DC Workshop.",
+    "images/events/iccv-2025-yang-presentation.webp": "Yang Qian presents Hashtag2Action at the ICCV 2025 Short-Form Video Understanding Workshop.",
+    "images/events/iccv-2025-uh-manoa-research-session.webp": "Research presentations at the After-ICCV gathering at UH Mānoa.",
+    "images/events/rss-2025-polartact3d-poster.webp": "Kai Garcia presents PolarTact3D at the RSS workshop on June 25, 2025.",
+    "images/events/rss-2025-polartact3d-award.webp": "Kai Garcia receives the workshop’s third-place Best Paper Award for PolarTact3D on June 25, 2025.",
+    "images/projects/FRC2025/pineapple-field-rover.jpg": "Team ʻĀina prepares its rover to survey pineapples at Dole Plantation. Photo from UH News.",
+    "images/projects/FRC2025/adjusting-the-rover.jpg": "Team members adjust the rover’s frame to clear the pineapple leaves. Photo from UH News.",
+    "images/projects/FRC2025/summit-presentation.webp": "Christian Komo presents Team ʻĀina’s pineapple mapping system at the Plug and Play Summit.",
+    "images/projects/FRC2025/surveying-pineapple-rows.jpg": "The rover travels between pineapple rows to collect images of individual fruit. Photo from UH News.",
+    "images/projects/FRC2025/team-aina.jpg": "Team ʻĀina with the survey drone and ground robot. Photo from UH News.",
+    "images/events/frc-organizers-agtech-summit.webp": "Team ʻĀina meets the Farm Robotics Challenge organizers at the Plug and Play Summit.",
+    "images/events/google-agtech-summit-visit.webp": "Team ʻĀina visits Google during the summit trip.",
+    "images/projects/FRC2026/FRC_1.png": "Demonstrating the robotic arm and palm simulation for the 2026 Farm Robotics Challenge.",
+    "images/projects/FRC2026/FRC_2.png": "A team member controls the simulated arm with a physical arm during teleoperation trials.",
+    "images/projects/FRC2026/FRC_3.png": "Simulated palm and test objects used to study the robot’s reach.",
+    "images/projects/FRC2026/team-assembly.webp": "The UH Mānoa and University of Michigan teams assemble the palm-climbing robot for the 2026 Farm Robotics Challenge.",
+    "images/projects/FRC2026/visit-crb-response.webp": "A field visit with the CRB Response team and UH Mānoa collaborators Daniel Jenkins and Xing Wei to learn about drone-based beetle control."
   },
+  "related_pages": [
+    {
+      "label": "CoRL conference news",
+      "href": "news/#2026-11-12-cirp-and-uh-manoa-at-corl-in-austin",
+      "photos": [
+        "images/gallery/corl-2026-lockhart-bbq.webp",
+        "images/gallery/corl-2026-proto-town.webp"
+      ]
+    },
+    {
+      "label": "Bin-picking workshop",
+      "href": "service/#cvpr-2025-bin-picking",
+      "photos": [
+        "images/events/cvpr-2025-bpc-workshop.webp"
+      ]
+    },
+    {
+      "label": "Challenge news",
+      "href": "news/#2025-06-25-cirp-lab-co-hosting-the-cvpr-2025-bin-picking-workshop-and-competition-with-opencv-and-intrinsic",
+      "photos": [
+        "images/events/cvpr-2025-bpc-workshop.webp"
+      ]
+    },
+    {
+      "label": "SIGGRAPH course",
+      "href": "service/#siggraph-2023",
+      "photos": [
+        "images/previews/siggraph-2023-course.webp"
+      ]
+    },
+    {
+      "label": "School visit",
+      "href": "service/#liholiho-visit",
+      "photos": [
+        "images/previews/liholiho-robot-demo.webp"
+      ]
+    },
+    {
+      "label": "Teacher training",
+      "href": "service/#hawaii-ffa-teacher-training",
+      "photos": [
+        "images/previews/hawaii-ffa-teacher-training.webp"
+      ]
+    },
+    {
+      "label": "GoFarm visit",
+      "href": "service/#gofarm-waimanalo",
+      "photos": [
+        "images/events/gofarm-waimanalo-visit.webp"
+      ]
+    },
+    {
+      "label": "Beetle symposium",
+      "href": "service/#crb-symposium",
+      "photos": [
+        "images/previews/crb-symposium-demo.webp",
+        "images/previews/crb-symposium-audience.webp"
+      ]
+    },
+    {
+      "label": "Palm robotics project",
+      "href": "research/frc2026/",
+      "photos": [
+        "images/previews/crb-symposium-demo.webp",
+        "images/previews/crb-symposium-audience.webp",
+        "images/projects/FRC2026/FRC_1.png",
+        "images/projects/FRC2026/FRC_2.png",
+        "images/projects/FRC2026/FRC_3.png",
+        "images/projects/FRC2026/team-assembly.webp",
+        "images/projects/FRC2026/visit-crb-response.webp",
+        "images/gallery/palm_capture.jpg"
+      ]
+    },
+    {
+      "label": "ICCV conference news",
+      "href": "news/#2025-10-15-cirp-lab-iccv-2025-two-workshop-papers-invited-talk-and-local-chair-role",
+      "photos": [
+        "images/events/iccv-2025-moseli-presentation.webp",
+        "images/events/iccv-2025-yang-presentation.webp",
+        "images/events/iccv-2025-uh-manoa-research-session.webp",
+        "images/events/iccv-2025-uh-manoa-group.webp"
+      ]
+    },
+    {
+      "label": "ICCV organizing role",
+      "href": "service/#iccv-2025",
+      "photos": [
+        "images/events/iccv-2025-uh-manoa-group.webp"
+      ]
+    },
+    {
+      "label": "Plant Health workshop",
+      "href": "service/#aps-plant-health-2025",
+      "photos": [
+        "images/events/aps-plant-health-2025-workshop.webp"
+      ]
+    },
+    {
+      "label": "RSS workshop award",
+      "href": "news/#2025-07-20-lab-undergraduates-win-3rd-place-best-paper-award-and-250-at-rss-2025-workshop",
+      "photos": [
+        "images/events/rss-2025-polartact3d-poster.webp",
+        "images/events/rss-2025-polartact3d-award.webp",
+        "images/gallery/rss-2025-dinner.webp"
+      ]
+    },
+    {
+      "label": "PolarTact3D project",
+      "href": "research/polartact3d/",
+      "photos": [
+        "images/events/rss-2025-polartact3d-poster.webp",
+        "images/events/rss-2025-polartact3d-award.webp"
+      ]
+    },
+    {
+      "label": "Pineapple robotics project",
+      "href": "research/frc2025/",
+      "photos": [
+        "images/projects/FRC2025/pineapple-field-rover.jpg",
+        "images/projects/FRC2025/adjusting-the-rover.jpg",
+        "images/projects/FRC2025/surveying-pineapple-rows.jpg",
+        "images/projects/FRC2025/team-aina.jpg"
+      ]
+    },
+    {
+      "label": "Team ʻĀina award",
+      "href": "news/#2025-05-13-congrats-to-my-students-for-winning-the-10-000-grand-prize-at-the-2025-farm-robotics-challenge",
+      "photos": [
+        "images/projects/FRC2025/pineapple-field-rover.jpg",
+        "images/projects/FRC2025/adjusting-the-rover.jpg",
+        "images/projects/FRC2025/surveying-pineapple-rows.jpg",
+        "images/projects/FRC2025/team-aina.jpg"
+      ]
+    },
+    {
+      "label": "Plug and Play Summit",
+      "href": "research/frc2025/#plug-and-play-summit",
+      "photos": [
+        "images/projects/FRC2025/summit-presentation.webp",
+        "images/events/frc-organizers-agtech-summit.webp",
+        "images/events/google-agtech-summit-visit.webp"
+      ]
+    },
+    {
+      "label": "Fish measurement research",
+      "href": "research/fisheye/",
+      "photos": [
+        "images/gallery/fish-measurement.webp"
+      ]
+    },
+    {
+      "label": "NVIDIA grant",
+      "href": "news/#2026-01-14-nvidia-academic-grant-awarded-thanks-nvidia",
+      "photos": [
+        "images/gallery/group_3.jpg"
+      ]
+    }
+  ],
   "locations": {
     "images/gallery/corl-2026-lockhart-bbq.webp": "Lockhart, Texas",
     "images/gallery/corl-2026-proto-town.webp": "Lockhart, Texas",
@@ -101,6 +331,30 @@
     "images/gallery/group_6.jpg": [4000, 2252],
     "images/gallery/group_7.jpeg": [1024, 768],
     "images/events/iccv-2025-uh-manoa-group.webp": [1500, 1125],
-    "images/events/aps-plant-health-2025-workshop.webp": [1400, 733]
+    "images/events/aps-plant-health-2025-workshop.webp": [1400, 733],
+    "images/events/cvpr-2025-bpc-workshop.webp": [1400, 788],
+    "images/previews/siggraph-2023-course.webp": [1440, 1080],
+    "images/previews/liholiho-robot-demo.webp": [1395, 1127],
+    "images/previews/hawaii-ffa-teacher-training.webp": [1550, 1163],
+    "images/events/gofarm-waimanalo-visit.webp": [1440, 1080],
+    "images/previews/crb-symposium-demo.webp": [1440, 1080],
+    "images/previews/crb-symposium-audience.webp": [1440, 1080],
+    "images/events/iccv-2025-moseli-presentation.webp": [1500, 1125],
+    "images/events/iccv-2025-yang-presentation.webp": [1500, 1125],
+    "images/events/iccv-2025-uh-manoa-research-session.webp": [1500, 1125],
+    "images/events/rss-2025-polartact3d-poster.webp": [1500, 844],
+    "images/events/rss-2025-polartact3d-award.webp": [900, 1200],
+    "images/projects/FRC2025/pineapple-field-rover.jpg": [676, 381],
+    "images/projects/FRC2025/adjusting-the-rover.jpg": [676, 381],
+    "images/projects/FRC2025/summit-presentation.webp": [1440, 1080],
+    "images/projects/FRC2025/surveying-pineapple-rows.jpg": [676, 381],
+    "images/projects/FRC2025/team-aina.jpg": [676, 381],
+    "images/events/frc-organizers-agtech-summit.webp": [1080, 810],
+    "images/events/google-agtech-summit-visit.webp": [1080, 1440],
+    "images/projects/FRC2026/FRC_1.png": [1444, 809],
+    "images/projects/FRC2026/FRC_2.png": [2608, 1648],
+    "images/projects/FRC2026/FRC_3.png": [2812, 1742],
+    "images/projects/FRC2026/team-assembly.webp": [1500, 1125],
+    "images/projects/FRC2026/visit-crb-response.webp": [1125, 1500]
   }
 }
