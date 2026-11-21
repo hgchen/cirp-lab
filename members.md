@@ -206,7 +206,6 @@ linkedin: https://www.linkedin.com/in/munir-zarea-722585159/
 role: MS alumnus
 placement: Instructor, University of Hawaiʻi at Mānoa
 affiliation: University of Hawaii at Manoa
-image: images/members/ethan-chung.webp
 email: echung32@hawaii.edu
 bio: Ethan worked on computational imaging benchmarks and phase-mask imaging.
 ---
