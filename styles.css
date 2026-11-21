@@ -280,7 +280,9 @@ summary {color:var(--green);cursor:pointer;width:fit-content}
 .pub h3 a:hover {text-decoration:underline}
 .pub-year {border-top:0;padding:20px 0}
 .pub-year .section-head {margin-bottom:12px}
-.pub-year h2 {font-family:var(--mono);font-weight:600;color:var(--green);border-bottom:2px solid currentColor;padding-bottom:5px}
+.pub-year h2 {font-family:var(--mono);font-weight:600;color:var(--green)}
+#earlier-work {padding-block:16px}
+#earlier-work > summary {font-size:var(--type-section);font-weight:600;line-height:1.5;min-height:44px}
 .pub-meta {color:var(--muted);font:13px/1.65 var(--mono)}
 .pub-meta span {color:var(--green)}
 .pub-actions,.pub-tools,.pub-tools form {display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 17px}

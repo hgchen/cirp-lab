@@ -359,25 +359,23 @@ def portrait(person, root, compact=False):
 
 def profile_activity(activity):
     groups = []
-    browse = []
     for category, path in ACTIVITY_PAGES.items():
-        category_link = link("../" + path, category)
         if entries := activity.get(category):
+            category_link = link("../" + path, category)
             items = "".join("<li>" + link("../" + url, title) + "</li>" for url, title in entries.items())
             groups.append(f"<dt>{category_link}</dt><dd><ul>{items}</ul></dd>")
-        else:
-            browse.append(category_link)
     if not groups:
         return ""
     listing = "<dl>" + "".join(groups) + "</dl>"
-    if browse:
-        listing += '<p class="activity-browse">Browse ' + " · ".join(browse) + "</p>"
     return f'<details class="profile-activity"><summary>Research and activities</summary>{listing}</details>'
 
 
 def member(person, category, activity):
     name = person["title"]
-    sub = escape(person.get("placement", person.get("role", "")))
+    placement = person.get("placement", "")
+    if category == "Alumni" and placement:
+        placement = "Now at " + placement
+    sub = escape(placement or person.get("role", ""))
     affiliation = person.get("affiliation", "")
     if category == "Visiting Students" and affiliation:
         sub += "<br>" + escape(affiliation)
@@ -628,9 +626,18 @@ def main():
         <button type="reset" disabled>Clear</button>
       </form><a href="../publications.bib" download>Download .bib</a></div>
       <p id="pub-status" role="status" hidden></p>'''
+    earlier_years = []
     for year in years:
-        content += f'<section class="section pub-year" data-year="{escape(year)}">' + heading(year) + "".join(publication(p, profiles) for p in pubs if p["year"] == year) + "</section>"
-    content += '<script src="search.js" defer></script>'
+        papers = "".join(publication(p, profiles) for p in pubs if p["year"] == year)
+        section = f'<section class="section pub-year" data-year="{escape(year)}">{heading(year)}{papers}</section>'
+        if year.isdecimal() and int(year) <= 2024:
+            earlier_years.append(section)
+        else:
+            content += section
+    if earlier_years:
+        content += '<details id="earlier-work" class="section"><summary>Earlier work</summary>' + "".join(earlier_years) + "</details>"
+    version = sha256((ROOT / "scripts/publication-search.js").read_bytes()).hexdigest()[:12]
+    content += f'<script src="search.js?v={version}" defer></script>'
     ArticleCredits(profiles, "Publications").feed(content)
     page("publications", "Publications", "Publications by members of CIRP Lab.", content)
     title = NAV["service"]

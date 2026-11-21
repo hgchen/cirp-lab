@@ -197,14 +197,14 @@ affiliation: University of Minnesota
 
 ### Munir Zarea
 role: Alumni
-placement: Mechanical Engineer at Pearl Harbor Naval Shipyard
+placement: Pearl Harbor Naval Shipyard (Mechanical Engineer)
 image: images/members/munir-zarea.webp
 linkedin: https://www.linkedin.com/in/munir-zarea-722585159/
 ---
 
 ### Ethan Chung
 role: MS alumnus
-placement: Instructor, University of Hawaiʻi at Mānoa
+placement: the University of Hawaiʻi at Mānoa (Instructor)
 affiliation: University of Hawaii at Manoa
 image: images/members/ethan-chung.webp
 email: echung32@hawaii.edu
@@ -213,7 +213,7 @@ bio: Ethan worked on computational imaging benchmarks and phase-mask imaging.
 
 ### Sean Hiroki Flynn
 role: MS alumnus
-placement: Image Processing Engineer, Okawa Screw Manufacturing, Tokyo
+placement: Okawa Screw Manufacturing in Tokyo (Image Processing Engineer)
 affiliation: University of Hawaii at Manoa
 image: images/members/sean.jpeg
 email: sflynn7@hawaii.edu
@@ -272,7 +272,7 @@ bio: Erik Bendickson worked on the 2025 Farm Robotics Challenge team while study
 
 ### Mikhail Shkaralevich
 role: Undergraduate Researcher, 2025
-placement: Software Engineer, Holocron Security
+placement: Holocron Security (Software Engineer)
 affiliation: University of Hawai'i at Manoa
 tags: Information and Computer Sciences | FRC 2025
 linkedin: https://www.linkedin.com/in/mikhail-shkaralevich/
@@ -306,7 +306,7 @@ bio: Michaelyn Tolmie contributed to CIRP Lab capstone work in 2025 as an underg
 
 ### Azibun Nuder
 role: Alumni
-placement: UH Office of Procurement
+placement: the UH Office of Procurement
 affiliation: University of Hawai'i at Manoa
 linkedin: https://www.linkedin.com/in/azibun-nuder-35b3891b0/
 bio: Azibun Nuder is an alumna of the CIRP Lab at UH Mānoa.
