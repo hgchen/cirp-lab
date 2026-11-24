@@ -186,6 +186,33 @@ linkedin: https://www.linkedin.com/in/hi-tylermak/
 bio: Tyler Mak is an undergraduate contributing to the lab's robotics and perception projects, including the Farm Robotics Challenge teams.
 ---
 
+### Elijah Saloma
+role: Undergraduate Researcher
+affiliation: University of Hawaiʻi at Mānoa
+tags: Information and Computer Sciences | FRC 2026
+image: images/members/elijah-saloma.jpg
+linkedin: https://www.linkedin.com/in/elijah-saloma/
+bio: Elijah is part of the 2026 Farm Robotics Challenge team developing a palm-climbing robot to inspect trees for coconut rhinoceros beetle damage.
+---
+
+### Kanta Saito
+role: Undergraduate Researcher
+affiliation: University of Hawaiʻi at Mānoa
+tags: Information and Computer Sciences | FRC 2026
+image: images/members/kanta-saito.jpg
+website: https://kantasaito.com
+linkedin: https://linkedin.com/in/kanta-saito
+bio: Kanta works on the lab’s palm-climbing robot for the 2026 Farm Robotics Challenge and has demonstrated robotic arms for K–12 educators in Hawaiʻi.
+---
+
+### Peter Law
+role: Undergraduate Researcher
+affiliation: University of Hawaiʻi at Mānoa
+image: images/members/peter-law.jpg
+linkedin: https://www.linkedin.com/in/lawpeterp/
+bio: Peter studies mechanical engineering and computer science at UH Mānoa. At CIRP, he works on a robot learning framework that simulates tactile sensors.
+---
+
 ## Visiting Students
 
 ### Jingyi Fang
