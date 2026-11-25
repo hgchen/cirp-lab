@@ -588,7 +588,7 @@ def home(projects, people, items, pubs):
     <div class="hero-links">{link("research/", "Explore our research")}{link("contact/#prospective-students", "Join the lab")}</div>
     <img class="hero-logo" src="images/cirp-hero.webp" width="176" height="176" alt=""></section>'''
     content += '<section class="section" id="lab-news">' + heading("Lab news", "news/", "All news →")
-    for stamp, title, _, anchor in items[:5]:
+    for stamp, title, _, anchor in items[:6]:
         content += f'<div class="news-row">{news_time(stamp)}{link("news/#" + anchor, title)}</div>'
     content += '</section>'
     content += selected_research(projects, pubs)
